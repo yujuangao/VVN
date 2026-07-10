@@ -55,7 +55,7 @@ df <- data.frame(
 ## VVN_TITLE
 
 ::: {.hero-subtitle}
-Virginia Visualization Network · Virginia Tech · `r format(Sys.Date(), "%Y")`
+Visualizing Virginia Numbers · Virginia Tech · `r format(Sys.Date(), "%Y")`
 :::
 
 A data-driven look at [your topic] across Virginia communities.
@@ -122,7 +122,7 @@ ggplot(df, aes(x = year, y = value, color = region, group = region)) +
   scale_color_vvn("main") +
   labs(
     title    = "Regional Trends, 2018–2023",
-    subtitle = "Virginia Visualization Network",
+    subtitle = "Visualizing Virginia Numbers",
     x        = "Year",
     y        = "Value",
     color    = "Region"
@@ -264,5 +264,5 @@ knitr::kable(summary_df, align = c("l", "r", "r", "r"))
 
 ---
 
-*Produced by the Virginia Visualization Network · Virginia Tech*
+*Produced by the Visualizing Virginia Numbers · Virginia Tech*
 *Built with [vvnthemes](https://github.com/vt-vvn/vvnthemes)*

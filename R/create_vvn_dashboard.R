@@ -25,7 +25,7 @@
 create_vvn_dashboard <- function(name,
                                   path   = ".",
                                   title  = name,
-                                  author = "Virginia Visualization Network") {
+                                  author = "Visualizing Virginia Numbers") {
 
   proj <- fs::path(path, name)
   if (fs::dir_exists(proj)) cli::cli_abort("Directory {.path {proj}} already exists.")

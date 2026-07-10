@@ -1,6 +1,6 @@
 # =============================================================================
 # VVN Colors & Palettes
-# Virginia Visualization Network · Virginia Tech
+# Visualizing Virginia Numbers · Virginia Tech
 # =============================================================================
 
 # ── Internal color constants (not exported) ───────────────────────────────────

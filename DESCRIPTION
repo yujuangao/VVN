@@ -1,13 +1,13 @@
 Package: vvnthemes
-Title: Virginia Visualization Network Themes and Templates
+Title: Visualizing Virginia Numbers Themes and Templates
 Version: 1.0.0
 Authors@R:
-    person("Virginia Visualization Network", "Virginia Tech",
+    person("Visualizing Virginia Numbers", "Virginia Tech",
            email = "vvn@vt.edu",
            role = c("aut", "cre"))
 Description: Provides ggplot2 themes, color palettes, scales, GT table styles,
     Leaflet map helpers, Shiny UI components, and ready-to-use Quarto / Shiny
-    project templates for the Virginia Visualization Network (VVN) at Virginia
+    project templates for the Visualizing Virginia Numbers (VVN) at Virginia
     Tech. Inspired by urbnthemes. All outputs follow VT brand guidelines
     (Maroon #861F41, Orange #E5751F) and meet WCAG 2.1 AA accessibility
     requirements.

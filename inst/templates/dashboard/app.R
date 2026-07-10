@@ -1,7 +1,7 @@
 # =============================================================================
 # VVN Dashboard Template — app.R
 # VVN_TITLE
-# VVN_AUTHOR · Virginia Visualization Network · Virginia Tech
+# VVN_AUTHOR · Visualizing Virginia Numbers · Virginia Tech
 #
 # Run: shiny::runApp()
 # Deploy: rsconnect::deployApp()
@@ -48,13 +48,13 @@ ui <- bslib::page_navbar(
   header = tagList(
     tags$head(
       tags$link(rel = "stylesheet", href = "vvn.css"),
-      tags$title("VVN_TITLE · Virginia Visualization Network")
+      tags$title("VVN_TITLE · Visualizing Virginia Numbers")
     )
   ),
   footer = tags$footer(
     class = "text-center text-muted small py-2 border-top mt-3",
     tags$span(
-      "Virginia Visualization Network · Virginia Tech · ",
+      "Visualizing Virginia Numbers · Virginia Tech · ",
       tags$a("vvn.vt.edu", href = "https://vvn.vt.edu", target = "_blank")
     )
   ),
@@ -239,7 +239,7 @@ ui <- bslib::page_navbar(
         tags$h3("About this Dashboard"),
         tags$p(
           "Built by the ",
-          tags$a("Virginia Visualization Network (VVN)",
+          tags$a("Visualizing Virginia Numbers (VVN)",
                  href = "https://vvn.vt.edu", target = "_blank"),
           " at Virginia Tech using the ",
           tags$a("vvnthemes", href = "https://github.com/vt-vvn/vvnthemes"),

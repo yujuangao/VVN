@@ -1,9 +1,9 @@
-#' vvnthemes: Virginia Visualization Network Themes and Templates
+#' vvnthemes: Visualizing Virginia Numbers Themes and Templates
 #'
 #' @description
 #' Provides ggplot2 themes, color palettes, scales, GT table styles, Leaflet
 #' map helpers, Shiny UI components, and ready-to-use project templates for the
-#' Virginia Visualization Network (VVN) at Virginia Tech. Inspired by
+#' Visualizing Virginia Numbers (VVN) at Virginia Tech. Inspired by
 #' [urbnthemes](https://urbaninstitute.github.io/urbnthemes/).
 #'
 #' @section Get started:
@@ -31,7 +31,7 @@
   v <- utils::packageVersion(pkgname)
   packageStartupMessage(
     "\u25a0 vvnthemes ", v,
-    " \u00b7 Virginia Visualization Network \u00b7 Virginia Tech\n",
+    " \u00b7 Visualizing Virginia Numbers \u00b7 Virginia Tech\n",
     "  Use set_vvn_defaults() to apply VVN brand globally."
   )
 }

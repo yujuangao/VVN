@@ -7,7 +7,7 @@ website:
   navbar:
     background: "#861F41"
     foreground: "white"
-    logo-alt: "Virginia Visualization Network"
+    logo-alt: "Visualizing Virginia Numbers"
     title: "VVN Insights"
     left:
       - text: "Home"
@@ -16,7 +16,7 @@ website:
       - icon: github
         href: "https://github.com/vt-vvn"
   page-footer:
-    left: "© Virginia Visualization Network · Virginia Tech"
+    left: "© Visualizing Virginia Numbers · Virginia Tech"
     right:
       - text: "Built with vvnthemes"
         href: "https://github.com/vt-vvn/vvnthemes"
