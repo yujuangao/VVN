@@ -1,0 +1,194 @@
+/* =============================================================================
+   VVN Theme · Global CSS
+   Virginia Visualization Network · Virginia Tech
+   Maroon #861F41  ·  Orange #E5751F  ·  Navy #1B5299
+   ============================================================================= */
+
+:root {
+  --vvn-maroon:      #861F41;
+  --vvn-maroon-dark: #520F25;
+  --vvn-maroon-lt:   #F5C8D4;
+  --vvn-orange:      #E5751F;
+  --vvn-orange-lt:   #FDE8D4;
+  --vvn-navy:        #1B5299;
+  --vvn-charcoal:    #3D3D3D;
+  --vvn-gray:        #AAAAAA;
+  --vvn-light-gray:  #F7F7F7;
+  --vvn-rule:        #E0E0E0;
+  --vvn-white:       #FFFFFF;
+
+  --vvn-font:        "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+  --vvn-mono:        "JetBrains Mono", "Fira Code", "Courier New", monospace;
+  --vvn-radius:      6px;
+  --vvn-shadow-sm:   0 1px 4px rgba(0,0,0,.08);
+  --vvn-shadow:      0 2px 10px rgba(0,0,0,.10);
+  --vvn-shadow-lg:   0 4px 20px rgba(134,31,65,.15);
+  --vvn-transition:  0.16s ease;
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+body { font-family: var(--vvn-font); color: var(--vvn-charcoal); }
+h1, h2, h3, h4 { color: var(--vvn-maroon); font-weight: 700; }
+a { color: var(--vvn-maroon); }
+a:hover { color: var(--vvn-orange); }
+
+/* ── Navbar ───────────────────────────────────────────────────────────────── */
+.navbar, .navbar-default,
+.bslib-page-navbar > .navbar {
+  background-color: var(--vvn-maroon) !important;
+  border-bottom: 3px solid var(--vvn-orange) !important;
+}
+.navbar-brand, .navbar .navbar-brand {
+  color: var(--vvn-white) !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.navbar .nav-link {
+  color: rgba(255,255,255,.88) !important;
+  font-size: .92rem;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link.active { color: var(--vvn-white) !important; }
+
+/* ── Cards ────────────────────────────────────────────────────────────────── */
+.card, .bslib-card {
+  border: 1px solid var(--vvn-rule);
+  border-radius: var(--vvn-radius);
+  box-shadow: var(--vvn-shadow-sm);
+}
+
+/* Card header with VVN branding */
+.vvn-card-header,
+.card-header.vvn-card-header {
+  background-color: var(--vvn-maroon) !important;
+  color:            var(--vvn-white)  !important;
+  font-weight: 600;
+  font-size:   .92rem;
+  border-bottom: 2px solid var(--vvn-orange);
+  border-radius: var(--vvn-radius) var(--vvn-radius) 0 0;
+  padding: .6rem 1rem;
+}
+
+/* ── KPI Cards ────────────────────────────────────────────────────────────── */
+.vvn-kpi-card {
+  border-top:    4px solid var(--vvn-maroon);
+  border-radius: var(--vvn-radius);
+  box-shadow:    var(--vvn-shadow-sm);
+  padding:       1rem 1.2rem;
+  background:    var(--vvn-white);
+  transition:    box-shadow var(--vvn-transition);
+}
+.vvn-kpi-card:hover { box-shadow: var(--vvn-shadow-lg); }
+.vvn-kpi-value  { font-size: 2rem; font-weight: 700; color: var(--vvn-maroon); margin: 0 0 .2rem; }
+.vvn-kpi-label  { font-size: .82rem; color: var(--vvn-charcoal); margin: 0; }
+.vvn-kpi-trend  { font-size: .8rem; margin: .2rem 0 0; }
+
+/* ── Buttons ──────────────────────────────────────────────────────────────── */
+.vvn-btn {
+  display:         inline-flex;
+  align-items:     center;
+  gap:             .4rem;
+  padding:         .44rem 1.1rem;
+  font-size:       .88rem;
+  font-weight:     600;
+  border-radius:   var(--vvn-radius);
+  border:          2px solid transparent;
+  cursor:          pointer;
+  transition:      background var(--vvn-transition),
+                   border-color var(--vvn-transition),
+                   box-shadow var(--vvn-transition);
+  text-decoration: none;
+}
+.vvn-btn:focus-visible {
+  outline: 3px solid var(--vvn-orange);
+  outline-offset: 2px;
+}
+
+.vvn-btn-primary {
+  background:   var(--vvn-maroon);
+  color:        var(--vvn-white);
+  border-color: var(--vvn-maroon);
+}
+.vvn-btn-primary:hover {
+  background:   var(--vvn-maroon-dark);
+  border-color: var(--vvn-maroon-dark);
+  box-shadow:   0 2px 8px rgba(134,31,65,.30);
+  color:        var(--vvn-white);
+}
+
+.vvn-btn-secondary {
+  background:   var(--vvn-orange);
+  color:        var(--vvn-white);
+  border-color: var(--vvn-orange);
+}
+.vvn-btn-secondary:hover { background: #c05f10; border-color: #c05f10; color: #fff; }
+
+.vvn-btn-outline {
+  background:   transparent;
+  color:        var(--vvn-maroon);
+  border-color: var(--vvn-maroon);
+}
+.vvn-btn-outline:hover {
+  background: var(--vvn-maroon-lt);
+  color: var(--vvn-maroon);
+}
+
+/* ── Filter / Sidebar ─────────────────────────────────────────────────────── */
+.vvn-filter-wrap  { margin-bottom: 1rem; }
+.vvn-slider-wrap  { margin-bottom: 1rem; }
+.vvn-filter-label {
+  font-size:       .8rem;
+  font-weight:     600;
+  color:           var(--vvn-charcoal);
+  text-transform:  uppercase;
+  letter-spacing:  .04em;
+  display:         block;
+  margin-bottom:   .25rem;
+}
+
+/* Shiny selectInput focus ring */
+.vvn-filter-wrap .selectize-input.focus {
+  border-color: var(--vvn-maroon) !important;
+  box-shadow:   0 0 0 3px rgba(134,31,65,.15) !important;
+}
+
+/* Shiny sliderInput track & handle */
+.vvn-slider-wrap .irs--shiny .irs-bar        { background: var(--vvn-maroon) !important; border-color: var(--vvn-maroon) !important; }
+.vvn-slider-wrap .irs--shiny .irs-handle      { border-color: var(--vvn-maroon) !important; }
+.vvn-slider-wrap .irs--shiny .irs-from,
+.vvn-slider-wrap .irs--shiny .irs-to,
+.vvn-slider-wrap .irs--shiny .irs-single       { background: var(--vvn-maroon) !important; }
+
+/* ── Leaflet ──────────────────────────────────────────────────────────────── */
+.leaflet-control { font-family: var(--vvn-font); font-size: .82rem; }
+.leaflet-popup-content-wrapper {
+  border-radius: var(--vvn-radius);
+  border: 1.5px solid var(--vvn-maroon);
+  box-shadow: var(--vvn-shadow);
+}
+.leaflet-popup-tip { background: var(--vvn-maroon); }
+
+/* ── DT tables ────────────────────────────────────────────────────────────── */
+table.dataTable thead th {
+  background-color: var(--vvn-maroon) !important;
+  color:            var(--vvn-white)  !important;
+  border-bottom:    2px solid var(--vvn-orange) !important;
+}
+table.dataTable.stripe tbody tr.odd { background-color: var(--vvn-light-gray); }
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  background: var(--vvn-maroon) !important;
+  border-color: var(--vvn-maroon) !important;
+  color: #fff !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background: var(--vvn-maroon-lt) !important;
+  border-color: var(--vvn-maroon) !important;
+  color: var(--vvn-maroon) !important;
+}
+.dataTables_filter input:focus { border-color: var(--vvn-maroon); box-shadow: 0 0 0 3px rgba(134,31,65,.15); }
+
+/* ── Accessibility ────────────────────────────────────────────────────────── */
+:focus-visible { outline: 3px solid var(--vvn-orange); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

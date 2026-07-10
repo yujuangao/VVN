@@ -1,0 +1,20 @@
+# R
+.Rhistory
+.RData
+.Rproj.user
+*.Rproj
+
+# Package build artifacts
+/doc/
+/Meta/
+NAMESPACE.bak
+
+# pkgdown site
+/docs/
+
+# macOS
+.DS_Store
+
+# Temporary files
+*.swp
+*~

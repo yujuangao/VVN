@@ -1,0 +1,45 @@
+Package: vvnthemes
+Title: Virginia Visualization Network Themes and Templates
+Version: 1.0.0
+Authors@R:
+    person("Virginia Visualization Network", "Virginia Tech",
+           email = "vvn@vt.edu",
+           role = c("aut", "cre"))
+Description: Provides ggplot2 themes, color palettes, scales, GT table styles,
+    Leaflet map helpers, Shiny UI components, and ready-to-use Quarto / Shiny
+    project templates for the Virginia Visualization Network (VVN) at Virginia
+    Tech. Inspired by urbnthemes. All outputs follow VT brand guidelines
+    (Maroon #861F41, Orange #E5751F) and meet WCAG 2.1 AA accessibility
+    requirements.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+Depends:
+    R (>= 4.1.0)
+Imports:
+    ggplot2 (>= 3.4.0),
+    scales  (>= 1.2.0),
+    grDevices,
+    grid,
+    rlang  (>= 1.0.0),
+    cli    (>= 3.0.0),
+    glue   (>= 1.6.0),
+    fs     (>= 1.5.0)
+Suggests:
+    gt       (>= 0.9.0),
+    leaflet  (>= 2.1.0),
+    htmltools,
+    shiny    (>= 1.7.0),
+    bslib    (>= 0.5.0),
+    DT       (>= 0.28),
+    plotly   (>= 4.10.0),
+    quarto,
+    dplyr,
+    usethis,
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+URL: https://github.com/vt-vvn/vvnthemes
+BugReports: https://github.com/vt-vvn/vvnthemes/issues
