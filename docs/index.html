@@ -318,12 +318,22 @@ var el = document.getElementById('demo-gs-code');
 var cur = document.getElementById('demo-gs-cursor');
 var out = document.getElementById('demo-gs-output');
 var i = 0;
+var revealed = false;
 function type(){
-  if(i < code.length){ el.textContent += code[i++]; setTimeout(type, i < 60 ? 40 : 20); }
-  else {
+  if(i < code.length){
+    el.textContent += code[i++];
+    if(!revealed && i >= Math.floor(code.length * 0.18)){
+      revealed = true;
+      out.style.display = 'block';
+      setTimeout(function(){ out.style.opacity = '1'; }, 30);
+    }
+    setTimeout(type, i < 60 ? 40 : 20);
+  } else {
     cur.style.display = 'none';
-    out.style.display = 'block';
-    setTimeout(function(){ out.style.opacity = '1'; }, 30);
+    if(!revealed){
+      out.style.display = 'block';
+      setTimeout(function(){ out.style.opacity = '1'; }, 30);
+    }
   }
 }
 setTimeout(type, 600);
@@ -360,7 +370,7 @@ setTimeout(type, 600);
 </section>
 <section id="learn-more" class="level2">
 <h2 class="anchored" data-anchor-id="learn-more">Learn more</h2>
-<p>The <a href="refman.html">Reference Manual</a> documents all function parameters in detail. The <a href="faq.html">FAQ</a> covers common errors and troubleshooting. For design rules — color standards, chart selection, normalization requirements — see the <a href="guide/index.html">VVN Style Guide</a>.</p>
+<p>The <a href="refman.html">Reference Manual</a> documents all function parameters in detail. The <a href="faq.html">FAQ</a> covers common errors and troubleshooting. For design rules — color standards, chart selection, normalization requirements — see the <a href="../vvn-guide/index.html">VVN Style Guide</a>.</p>
 
 
 <!-- -->
@@ -935,70 +945,80 @@ setTimeout(type, 600);
 <span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a><span class="in">var cur = document.getElementById('demo-gs-cursor');</span></span>
 <span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a><span class="in">var out = document.getElementById('demo-gs-output');</span></span>
 <span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a><span class="in">var i = 0;</span></span>
-<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a><span class="in">function type(){</span></span>
-<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a><span class="in">  if(i &lt; code.length){ el.textContent += code[i++]; setTimeout(type, i &lt; 60 ? 40 : 20); }</span></span>
-<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a><span class="in">  else {</span></span>
-<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a><span class="in">    cur.style.display = 'none';</span></span>
-<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a><span class="in">    out.style.display = 'block';</span></span>
-<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a><span class="in">    setTimeout(function(){ out.style.opacity = '1'; }, 30);</span></span>
-<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a><span class="in">setTimeout(type, 600);</span></span>
-<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a><span class="in">})();</span></span>
-<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/script&gt;</span></span>
-<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a>The same pattern applies to maps (<span class="in">`theme_vvn_map()`</span>, <span class="in">`scale_fill_vvn_c()`</span>) and tables (<span class="in">`gt()`</span> |&gt; <span class="in">`vvn_table()`</span>). Step-by-step tutorials are available for <span class="co">[</span><span class="ot">charts</span><span class="co">](charts.html)</span>, <span class="co">[</span><span class="ot">maps</span><span class="co">](maps.html)</span>, <span class="co">[</span><span class="ot">tables</span><span class="co">](tables.html)</span>, and <span class="co">[</span><span class="ot">interactive Shiny components</span><span class="co">](interactive-components.html)</span>.</span>
-<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a><span class="fu">## Use the Dashboard Template</span></span>
-<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a><span class="in">`create_vvn_dashboard()`</span> scaffolds a complete, deployable Shiny dashboard in one command. The dashboard runs immediately with placeholder data — no configuration required before the first preview:</span>
-<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vvnthemes)</span>
-<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a><span class="fu">create_vvn_dashboard</span>(<span class="st">"my-dashboard"</span>, <span class="at">title =</span> <span class="st">"Virginia Housing Dashboard"</span>)</span>
-<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a>shiny<span class="sc">::</span><span class="fu">runApp</span>(<span class="st">"my-dashboard"</span>)</span>
-<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a><span class="in">var revealed = false;</span></span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a><span class="in">function type(){</span></span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a><span class="in">  if(i &lt; code.length){</span></span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a><span class="in">    el.textContent += code[i++];</span></span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a><span class="in">    if(!revealed &amp;&amp; i &gt;= Math.floor(code.length * 0.18)){</span></span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a><span class="in">      revealed = true;</span></span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a><span class="in">      out.style.display = 'block';</span></span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a><span class="in">      setTimeout(function(){ out.style.opacity = '1'; }, 30);</span></span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a><span class="in">    setTimeout(type, i &lt; 60 ? 40 : 20);</span></span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a><span class="in">  } else {</span></span>
+<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a><span class="in">    cur.style.display = 'none';</span></span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a><span class="in">    if(!revealed){</span></span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a><span class="in">      out.style.display = 'block';</span></span>
+<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a><span class="in">      setTimeout(function(){ out.style.opacity = '1'; }, 30);</span></span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a><span class="in">setTimeout(type, 600);</span></span>
+<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a><span class="in">})();</span></span>
+<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/script&gt;</span></span>
+<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a>The same pattern applies to maps (<span class="in">`theme_vvn_map()`</span>, <span class="in">`scale_fill_vvn_c()`</span>) and tables (<span class="in">`gt()`</span> |&gt; <span class="in">`vvn_table()`</span>). Step-by-step tutorials are available for <span class="co">[</span><span class="ot">charts</span><span class="co">](charts.html)</span>, <span class="co">[</span><span class="ot">maps</span><span class="co">](maps.html)</span>, <span class="co">[</span><span class="ot">tables</span><span class="co">](tables.html)</span>, and <span class="co">[</span><span class="ot">interactive Shiny components</span><span class="co">](interactive-components.html)</span>.</span>
+<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a>---</span>
 <span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a>The dashboard opens in your browser with a sidebar, four KPI cards, a trend line chart, a horizontal bar chart, and a searchable data table — all VVN-styled. To populate it with your own data, open <span class="in">`R/data_prep.R`</span> and replace the data source:</span>
+<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a><span class="fu">## Use the Dashboard Template</span></span>
 <span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a>app_data <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/my_data.csv"</span>)</span>
-<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a>Your data frame requires at minimum <span class="in">`region`</span> (character), <span class="in">`year`</span> (integer), and <span class="in">`value`</span> (numeric). All charts, cards, and tables update automatically. See the <span class="co">[</span><span class="ot">Dashboard Template</span><span class="co">](dashboard-template.html)</span> for a fully annotated walkthrough of all 11 sections.</span>
-<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-152"><a href="#cb6-152" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a><span class="in">`create_vvn_dashboard()`</span> scaffolds a complete, deployable Shiny dashboard in one command. The dashboard runs immediately with placeholder data — no configuration required before the first preview:</span>
+<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vvnthemes)</span>
+<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a><span class="fu">create_vvn_dashboard</span>(<span class="st">"my-dashboard"</span>, <span class="at">title =</span> <span class="st">"Virginia Housing Dashboard"</span>)</span>
+<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a>shiny<span class="sc">::</span><span class="fu">runApp</span>(<span class="st">"my-dashboard"</span>)</span>
+<span id="cb6-152"><a href="#cb6-152" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb6-153"><a href="#cb6-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-154"><a href="#cb6-154" aria-hidden="true" tabindex="-1"></a><span class="fu">## Use the VVN Insights Template</span></span>
+<span id="cb6-154"><a href="#cb6-154" aria-hidden="true" tabindex="-1"></a>The dashboard opens in your browser with a sidebar, four KPI cards, a trend line chart, a horizontal bar chart, and a searchable data table — all VVN-styled. To populate it with your own data, open <span class="in">`R/data_prep.R`</span> and replace the data source:</span>
 <span id="cb6-155"><a href="#cb6-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-156"><a href="#cb6-156" aria-hidden="true" tabindex="-1"></a><span class="in">`create_vvn_story()`</span> scaffolds a complete Quarto narrative report with a branded hero section, written analysis, charts, a map, and a summary table:</span>
-<span id="cb6-157"><a href="#cb6-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-158"><a href="#cb6-158" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb6-159"><a href="#cb6-159" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vvnthemes)</span>
-<span id="cb6-160"><a href="#cb6-160" aria-hidden="true" tabindex="-1"></a><span class="fu">create_vvn_story</span>(</span>
-<span id="cb6-161"><a href="#cb6-161" aria-hidden="true" tabindex="-1"></a>  <span class="st">"my-insight"</span>,</span>
-<span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a>  <span class="at">title  =</span> <span class="st">"Broadband Access in Rural Virginia"</span>,</span>
-<span id="cb6-163"><a href="#cb6-163" aria-hidden="true" tabindex="-1"></a>  <span class="at">author =</span> <span class="st">"VVN Research Team"</span></span>
-<span id="cb6-164"><a href="#cb6-164" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-165"><a href="#cb6-165" aria-hidden="true" tabindex="-1"></a>quarto<span class="sc">::</span><span class="fu">quarto_render</span>(<span class="st">"my-insight/index.qmd"</span>)</span>
-<span id="cb6-166"><a href="#cb6-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-156"><a href="#cb6-156" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb6-157"><a href="#cb6-157" aria-hidden="true" tabindex="-1"></a>app_data <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/my_data.csv"</span>)</span>
+<span id="cb6-158"><a href="#cb6-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-159"><a href="#cb6-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-160"><a href="#cb6-160" aria-hidden="true" tabindex="-1"></a>Your data frame requires at minimum <span class="in">`region`</span> (character), <span class="in">`year`</span> (integer), and <span class="in">`value`</span> (numeric). All charts, cards, and tables update automatically. See the <span class="co">[</span><span class="ot">Dashboard Template</span><span class="co">](dashboard-template.html)</span> for a fully annotated walkthrough of all 11 sections.</span>
+<span id="cb6-161"><a href="#cb6-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb6-163"><a href="#cb6-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-164"><a href="#cb6-164" aria-hidden="true" tabindex="-1"></a><span class="fu">## Use the VVN Insights Template</span></span>
+<span id="cb6-165"><a href="#cb6-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-166"><a href="#cb6-166" aria-hidden="true" tabindex="-1"></a><span class="in">`create_vvn_story()`</span> scaffolds a complete Quarto narrative report with a branded hero section, written analysis, charts, a map, and a summary table:</span>
 <span id="cb6-167"><a href="#cb6-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-168"><a href="#cb6-168" aria-hidden="true" tabindex="-1"></a>The report renders immediately with placeholder content — a hero banner, overview, background, findings, and conclusion sections, all styled and ready to fill in. Open <span class="in">`index.qmd`</span>, replace every <span class="in">`[placeholder]`</span> with your written content, and update the data loading line:</span>
-<span id="cb6-169"><a href="#cb6-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-170"><a href="#cb6-170" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb6-171"><a href="#cb6-171" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/my_data.csv"</span>)</span>
-<span id="cb6-172"><a href="#cb6-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-173"><a href="#cb6-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-174"><a href="#cb6-174" aria-hidden="true" tabindex="-1"></a>See the <span class="co">[</span><span class="ot">VVN Insights Template</span><span class="co">](insights-template.html)</span> for a fully annotated walkthrough of all 12 sections.</span>
-<span id="cb6-175"><a href="#cb6-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-176"><a href="#cb6-176" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb6-168"><a href="#cb6-168" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb6-169"><a href="#cb6-169" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vvnthemes)</span>
+<span id="cb6-170"><a href="#cb6-170" aria-hidden="true" tabindex="-1"></a><span class="fu">create_vvn_story</span>(</span>
+<span id="cb6-171"><a href="#cb6-171" aria-hidden="true" tabindex="-1"></a>  <span class="st">"my-insight"</span>,</span>
+<span id="cb6-172"><a href="#cb6-172" aria-hidden="true" tabindex="-1"></a>  <span class="at">title  =</span> <span class="st">"Broadband Access in Rural Virginia"</span>,</span>
+<span id="cb6-173"><a href="#cb6-173" aria-hidden="true" tabindex="-1"></a>  <span class="at">author =</span> <span class="st">"VVN Research Team"</span></span>
+<span id="cb6-174"><a href="#cb6-174" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-175"><a href="#cb6-175" aria-hidden="true" tabindex="-1"></a>quarto<span class="sc">::</span><span class="fu">quarto_render</span>(<span class="st">"my-insight/index.qmd"</span>)</span>
+<span id="cb6-176"><a href="#cb6-176" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb6-177"><a href="#cb6-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-178"><a href="#cb6-178" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learn more</span></span>
+<span id="cb6-178"><a href="#cb6-178" aria-hidden="true" tabindex="-1"></a>The report renders immediately with placeholder content — a hero banner, overview, background, findings, and conclusion sections, all styled and ready to fill in. Open <span class="in">`index.qmd`</span>, replace every <span class="in">`[placeholder]`</span> with your written content, and update the data loading line:</span>
 <span id="cb6-179"><a href="#cb6-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-180"><a href="#cb6-180" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">Reference Manual</span><span class="co">](refman.html)</span> documents all function parameters in detail. The <span class="co">[</span><span class="ot">FAQ</span><span class="co">](faq.html)</span> covers common errors and troubleshooting. For design rules — color standards, chart selection, normalization requirements — see the <span class="co">[</span><span class="ot">VVN Style Guide</span><span class="co">](guide/index.html)</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb6-180"><a href="#cb6-180" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb6-181"><a href="#cb6-181" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/my_data.csv"</span>)</span>
+<span id="cb6-182"><a href="#cb6-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-183"><a href="#cb6-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-184"><a href="#cb6-184" aria-hidden="true" tabindex="-1"></a>See the <span class="co">[</span><span class="ot">VVN Insights Template</span><span class="co">](insights-template.html)</span> for a fully annotated walkthrough of all 12 sections.</span>
+<span id="cb6-185"><a href="#cb6-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-186"><a href="#cb6-186" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb6-187"><a href="#cb6-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-188"><a href="#cb6-188" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learn more</span></span>
+<span id="cb6-189"><a href="#cb6-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-190"><a href="#cb6-190" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">Reference Manual</span><span class="co">](refman.html)</span> documents all function parameters in detail. The <span class="co">[</span><span class="ot">FAQ</span><span class="co">](faq.html)</span> covers common errors and troubleshooting. For design rules — color standards, chart selection, normalization requirements — see the <span class="co">[</span><span class="ot">VVN Style Guide</span><span class="co">](../vvn-guide/index.html)</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
