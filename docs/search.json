@@ -1,0 +1,758 @@
+[
+  {
+    "objectID": "tables.html",
+    "href": "tables.html",
+    "title": "Tables",
+    "section": "",
+    "text": "For design rules, cell formatting, and border conventions, see Table Standards →"
+  },
+  {
+    "objectID": "tables.html#create-your-first-table",
+    "href": "tables.html#create-your-first-table",
+    "title": "Tables",
+    "section": "Create your first table",
+    "text": "Create your first table\nFor most VVN projects, use vvn_table(). It handles all styling — maroon header, alternating rows, source line — automatically.\n\nStep 1 — Install gt (once)\ninstall.packages(\"gt\")\ngt is the R package that builds the underlying table. vvn_table() wraps it with VVN styling.\n\n\nStep 2 — Load packages\nlibrary(vvnthemes)\nlibrary(gt)\n\n\nStep 3 — Prepare your data\ndf &lt;- data.frame(\n  Region       = c(\"Urban Core\", \"Urban Fringe\", \"Suburban\", \"Small City\", \"Rural\"),\n  `2023 Value` = c(65.3, 61.8, 57.4, 52.1, 46.2),\n  Change       = c(\"+4.1\", \"+3.9\", \"+3.5\", \"+3.2\", \"+3.0\"),\n  check.names  = FALSE\n)\nSort rows before creating the table — gt displays them in the order they appear in your data frame.\n\n\nStep 4 — Create the table\ndf |&gt;\n  gt() |&gt;\n  vvn_table(\n    title       = \"Economic Index by Region\",\n    subtitle    = \"Virginia, 2023 estimates\",\n    source_note = \"Source: VVN Example Data\"\n  )\nThe pattern is always: data |&gt; gt() |&gt; vvn_table(...). You must call gt() before vvn_table().\n\ntitle — headline case; displayed in maroon above the table\nsubtitle — sentence case; geography and year\nsource_note — required on every published table\n\n\n\nStep 5 — Format numbers (optional)\nChain gt formatting functions after vvn_table() to control decimal places, alignment, and separators:\ndf |&gt;\n  gt() |&gt;\n  vvn_table(\n    title       = \"Summary Table\",\n    source_note = \"Source: [Dataset] · VVN Analysis\"\n  ) |&gt;\n  gt::fmt_number(columns = `2023 Value`, decimals = 1) |&gt;\n  gt::cols_align(align = \"right\", columns = -Region)\nCommon formatting functions:\n\n\n\nFunction\nWhat it does\n\n\n\n\ngt::fmt_number(columns, decimals = 1)\nRound to N decimal places\n\n\ngt::fmt_percent(columns, decimals = 1)\nFormat as percentage\n\n\ngt::fmt_currency(columns)\nFormat as dollar amount\n\n\ngt::cols_align(align = \"right\", columns)\nRight-align numbers\n\n\ngt::tab_spanner(label, columns)\nGroup columns under a header"
+  },
+  {
+    "objectID": "tables.html#need-an-interactive-table",
+    "href": "tables.html#need-an-interactive-table",
+    "title": "Tables",
+    "section": "Need an interactive table?",
+    "text": "Need an interactive table?\nIf you are building a Shiny dashboard where users need to search, sort, filter, or download data, use DT::datatable() instead of vvn_table().\ninstall.packages(\"DT\")   # once\nlibrary(DT)\n\nDT::datatable(\n  your_data,\n  rownames   = FALSE,\n  class      = \"stripe hover compact\",\n  extensions = \"Buttons\",\n  options    = list(\n    pageLength = 15,\n    dom        = \"Bfrtip\",\n    buttons    = c(\"csv\", \"excel\")\n  )\n)\nIn a Shiny app:\n# Server\noutput$dt_table &lt;- DT::renderDataTable({\n  filtered() |&gt;\n    DT::datatable(rownames = FALSE, class = \"stripe hover compact\")\n})\n\n# UI\nDT::dataTableOutput(\"dt_table\")"
+  },
+  {
+    "objectID": "tables.html#presenting-model-results",
+    "href": "tables.html#presenting-model-results",
+    "title": "Tables",
+    "section": "Presenting model results",
+    "text": "Presenting model results\nUse vvn_table_pvalues() to add automatic significance stars to a regression table.\nlibrary(gt)\nlibrary(broom)\n\nmodel &lt;- lm(mpg ~ wt + hp + cyl, data = mtcars)\n\ntidy(model) |&gt;\n  mutate(across(where(is.numeric), \\(x) round(x, 3))) |&gt;\n  gt() |&gt;\n  vvn_table(\n    title       = \"OLS Regression: Fuel Economy\",\n    subtitle    = \"Dependent variable: miles per gallon\",\n    source_note = \"Source: Motor Trend (1974). N = 32.\"\n  ) |&gt;\n  vvn_table_pvalues(col_name = \"p.value\")\nSignificance notation: * p &lt; 0.05 · ** p &lt; 0.01 · *** p &lt; 0.001 p &lt; 0.001 cells are highlighted in maroon; p &lt; 0.05 in orange."
+  },
+  {
+    "objectID": "tables.html#design-rules",
+    "href": "tables.html#design-rules",
+    "title": "Tables",
+    "section": "Design rules",
+    "text": "Design rules\n\n\n\nRule\nRequirement\n\n\n\n\nTitle\nHeadline case, concise\n\n\nColumn headings\nSentence case\n\n\nNumbers\nRight-aligned; consistent decimal places\n\n\nMissing values\nEm dash — — never leave cells blank\n\n\nSource\nRequired on every table"
+  },
+  {
+    "objectID": "tables.html#common-mistakes",
+    "href": "tables.html#common-mistakes",
+    "title": "Tables",
+    "section": "Common mistakes",
+    "text": "Common mistakes\n“could not find function ‘gt’” — You forgot library(gt). Run install.packages(\"gt\") first, then library(gt).\n“could not find function ‘vvn_table’” — You forgot library(vvnthemes).\nvvn_table(df) gives an error. — The correct pattern is df |&gt; gt() |&gt; vvn_table(...). You must call gt() first.\nNumbers have too many decimal places. — Add gt::fmt_number(columns = my_col, decimals = 1) after vvn_table().\nTable fails VVN review. — You forgot source_note. It is required on every published table.\nSee Reference Manual → for full parameter documentation on vvn_table() and vvn_table_pvalues()."
+  },
+  {
+    "objectID": "maps.html",
+    "href": "maps.html",
+    "title": "Maps",
+    "section": "",
+    "text": "For design rules, legend conventions, and normalization requirements, see Map Standards →"
+  },
+  {
+    "objectID": "maps.html#create-your-first-map",
+    "href": "maps.html#create-your-first-map",
+    "title": "Maps",
+    "section": "Create your first map",
+    "text": "Create your first map\nThe standard VVN map is a county-level choropleth — Virginia counties filled by color according to a data value. Follow these steps.\n\nStep 1 — Install map packages (once)\ninstall.packages(c(\"sf\", \"tigris\"))\n\nsf — handles geographic data (shapes, projections)\ntigris — downloads official U.S. county boundaries\n\n\n\nStep 2 — Load packages\nlibrary(vvnthemes)\nlibrary(ggplot2)\nlibrary(sf)\nlibrary(tigris)\n\n\nStep 3 — Get Virginia county boundaries\nva &lt;- counties(\"VA\", cb = TRUE, resolution = \"20m\") |&gt;\n  st_transform(crs = 5070)\ncrs = 5070 is Albers Equal-Area — the correct projection for static Virginia maps. It makes the state look proportionally correct.\n\n\nStep 4 — Join your data\n# Replace this with your actual data:\n# va &lt;- left_join(va, my_data, by = c(\"GEOID\" = \"fips\"))\n\n# Placeholder so this example runs immediately:\nset.seed(42)\nva$rate &lt;- runif(nrow(va), 30, 80)\n\n\n\n\n\n\nImportant\n\n\n\nAlways map a rate or percentage, never a raw count. Raw counts make densely populated counties look more extreme simply because they have more people, not because the situation is different.\n\n\n\n\nStep 5 — Create and save the map\np &lt;- ggplot(va, aes(fill = rate)) +\n  geom_sf(color = \"#FFFFFF\", linewidth = 0.3) +\n  scale_fill_vvn_c(\"maroon_seq\") +\n  theme_vvn_map() +\n  labs(\n    title    = \"Broadband Access by County, 2023\",\n    subtitle = \"Percentage of households with broadband access\",\n    fill     = \"Households (%)\"\n  ) +\n  vvn_source(\"FCC Broadband Data · VVN Analysis\")\n\nvvn_save(p, \"figures/map.png\")\n\nscale_fill_vvn_c(\"maroon_seq\") — light to dark maroon; the VVN standard for county data\ntheme_vvn_map() — removes axes, places legend at bottom right\nfill = \"Households (%)\" — legend label must include units\nvvn_source() — required on every published map"
+  },
+  {
+    "objectID": "maps.html#for-dashboards-interactive-map",
+    "href": "maps.html#for-dashboards-interactive-map",
+    "title": "Maps",
+    "section": "For dashboards: interactive map",
+    "text": "For dashboards: interactive map\nIf you are building a Shiny dashboard, use vvn_map_style() with Leaflet instead of the static ggplot2 approach. Interactive maps let users zoom, pan, and hover over counties.\n\nStep 1 — Install leaflet (once)\ninstall.packages(\"leaflet\")\n\n\nStep 2 — Load and prepare data (CRS must be 4326)\nlibrary(leaflet)\nlibrary(sf)\nlibrary(tigris)\n\nva &lt;- counties(\"VA\", cb = TRUE, resolution = \"20m\") |&gt;\n  st_transform(crs = 4326)   # WGS84 — required for Leaflet (NOT 5070)\n\n\nStep 3 — Create the map\nset.seed(42)\nva$rate &lt;- runif(nrow(va), 30, 80)\n\nleaflet(va) |&gt;\n  vvn_map_style(va, \"rate\",\n                label_col = \"NAME\",\n                title     = \"Broadband coverage (%)\",\n                palette   = \"maroon_seq\")\nlabel_col = \"NAME\" — shows the county name in the hover tooltip.\n\n\nIn a Shiny app\n# Server\noutput$county_map &lt;- leaflet::renderLeaflet({\n  leaflet(va) |&gt;\n    vvn_map_style(va, value_col = input$variable_sel, title = \"Selected Variable\")\n})\n\n# UI\nleaflet::leafletOutput(\"county_map\", height = \"580px\")"
+  },
+  {
+    "objectID": "maps.html#other-map-types",
+    "href": "maps.html#other-map-types",
+    "title": "Maps",
+    "section": "Other map types",
+    "text": "Other map types\n\nPoint map\n\nUse when Showing specific locations such as facilities, schools, or sample sites.\n\nlocations_sf &lt;- sf::st_as_sf(\n  your_points_df,\n  coords = c(\"longitude\", \"latitude\"),\n  crs    = 4326\n)\n\nggplot() +\n  geom_sf(data = va, fill = \"#F7F7F7\", color = \"#E0E0E0\", linewidth = 0.3) +\n  geom_sf(data = locations_sf, color = \"#861F41\", size = 2.5, alpha = 0.8) +\n  theme_vvn_map() +\n  labs(title = \"Location Map Title\", subtitle = \"Virginia, 2023\") +\n  vvn_source(\"Source: [Dataset] · VVN Analysis\")\n\n\nBubble map\n\nUse when Showing proportional quantities at specific locations — circle size represents magnitude.\n\nggplot() +\n  geom_sf(data = va, fill = \"#F7F7F7\", color = \"#E0E0E0\", linewidth = 0.3) +\n  geom_sf(data = centroids_sf, aes(size = your_variable),\n          color = \"#861F41\", alpha = 0.65, show.legend = TRUE) +\n  scale_size_area(max_size = 18, name = \"Variable label\") +\n  theme_vvn_map() +\n  labs(title = \"Bubble Map Title\") +\n  vvn_source(\"Source: [Dataset] · VVN Analysis\")"
+  },
+  {
+    "objectID": "maps.html#color-scale-reference",
+    "href": "maps.html#color-scale-reference",
+    "title": "Maps",
+    "section": "Color scale reference",
+    "text": "Color scale reference\n\n\n\n\n\n\n\nData type\nScale\n\n\n\n\nSequential (low → high) — primary metric\nscale_fill_vvn_c(\"maroon_seq\")\n\n\nSequential — secondary metric\nscale_fill_vvn_c(\"orange_seq\")\n\n\nDiverging (above / below average)\nscale_fill_vvn_c(\"diverging\")"
+  },
+  {
+    "objectID": "maps.html#common-mistakes",
+    "href": "maps.html#common-mistakes",
+    "title": "Maps",
+    "section": "Common mistakes",
+    "text": "Common mistakes\nMap is blank or all one color. — You forgot left_join() to attach your data to the county shapes. All counties show the same color when no data is joined.\nLeaflet map doesn’t render. — You used crs = 5070 for a Leaflet map. Leaflet requires crs = 4326 (WGS84). Use 5070 only for static ggplot2 maps.\nMap fails VVN review. — You mapped a raw count (population, number of businesses) instead of a rate. Always normalize: use rates, percentages, or per-capita values.\nLegend label has no units. — Set fill = \"Households (%)\" (or equivalent) in labs(). The legend must always include units.\nvvn_source() is missing. — Required on every published map. Add vvn_source(\"Source: [Dataset] · VVN Analysis\").\nSee Reference Manual → for full parameter documentation on vvn_map_style()."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Get Started",
+    "section": "",
+    "text": "vvnthemes v1.0.0\nVirginia Tech brand compliance for all Visualizing Virginia Numbers projects\ndevtools::install_github(\"vt-vvn/vvnthemes\")\nvvnthemes provides Virginia Tech brand colors, ggplot2 themes, map styling, styled tables, Shiny UI components, and project scaffolding for all VVN projects. It enforces consistent visual identity — VT Maroon, Burnt Orange, and Navy — across every chart, map, table, dashboard, and narrative report your team produces.\nFeatures"
+  },
+  {
+    "objectID": "index.html#three-ways-to-use-vvnthemes",
+    "href": "index.html#three-ways-to-use-vvnthemes",
+    "title": "Get Started",
+    "section": "Three ways to use vvnthemes",
+    "text": "Three ways to use vvnthemes\n\n\nWorkflow 1\nBuild with the library\nUse individual functions to create charts, maps, and tables from your own data.\nGet started →\n\n\nWorkflow 2\nDashboard Template\nScaffold a complete, ready-to-run Shiny dashboard in one command.\nGet started →\n\n\nWorkflow 3\nVVN Insights Template\nScaffold a complete Quarto narrative report with branded styling.\nGet started →"
+  },
+  {
+    "objectID": "index.html#installation",
+    "href": "index.html#installation",
+    "title": "Get Started",
+    "section": "Installation",
+    "text": "Installation\nTo install vvnthemes, you need the devtools package:\ninstall.packages(\"devtools\")\ndevtools::install_github(\"vt-vvn/vvnthemes\")"
+  },
+  {
+    "objectID": "index.html#build-with-the-library",
+    "href": "index.html#build-with-the-library",
+    "title": "Get Started",
+    "section": "Build with the library",
+    "text": "Build with the library\nLoad vvnthemes at the top of every script or Quarto document. Call set_vvn_defaults() once per session — it applies VT Maroon and the VVN ggplot2 theme to all subsequent charts automatically. Every published figure requires vvn_source() for data attribution, and vvn_save() exports at 300 dpi.\n\n\nR — horizontal bar chart\n\n\n\n\n\nChart output\n\n\n\n\n\n\nThe same pattern applies to maps (theme_vvn_map(), scale_fill_vvn_c()) and tables (gt() |&gt; vvn_table()). Step-by-step tutorials are available for charts, maps, tables, and interactive Shiny components."
+  },
+  {
+    "objectID": "index.html#use-the-dashboard-template",
+    "href": "index.html#use-the-dashboard-template",
+    "title": "Get Started",
+    "section": "Use the Dashboard Template",
+    "text": "Use the Dashboard Template\ncreate_vvn_dashboard() scaffolds a complete, deployable Shiny dashboard in one command. The dashboard runs immediately with placeholder data — no configuration required before the first preview:\nlibrary(vvnthemes)\ncreate_vvn_dashboard(\"my-dashboard\", title = \"Virginia Housing Dashboard\")\nshiny::runApp(\"my-dashboard\")\nThe dashboard opens in your browser with a sidebar, four KPI cards, a trend line chart, a horizontal bar chart, and a searchable data table — all VVN-styled. To populate it with your own data, open R/data_prep.R and replace the data source:\napp_data &lt;- readr::read_csv(\"data/my_data.csv\")\nYour data frame requires at minimum region (character), year (integer), and value (numeric). All charts, cards, and tables update automatically. See the Dashboard Template for a fully annotated walkthrough of all 11 sections."
+  },
+  {
+    "objectID": "index.html#use-the-vvn-insights-template",
+    "href": "index.html#use-the-vvn-insights-template",
+    "title": "Get Started",
+    "section": "Use the VVN Insights Template",
+    "text": "Use the VVN Insights Template\ncreate_vvn_story() scaffolds a complete Quarto narrative report with a branded hero section, written analysis, charts, a map, and a summary table:\nlibrary(vvnthemes)\ncreate_vvn_story(\n  \"my-insight\",\n  title  = \"Broadband Access in Rural Virginia\",\n  author = \"VVN Research Team\"\n)\nquarto::quarto_render(\"my-insight/index.qmd\")\nThe report renders immediately with placeholder content — a hero banner, overview, background, findings, and conclusion sections, all styled and ready to fill in. Open index.qmd, replace every [placeholder] with your written content, and update the data loading line:\ndf &lt;- readr::read_csv(\"data/my_data.csv\")\nSee the VVN Insights Template for a fully annotated walkthrough of all 12 sections."
+  },
+  {
+    "objectID": "index.html#learn-more",
+    "href": "index.html#learn-more",
+    "title": "Get Started",
+    "section": "Learn more",
+    "text": "Learn more\nThe Reference Manual documents all function parameters in detail. The FAQ covers common errors and troubleshooting. For design rules — color standards, chart selection, normalization requirements — see the VVN Style Guide."
+  },
+  {
+    "objectID": "refman.html",
+    "href": "refman.html",
+    "title": "Reference Manual",
+    "section": "",
+    "text": "Click a name to jump directly to its entry."
+  },
+  {
+    "objectID": "refman.html#set_vvn_defaults",
+    "href": "refman.html#set_vvn_defaults",
+    "title": "Reference Manual",
+    "section": "set_vvn_defaults",
+    "text": "set_vvn_defaults\nSet theme_vvn() as the global ggplot2 theme and update default geom aesthetics for the session. Bars, lines, and points become VT Maroon; smooth lines become VT Orange. Call once at the top of every script.\n\nUsage\nset_vvn_defaults(style = c(\"standard\", \"map\"), base_size = 12)\n\n\nArguments\n\nstyle\n\"standard\" applies theme_vvn(); \"map\" applies theme_vvn_map(). Default: \"standard\".\nbase_size\nBase font size passed to the theme. Default: 12.\n\n\n\nValue\nInvisibly NULL. Called for its side effects — sets the ggplot2 global theme and geom color defaults.\n\n\nExamples\nlibrary(vvnthemes)\nset_vvn_defaults()\n\nggplot2::ggplot(mpg, ggplot2::aes(displ, hwy)) +\n  ggplot2::geom_point()   # automatically VT Maroon, theme_vvn()\n\nundo_vvn_defaults()       # revert when done"
+  },
+  {
+    "objectID": "refman.html#undo_vvn_defaults",
+    "href": "refman.html#undo_vvn_defaults",
+    "title": "Reference Manual",
+    "section": "undo_vvn_defaults",
+    "text": "undo_vvn_defaults\nRevert to ggplot2 factory defaults, undoing set_vvn_defaults().\n\nUsage\nundo_vvn_defaults()\n\n\nValue\nInvisibly NULL.\n\n\nExamples\nset_vvn_defaults()\n# ... make VVN charts ...\nundo_vvn_defaults()"
+  },
+  {
+    "objectID": "refman.html#theme_vvn",
+    "href": "refman.html#theme_vvn",
+    "title": "Reference Manual",
+    "section": "theme_vvn",
+    "text": "theme_vvn\nStandard VVN ggplot2 theme: white background, VT Maroon titles, light gray horizontal grid lines, and clean typography. Use for bar charts, line charts, histograms, and most non-map figures.\n\nUsage\ntheme_vvn(base_size = 12, base_family = \"sans\", grid = \"y\")\n\n\nArguments\n\nbase_size\nBase font size in points. Default: 12.\nbase_family\nFont family. Default: \"sans\".\ngrid\nGrid lines to display: \"y\" (horizontal only, default), \"x\" (vertical only), \"both\", or \"none\".\n\n\n\nValue\nA ggplot2::theme object.\n\n\nExamples\nlibrary(ggplot2)\n\n# Bar chart — horizontal grid (default)\nggplot(mpg, aes(class)) +\n  geom_bar() +\n  theme_vvn()\n\n# Scatter plot — both axes\nggplot(mpg, aes(displ, hwy)) +\n  geom_point() +\n  theme_vvn(grid = \"both\")\n\n# Larger base size for presentations\nggplot(mpg, aes(class)) +\n  geom_bar() +\n  theme_vvn(base_size = 16)"
+  },
+  {
+    "objectID": "refman.html#theme_vvn_map",
+    "href": "refman.html#theme_vvn_map",
+    "title": "Reference Manual",
+    "section": "theme_vvn_map",
+    "text": "theme_vvn_map\nMap theme for ggplot2 + sf static choropleth maps. Removes axes and ticks; adds a muted panel background and places the legend at the bottom.\n\nUsage\ntheme_vvn_map(base_size = 11, base_family = \"sans\")\n\n\nArguments\n\nbase_size\nBase font size in points. Default: 11.\nbase_family\nFont family. Default: \"sans\".\n\n\n\nValue\nA ggplot2::theme object.\n\n\nExamples\nlibrary(ggplot2); library(sf)\n\nggplot(va_counties_sf, aes(fill = pct_broadband)) +\n  geom_sf(color = \"#FFFFFF\", linewidth = 0.3) +\n  scale_fill_vvn_c(\"maroon_seq\") +\n  theme_vvn_map() +\n  labs(title = \"Broadband Access by County\", fill = \"Households (%)\")"
+  },
+  {
+    "objectID": "refman.html#theme_vvn_minimal",
+    "href": "refman.html#theme_vvn_minimal",
+    "title": "Reference Manual",
+    "section": "theme_vvn_minimal",
+    "text": "theme_vvn_minimal\nMinimal VVN variant: no grid lines, no axes, white background. Use for small multiples, annotation-heavy figures, and inset charts.\n\nUsage\ntheme_vvn_minimal(base_size = 12, base_family = \"sans\")\n\n\nArguments\n\nbase_size\nBase font size in points. Default: 12.\nbase_family\nFont family. Default: \"sans\".\n\n\n\nValue\nA ggplot2::theme object.\n\n\nExamples\nggplot(df, aes(x, y)) +\n  geom_col() +\n  theme_vvn_minimal()"
+  },
+  {
+    "objectID": "refman.html#vvn_colors",
+    "href": "refman.html#vvn_colors",
+    "title": "Reference Manual",
+    "section": "vvn_colors",
+    "text": "vvn_colors\nReturn one or more named VVN brand colors as a named character vector of hex codes.\n\nUsage\nvvn_colors(...)\n\n\nArguments\n\n...\nColor name(s) to return. Valid names: \"maroon\", \"orange\", \"navy\", \"charcoal\", \"gray\", \"light_gray\", \"white\", \"maroon_dk\", \"maroon_lt\", \"orange_lt\". If none provided, returns all colors.\n\n\n\nValue\nA named character vector of hex codes.\n\n\nExamples\nvvn_colors()                             # all brand colors\nvvn_colors(\"maroon\")                     # \"#861F41\"\nvvn_colors(\"maroon\", \"orange\", \"navy\")   # three primary colors"
+  },
+  {
+    "objectID": "refman.html#vvn_palette",
+    "href": "refman.html#vvn_palette",
+    "title": "Reference Manual",
+    "section": "vvn_palette",
+    "text": "vvn_palette\nGenerate a vector of hex colors from a named VVN palette. Sequential and diverging palettes are interpolated when n exceeds the base palette size.\n\nUsage\nvvn_palette(palette = \"main\", n = NULL, reverse = FALSE, alpha = 1)\n\n\nArguments\n\npalette\nPalette name. Categorical: \"main\" (10 colors), \"brand\" (maroon / orange / navy), \"accessible\" (7 colors, Okabe-Ito inspired). Sequential: \"maroon_seq\", \"orange_seq\", \"navy_seq\". Diverging: \"diverging\". Neutral: \"gray_seq\". Default: \"main\".\nn\nNumber of colors to return. NULL returns all base palette colors. Sequential and diverging palettes interpolate when n exceeds the base size.\nreverse\nReverse the palette order? Default: FALSE.\nalpha\nOpacity, 0–1. Default: 1.\n\n\n\nValue\nA character vector of hex color codes.\n\n\nExamples\nvvn_palette()                        # 10 main colors\nvvn_palette(\"brand\")                 # \"#861F41\" \"#E5751F\" \"#1B5299\"\nvvn_palette(\"maroon_seq\", n = 9)     # 9-step interpolated maroon ramp\nvvn_palette(\"diverging\", n = 11)\nvvn_palette(\"accessible\")"
+  },
+  {
+    "objectID": "refman.html#view_vvn_palette",
+    "href": "refman.html#view_vvn_palette",
+    "title": "Reference Manual",
+    "section": "view_vvn_palette",
+    "text": "view_vvn_palette\nDisplay a horizontal color swatch strip for any VVN palette. Returns a ggplot object that can be saved with vvn_save().\n\nUsage\nview_vvn_palette(palette = \"main\", n = NULL, label = TRUE, title = NULL)\n\n\nArguments\n\npalette\nPalette name (see vvn_palette()). Default: \"main\".\nn\nNumber of colors to display. NULL shows all base palette colors.\nlabel\nShow hex codes on each swatch? Default: TRUE.\ntitle\nPlot title. Defaults to vvn_palette(\"&lt;palette&gt;\").\n\n\n\nValue\nA ggplot object, printed invisibly.\n\n\nExamples\nview_vvn_palette()                       # \"main\" palette\nview_vvn_palette(\"diverging\", n = 9)\nview_vvn_palette(\"accessible\", label = FALSE)\nvvn_save(view_vvn_palette(\"brand\"), \"figures/brand_palette.png\")"
+  },
+  {
+    "objectID": "refman.html#scale_color_vvn",
+    "href": "refman.html#scale_color_vvn",
+    "title": "Reference Manual",
+    "section": "scale_color_vvn",
+    "text": "scale_color_vvn\nApply a VVN categorical color palette to the color aesthetic of a ggplot2 chart. scale_colour_vvn() is a British-English alias.\n\nUsage\nscale_color_vvn(palette = \"main\", reverse = FALSE, alpha = 1, ...)\nscale_colour_vvn(palette = \"main\", reverse = FALSE, alpha = 1, ...)\n\n\nArguments\n\npalette\nPalette name: \"main\" (general purpose, up to 10 groups), \"brand\" (3 groups: maroon / orange / navy), or \"accessible\" (colorblind-safe). Default: \"main\".\nreverse\nReverse palette order? Default: FALSE.\nalpha\nOpacity, 0–1. Default: 1.\n...\nPassed to ggplot2::discrete_scale().\n\n\n\nValue\nA ggplot2 scale object.\n\n\nExamples\nlibrary(ggplot2)\n\nggplot(economics_long, aes(date, value01, color = variable)) +\n  geom_line() +\n  scale_color_vvn(\"main\")\n\nggplot(df, aes(date, value, color = group)) +\n  geom_line() +\n  scale_color_vvn(\"brand\")   # 2–3 groups"
+  },
+  {
+    "objectID": "refman.html#scale_fill_vvn",
+    "href": "refman.html#scale_fill_vvn",
+    "title": "Reference Manual",
+    "section": "scale_fill_vvn",
+    "text": "scale_fill_vvn\nApply a VVN categorical color palette to the fill aesthetic. Same palettes and arguments as scale_color_vvn().\n\nUsage\nscale_fill_vvn(palette = \"main\", reverse = FALSE, alpha = 1, ...)\n\n\nArguments\n\npalette\nPalette name: \"main\", \"brand\", or \"accessible\". Default: \"main\".\nreverse\nReverse palette order? Default: FALSE.\nalpha\nOpacity, 0–1. Default: 1.\n...\nPassed to ggplot2::discrete_scale().\n\n\n\nValue\nA ggplot2 scale object.\n\n\nExamples\nlibrary(ggplot2)\n\n# Grouped bar chart\nggplot(mpg, aes(class, fill = drv)) +\n  geom_bar(position = \"dodge\") +\n  scale_fill_vvn(\"brand\")\n\n# Colorblind-safe palette\nggplot(df, aes(region, fill = category)) +\n  geom_col() +\n  scale_fill_vvn(\"accessible\")"
+  },
+  {
+    "objectID": "refman.html#scale_color_vvn_c",
+    "href": "refman.html#scale_color_vvn_c",
+    "title": "Reference Manual",
+    "section": "scale_color_vvn_c",
+    "text": "scale_color_vvn_c\nApply a VVN sequential or diverging palette to a continuous color aesthetic. scale_colour_vvn_c() is a British-English alias.\n\nUsage\nscale_color_vvn_c(palette = \"maroon_seq\", reverse = FALSE, ...)\nscale_colour_vvn_c(palette = \"maroon_seq\", reverse = FALSE, ...)\n\n\nArguments\n\npalette\nPalette name: \"maroon_seq\" (primary), \"orange_seq\", \"navy_seq\", \"diverging\" (for above/below-average data), or \"gray_seq\". Default: \"maroon_seq\".\nreverse\nReverse palette direction? Default: FALSE.\n...\nPassed to ggplot2::scale_color_gradientn().\n\n\n\nValue\nA ggplot2 scale object.\n\n\nExamples\nggplot(df, aes(x, y, color = value)) +\n  geom_point(size = 3) +\n  scale_color_vvn_c(\"maroon_seq\")\n\nggplot(df, aes(x, y, color = z_score)) +\n  geom_point() +\n  scale_color_vvn_c(\"diverging\")"
+  },
+  {
+    "objectID": "refman.html#scale_fill_vvn_c",
+    "href": "refman.html#scale_fill_vvn_c",
+    "title": "Reference Manual",
+    "section": "scale_fill_vvn_c",
+    "text": "scale_fill_vvn_c\nApply a VVN sequential or diverging palette to a continuous fill aesthetic. The primary function for county choropleth maps.\n\nUsage\nscale_fill_vvn_c(palette = \"maroon_seq\", reverse = FALSE, ...)\n\n\nArguments\n\npalette\nPalette name: \"maroon_seq\" (default), \"orange_seq\", \"navy_seq\", \"diverging\", or \"gray_seq\".\nreverse\nReverse palette direction? Default: FALSE.\n...\nPassed to ggplot2::scale_fill_gradientn().\n\n\n\nValue\nA ggplot2 scale object.\n\n\nExamples\nlibrary(ggplot2); library(sf)\n\n# Standard county choropleth\nggplot(va_counties_sf, aes(fill = pct_broadband)) +\n  geom_sf(color = \"#FFFFFF\", linewidth = 0.3) +\n  scale_fill_vvn_c(\"maroon_seq\") +\n  theme_vvn_map()\n\n# Diverging scale (above/below state average)\nggplot(va_counties_sf, aes(fill = dev_from_mean)) +\n  geom_sf() +\n  scale_fill_vvn_c(\"diverging\")"
+  },
+  {
+    "objectID": "refman.html#vvn_title",
+    "href": "refman.html#vvn_title",
+    "title": "Reference Manual",
+    "section": "vvn_title",
+    "text": "vvn_title\nAdd a formatted title and optional subtitle to a ggplot.\n\nUsage\nvvn_title(title, subtitle = NULL)\n\n\nArguments\n\ntitle\nTitle string. Use headline case (capitalize all major words).\nsubtitle\nOptional subtitle. Use sentence case. Default: NULL.\n\n\n\nValue\nA ggplot2::labs() call.\n\n\nExamples\nggplot(mpg, aes(displ, hwy)) +\n  geom_point() +\n  vvn_title(\"Engine Size vs Fuel Economy\",\n             subtitle = \"Motor Trend car road tests, 1974\")"
+  },
+  {
+    "objectID": "refman.html#vvn_source",
+    "href": "refman.html#vvn_source",
+    "title": "Reference Manual",
+    "section": "vvn_source",
+    "text": "vvn_source\nAdd a source attribution caption below a ggplot. Required on every published VVN figure.\n\nUsage\nvvn_source(source, note = NULL)\n\n\nArguments\n\nsource\nSource string, e.g. \"U.S. Census Bureau, ACS 5-Year Estimates, 2022\".\nnote\nOptional methodological note. Prepended as Note: … before the source text. Default: NULL.\n\n\n\nValue\nA ggplot2::labs(caption = ...) call.\n\n\nExamples\nggplot(df, aes(x, y)) +\n  geom_col() +\n  vvn_source(\"U.S. Census Bureau, ACS 5-Year Estimates, 2022\")\n\n# With a methodological note\nggplot(df, aes(x, y)) +\n  geom_col() +\n  vvn_source(\"Virginia Employment Commission\",\n              note = \"Data suppressed for localities with fewer than 100 workers.\")"
+  },
+  {
+    "objectID": "refman.html#vvn_note",
+    "href": "refman.html#vvn_note",
+    "title": "Reference Manual",
+    "section": "vvn_note",
+    "text": "vvn_note\nAdd a footnote-style annotation below a ggplot (without a source line).\n\nUsage\nvvn_note(text)\n\n\nArguments\n\ntext\nNote text. Prefixed with Note:  in the caption.\n\n\n\nValue\nA ggplot2::labs(caption = ...) call.\n\n\nExamples\nggplot(df, aes(x, y)) +\n  geom_col() +\n  vvn_note(\"Excludes localities with suppressed data.\")"
+  },
+  {
+    "objectID": "refman.html#remove_ticks",
+    "href": "refman.html#remove_ticks",
+    "title": "Reference Manual",
+    "section": "remove_ticks",
+    "text": "remove_ticks\nRemove axis tick marks from a ggplot. Recommended for bar charts and categorical axes.\n\nUsage\nremove_ticks(axis = \"both\")\n\n\nArguments\n\naxis\nWhich axis ticks to remove: \"both\" (default), \"x\", or \"y\".\n\n\n\nValue\nA ggplot2::theme() call.\n\n\nExamples\nggplot(df, aes(x = value, y = region)) +\n  geom_col() +\n  remove_ticks()"
+  },
+  {
+    "objectID": "refman.html#remove_axis",
+    "href": "refman.html#remove_axis",
+    "title": "Reference Manual",
+    "section": "remove_axis",
+    "text": "remove_axis\nRemove an entire axis — text, title, ticks, and line — from a ggplot.\n\nUsage\nremove_axis(axis = \"x\")\n\n\nArguments\n\naxis\nWhich axis to remove entirely: \"x\" (default), \"y\", or \"both\".\n\n\n\nValue\nA ggplot2::theme() call.\n\n\nExamples\nggplot(df, aes(x, y)) +\n  geom_col() +\n  remove_axis(\"x\")   # when category labels are self-evident"
+  },
+  {
+    "objectID": "refman.html#scatter_grid",
+    "href": "refman.html#scatter_grid",
+    "title": "Reference Manual",
+    "section": "scatter_grid",
+    "text": "scatter_grid\nAdd major grid lines on both x and y axes. Use with theme_vvn() for scatter plots where both axes need a visual reference.\n\nUsage\nscatter_grid()\n\n\nValue\nA ggplot2::theme() call.\n\n\nExamples\nggplot(df, aes(income, broadband)) +\n  geom_point() +\n  theme_vvn() +\n  scatter_grid()\n\n# Equivalent to:\nggplot(df, aes(income, broadband)) +\n  geom_point() +\n  theme_vvn(grid = \"both\")"
+  },
+  {
+    "objectID": "refman.html#legend_bottom",
+    "href": "refman.html#legend_bottom",
+    "title": "Reference Manual",
+    "section": "legend_bottom",
+    "text": "legend_bottom\nMove the ggplot legend to the bottom of the chart, oriented horizontally.\n\nUsage\nlegend_bottom()\n\n\nValue\nA ggplot2::theme() call.\n\n\nExamples\nggplot(df, aes(date, value, color = group)) +\n  geom_line() +\n  scale_color_vvn(\"brand\") +\n  legend_bottom()"
+  },
+  {
+    "objectID": "refman.html#remove_legend",
+    "href": "refman.html#remove_legend",
+    "title": "Reference Manual",
+    "section": "remove_legend",
+    "text": "remove_legend\nRemove the legend from a ggplot entirely.\n\nUsage\nremove_legend()\n\n\nValue\nA ggplot2::theme() call.\n\n\nExamples\nggplot(df, aes(region, value, fill = region)) +\n  geom_col() +\n  scale_fill_vvn(\"main\") +\n  remove_legend()   # when colors are labeled directly on chart"
+  },
+  {
+    "objectID": "refman.html#vvn_save",
+    "href": "refman.html#vvn_save",
+    "title": "Reference Manual",
+    "section": "vvn_save",
+    "text": "vvn_save\nSave a ggplot at publication quality with VVN default dimensions (8 × 5 inches, 300 dpi, white background). Supports multi-format export in a single call.\n\nUsage\nvvn_save(plot = ggplot2::last_plot(), filename, width = 8, height = 5,\n         dpi = 300, formats = NULL)\n\n\nArguments\n\nplot\nA ggplot object. Defaults to ggplot2::last_plot().\nfilename\nFile path with extension (e.g. \"figures/chart.png\"), or base path without extension when formats is provided.\nwidth\nOutput width in inches. Default: 8.\nheight\nOutput height in inches. Default: 5.\ndpi\nResolution in dots per inch. Default: 300.\nformats\nCharacter vector of file extensions for simultaneous multi-format export, e.g. c(\"png\", \"pdf\", \"svg\"). When provided, overrides the extension in filename.\n\n\n\nValue\nInvisibly returns the file path(s) written.\n\n\nExamples\np &lt;- ggplot(mpg, aes(class)) + geom_bar() + theme_vvn()\n\nvvn_save(p, \"figures/class_bar.png\")\n\n# Custom size\nvvn_save(p, \"figures/class_bar_wide.png\", width = 12, height = 4)\n\n# Export to multiple formats at once\nvvn_save(p, \"figures/class_bar\", formats = c(\"png\", \"pdf\", \"svg\"))"
+  },
+  {
+    "objectID": "refman.html#vvn_accessibility_check",
+    "href": "refman.html#vvn_accessibility_check",
+    "title": "Reference Manual",
+    "section": "vvn_accessibility_check",
+    "text": "vvn_accessibility_check\nCompute WCAG 2.1 contrast ratios for a set of hex colors against a background color and report pass/fail status.\n\nUsage\nvvn_accessibility_check(colors, background = \"#FFFFFF\", level = c(\"AA\", \"AAA\"))\n\n\nArguments\n\ncolors\nCharacter vector of hex codes to test.\nbackground\nBackground hex code to test against. Default: \"#FFFFFF\".\nlevel\nWCAG standard: \"AA\" requires ≥ 4.5:1 contrast ratio (default); \"AAA\" requires ≥ 7.0:1.\n\n\n\nValue\nInvisibly returns a data frame with columns color, contrast_ratio, pass. Prints a formatted pass/fail report via cli.\n\n\nExamples\n# Check brand palette on white background\nvvn_accessibility_check(vvn_palette(\"brand\"))\n\n# Check white text on maroon background\nvvn_accessibility_check(c(\"#FFFFFF\", \"#F7F7F7\"), background = \"#861F41\")\n\n# Stricter AAA standard\nvvn_accessibility_check(vvn_palette(\"accessible\"), level = \"AAA\")"
+  },
+  {
+    "objectID": "refman.html#vvn_table",
+    "href": "refman.html#vvn_table",
+    "title": "Reference Manual",
+    "section": "vvn_table",
+    "text": "vvn_table\nApply VVN branding to a gt table: VT Maroon column headers, alternating light gray rows, orange accent border on the header, and optional title and source note.\nRequires the gt package (install.packages(\"gt\")).\n\nUsage\nvvn_table(gt_tbl, title = NULL, subtitle = NULL, source_note = NULL,\n          striped = TRUE, compact = FALSE)\n\n\nArguments\n\ngt_tbl\nA gt_tbl object created by gt::gt().\ntitle\nTable title string. Use headline case. Default: NULL.\nsubtitle\nOptional subtitle. Use sentence case. Default: NULL.\nsource_note\nSource attribution string. Required for all published tables. Default: NULL.\nstriped\nApply alternating row shading (#F7F7F7)? Default: TRUE.\ncompact\nReduce cell padding for dense tables? Default: FALSE.\n\n\n\nValue\nA styled gt_tbl object.\n\n\nExamples\nlibrary(gt)\n\ngt(head(mtcars)) |&gt;\n  vvn_table(\n    title       = \"Motor Trend Road Tests\",\n    subtitle    = \"Selected vehicles, 1974\",\n    source_note = \"Source: Henderson & Velleman (1981)\"\n  )"
+  },
+  {
+    "objectID": "refman.html#vvn_table_pvalues",
+    "href": "refman.html#vvn_table_pvalues",
+    "title": "Reference Manual",
+    "section": "vvn_table_pvalues",
+    "text": "vvn_table_pvalues\nColor-code a p-value column in a gt regression table: maroon for p &lt; 0.001, orange for p &lt; 0.05. Pipe after vvn_table().\n\nUsage\nvvn_table_pvalues(gt_tbl, col_name = \"p.value\",\n                  thresholds = c(\"0.001\" = \"#861F41\", \"0.05\" = \"#E5751F\"))\n\n\nArguments\n\ngt_tbl\nA gt_tbl object, typically piped from vvn_table().\ncol_name\nName of the column containing p-values. Default: \"p.value\".\nthresholds\nNamed character vector mapping threshold values to highlight hex colors. Default highlights p &lt; 0.001 in maroon and p &lt; 0.05 in orange.\n\n\n\nValue\nA gt_tbl with color-highlighted p-value cells.\n\n\nExamples\nlibrary(gt); library(broom)\n\nlm(mpg ~ wt + cyl, data = mtcars) |&gt;\n  tidy() |&gt;\n  gt() |&gt;\n  vvn_table(title = \"OLS Regression: Fuel Economy\") |&gt;\n  vvn_table_pvalues()"
+  },
+  {
+    "objectID": "refman.html#vvn_map_style",
+    "href": "refman.html#vvn_map_style",
+    "title": "Reference Manual",
+    "section": "vvn_map_style",
+    "text": "vvn_map_style\nApply VVN branding to a Leaflet choropleth map: muted CartoDB basemap, VVN palette fill, maroon county hover highlight, popup tooltips, and a styled legend.\nRequires the leaflet and htmltools packages.\n\nUsage\nvvn_map_style(map, data, value_col, label_col = value_col,\n              palette = \"maroon_seq\", n_bins = 6, title = value_col,\n              opacity = 0.75,\n              fmt_fn = function(x) format(round(x), big.mark = \",\"))\n\n\nArguments\n\nmap\nA leaflet map object from leaflet::leaflet().\ndata\nAn sf data frame with polygon geometry in CRS 4326.\nvalue_col\nName of the numeric column to visualize (character). Use a normalized variable — rate, percentage, or per-capita — never a raw count.\nlabel_col\nColumn used as the tooltip label (e.g. county name). Default: same as value_col.\npalette\nVVN palette: \"maroon_seq\" (default), \"orange_seq\", \"navy_seq\", or \"diverging\".\nn_bins\nNumber of legend bins. Default: 6.\ntitle\nLegend title string. Default: value_col.\nopacity\nFill opacity, 0–1. Default: 0.75.\nfmt_fn\nFunction to format tooltip values. Default: format(round(x), big.mark = \",\").\n\n\n\nValue\nA styled leaflet map.\n\n\nExamples\nlibrary(leaflet); library(sf)\n\nleaflet(va_counties) |&gt;\n  vvn_map_style(va_counties, \"pct_broadband\",\n                label_col = \"NAME\",\n                title     = \"Broadband coverage (%)\",\n                palette   = \"maroon_seq\")"
+  },
+  {
+    "objectID": "refman.html#vvn_filter",
+    "href": "refman.html#vvn_filter",
+    "title": "Reference Manual",
+    "section": "vvn_filter",
+    "text": "vvn_filter\nA VVN-branded Shiny dropdown filter (selectInput) in a styled container with a maroon label.\nRequires the shiny package.\n\nUsage\nvvn_filter(inputId, label, choices, selected = NULL,\n           multiple = FALSE, width = \"100%\")\n\n\nArguments\n\ninputId\nShiny input ID (character).\nlabel\nDisplay label shown above the dropdown.\nchoices\nNamed vector or list of choices passed to shiny::selectInput().\nselected\nDefault selected value(s). Default: NULL (first choice).\nmultiple\nAllow multiple selections? Default: FALSE.\nwidth\nCSS width of the filter container. Default: \"100%\".\n\n\n\nValue\nA Shiny tagList.\n\n\nExamples\nvvn_filter(\"year_sel\", \"Select year\",\n           choices  = 2018:2023,\n           selected = 2023)\n\nvvn_filter(\"region_sel\", \"Region\",\n           choices  = c(\"All\", \"Rural\", \"Urban\"),\n           selected = \"All\")"
+  },
+  {
+    "objectID": "refman.html#vvn_slider",
+    "href": "refman.html#vvn_slider",
+    "title": "Reference Manual",
+    "section": "vvn_slider",
+    "text": "vvn_slider\nA VVN-branded Shiny range slider (sliderInput) with maroon track and handle.\n\nUsage\nvvn_slider(inputId, label, min, max, value, step = 1, width = \"100%\")\n\n\nArguments\n\ninputId\nShiny input ID.\nlabel\nDisplay label.\nmin\nMinimum slider value.\nmax\nMaximum slider value.\nvalue\nDefault value. Use a length-2 vector (e.g. c(2018, 2023)) to create a two-handle range slider.\nstep\nStep size. Default: 1.\nwidth\nCSS width. Default: \"100%\".\n\n\n\nValue\nA Shiny tagList.\n\n\nExamples\nvvn_slider(\"year_range\", \"Year range\",\n           min = 2015, max = 2023, value = c(2018, 2023))"
+  },
+  {
+    "objectID": "refman.html#vvn_button",
+    "href": "refman.html#vvn_button",
+    "title": "Reference Manual",
+    "section": "vvn_button",
+    "text": "vvn_button\nA styled Shiny action button in one of three VVN style variants.\n\nUsage\nvvn_button(inputId, label, icon = NULL,\n           style = c(\"primary\", \"secondary\", \"outline\"), width = NULL)\n\n\nArguments\n\ninputId\nShiny input ID.\nlabel\nButton label text.\nicon\nOptional icon from shiny::icon(). Default: NULL.\nstyle\n\"primary\" — maroon fill, white text (use for Apply Filters). \"secondary\" — orange fill, white text. \"outline\" — maroon border, white background (use for Reset). Default: \"primary\".\nwidth\nCSS width. Default: NULL (auto).\n\n\n\nValue\nA Shiny actionButton.\n\n\nExamples\nvvn_button(\"apply_btn\",  \"Apply Filters\", style = \"primary\")\nvvn_button(\"reset_btn\",  \"Reset\",         style = \"outline\")\nvvn_button(\"export_btn\", \"Download CSV\",  style = \"secondary\",\n           icon = shiny::icon(\"download\"))"
+  },
+  {
+    "objectID": "refman.html#vvn_kpi_card",
+    "href": "refman.html#vvn_kpi_card",
+    "title": "Reference Manual",
+    "section": "vvn_kpi_card",
+    "text": "vvn_kpi_card\nRender a VVN KPI metric card with a large value, descriptive label, and optional trend indicator. Use three per dashboard row — one maroon, one orange, one navy.\n\nUsage\nvvn_kpi_card(value, label, trend = NULL, trend_text = NULL,\n             color_scheme = c(\"maroon\", \"orange\", \"navy\"))\n\n\nArguments\n\nvalue\nScalar metric value displayed in large type, e.g. \"76%\" or \"$52,342\".\nlabel\nShort descriptive label below the value, e.g. \"Households with broadband\".\ntrend\nTrend direction: \"up\", \"down\", or NULL for no indicator. Default: NULL.\ntrend_text\nTrend annotation string, e.g. \"+5 pp vs 2020\". Default: NULL.\ncolor_scheme\nAccent color for the top border and trend icon: \"maroon\" (default), \"orange\", or \"navy\".\n\n\n\nValue\nA Shiny div tag.\n\n\nExamples\nlibrary(shiny)\n\nfluidRow(\n  column(4, vvn_kpi_card(\"76%\",     \"Households with broadband\",\n                          trend = \"up\", trend_text = \"+5 pp vs 2020\")),\n  column(4, vvn_kpi_card(\"$52,342\", \"Median household income\",\n                          trend = \"up\", trend_text = \"+8% vs 2019\",\n                          color_scheme = \"orange\")),\n  column(4, vvn_kpi_card(\"22.4%\",   \"Population in poverty\",\n                          trend = \"down\", trend_text = \"-2.1 pp vs 2020\",\n                          color_scheme = \"navy\"))\n)"
+  },
+  {
+    "objectID": "refman.html#create_vvn_dashboard",
+    "href": "refman.html#create_vvn_dashboard",
+    "title": "Reference Manual",
+    "section": "create_vvn_dashboard",
+    "text": "create_vvn_dashboard\nScaffold a production-ready R Shiny dashboard with VVN branding: maroon navbar, KPI cards, reactive charts, Leaflet county map, sidebar filters, and a data download tab. The generated project runs immediately with placeholder data.\n\nUsage\ncreate_vvn_dashboard(name, path = \".\", title = name,\n                     author = \"Visualizing Virginia Numbers\")\n\n\nArguments\n\nname\nProject folder name (character). Use snake_case or kebab-case, e.g. \"housing_dashboard\".\npath\nParent directory. Default: \".\" (current working directory).\ntitle\nDashboard title displayed in the maroon navbar. Default: name.\nauthor\nAuthor name(s) injected into the README. Default: \"Visualizing Virginia Numbers\".\n\n\n\nValue\nInvisibly returns the project path (character). Prints setup instructions via cli.\n\n\nDetails\nCreates the following structure:\nname/\n├── app.R            ← main dashboard (runs immediately)\n├── R/data_prep.R    ← load and clean your data here\n├── www/vvn.css      ← VVN brand CSS\n└── data/\n    ├── raw/\n    └── processed/\n\n\nExamples\ncreate_vvn_dashboard(\"housing_dashboard\",\n                      title = \"Virginia Housing Affordability Dashboard\")\n\nshiny::runApp(\"housing_dashboard\")       # test locally\nrsconnect::deployApp(\"housing_dashboard\")   # publish"
+  },
+  {
+    "objectID": "refman.html#create_vvn_story",
+    "href": "refman.html#create_vvn_story",
+    "title": "Reference Manual",
+    "section": "create_vvn_story",
+    "text": "create_vvn_story\nScaffold a new VVN Insights Quarto project with VVN branding, directory structure, and pre-built narrative sections (Overview, Background, Findings, Conclusion). The generated document renders immediately with placeholder content.\n\nUsage\ncreate_vvn_story(name, path = \".\", title = name,\n                 author = \"Visualizing Virginia Numbers\")\n\n\nArguments\n\nname\nProject folder name. Use snake_case, e.g. \"childcare_cost\".\npath\nParent directory. Default: \".\".\ntitle\nStory title injected into the YAML front matter and hero banner. Default: name.\nauthor\nAuthor name(s). Default: \"Visualizing Virginia Numbers\".\n\n\n\nValue\nInvisibly returns the project path. Prints setup instructions via cli.\n\n\nDetails\nCreates the following structure:\nname/\n├── index.qmd        ← edit this — pre-built narrative sections\n├── _quarto.yml\n├── styles.scss      ← VVN brand SCSS\n├── data/raw/\n├── data/processed/\n├── figures/\n└── scripts/\n\n\nExamples\ncreate_vvn_story(\"childcare_cost\",\n                  title  = \"Childcare Cost in Rural Virginia\",\n                  author = \"VVN Research Team\")\n\nquarto::quarto_render(\"childcare_cost/index.qmd\")"
+  },
+  {
+    "objectID": "refman.html#check_vvn_story",
+    "href": "refman.html#check_vvn_story",
+    "title": "Reference Manual",
+    "section": "check_vvn_story",
+    "text": "check_vvn_story\nValidate a VVN Insights index.qmd for required sections and VVN function usage before publishing. Checks for Overview, Background, Findings, Conclusion, theme_vvn(), and vvn_source().\n\nUsage\ncheck_vvn_story(path = \".\")\n\n\nArguments\n\npath\nPath to the story folder containing index.qmd. Default: \".\".\n\n\n\nValue\nInvisibly TRUE if all checks pass, FALSE otherwise. Prints a formatted pass/fail report.\n\n\nExamples\ncreate_vvn_story(\"my_insight\")\n# ... edit index.qmd ...\ncheck_vvn_story(\"my_insight\")"
+  },
+  {
+    "objectID": "interactive-components.html",
+    "href": "interactive-components.html",
+    "title": "Interactive Components",
+    "section": "",
+    "text": "Styled Shiny UI components for VVN dashboards — filters, sliders, buttons, and KPI cards. These are used in the Dashboard Template only, not in VVN Insights documents.\nRequired packages"
+  },
+  {
+    "objectID": "interactive-components.html#which-component-should-i-use",
+    "href": "interactive-components.html#which-component-should-i-use",
+    "title": "Interactive Components",
+    "section": "Which component should I use?",
+    "text": "Which component should I use?\n\n\n\n\n\n\n\n\nI need…\nComponent\nFunction\n\n\n\n\nLet users pick a category or region\nDropdown filter\nvvn_filter()\n\n\nLet users select a year range\nRange slider\nvvn_slider()\n\n\nTrigger filtering or reset state\nAction button\nvvn_button()\n\n\nShow a headline metric with trend\nKPI metric card\nvvn_kpi_card()"
+  },
+  {
+    "objectID": "interactive-components.html#quick-start-complete-sidebar",
+    "href": "interactive-components.html#quick-start-complete-sidebar",
+    "title": "Interactive Components",
+    "section": "Quick start — complete sidebar",
+    "text": "Quick start — complete sidebar\nA standard VVN sidebar with two filters, a slider, and Apply / Reset buttons:\nsidebar &lt;- bslib::sidebar(\n  title = \"Filters\", width = 260, bg = \"#F7F7F7\",\n\n  vvn_filter(\"region_sel\", \"Region\",\n             choices  = c(\"All\", \"Rural\", \"Urban\"),\n             selected = \"All\", multiple = TRUE),\n\n  vvn_slider(\"year_range\", \"Year Range\",\n             min = 2015, max = 2023, value = c(2015, 2023)),\n\n  hr(),\n\n  vvn_button(\"apply_btn\", \"Apply Filters\",\n             icon = bslib::bs_icon(\"funnel-fill\"), style = \"primary\"),\n  tags$br(),\n  vvn_button(\"reset_btn\", \"Reset\",\n             icon = bslib::bs_icon(\"arrow-counterclockwise\"), style = \"outline\")\n)"
+  },
+  {
+    "objectID": "interactive-components.html#vvn_filter-dropdown-filter",
+    "href": "interactive-components.html#vvn_filter-dropdown-filter",
+    "title": "Interactive Components",
+    "section": "vvn_filter() — dropdown filter",
+    "text": "vvn_filter() — dropdown filter\n\nUse when Letting users select one or more categories (region, variable, topic). Produces a styled dropdown with a bold label.\n\nvvn_filter(\n  id       = \"region_sel\",\n  label    = \"Select Region\",\n  choices  = c(\"All\" = \"All\", \"Rural\" = \"Rural\", \"Urban\" = \"Urban\"),\n  selected = \"All\",\n  multiple = TRUE\n)\n\nParameters\n\n\n\n\n\n\n\n\n\nParameter\nType\nDefault\nDescription\n\n\n\n\nid\ncharacter\nrequired\nShiny input ID\n\n\nlabel\ncharacter\nrequired\nDisplay label shown above the dropdown\n\n\nchoices\nnamed vector\nrequired\nOptions — name = displayed text, value = code\n\n\nselected\ncharacter\nNULL\nInitially selected value(s)\n\n\nmultiple\nlogical\nFALSE\nAllow multiple selections\n\n\n\n\n\nAccess in server\ninput$region_sel   # character vector of selected values"
+  },
+  {
+    "objectID": "interactive-components.html#vvn_slider-range-slider",
+    "href": "interactive-components.html#vvn_slider-range-slider",
+    "title": "Interactive Components",
+    "section": "vvn_slider() — range slider",
+    "text": "vvn_slider() — range slider\n\nUse when Letting users set a numeric range or select a single year. Produces a styled single-handle or two-handle slider.\n\n# Range slider (two handles)\nvvn_slider(\"year_range\", \"Year Range\", min = 2015, max = 2023, value = c(2015, 2023))\n\n# Single-value slider\nvvn_slider(\"year_sel\", \"Year\", min = 2015, max = 2023, value = 2023)\n\nParameters\n\n\n\n\n\n\n\n\nParameter\nType\nDescription\n\n\n\n\nid\ncharacter\nShiny input ID\n\n\nlabel\ncharacter\nDisplay label\n\n\nmin\nnumeric\nMinimum value\n\n\nmax\nnumeric\nMaximum value\n\n\nvalue\nnumeric or length-2 vector\nInitial value(s) — use c(min, max) for a range slider\n\n\n\n\n\nAccess in server\n# Range: input$year_range is a length-2 vector [low, high]\nfiltered_data &lt;- reactive({\n  df |&gt; filter(year &gt;= input$year_range[1], year &lt;= input$year_range[2])\n})"
+  },
+  {
+    "objectID": "interactive-components.html#vvn_button-action-button",
+    "href": "interactive-components.html#vvn_button-action-button",
+    "title": "Interactive Components",
+    "section": "vvn_button() — action button",
+    "text": "vvn_button() — action button\n\nUse when Triggering a filter action or resetting state. Use “primary” (maroon) for Apply Filters and “outline” for Reset.\n\n# Primary (maroon) — Apply Filters\nvvn_button(\"apply_btn\", \"Apply Filters\",\n           icon = bslib::bs_icon(\"funnel-fill\"), style = \"primary\")\n\n# Outline — Reset\nvvn_button(\"reset_btn\", \"Reset\",\n           icon = bslib::bs_icon(\"arrow-counterclockwise\"), style = \"outline\")\n\nParameters\n\n\n\n\n\n\n\n\n\nParameter\nType\nDefault\nDescription\n\n\n\n\nid\ncharacter\nrequired\nShiny input ID\n\n\nlabel\ncharacter\nrequired\nButton text\n\n\nicon\nicon\nNULL\nOptional icon from bslib::bs_icon()\n\n\nstyle\ncharacter\n\"primary\"\n\"primary\" (maroon) · \"secondary\" · \"outline\"\n\n\n\n\n\nApply + Reset pattern\n# Filter triggers only on Apply click\nfiltered &lt;- reactive({\n  df |&gt; filter(year &gt;= input$year_range[1])\n}) |&gt; bindEvent(input$apply_btn, ignoreNULL = FALSE)\n\n# Reset restores all defaults\nobserveEvent(input$reset_btn, {\n  updateSelectInput(session, \"region_sel\", selected = \"All\")\n  updateSliderInput(session, \"year_range\", value = c(2015, 2023))\n})"
+  },
+  {
+    "objectID": "interactive-components.html#vvn_kpi_card-kpi-metric-card",
+    "href": "interactive-components.html#vvn_kpi_card-kpi-metric-card",
+    "title": "Interactive Components",
+    "section": "vvn_kpi_card() — KPI metric card",
+    "text": "vvn_kpi_card() — KPI metric card\n\nUse when Displaying a headline metric at the top of a dashboard. Use three per row with maroon, orange, and navy color schemes.\n\nvvn_kpi_card(\n  value        = \"42%\",\n  label        = \"Employment Rate\",\n  trend        = \"up\",\n  trend_text   = \"+3.1% vs 2022\",\n  color_scheme = \"maroon\"\n)\n\nParameters\n\n\n\n\n\n\n\n\n\nParameter\nType\nDefault\nDescription\n\n\n\n\nvalue\ncharacter or numeric\nrequired\nThe large metric value displayed\n\n\nlabel\ncharacter\nrequired\nShort description of the metric\n\n\ntrend\ncharacter\nNULL\n\"up\" · \"down\" · \"flat\" · NULL (no indicator)\n\n\ntrend_text\ncharacter\nNULL\nSupporting text (e.g., “+3% vs 2022”)\n\n\ncolor_scheme\ncharacter\n\"maroon\"\n\"maroon\" · \"orange\" · \"navy\"\n\n\n\n\n\nThree-card layout in a Shiny app\n# Server — compute values from filtered data\noutput$kpi_mean   &lt;- renderUI({\n  vvn_kpi_card(round(mean(filtered()$value, na.rm = TRUE), 1),\n               \"Average Value\", color_scheme = \"maroon\")\n})\noutput$kpi_n      &lt;- renderUI({\n  vvn_kpi_card(nrow(filtered()), \"Counties\", color_scheme = \"orange\")\n})\noutput$kpi_change &lt;- renderUI({\n  d  &lt;- filtered()\n  ch &lt;- round(mean(d$value[d$year == max(d$year)], na.rm = TRUE) -\n              mean(d$value[d$year == min(d$year)], na.rm = TRUE), 1)\n  vvn_kpi_card(\n    value        = paste0(if (ch &gt;= 0) \"+\" else \"\", ch),\n    label        = paste0(\"Change (\", min(d$year), \"–\", max(d$year), \")\"),\n    trend        = if (ch &gt;= 0) \"up\" else \"down\",\n    color_scheme = \"navy\"\n  )\n})\n\n# UI — three equal columns\nbslib::layout_columns(\n  col_widths = c(4, 4, 4),\n  uiOutput(\"kpi_mean\"),\n  uiOutput(\"kpi_n\"),\n  uiOutput(\"kpi_change\")\n)"
+  },
+  {
+    "objectID": "interactive-components.html#standard-reactive-filter-pattern",
+    "href": "interactive-components.html#standard-reactive-filter-pattern",
+    "title": "Interactive Components",
+    "section": "Standard reactive filter pattern",
+    "text": "Standard reactive filter pattern\nThe recommended server pattern for all VVN dashboards — filtering triggered by the Apply button, Reset restores defaults:\nserver &lt;- function(input, output, session) {\n\n  filtered &lt;- reactive({\n    req(input$year_range)\n    d &lt;- app_data\n\n    if (!(\"All\" %in% (input$region_sel %||% \"All\")))\n      d &lt;- d |&gt; filter(region %in% input$region_sel)\n\n    d |&gt;\n      filter(year &gt;= input$year_range[1], year &lt;= input$year_range[2]) |&gt;\n      mutate(display_value = .data[[input$variable_sel %||% \"value\"]])\n\n  }) |&gt; bindEvent(input$apply_btn, ignoreNULL = FALSE)\n\n  observeEvent(input$reset_btn, {\n    updateSelectInput(session, \"region_sel\",   selected = \"All\")\n    updateSliderInput(session, \"year_range\",   value    = c(2015, 2023))\n    updateSelectInput(session, \"variable_sel\", selected = \"value\")\n  })\n}"
+  },
+  {
+    "objectID": "interactive-components.html#complete-examples",
+    "href": "interactive-components.html#complete-examples",
+    "title": "Interactive Components",
+    "section": "Complete examples",
+    "text": "Complete examples\n\nKPI card row\nThree KPI cards at the top of a dashboard — one per color scheme:\nlibrary(shiny)\nlibrary(vvnthemes)\n\nfluidRow(\n  column(4, vvn_kpi_card(\"76%\",     \"Households with broadband\",\n                          trend = \"up\", trend_text = \"+5 pp vs 2020\")),\n  column(4, vvn_kpi_card(\"$52,342\", \"Median household income\",\n                          trend = \"up\", trend_text = \"+8% vs 2019\",\n                          color_scheme = \"orange\")),\n  column(4, vvn_kpi_card(\"22.4%\",   \"Population in poverty\",\n                          trend = \"down\", trend_text = \"-2.1 pp vs 2020\",\n                          color_scheme = \"navy\"))\n)\nUse one maroon card, one orange card, one navy card — always in that order.\n\n\nMinimal Shiny app with sidebar\nA complete minimal app — one filter, one slider, Apply + Reset, and a chart output:\nlibrary(shiny)\nlibrary(bslib)\nlibrary(ggplot2)\nlibrary(vvnthemes)\n\nset_vvn_defaults()\n\nui &lt;- page_sidebar(\n  title = \"VVN Dashboard\",\n  sidebar = sidebar(\n    title = \"Filters\", width = 260, bg = \"#F7F7F7\",\n    vvn_filter(\"region_sel\", \"Region\",\n               choices  = c(\"All\", \"Rural\", \"Urban\"),\n               selected = \"All\"),\n    vvn_slider(\"year_sel\", \"Year\", min = 2018, max = 2023, value = 2023),\n    hr(),\n    vvn_button(\"apply_btn\", \"Apply\",  style = \"primary\"),\n    tags$br(),\n    vvn_button(\"reset_btn\", \"Reset\",  style = \"outline\")\n  ),\n  plotOutput(\"chart\")\n)\n\nserver &lt;- function(input, output, session) {\n  filtered &lt;- reactive({\n    d &lt;- app_data\n    if (input$region_sel != \"All\") d &lt;- d |&gt; filter(region == input$region_sel)\n    d |&gt; filter(year == input$year_sel)\n  }) |&gt; bindEvent(input$apply_btn, ignoreNULL = FALSE)\n\n  observeEvent(input$reset_btn, {\n    updateSelectInput(session, \"region_sel\", selected = \"All\")\n    updateSliderInput(session, \"year_sel\",   value    = 2023)\n  })\n\n  output$chart &lt;- renderPlot({\n    ggplot(filtered(), aes(x = value, y = reorder(region, value))) +\n      geom_col(width = 0.65) +\n      vvn_source(\"VVN Analysis\") +\n      remove_ticks()\n  })\n}\n\nshinyApp(ui, server)"
+  },
+  {
+    "objectID": "vvnthemes.html",
+    "href": "vvnthemes.html",
+    "title": "vvnthemes",
+    "section": "",
+    "text": "vvnthemes is the design foundation for all VVN projects. It provides ggplot2 themes, brand color palettes, scale functions, Shiny UI components, and project scaffolding — all consistent with the Virginia Tech visual identity.\n# Install once from GitHub\ndevtools::install_github(\"vt-vvn/vvnthemes\")\n\n# Load and apply\nlibrary(vvnthemes)\nset_vvn_defaults()   # styles all subsequent ggplot2 calls\n\nSee Get Started → for a step-by-step workflow guide."
+  },
+  {
+    "objectID": "vvnthemes.html#overview",
+    "href": "vvnthemes.html#overview",
+    "title": "vvnthemes",
+    "section": "",
+    "text": "vvnthemes is the design foundation for all VVN projects. It provides ggplot2 themes, brand color palettes, scale functions, Shiny UI components, and project scaffolding — all consistent with the Virginia Tech visual identity.\n# Install once from GitHub\ndevtools::install_github(\"vt-vvn/vvnthemes\")\n\n# Load and apply\nlibrary(vvnthemes)\nset_vvn_defaults()   # styles all subsequent ggplot2 calls\n\nSee Get Started → for a step-by-step workflow guide."
+  },
+  {
+    "objectID": "vvnthemes.html#setup",
+    "href": "vvnthemes.html#setup",
+    "title": "vvnthemes",
+    "section": "Setup",
+    "text": "Setup\n\nset_vvn_defaults()\nSet theme_vvn() as the global ggplot2 theme and update default geom aesthetics for the session. Call once at the top of every script.\n\nUsage\nset_vvn_defaults(style = c(\"standard\", \"map\"), base_size = 12)\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\nstyle\n\"standard\"\n\"standard\" applies theme_vvn(); \"map\" applies theme_vvn_map().\n\n\nbase_size\n12\nBase font size passed to the theme.\n\n\n\n\n\nValue\nInvisibly NULL. Called for its side effects — sets the ggplot2 global theme and geom color defaults (bars, lines, points → VT Maroon; smooth → VT Orange).\n\n\nExamples\nlibrary(vvnthemes)\nset_vvn_defaults()\n\n# All subsequent ggplot2 calls use theme_vvn() and VVN colors automatically\nggplot2::ggplot(mpg, ggplot2::aes(displ, hwy)) +\n  ggplot2::geom_point()\n\nundo_vvn_defaults()   # revert when done\n\n\n\n\nundo_vvn_defaults()\nRevert to ggplot2 factory defaults, undoing set_vvn_defaults().\n\nUsage\nundo_vvn_defaults()\n\n\nValue\nInvisibly NULL.\n\n\nExamples\nset_vvn_defaults()\n# ... make VVN charts ...\nundo_vvn_defaults()"
+  },
+  {
+    "objectID": "vvnthemes.html#themes",
+    "href": "vvnthemes.html#themes",
+    "title": "vvnthemes",
+    "section": "Themes",
+    "text": "Themes\n\ntheme_vvn()\nStandard VVN ggplot2 theme: white background, VT Maroon titles, light gray grid, and clean typography. Use for bars, lines, histograms, and most charts.\n\nUsage\ntheme_vvn(base_size = 12, base_family = \"sans\", grid = \"y\")\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\nbase_size\n12\nBase font size in points.\n\n\nbase_family\n\"sans\"\nFont family.\n\n\ngrid\n\"y\"\nGrid lines to show: \"y\" (horizontal only), \"x\", \"both\", or \"none\".\n\n\n\n\n\nValue\nA ggplot2::theme object.\n\n\nExamples\nlibrary(ggplot2)\n\n# Bar chart — horizontal grid (default)\nggplot(mpg, aes(class)) +\n  geom_bar() +\n  theme_vvn()\n\n# Scatter plot — both axes\nggplot(mpg, aes(displ, hwy)) +\n  geom_point() +\n  theme_vvn(grid = \"both\")\n\n\n\n\ntheme_vvn_map()\nMap theme for ggplot2 + sf static choropleth maps. Removes axes and ticks; adds a muted panel background and a horizontal legend at the bottom.\n\nUsage\ntheme_vvn_map(base_size = 11, base_family = \"sans\")\n\n\nArguments\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\nbase_size\n11\nBase font size in points.\n\n\nbase_family\n\"sans\"\nFont family.\n\n\n\n\n\nValue\nA ggplot2::theme object.\n\n\nExamples\nlibrary(ggplot2); library(sf)\nggplot(va_counties_sf, aes(fill = median_income)) +\n  geom_sf() +\n  scale_fill_vvn_c(\"maroon_seq\") +\n  theme_vvn_map()\n\n\n\n\ntheme_vvn_minimal()\nMinimal VVN variant: no grid lines, no axes. Use for small multiples, annotation-heavy figures, and inset charts.\n\nUsage\ntheme_vvn_minimal(base_size = 12, base_family = \"sans\")\n\n\nArguments\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\nbase_size\n12\nBase font size in points.\n\n\nbase_family\n\"sans\"\nFont family.\n\n\n\n\n\nValue\nA ggplot2::theme object."
+  },
+  {
+    "objectID": "vvnthemes.html#color-system",
+    "href": "vvnthemes.html#color-system",
+    "title": "vvnthemes",
+    "section": "Color System",
+    "text": "Color System\n\nvvn_colors()\nReturn one or more named VVN brand colors as a named character vector of hex codes.\n\nUsage\nvvn_colors(...)\n\n\nArguments\n\n\n\n\n\n\n\nArgument\nDescription\n\n\n\n\n...\nColor name(s) to return. Valid names: \"maroon\", \"orange\", \"navy\", \"charcoal\", \"gray\", \"light_gray\", \"white\", \"maroon_dk\", \"maroon_lt\", \"orange_lt\". If none provided, returns all colors.\n\n\n\n\n\nValue\nA named character vector of hex codes.\n\n\nExamples\nvvn_colors()                             # all brand colors\nvvn_colors(\"maroon\")                     # \"#861F41\"\nvvn_colors(\"maroon\", \"orange\", \"navy\")   # three primary VVN colors\n\n\n\n\nvvn_palette()\nGenerate a vector of hex colors from a named VVN palette. Sequential and diverging palettes are interpolated when n exceeds the base palette size.\n\nUsage\nvvn_palette(palette = \"main\", n = NULL, reverse = FALSE, alpha = 1)\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\npalette\n\"main\"\nPalette name. Categorical: \"main\" (10 colors), \"brand\" (3 colors: maroon/orange/navy), \"accessible\" (7 colors, Okabe-Ito). Sequential: \"maroon_seq\", \"orange_seq\", \"navy_seq\". Diverging: \"diverging\". Neutral: \"gray_seq\".\n\n\nn\nNULL\nNumber of colors to return. NULL returns all base palette colors.\n\n\nreverse\nFALSE\nReverse the palette order?\n\n\nalpha\n1\nOpacity, 0–1.\n\n\n\n\n\nValue\nA character vector of hex color codes.\n\n\nExamples\nvvn_palette()                        # 10 main colors\nvvn_palette(\"brand\")                 # \"#861F41\" \"#E5751F\" \"#1B5299\"\nvvn_palette(\"maroon_seq\", n = 9)     # 9-step interpolated maroon\nvvn_palette(\"diverging\", n = 11)\nvvn_palette(\"accessible\")\n\n\n\n\nview_vvn_palette()\nDisplay a horizontal color swatch strip for any VVN palette.\n\nUsage\nview_vvn_palette(palette = \"main\", n = NULL, label = TRUE, title = NULL)\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\npalette\n\"main\"\nPalette name (see vvn_palette()).\n\n\nn\nNULL\nNumber of colors to display. NULL shows all base colors.\n\n\nlabel\nTRUE\nShow hex codes on each swatch?\n\n\ntitle\nNULL\nPlot title. Defaults to vvn_palette(\"&lt;palette&gt;\").\n\n\n\n\n\nValue\nA ggplot object, printed invisibly. Save with vvn_save().\n\n\nExamples\nview_vvn_palette()                       # \"main\" palette\nview_vvn_palette(\"diverging\", n = 9)\nview_vvn_palette(\"accessible\", label = FALSE)"
+  },
+  {
+    "objectID": "vvnthemes.html#discrete-scales",
+    "href": "vvnthemes.html#discrete-scales",
+    "title": "vvnthemes",
+    "section": "Discrete Scales",
+    "text": "Discrete Scales\n\nscale_color_vvn() / scale_fill_vvn()\nApply a VVN categorical palette to ggplot2 color or fill aesthetics. scale_colour_vvn() is a British-English alias for scale_color_vvn().\n\nUsage\nscale_color_vvn(palette = \"main\", reverse = FALSE, alpha = 1, ...)\nscale_colour_vvn(palette = \"main\", reverse = FALSE, alpha = 1, ...)\nscale_fill_vvn(palette = \"main\", reverse = FALSE, alpha = 1, ...)\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\npalette\n\"main\"\nPalette name: \"main\" (general purpose, up to 10 categories), \"brand\" (3 groups: maroon/orange/navy), or \"accessible\" (colorblind-safe).\n\n\nreverse\nFALSE\nReverse palette order?\n\n\nalpha\n1\nOpacity, 0–1.\n\n\n...\n\nPassed to ggplot2::discrete_scale().\n\n\n\n\n\nValue\nA ggplot2 scale object.\n\n\nExamples\nlibrary(ggplot2)\n\n# 3-group bar chart\nggplot(mpg, aes(class, fill = drv)) +\n  geom_bar(position = \"dodge\") +\n  scale_fill_vvn(\"brand\")\n\n# Multi-series line chart\nggplot(economics_long, aes(date, value01, color = variable)) +\n  geom_line() +\n  scale_color_vvn(\"main\")"
+  },
+  {
+    "objectID": "vvnthemes.html#continuous-scales",
+    "href": "vvnthemes.html#continuous-scales",
+    "title": "vvnthemes",
+    "section": "Continuous Scales",
+    "text": "Continuous Scales\n\nscale_color_vvn_c() / scale_fill_vvn_c()\nApply a VVN sequential or diverging palette to continuous ggplot2 color or fill aesthetics. scale_colour_vvn_c() is a British-English alias for scale_color_vvn_c().\n\nUsage\nscale_color_vvn_c(palette = \"maroon_seq\", reverse = FALSE, ...)\nscale_colour_vvn_c(palette = \"maroon_seq\", reverse = FALSE, ...)\nscale_fill_vvn_c(palette = \"maroon_seq\", reverse = FALSE, ...)\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\npalette\n\"maroon_seq\"\nPalette name: \"maroon_seq\" (primary), \"orange_seq\", \"navy_seq\", \"diverging\" (for above/below-average data), or \"gray_seq\".\n\n\nreverse\nFALSE\nReverse palette?\n\n\n...\n\nPassed to ggplot2::scale_color_gradientn() or scale_fill_gradientn().\n\n\n\n\n\nValue\nA ggplot2 scale object.\n\n\nExamples\nlibrary(ggplot2)\n\n# Choropleth fill — most common VVN use\nggplot(va_counties_sf, aes(fill = pct_broadband)) +\n  geom_sf() +\n  scale_fill_vvn_c(\"maroon_seq\") +\n  theme_vvn_map()\n\n# Diverging scale (z-scores, above/below average)\nggplot(df, aes(x, y, fill = z_score)) +\n  geom_tile() +\n  scale_fill_vvn_c(\"diverging\")"
+  },
+  {
+    "objectID": "vvnthemes.html#chart-helpers",
+    "href": "vvnthemes.html#chart-helpers",
+    "title": "vvnthemes",
+    "section": "Chart Helpers",
+    "text": "Chart Helpers\n\nvvn_title()\nAdd a formatted title and optional subtitle to a ggplot.\n\nUsage\nvvn_title(title, subtitle = NULL)\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\ntitle\n\nTitle string. Use headline case (capitalize all major words).\n\n\nsubtitle\nNULL\nOptional subtitle. Use sentence case.\n\n\n\n\n\nValue\nA ggplot2::labs() call.\n\n\nExamples\nggplot(mpg, aes(displ, hwy)) +\n  geom_point() +\n  vvn_title(\"Engine Size vs Fuel Economy\",\n             subtitle = \"Motor Trend Car Road Tests, 1974\")\n\n\n\n\nvvn_source()\nAdd a source attribution caption to any ggplot. Required on every published VVN figure.\n\nUsage\nvvn_source(source, note = NULL)\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\nsource\n\nSource string, e.g. \"U.S. Census Bureau, ACS 5-Year Estimates, 2022\".\n\n\nnote\nNULL\nOptional note prepended as \"Note: ...\" before the source line.\n\n\n\n\n\nValue\nA ggplot2::labs(caption = ...) call.\n\n\nExamples\nggplot(df, aes(x, y)) +\n  geom_point() +\n  vvn_source(\"U.S. Census Bureau, ACS 5-Year Estimates, 2022\")\n\n# With a methodological note\nggplot(df, aes(x, y)) +\n  geom_col() +\n  vvn_source(\"Virginia Employment Commission\",\n              note = \"Data suppressed for localities with fewer than 100 workers.\")\n\n\n\n\nvvn_note()\nAdd a footnote-style annotation below a ggplot.\n\nUsage\nvvn_note(text)\n\n\nArguments\n\n\n\nArgument\nDescription\n\n\n\n\ntext\nNote text. Prefixed with \"Note: \" in the caption.\n\n\n\n\n\nValue\nA ggplot2::labs(caption = ...) call.\n\n\nExamples\nggplot(df, aes(x, y)) +\n  geom_col() +\n  vvn_note(\"Excludes localities with suppressed data.\")\n\n\n\n\nremove_ticks()\nRemove axis ticks from a ggplot. Recommended for bar charts and categorical axes.\n\nUsage\nremove_ticks(axis = \"both\")\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\naxis\n\"both\"\nWhich axis ticks to remove: \"both\", \"x\", or \"y\".\n\n\n\n\n\nValue\nA ggplot2::theme() call.\n\n\nExamples\nggplot(df, aes(x = value, y = region)) +\n  geom_col() +\n  remove_ticks()\n\n\n\n\nremove_axis()\nRemove an entire axis — text, title, ticks, and line — from a ggplot.\n\nUsage\nremove_axis(axis = \"x\")\n\n\nArguments\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\naxis\n\"x\"\nWhich axis to remove: \"x\", \"y\", or \"both\".\n\n\n\n\n\nValue\nA ggplot2::theme() call.\n\n\nExamples\nggplot(df, aes(x, y)) +\n  geom_col() +\n  remove_axis(\"x\")   # remove x-axis when categories are self-evident\n\n\n\n\nscatter_grid()\nAdd major x and y grid lines to a ggplot. Use with theme_vvn() for scatter plots where both axes need a reference grid.\n\nUsage\nscatter_grid()\n\n\nValue\nA ggplot2::theme() call.\n\n\nExamples\nggplot(df, aes(income, broadband)) +\n  geom_point() +\n  theme_vvn() +\n  scatter_grid()\n\n\n\n\nlegend_bottom()\nMove the legend to the bottom of a ggplot, oriented horizontally.\n\nUsage\nlegend_bottom()\n\n\nValue\nA ggplot2::theme() call.\n\n\nExamples\nggplot(df, aes(date, value, color = group)) +\n  geom_line() +\n  legend_bottom()\n\n\n\n\nremove_legend()\nRemove the legend from a ggplot entirely.\n\nUsage\nremove_legend()\n\n\nValue\nA ggplot2::theme() call.\n\n\nExamples\nggplot(df, aes(region, fill = region)) +\n  geom_col() +\n  remove_legend()\n\n\n\n\nvvn_save()\nSave a ggplot at publication quality with VVN default dimensions (8×5 in, 300 dpi, white background). Supports multi-format export in one call.\n\nUsage\nvvn_save(plot = ggplot2::last_plot(), filename, width = 8, height = 5,\n         dpi = 300, formats = NULL)\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\nplot\nlast_plot()\nA ggplot object. Defaults to the most recently printed plot.\n\n\nfilename\n\nFile path with extension (e.g. \"figures/chart.png\"), or base path when formats is provided.\n\n\nwidth\n8\nWidth in inches.\n\n\nheight\n5\nHeight in inches.\n\n\ndpi\n300\nResolution in dots per inch.\n\n\nformats\nNULL\nCharacter vector of extensions for simultaneous multi-format export, e.g. c(\"png\", \"pdf\", \"svg\"). Overrides the filename extension.\n\n\n\n\n\nValue\nInvisibly returns the file path(s).\n\n\nExamples\np &lt;- ggplot(mpg, aes(class)) + geom_bar() + theme_vvn()\n\nvvn_save(p, \"figures/class_bar.png\")\n\n# Export to multiple formats at once\nvvn_save(p, \"figures/class_bar\", formats = c(\"png\", \"pdf\", \"svg\"))"
+  },
+  {
+    "objectID": "vvnthemes.html#tables",
+    "href": "vvnthemes.html#tables",
+    "title": "vvnthemes",
+    "section": "Tables",
+    "text": "Tables\n\nvvn_table()\nApply VVN branding to a gt table: VT Maroon column headers, alternating light gray rows, orange accent border, and optional title and source note.\nRequires the gt package (install.packages(\"gt\")).\n\nUsage\nvvn_table(gt_tbl, title = NULL, subtitle = NULL, source_note = NULL,\n          striped = TRUE, compact = FALSE)\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\ngt_tbl\n\nA gt_tbl object from gt::gt().\n\n\ntitle\nNULL\nTable title string. Use headline case.\n\n\nsubtitle\nNULL\nOptional subtitle. Use sentence case.\n\n\nsource_note\nNULL\nSource attribution string. Required for all published tables.\n\n\nstriped\nTRUE\nApply alternating row shading (#F7F7F7)?\n\n\ncompact\nFALSE\nReduce cell padding for dense tables?\n\n\n\n\n\nValue\nA styled gt_tbl object.\n\n\nExamples\nlibrary(gt)\n\ngt(head(mtcars)) |&gt;\n  vvn_table(\n    title       = \"Motor Trend Road Tests\",\n    subtitle    = \"Selected vehicles, 1974\",\n    source_note = \"Source: Henderson & Velleman (1981)\"\n  )\n\nFor extended examples including ranking tables, regression tables, and interactive DT tables, see the Table Library →.\n\n\n\n\n\nvvn_table_pvalues()\nColor-code p-values in a gt regression table: maroon for p &lt; 0.001, orange for p &lt; 0.05.\n\nUsage\nvvn_table_pvalues(gt_tbl, col_name = \"p.value\",\n                  thresholds = c(\"0.001\" = \"#861F41\", \"0.05\" = \"#E5751F\"))\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\ngt_tbl\n\nA gt_tbl object, typically piped after vvn_table().\n\n\ncol_name\n\"p.value\"\nColumn name containing p-values (character).\n\n\nthresholds\nc(\"0.001\" = \"#861F41\", \"0.05\" = \"#E5751F\")\nNamed vector mapping threshold values to highlight hex colors.\n\n\n\n\n\nValue\nA gt_tbl with highlighted p-value cells.\n\n\nExamples\nlibrary(gt); library(broom)\n\nlm(mpg ~ wt + cyl, data = mtcars) |&gt;\n  tidy() |&gt;\n  gt() |&gt;\n  vvn_table(title = \"OLS Regression: Fuel Economy\") |&gt;\n  vvn_table_pvalues()"
+  },
+  {
+    "objectID": "vvnthemes.html#maps",
+    "href": "vvnthemes.html#maps",
+    "title": "vvnthemes",
+    "section": "Maps",
+    "text": "Maps\n\nvvn_map_style()\nApply VVN branding to a Leaflet choropleth map: muted CartoDB basemap, VVN palette fill, maroon county hover highlight, popup tooltips, and a styled legend.\nRequires the leaflet and htmltools packages.\n\nUsage\nvvn_map_style(map, data, value_col, label_col = value_col,\n              palette = \"maroon_seq\", n_bins = 6, title = value_col,\n              opacity = 0.75,\n              fmt_fn = function(x) format(round(x), big.mark = \",\"))\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\nmap\n\nA leaflet map from leaflet::leaflet().\n\n\ndata\n\nAn sf data frame with polygon geometry.\n\n\nvalue_col\n\nName of the numeric column to visualize (character).\n\n\nlabel_col\nvalue_col\nColumn used as the tooltip label (e.g. county name).\n\n\npalette\n\"maroon_seq\"\nVVN palette: \"maroon_seq\", \"orange_seq\", \"navy_seq\", or \"diverging\".\n\n\nn_bins\n6\nNumber of legend bins.\n\n\ntitle\nvalue_col\nLegend title string.\n\n\nopacity\n0.75\nFill opacity, 0–1.\n\n\nfmt_fn\ncomma format\nFunction to format tooltip values. Default: format(round(x), big.mark = \",\").\n\n\n\n\n\nValue\nA styled leaflet map.\n\n\nExamples\nlibrary(leaflet); library(sf)\n\nleaflet(va_counties) |&gt;\n  vvn_map_style(va_counties, \"pct_broadband\",\n                label_col = \"name\",\n                title     = \"Broadband coverage (%)\",\n                palette   = \"maroon_seq\")\n\nFor complete map examples including variable selectors and diverging palettes, see the Map Library →."
+  },
+  {
+    "objectID": "vvnthemes.html#shiny-ui",
+    "href": "vvnthemes.html#shiny-ui",
+    "title": "vvnthemes",
+    "section": "Shiny UI",
+    "text": "Shiny UI\n\nvvn_filter()\nA VVN-branded Shiny dropdown filter (selectInput) in a styled container.\nRequires the shiny package.\n\nUsage\nvvn_filter(inputId, label, choices, selected = NULL,\n           multiple = FALSE, width = \"100%\")\n\n\nArguments\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\ninputId\n\nShiny input ID.\n\n\nlabel\n\nDisplay label shown above the dropdown.\n\n\nchoices\n\nNamed vector or list of choices.\n\n\nselected\nNULL\nDefault selected value(s).\n\n\nmultiple\nFALSE\nAllow multiple selections?\n\n\nwidth\n\"100%\"\nCSS width.\n\n\n\n\n\nValue\nA Shiny tagList.\n\n\nExamples\nvvn_filter(\"year_sel\", \"Select year\",\n           choices  = 2018:2023,\n           selected = 2023)\n\n\n\n\nvvn_slider()\nA VVN-branded Shiny range slider (sliderInput) with maroon track and handle.\n\nUsage\nvvn_slider(inputId, label, min, max, value, step = 1, width = \"100%\")\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\ninputId\n\nShiny input ID.\n\n\nlabel\n\nDisplay label.\n\n\nmin\n\nMinimum slider value.\n\n\nmax\n\nMaximum slider value.\n\n\nvalue\n\nDefault value. Use a length-2 vector (e.g. c(2018, 2023)) for a two-handle range slider.\n\n\nstep\n1\nStep size.\n\n\nwidth\n\"100%\"\nCSS width.\n\n\n\n\n\nValue\nA Shiny tagList.\n\n\nExamples\nvvn_slider(\"year_range\", \"Year range\",\n           min = 2015, max = 2023, value = c(2018, 2023))\n\n\n\n\nvvn_button()\nA styled Shiny action button in one of three VVN style variants.\n\nUsage\nvvn_button(inputId, label, icon = NULL,\n           style = c(\"primary\", \"secondary\", \"outline\"), width = NULL)\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\ninputId\n\nShiny input ID.\n\n\nlabel\n\nButton label text.\n\n\nicon\nNULL\nOptional Shiny icon from shiny::icon().\n\n\nstyle\n\"primary\"\n\"primary\" = maroon fill (Apply Filters); \"secondary\" = orange fill; \"outline\" = maroon border (Reset).\n\n\nwidth\nNULL\nCSS width.\n\n\n\n\n\nValue\nA Shiny actionButton.\n\n\nExamples\nvvn_button(\"apply_btn\",  \"Apply Filters\", style = \"primary\")\nvvn_button(\"reset_btn\",  \"Reset\",         style = \"outline\")\nvvn_button(\"export_btn\", \"Download CSV\",  style = \"secondary\",\n           icon = shiny::icon(\"download\"))\n\n\n\n\nvvn_kpi_card()\nRender a VVN KPI metric card with a large value, descriptive label, and optional trend indicator. Use three per row — one maroon, one orange, one navy.\n\nUsage\nvvn_kpi_card(value, label, trend = NULL, trend_text = NULL,\n             color_scheme = c(\"maroon\", \"orange\", \"navy\"))\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\nvalue\n\nScalar metric value, e.g. \"76%\" or 42158.\n\n\nlabel\n\nShort descriptive label, e.g. \"Households with broadband\".\n\n\ntrend\nNULL\nTrend direction: \"up\", \"down\", or NULL for no indicator.\n\n\ntrend_text\nNULL\nTrend annotation, e.g. \"+5 pp vs 2020\".\n\n\ncolor_scheme\n\"maroon\"\nAccent color: \"maroon\", \"orange\", or \"navy\".\n\n\n\n\n\nValue\nA Shiny div tag.\n\n\nExamples\nvvn_kpi_card(\"76%\",    \"Households with broadband\",\n             trend = \"up\", trend_text = \"+5 pp vs 2020\")\nvvn_kpi_card(\"$52,342\",\"Median household income\",\n             trend = \"up\", trend_text = \"+8% vs 2019\",\n             color_scheme = \"orange\")\nvvn_kpi_card(\"22.4%\",  \"Population in poverty\",\n             trend = \"down\", trend_text = \"-2.1 pp vs 2020\",\n             color_scheme = \"navy\")\n\nFor dashboard layout with all three cards in a row, see the Interactive Components →.\n\n\n\n\n\nvvn_accessibility_check()\nCompute WCAG 2.1 contrast ratios for a set of hex colors against a background and report pass/fail status.\n\nUsage\nvvn_accessibility_check(colors, background = \"#FFFFFF\", level = c(\"AA\", \"AAA\"))\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\ncolors\n\nCharacter vector of hex codes to test.\n\n\nbackground\n\"#FFFFFF\"\nBackground hex code to test against.\n\n\nlevel\n\"AA\"\nWCAG standard: \"AA\" (≥ 4.5:1 contrast ratio) or \"AAA\" (≥ 7.0:1).\n\n\n\n\n\nValue\nInvisibly returns a data frame with columns color, contrast_ratio, pass. Prints a formatted pass/fail report via cli.\n\n\nExamples\n# Check the brand palette on white\nvvn_accessibility_check(vvn_palette(\"brand\"))\n\n# Check white text on a maroon background\nvvn_accessibility_check(c(\"#FFFFFF\", \"#F7F7F7\"), background = \"#861F41\")\n\n# Stricter AAA standard\nvvn_accessibility_check(vvn_palette(\"accessible\"), level = \"AAA\")"
+  },
+  {
+    "objectID": "vvnthemes.html#project-scaffolding",
+    "href": "vvnthemes.html#project-scaffolding",
+    "title": "vvnthemes",
+    "section": "Project Scaffolding",
+    "text": "Project Scaffolding\n\ncreate_vvn_story()\nScaffold a new VVN Insights Quarto project with VVN branding, directory structure, and pre-built narrative sections.\n\nUsage\ncreate_vvn_story(name, path = \".\", title = name,\n                 author = \"Visualizing Virginia Numbers\")\n\n\nArguments\n\n\n\n\n\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\nname\n\nProject folder name. Use snake_case (e.g. \"childcare_cost\").\n\n\npath\n\".\"\nParent directory. Defaults to the current working directory.\n\n\ntitle\nname\nStory title injected into the YAML front matter and README.\n\n\nauthor\n\"Visualizing Virginia Numbers\"\nAuthor name(s).\n\n\n\n\n\nValue\nInvisibly returns the project path (character). Prints setup instructions via cli.\n\n\nDetails\nCreates:\nname/\n├── index.qmd        ← Edit this file — pre-built Overview, Background,\n│                       Findings, Conclusion sections\n├── _quarto.yml\n├── styles.scss      ← VVN brand SCSS\n├── data/raw/\n├── data/processed/\n├── figures/\n└── scripts/\n\n\nExamples\ncreate_vvn_story(\"childcare_cost\",\n                  title  = \"Childcare Cost in Rural Virginia\",\n                  author = \"VVN Research Team\")\n\n# Render to HTML\nquarto::quarto_render(\"childcare_cost/index.qmd\")\n\nFor the full annotated Insights template, see VVN Insights Template →.\n\n\n\n\n\ncheck_vvn_story()\nValidate a VVN Insights index.qmd for required sections and VVN function usage before publishing.\n\nUsage\ncheck_vvn_story(path = \".\")\n\n\nArguments\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\npath\n\".\"\nPath to the story folder containing index.qmd.\n\n\n\n\n\nValue\nInvisibly TRUE if all checks pass, FALSE otherwise. Prints a pass/fail report.\nChecks for presence of: Overview, Background, Findings, Conclusion, theme_vvn, vvn_source.\n\n\nExamples\ncreate_vvn_story(\"my_insight\")\n# ... edit index.qmd ...\ncheck_vvn_story(\"my_insight\")\n\n\n\n\ncreate_vvn_dashboard()\nScaffold a production-ready R Shiny dashboard with VVN branding: maroon navbar, KPI cards, reactive charts, Leaflet county map, sidebar filters, and a data download tab.\n\nUsage\ncreate_vvn_dashboard(name, path = \".\", title = name,\n                     author = \"Visualizing Virginia Numbers\")\n\n\nArguments\n\n\n\nArgument\nDefault\nDescription\n\n\n\n\nname\n\nProject folder name.\n\n\npath\n\".\"\nParent directory.\n\n\ntitle\nname\nDashboard title shown in the maroon navbar.\n\n\nauthor\n\"Visualizing Virginia Numbers\"\nAuthor name(s).\n\n\n\n\n\nValue\nInvisibly returns the project path. Prints setup instructions via cli.\n\n\nDetails\nCreates:\nname/\n├── app.R            ← Main dashboard (runs immediately with example data)\n├── R/data_prep.R    ← Load and clean your data\n├── www/vvn.css      ← VVN brand CSS\n└── data/\n    ├── raw/\n    └── processed/\n\n\nExamples\ncreate_vvn_dashboard(\"housing_dashboard\",\n                      title = \"Virginia Housing Affordability Dashboard\")\n\nshiny::runApp(\"housing_dashboard\")\nrsconnect::deployApp(\"housing_dashboard\")   # publish\n\nFor the full annotated dashboard template, see Dashboard Template →."
+  },
+  {
+    "objectID": "get-started.html",
+    "href": "get-started.html",
+    "title": "Get Started",
+    "section": "",
+    "text": "By the end of this page you will have a publication-ready bar chart, a styled data table, and a county-level choropleth map — all matching the VVN design standard. Then you will scaffold a complete dashboard or Insights document in one command.\n\n\n\n1\n\n\nInstallInstall the package once from GitHub.\n\n\n\n\n\n\n\n2\n\n\nFirst chartA horizontal bar chart with VT Maroon fill, white background, and a source line.\n\n\n\n\n\n\n\n3\n\n\nFirst tableA styled summary table with maroon header and alternating rows.\n\n\n\n\n\n\n\n4\n\n\nFirst mapA county-level choropleth using the maroon sequential palette.\n\n\n\n\n\n\n\n5\n\n\nStart a full projectScaffold a complete dashboard or Insights document in one R command."
+  },
+  {
+    "objectID": "get-started.html#what-you-will-build",
+    "href": "get-started.html#what-you-will-build",
+    "title": "Get Started",
+    "section": "",
+    "text": "By the end of this page you will have a publication-ready bar chart, a styled data table, and a county-level choropleth map — all matching the VVN design standard. Then you will scaffold a complete dashboard or Insights document in one command.\n\n\n\n1\n\n\nInstallInstall the package once from GitHub.\n\n\n\n\n\n\n\n2\n\n\nFirst chartA horizontal bar chart with VT Maroon fill, white background, and a source line.\n\n\n\n\n\n\n\n3\n\n\nFirst tableA styled summary table with maroon header and alternating rows.\n\n\n\n\n\n\n\n4\n\n\nFirst mapA county-level choropleth using the maroon sequential palette.\n\n\n\n\n\n\n\n5\n\n\nStart a full projectScaffold a complete dashboard or Insights document in one R command."
+  },
+  {
+    "objectID": "get-started.html#step-1-install",
+    "href": "get-started.html#step-1-install",
+    "title": "Get Started",
+    "section": "Step 1 — Install",
+    "text": "Step 1 — Install\nInstall vvnthemes once per machine. You do not need to reinstall it every session.\ninstall.packages(\"devtools\")                       # skip if already installed\ndevtools::install_github(\"vt-vvn/vvnthemes\")\nThen add these two lines to the top of every script or Quarto chunk:\nlibrary(vvnthemes)\nset_vvn_defaults()   # one call transforms every subsequent ggplot2 chart\nset_vvn_defaults() does three things: it sets the global ggplot2 theme to theme_vvn(), changes all default geom colors to VT Maroon, and makes sure your charts look like VVN without any extra code."
+  },
+  {
+    "objectID": "get-started.html#step-2-your-first-chart",
+    "href": "get-started.html#step-2-your-first-chart",
+    "title": "Get Started",
+    "section": "Step 2 — Your first chart",
+    "text": "Step 2 — Your first chart\nGoal: A horizontal bar chart ranking Virginia regions by an index value — white background, VT Maroon bars, maroon title, source line at the bottom.\nThis is the most common VVN chart type. Copy, run, and you will see the result immediately.\nlibrary(vvnthemes)\nlibrary(ggplot2)\n\nset_vvn_defaults()\n\ndf &lt;- data.frame(\n  region = c(\"Rural\", \"Small City\", \"Suburban\", \"Urban Fringe\", \"Urban Core\"),\n  value  = c(46.2, 52.1, 57.4, 61.8, 65.3)\n)\n\nggplot(df, aes(x = value, y = reorder(region, value))) +\n  geom_col(width = 0.65) +\n  geom_text(aes(label = round(value, 1)), hjust = -0.2, size = 3.5) +\n  scale_x_continuous(expand = expansion(mult = c(0, .15))) +\n  labs(\n    title    = \"Economic Index by Region, 2023\",\n    subtitle = \"Virginia regions ranked by index value\",\n    x = \"Index value\", y = NULL\n  ) +\n  vvn_source(\"VVN Example Data\") +\n  remove_ticks()\nWhat happened automatically because of set_vvn_defaults():\n\nBars filled VT Maroon — no fill = argument needed\nWhite plot background instead of ggplot2’s default gray\nVT Maroon title and horizontal grid lines only\nProfessional font sizing and spacing\n\nvvn_source() adds the required source line in gray below the chart. remove_ticks() removes axis ticks — standard for bar charts.\n\nFor more chart types (line, scatter, histogram, boxplot), see Chart Library →"
+  },
+  {
+    "objectID": "get-started.html#step-3-your-first-table",
+    "href": "get-started.html#step-3-your-first-table",
+    "title": "Get Started",
+    "section": "Step 3 — Your first table",
+    "text": "Step 3 — Your first table\nGoal: A summary table with a maroon header row, alternating gray body rows, title, and source line — the standard VVN table format.\nThe gt package is required. Install it once with install.packages(\"gt\").\nlibrary(vvnthemes)\nlibrary(gt)\n\ndf &lt;- data.frame(\n  Region       = c(\"Urban Core\", \"Urban Fringe\", \"Suburban\", \"Small City\", \"Rural\"),\n  `2023 Value` = c(65.3, 61.8, 57.4, 52.1, 46.2),\n  `Change`     = c(\"+4.1\", \"+3.9\", \"+3.5\", \"+3.2\", \"+3.0\"),\n  check.names  = FALSE\n)\n\ndf |&gt;\n  gt() |&gt;\n  vvn_table(\n    title       = \"Economic Index by Region\",\n    subtitle    = \"Virginia, 2023 estimates\",\n    source_note = \"Source: VVN Example Data\"\n  )\nvvn_table() applies the full VVN table style in one call: maroon header, alternating rows, orange bottom border on the header, and the source note.\n\nFor ranking tables, regression tables, and interactive DT tables, see Table Library →"
+  },
+  {
+    "objectID": "get-started.html#step-4-your-first-map",
+    "href": "get-started.html#step-4-your-first-map",
+    "title": "Get Started",
+    "section": "Step 4 — Your first map",
+    "text": "Step 4 — Your first map\nGoal: A county-level choropleth map of Virginia using the maroon sequential palette — light counties have low values, dark maroon counties have high values.\nYou need county boundary data. The fastest way is the tigris package:\ninstall.packages(\"tigris\")   # once\ninstall.packages(\"sf\")       # once\nlibrary(vvnthemes)\nlibrary(ggplot2)\nlibrary(sf)\nlibrary(tigris)\nlibrary(dplyr)\n\n# Download Virginia county boundaries\nva &lt;- counties(\"VA\", cb = TRUE, resolution = \"20m\") |&gt;\n  st_transform(crs = 5070)\n\n# Join your data (replace with your own)\n# va &lt;- left_join(va, your_data, by = c(\"GEOID\" = \"fips\"))\n\n# For this example, simulate a value\nset.seed(42)\nva$rate &lt;- runif(nrow(va), 30, 80)\n\nggplot(va, aes(fill = rate)) +\n  geom_sf(color = \"#FFFFFF\", linewidth = 0.3) +\n  scale_fill_vvn_c(\"maroon_seq\") +\n  theme_vvn_map() +\n  labs(\n    title    = \"Broadband Access by County, 2023\",\n    subtitle = \"Percentage of households with broadband access\",\n    fill     = \"Households (%)\"\n  ) +\n  vvn_source(\"FCC Broadband Data · VVN Analysis\")\nscale_fill_vvn_c(\"maroon_seq\") applies the maroon sequential palette — the VVN standard for continuous county-level data. theme_vvn_map() removes axes and ticks automatically.\n\nFor interactive Leaflet maps and point maps, see Map Library →"
+  },
+  {
+    "objectID": "get-started.html#step-5-start-a-full-project",
+    "href": "get-started.html#step-5-start-a-full-project",
+    "title": "Get Started",
+    "section": "Step 5 — Start a full project",
+    "text": "Step 5 — Start a full project\nInstead of building file by file, scaffold a complete VVN project in one command. The generated project runs immediately with placeholder data.\nDashboard (R Shiny):\nlibrary(vvnthemes)\n\ncreate_vvn_dashboard(\"my-dashboard\",\n                      title = \"Virginia Housing Dashboard\")\n# Created: my-dashboard/app.R · R/data_prep.R · www/vvn.css\n\nshiny::runApp(\"my-dashboard\")   # runs immediately\nVVN Insights document (Quarto):\ncreate_vvn_story(\"my-insight\",\n                  title  = \"Broadband Access in Rural Virginia\",\n                  author = \"VVN Research Team\")\n# Created: my-insight/index.qmd · _quarto.yml · styles.scss\n\nquarto::quarto_render(\"my-insight/index.qmd\")   # renders immediately\nReplace the placeholder data and you have a complete VVN product.\n\nSee Dashboard Template → and VVN Insights Template → for annotated walkthroughs."
+  },
+  {
+    "objectID": "get-started.html#next-steps",
+    "href": "get-started.html#next-steps",
+    "title": "Get Started",
+    "section": "Next steps",
+    "text": "Next steps\n\n\n\nI want to…\nGo to\n\n\n\n\nCopy common chart, map, and table recipes\nRecipes →\n\n\nBuild more chart types\nChart Library →\n\n\nBuild county maps\nMap Library →\n\n\nBuild styled tables\nTable Library →\n\n\nAdd Shiny filters and KPI cards\nInteractive Components →\n\n\nSee all functions\nReference →\n\n\nGet answers to common questions\nFAQ →"
+  },
+  {
+    "objectID": "charts.html",
+    "href": "charts.html",
+    "title": "Charts",
+    "section": "",
+    "text": "For title/label conventions and chart selection rules, see Chart Standards →"
+  },
+  {
+    "objectID": "charts.html#create-your-first-chart",
+    "href": "charts.html#create-your-first-chart",
+    "title": "Charts",
+    "section": "Create your first chart",
+    "text": "Create your first chart\nThe horizontal bar chart is the most common VVN output. Follow these steps to build one from scratch.\n\nStep 1 — Load packages\nlibrary(vvnthemes)\nlibrary(ggplot2)\nset_vvn_defaults()\nCall set_vvn_defaults() once per session. It sets the VVN theme globally and makes all bars, lines, and points VT Maroon by default — you never have to specify colors manually.\n\n\nStep 2 — Prepare your data\ndf &lt;- data.frame(\n  region = c(\"Rural\", \"Small City\", \"Suburban\", \"Urban Fringe\", \"Urban Core\"),\n  value  = c(46.2, 52.1, 57.4, 61.8, 65.3)\n)\nSort rows from smallest to largest value before plotting so bars display in order.\n\n\nStep 3 — Build the chart\np &lt;- ggplot(df, aes(x = value, y = reorder(region, value))) +\n  geom_col(width = 0.65) +\n  geom_text(aes(label = round(value, 1)), hjust = -0.2, size = 3.5) +\n  scale_x_continuous(expand = expansion(mult = c(0, .15)))\n\nx = value, y = reorder(region, value) — value on x, categories on y, sorted\ngeom_text(...) — adds a value label just past the end of each bar\nscale_x_continuous(expand = ...) — adds space to the right so labels aren’t cut off\n\n\n\nStep 4 — Add title, subtitle, and source\np &lt;- p +\n  labs(\n    title    = \"Economic Index by Region, 2023\",\n    subtitle = \"Virginia regions ranked by index value\",\n    x = \"Index value\", y = NULL\n  ) +\n  vvn_source(\"VVN Example Data\") +\n  remove_ticks()\n\ntitle — headline case: capitalize every major word\nsubtitle — sentence case: geography and year\nvvn_source() — required on every published chart; adds a gray caption at the bottom\nremove_ticks() — standard for bar charts; removes the small tick marks on axes\n\n\n\nStep 5 — Save\nvvn_save(p, \"figures/chart.png\")              # 8×5 in, 300 dpi\nvvn_save(p, \"figures/chart.png\", width = 12)  # wider for wide layouts\nvvn_save(p, \"figures/chart\", formats = c(\"png\", \"pdf\"))  # both formats"
+  },
+  {
+    "objectID": "charts.html#which-chart-should-i-make",
+    "href": "charts.html#which-chart-should-i-make",
+    "title": "Charts",
+    "section": "Which chart should I make?",
+    "text": "Which chart should I make?\n\n\n\n\n\n\n\n\nI want to show…\nChart type\nKey function\n\n\n\n\nRanking across 5+ categories\nHorizontal bar\ngeom_col() (bars go left-right)\n\n\nComparison of 3–4 short-named groups\nVertical column\ngeom_col() (bars go up)\n\n\nChange over time\nLine chart\ngeom_line() + geom_point()\n\n\nDistribution of one variable\nHistogram\ngeom_histogram()\n\n\nDistributions across groups\nBoxplot\ngeom_boxplot()\n\n\nRelationship between two variables\nScatter plot\ngeom_point()"
+  },
+  {
+    "objectID": "charts.html#more-chart-types",
+    "href": "charts.html#more-chart-types",
+    "title": "Charts",
+    "section": "More chart types",
+    "text": "More chart types\n\nLine chart\n\nUse when Showing change over time for one or more groups. One line per group.\n\ndf_trend &lt;- data.frame(\n  year  = rep(2018:2023, 2),\n  value = c(44, 46, 47, 49, 51, 53, 62, 63, 65, 64, 67, 70),\n  group = rep(c(\"Rural\", \"Urban\"), each = 6)\n)\n\nggplot(df_trend, aes(x = year, y = value, color = group, group = group)) +\n  geom_line(linewidth = 1.2) +\n  geom_point(size = 2.5) +\n  scale_color_vvn(\"brand\") +\n  scale_x_continuous(breaks = 2018:2023) +\n  labs(\n    title    = \"Broadband Access Over Time\",\n    subtitle = \"Percentage of households, Virginia 2018–2023\",\n    x = NULL, y = \"Households (%)\", color = NULL\n  ) +\n  vvn_source(\"FCC Broadband Data\") +\n  legend_bottom()\n\n\n\n\n\n\nTip\n\n\n\nFor direct labels instead of a legend, use ggrepel::geom_text_repel() on the last year’s values and add remove_legend().\n\n\n\n\nScatter plot\n\nUse when Exploring the association between two continuous variables. Always add grid lines on both axes.\n\nggplot(df, aes(x = income, y = broadband)) +\n  geom_point(size = 3, alpha = 0.8) +\n  geom_smooth(method = \"lm\", se = FALSE, linewidth = 0.8) +\n  labs(\n    title    = \"Income and Broadband Access\",\n    subtitle = \"Virginia counties, 2022\",\n    x = \"Median household income\", y = \"Households with broadband (%)\"\n  ) +\n  vvn_source(\"U.S. Census Bureau, ACS 5-Year Estimates, 2022\") +\n  scatter_grid()\nscatter_grid() adds grid lines on both axes — required for scatter plots so readers can trace values.\n\n\nHistogram\n\nUse when Showing the distribution of a single continuous variable. Add a mean line for context.\n\nm &lt;- mean(df$value, na.rm = TRUE)\n\nggplot(df, aes(x = value)) +\n  geom_histogram(bins = 25, fill = \"#861F41\", color = \"#FFFFFF\", alpha = 0.9) +\n  geom_vline(xintercept = m, color = \"#E5751F\", linewidth = 1.2, linetype = \"dashed\") +\n  annotate(\"text\", x = m + 0.5, y = Inf,\n           label = paste0(\"Mean: \", round(m, 1)),\n           color = \"#E5751F\", hjust = 0, vjust = 1.5, size = 3.5) +\n  labs(title = \"Distribution of Values\", x = \"Value\", y = \"Count\") +\n  vvn_source(\"Source: [Dataset] · VVN Analysis\")\n\n\nBoxplot\n\nUse when Comparing distributions across two or more groups. Shows median, IQR, and outliers.\n\nggplot(df, aes(x = region, y = value, fill = region)) +\n  geom_boxplot(width = 0.5, outlier.color = \"#333333\",\n               outlier.size = 1.5, show.legend = FALSE) +\n  scale_fill_vvn(\"main\") +\n  labs(title = \"Value Distribution by Region\", x = NULL, y = \"Value\") +\n  vvn_source(\"Source: [Dataset] · VVN Analysis\") +\n  remove_ticks()\n\n\nHighlight one group\n\nUse when Drawing attention to a focal category — for example, Rural vs. all others.\n\ndf_latest &lt;- df |&gt;\n  filter(year == max(year)) |&gt;\n  arrange(value) |&gt;\n  mutate(region = factor(region, levels = region),\n         highlight = region == \"Rural\")\n\nggplot(df_latest, aes(x = value, y = region, fill = highlight)) +\n  geom_col(width = 0.65) +\n  scale_fill_manual(values = c(`TRUE` = \"#E5751F\", `FALSE` = \"#861F41\"),\n                    guide  = \"none\") +\n  labs(title    = \"Regional Comparison, 2023\",\n       subtitle = \"Rural highlighted in orange\",\n       x = NULL, y = NULL) +\n  vvn_source(\"Source: [Dataset] · VVN Analysis\") +\n  remove_ticks()"
+  },
+  {
+    "objectID": "charts.html#color-palettes",
+    "href": "charts.html#color-palettes",
+    "title": "Charts",
+    "section": "Color palettes",
+    "text": "Color palettes\n\n\n\n\n\n\n\nPalette\nUse for\n\n\n\n\nscale_fill_vvn(\"main\")\nGeneral purpose — up to 10 groups\n\n\nscale_fill_vvn(\"brand\")\n2–3 groups — maroon, orange, navy\n\n\nscale_fill_vvn(\"accessible\")\nColorblind-safe alternative\n\n\nscale_fill_vvn_c(\"maroon_seq\")\nContinuous gradient — maps and heatmaps\n\n\nscale_fill_vvn_c(\"diverging\")\nAbove / below average\n\n\n\nThe same palettes work for color (lines, points): scale_color_vvn(\"main\")."
+  },
+  {
+    "objectID": "charts.html#common-mistakes",
+    "href": "charts.html#common-mistakes",
+    "title": "Charts",
+    "section": "Common mistakes",
+    "text": "Common mistakes\nBars aren’t maroon. You forgot set_vvn_defaults(). Add it once at the top of your script.\nValue labels get cut off. Add scale_x_continuous(expand = expansion(mult = c(0, .15))) to create space to the right.\nBars aren’t sorted. Use reorder(region, value) in the aes() mapping, or arrange() + mutate(region = factor(region, levels = region)) before plotting.\nChart fails VVN review. You forgot vvn_source(). It is required on every published figure.\nScatter plot looks empty. You need scatter_grid() or theme_vvn(grid = \"both\") — scatter plots require grid lines on both axes.\nSee Reference Manual → for full parameter documentation."
+  },
+  {
+    "objectID": "dashboard.html",
+    "href": "dashboard.html",
+    "title": "Dashboard",
+    "section": "",
+    "text": "The create_vvn_dashboard() function scaffolds a complete, ready-to-run R Shiny application in one command. The dashboard runs immediately with placeholder data — you only replace the data source and labels."
+  },
+  {
+    "objectID": "dashboard.html#create-the-project",
+    "href": "dashboard.html#create-the-project",
+    "title": "Dashboard",
+    "section": "Create the project",
+    "text": "Create the project\nlibrary(vvnthemes)\ncreate_vvn_dashboard(\"my-dashboard\", title = \"Virginia Housing Dashboard\")\nshiny::runApp(\"my-dashboard\")"
+  },
+  {
+    "objectID": "dashboard.html#project-structure",
+    "href": "dashboard.html#project-structure",
+    "title": "Dashboard",
+    "section": "Project structure",
+    "text": "Project structure\nmy-dashboard/\n├── app.R           # Main Shiny application — UI and server\n├── R/\n│   └── data_prep.R # Data loading and transformation\n└── www/\n    └── vvn.css     # VVN brand styles (do not edit)"
+  },
+  {
+    "objectID": "dashboard.html#what-each-file-does",
+    "href": "dashboard.html#what-each-file-does",
+    "title": "Dashboard",
+    "section": "What each file does",
+    "text": "What each file does\napp.R is the complete Shiny application. It defines the UI (page layout, navbar, sidebar, tabs, cards) and the server (reactive data, outputs for charts, table, and map). The file is pre-wired — all inputs connect to all outputs automatically.\nR/data_prep.R is the only file you need to edit to use your own data. It loads and cleans the data and defines app_data, which the rest of the app reads. Your data frame requires at minimum: region (character), year (integer), and value (numeric).\nwww/vvn.css is the compiled VVN brand stylesheet. Do not edit this file."
+  },
+  {
+    "objectID": "dashboard.html#tab-structure",
+    "href": "dashboard.html#tab-structure",
+    "title": "Dashboard",
+    "section": "Tab structure",
+    "text": "Tab structure\n\n\n\n\n\n\n\nTab\nContents\n\n\n\n\nOverview\nSidebar filters · KPI cards · trend chart · bar chart · histogram\n\n\nMap\nVirginia county-level Leaflet choropleth\n\n\nData\nSearchable DT table with CSV and Excel download\n\n\nAbout\nProject description · data sources · methods · contact\n\n\n\n\nFor layout rules, tab requirements, and publishing checklist, see Dashboard Standards →"
+  },
+  {
+    "objectID": "dashboard.html#rdata_prep.r-data-loading",
+    "href": "dashboard.html#rdata_prep.r-data-loading",
+    "title": "Dashboard",
+    "section": "R/data_prep.R — Data loading",
+    "text": "R/data_prep.R — Data loading\nEdit this file to load your data. It must define app_data.\n# R/data_prep.R\nlibrary(dplyr)\nlibrary(readr)\n\n# ── Load raw data ──────────────────────────────────────────────────────────\napp_data &lt;- readr::read_csv(\"data/my_data.csv\")\n\n# ── Clean ──────────────────────────────────────────────────────────────────\napp_data &lt;- app_data |&gt;\n  filter(!is.na(value)) |&gt;\n  mutate(\n    year   = as.integer(year),\n    region = as.character(region)\n  )\n\n# ── Derived variables ──────────────────────────────────────────────────────\n# Add any computed columns used throughout the dashboard:\n# app_data &lt;- app_data |&gt; mutate(pct_change = (value - lag(value)) / lag(value))"
+  },
+  {
+    "objectID": "dashboard.html#full-app.r",
+    "href": "dashboard.html#full-app.r",
+    "title": "Dashboard",
+    "section": "Full app.R",
+    "text": "Full app.R\nThis is the complete annotated app.R. Replace all [...] placeholders before publishing.\n\nSection 1 — Libraries and theme setup\nLoad packages and define the VVN bslib theme. Uncomment optional libraries as needed.\n# =============================================================================\n# VVN Dashboard — app.R\n# [YOUR DASHBOARD TITLE]\n# [YOUR NAME] · Visualizing Virginia Numbers · Virginia Tech\n# =============================================================================\n\nlibrary(shiny)\nlibrary(bslib)\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(vvnthemes)\nlibrary(DT)\n# library(leaflet)  # uncomment for interactive map\n# library(gt)       # uncomment for styled gt tables\n# library(plotly)   # uncomment for interactive charts\n\n# ── Load data ─────────────────────────────────────────────────────────────────\nsource(\"R/data_prep.R\", local = TRUE)   # defines app_data\n\n# ── VVN bslib theme ───────────────────────────────────────────────────────────\nvvn_bs_theme &lt;- bslib::bs_theme(\n  version      = 5,\n  primary      = \"#861F41\",\n  secondary    = \"#E5751F\",\n  info         = \"#1B5299\",\n  base_font    = bslib::font_google(\"Source Sans Pro\", wght = c(400, 600, 700)),\n  heading_font = bslib::font_google(\"Source Sans Pro\", wght = 700),\n  code_font    = bslib::font_google(\"JetBrains Mono\"),\n  \"navbar-bg\"  = \"#861F41\"\n)\n\n\nSection 2 — UI: page layout, navbar, and footer\nDefine the outer page wrapper with the maroon navbar, VVN CSS link, and footer.\n# ══════════════════════════════════════════════════════════════════════════════\n# UI\n# ══════════════════════════════════════════════════════════════════════════════\nui &lt;- bslib::page_navbar(\n  title  = \"[YOUR DASHBOARD TITLE]\",\n  id     = \"main_nav\",\n  bg     = \"#861F41\",\n  fg     = \"#FFFFFF\",\n  theme  = vvn_bs_theme,\n  header = tagList(\n    tags$head(\n      tags$link(rel = \"stylesheet\", href = \"vvn.css\"),\n      tags$title(\"[YOUR TITLE] · Visualizing Virginia Numbers\")\n    )\n  ),\n  footer = tags$footer(\n    class = \"text-center text-muted small py-2 border-top mt-3\",\n    \"Visualizing Virginia Numbers · Virginia Tech · \",\n    tags$a(\"vvn.vt.edu\", href = \"https://vvn.vt.edu\", target = \"_blank\")\n  ),\n\n\nSection 3 — UI: Tab 1 — Overview (sidebar filters)\nSidebar with region dropdown, year range slider, variable selector, and Apply / Reset buttons.\n  # ── Tab 1: Overview ────────────────────────────────────────────────────────\n  bslib::nav_panel(\n    title = tagList(bslib::bs_icon(\"house-fill\"), \" Overview\"),\n    value = \"overview\",\n\n    bslib::layout_sidebar(\n\n      # ── Sidebar ────────────────────────────────────────────────────────────\n      sidebar = bslib::sidebar(\n        title = \"Filters\",\n        width = 260,\n        bg    = \"#F7F7F7\",\n\n        vvn_filter(\n          \"region_sel\", \"Region\",\n          choices  = c(\"All\" = \"All\",\n                       \"Rural\"        = \"Rural\",\n                       \"Small City\"   = \"Small City\",\n                       \"Suburban\"     = \"Suburban\",\n                       \"Urban Fringe\" = \"Urban Fringe\",\n                       \"Urban Core\"   = \"Urban Core\"),\n          selected = \"All\",\n          multiple = TRUE\n        ),\n\n        vvn_slider(\"year_range\", \"Year Range\",\n                    min = 2015, max = 2023, value = c(2015, 2023)),\n\n        vvn_filter(\n          \"variable_sel\", \"Variable\",\n          choices = c(\"Index Value\"     = \"value\",\n                       \"Employment Rate\" = \"employment\",\n                       \"Poverty Rate\"    = \"poverty\")\n        ),\n\n        hr(),\n\n        vvn_button(\"apply_btn\", \"Apply Filters\",\n                    icon  = bslib::bs_icon(\"funnel-fill\"),\n                    style = \"primary\"),\n        tags$br(), tags$br(),\n        vvn_button(\"reset_btn\", \"Reset\",\n                    icon  = bslib::bs_icon(\"arrow-counterclockwise\"),\n                    style = \"outline\")\n      ),\n\n\nSection 4 — UI: Tab 1 — Overview (KPI cards and charts)\nThree KPI cards, a trend line chart, a horizontal bar chart, and a histogram in the main panel.\n      # ── Main panel ─────────────────────────────────────────────────────────\n      bslib::layout_columns(\n        col_widths = 12, gap = \"1rem\",\n\n        # KPI row\n        bslib::layout_columns(\n          col_widths = c(4, 4, 4), gap = \"0.75rem\",\n          uiOutput(\"kpi_n\"),\n          uiOutput(\"kpi_mean\"),\n          uiOutput(\"kpi_change\")\n        ),\n\n        # Trend chart\n        bslib::card(\n          full_screen = TRUE,\n          bslib::card_header(\"Trend Over Time\", class = \"vvn-card-header\"),\n          bslib::card_body(plotOutput(\"trend_chart\", height = \"310px\"))\n        ),\n\n        # Bar + histogram row\n        bslib::layout_columns(\n          col_widths = c(7, 5), gap = \"0.75rem\",\n          bslib::card(\n            full_screen = TRUE,\n            bslib::card_header(\"Latest Year Comparison\", class = \"vvn-card-header\"),\n            bslib::card_body(plotOutput(\"bar_chart\", height = \"270px\"))\n          ),\n          bslib::card(\n            full_screen = TRUE,\n            bslib::card_header(\"Value Distribution\", class = \"vvn-card-header\"),\n            bslib::card_body(plotOutput(\"hist_chart\", height = \"270px\"))\n          )\n        )\n      )\n    )\n  ),\n\n\nSection 5 — UI: Tab 2 — Map\nFull-panel Leaflet choropleth map. Replace the placeholder with leaflet::leafletOutput() after adding spatial data.\n  # ── Tab 2: Map ─────────────────────────────────────────────────────────────\n  bslib::nav_panel(\n    title = tagList(bslib::bs_icon(\"map-fill\"), \" Map\"),\n    value = \"map\",\n    bslib::card(\n      full_screen = TRUE,\n      bslib::card_header(\"Virginia County Map\", class = \"vvn-card-header\"),\n      bslib::card_body(\n        # Replace with leaflet::leafletOutput(\"county_map\", height = \"580px\")\n        # after adding sf + leaflet data\n        tags$p(\"Add leaflet::leafletOutput() here and uncomment the server code.\")\n      )\n    )\n  ),\n\n\nSection 6 — UI: Tab 3 — Data and Tab 4 — About\nData tab with a searchable DT table; About tab with project description, sources, methods, and contact.\n  # ── Tab 3: Data ─────────────────────────────────────────────────────────────\n  bslib::nav_panel(\n    title = tagList(bslib::bs_icon(\"table\"), \" Data\"),\n    value = \"data\",\n    bslib::card(\n      bslib::card_header(\"Summary Table\", class = \"vvn-card-header\"),\n      bslib::card_body(DT::dataTableOutput(\"dt_table\"))\n    )\n  ),\n\n  # ── Tab 4: About ────────────────────────────────────────────────────────────\n  bslib::nav_panel(\n    title = tagList(bslib::bs_icon(\"info-circle\"), \" About\"),\n    value = \"about\",\n    bslib::card(\n      bslib::card_body(\n        tags$h3(\"About This Dashboard\"),\n        tags$p(\"Built by the Visualizing Virginia Numbers (VVN) at Virginia Tech.\"),\n        tags$h4(\"Data Sources\"),\n        tags$ul(\n          tags$li(\"[Replace with your data source 1]\"),\n          tags$li(\"[Replace with your data source 2]\")\n        ),\n        tags$h4(\"Methods\"),\n        tags$p(\"[Describe data processing and analytical methods.]\"),\n        tags$h4(\"Contact\"),\n        tags$p(tags$a(\"vvn@vt.edu\", href = \"mailto:vvn@vt.edu\"))\n      )\n    )\n  )\n)\n\n\nSection 7 — Server: reactive data and reset\nFiltered reactive dataset that responds to Apply Filters; reset observer to restore defaults.\n# ══════════════════════════════════════════════════════════════════════════════\n# Server\n# ══════════════════════════════════════════════════════════════════════════════\nserver &lt;- function(input, output, session) {\n\n  # ── Null-coalescing helper ─────────────────────────────────────────────────\n  `%||%` &lt;- function(x, y) if (!is.null(x)) x else y\n\n  # ── Filtered data ──────────────────────────────────────────────────────────\n  filtered &lt;- reactive({\n    req(input$year_range)\n    d &lt;- app_data\n\n    if (!(\"All\" %in% (input$region_sel %||% \"All\")) &&\n        length(input$region_sel) &gt; 0) {\n      d &lt;- d |&gt; filter(region %in% input$region_sel)\n    }\n\n    d |&gt;\n      filter(year &gt;= input$year_range[1], year &lt;= input$year_range[2]) |&gt;\n      mutate(display_value = .data[[input$variable_sel %||% \"value\"]])\n\n  }) |&gt; bindEvent(input$apply_btn, ignoreNULL = FALSE)\n\n  # ── Reset ──────────────────────────────────────────────────────────────────\n  observeEvent(input$reset_btn, {\n    updateSelectInput(session, \"region_sel\",   selected = \"All\")\n    updateSliderInput(session, \"year_range\",   value    = c(2015, 2023))\n    updateSelectInput(session, \"variable_sel\", selected = \"value\")\n  })\n\n\nSection 8 — Server: KPI cards\nThree renderUI outputs producing maroon, orange, and navy VVN KPI cards.\n  # ── KPI cards ──────────────────────────────────────────────────────────────\n  output$kpi_n &lt;- renderUI({\n    n &lt;- dplyr::n_distinct(filtered()$region)\n    vvn_kpi_card(paste0(n, \" Region\", if (n != 1) \"s\"), \"In Selection\",\n                  color_scheme = \"maroon\")\n  })\n\n  output$kpi_mean &lt;- renderUI({\n    m &lt;- round(mean(filtered()$display_value, na.rm = TRUE), 1)\n    vvn_kpi_card(m, \"Average Value\", color_scheme = \"orange\")\n  })\n\n  output$kpi_change &lt;- renderUI({\n    d  &lt;- filtered()\n    v1 &lt;- mean(d$display_value[d$year == min(d$year)], na.rm = TRUE)\n    v2 &lt;- mean(d$display_value[d$year == max(d$year)], na.rm = TRUE)\n    ch &lt;- round(v2 - v1, 1)\n    vvn_kpi_card(\n      value        = paste0(if (ch &gt;= 0) \"+\" else \"\", ch),\n      label        = paste0(\"Change (\", min(d$year), \"\\u2013\", max(d$year), \")\"),\n      trend        = if (ch &gt;= 0) \"up\" else \"down\",\n      trend_text   = paste0(abs(round(ch / v1 * 100)), \"% vs start\"),\n      color_scheme = \"navy\"\n    )\n  })\n\n\nSection 9 — Server: charts\nTrend line chart, horizontal bar chart, and histogram — all using theme_vvn() and VVN color scales.\n  # ── Trend chart ────────────────────────────────────────────────────────────\n  output$trend_chart &lt;- renderPlot({\n    req(nrow(filtered()) &gt; 0)\n    filtered() |&gt;\n      group_by(year, region) |&gt;\n      summarise(v = mean(display_value, na.rm = TRUE), .groups = \"drop\") |&gt;\n      ggplot(aes(x = year, y = v, color = region, group = region)) +\n      geom_line(linewidth = 1.3) + geom_point(size = 2.8, alpha = 0.9) +\n      scale_color_vvn(\"main\") + theme_vvn() +\n      labs(title    = \"Trend by Region\",\n           subtitle = paste0(input$year_range[1], \"\\u2013\", input$year_range[2]),\n           x = \"Year\", y = \"Value\", color = \"Region\",\n           caption  = \"Source: [Replace with source]\")\n  }, res = 110)\n\n  # ── Bar chart ──────────────────────────────────────────────────────────────\n  output$bar_chart &lt;- renderPlot({\n    req(nrow(filtered()) &gt; 0)\n    filtered() |&gt;\n      filter(year == max(year)) |&gt;\n      group_by(region) |&gt;\n      summarise(v = mean(display_value, na.rm = TRUE), .groups = \"drop\") |&gt;\n      arrange(v) |&gt; mutate(region = factor(region, levels = region)) |&gt;\n      ggplot(aes(x = v, y = region, fill = region)) +\n      geom_col(width = 0.65, show.legend = FALSE) +\n      geom_text(aes(label = round(v, 1)), hjust = -0.2, size = 3.2) +\n      scale_fill_vvn(\"main\") +\n      scale_x_continuous(expand = expansion(mult = c(0, .18))) +\n      theme_vvn(grid = \"x\") + remove_ticks() +\n      labs(title = paste(\"Comparison \\u00b7\", max(filtered()$year)),\n           x = \"Value\", y = NULL)\n  }, res = 110)\n\n  # ── Histogram ─────────────────────────────────────────────────────────────\n  output$hist_chart &lt;- renderPlot({\n    req(nrow(filtered()) &gt; 0)\n    m &lt;- mean(filtered()$display_value, na.rm = TRUE)\n    ggplot(filtered(), aes(x = display_value)) +\n      geom_histogram(bins = 18, fill = \"#861F41\", color = \"#FFFFFF\", alpha = 0.9) +\n      geom_vline(xintercept = m, color = \"#E5751F\", linewidth = 1.2, linetype = \"dashed\") +\n      annotate(\"text\", x = m + 0.3, y = Inf, vjust = 2, hjust = 0, size = 3,\n               label = paste0(\"Mean: \", round(m, 1)), color = \"#E5751F\") +\n      theme_vvn() +\n      labs(title = \"Distribution\", x = \"Value\", y = \"Count\")\n  }, res = 110)\n\n\nSection 10 — Server: data table and map\nDT table with CSV/Excel download buttons; Leaflet map output (commented out until spatial data is added).\n  # ── DT table ──────────────────────────────────────────────────────────────\n  output$dt_table &lt;- DT::renderDataTable({\n    filtered() |&gt;\n      group_by(region, year) |&gt;\n      summarise(Value = round(mean(display_value, na.rm = TRUE), 2), .groups = \"drop\") |&gt;\n      arrange(desc(year), region) |&gt;\n      DT::datatable(\n        rownames   = FALSE,\n        class      = \"stripe hover compact\",\n        extensions = \"Buttons\",\n        options    = list(pageLength = 15, scrollX = TRUE,\n                          dom = \"Bfrtip\", buttons = c(\"csv\", \"excel\"))\n      )\n  })\n\n  # ── County map (uncomment after adding leaflet + sf data) ────────────────\n  # output$county_map &lt;- leaflet::renderLeaflet({\n  #   leaflet::leaflet(va_counties) |&gt;\n  #     vvn_map_style(data = va_counties, value_col = input$variable_sel,\n  #                   title = \"Selected Variable\")\n  # })\n}\n\n\nSection 11 — Launch\n# ── Launch ────────────────────────────────────────────────────────────────────\nshinyApp(ui, server)"
+  },
+  {
+    "objectID": "dashboard.html#publishing",
+    "href": "dashboard.html#publishing",
+    "title": "Dashboard",
+    "section": "Publishing",
+    "text": "Publishing\n# Test locally\nshiny::runApp()\n\n# Deploy to shinyapps.io\nrsconnect::deployApp()\nSee Interactive Components for full documentation on vvn_filter(), vvn_slider(), vvn_button(), and vvn_kpi_card()."
+  },
+  {
+    "objectID": "faq.html#charts",
+    "href": "faq.html#charts",
+    "title": "FAQ",
+    "section": "Charts",
+    "text": "Charts"
+  },
+  {
+    "objectID": "faq.html#maps",
+    "href": "faq.html#maps",
+    "title": "FAQ",
+    "section": "Maps",
+    "text": "Maps"
+  },
+  {
+    "objectID": "faq.html#tables",
+    "href": "faq.html#tables",
+    "title": "FAQ",
+    "section": "Tables",
+    "text": "Tables"
+  },
+  {
+    "objectID": "faq.html#shiny-dashboards",
+    "href": "faq.html#shiny-dashboards",
+    "title": "FAQ",
+    "section": "Shiny dashboards",
+    "text": "Shiny dashboards"
+  },
+  {
+    "objectID": "faq.html#vvn-insights",
+    "href": "faq.html#vvn-insights",
+    "title": "FAQ",
+    "section": "VVN Insights",
+    "text": "VVN Insights"
+  },
+  {
+    "objectID": "vvn-insight.html",
+    "href": "vvn-insight.html",
+    "title": "VVN Insight",
+    "section": "",
+    "text": "The create_vvn_story() function scaffolds a complete Quarto narrative report in one command. The document renders immediately with placeholder content — you only replace the data and written sections."
+  },
+  {
+    "objectID": "vvn-insight.html#create-the-project",
+    "href": "vvn-insight.html#create-the-project",
+    "title": "VVN Insight",
+    "section": "Create the project",
+    "text": "Create the project\nlibrary(vvnthemes)\ncreate_vvn_story(\n  \"my-insight\",\n  title  = \"Broadband Access in Rural Virginia\",\n  author = \"VVN Research Team\"\n)\nquarto::quarto_render(\"my-insight/index.qmd\")"
+  },
+  {
+    "objectID": "vvn-insight.html#project-structure",
+    "href": "vvn-insight.html#project-structure",
+    "title": "VVN Insight",
+    "section": "Project structure",
+    "text": "Project structure\nmy-insight/\n├── index.qmd       # Main document — edit this file\n├── _quarto.yml     # Quarto configuration\n├── styles.scss     # VVN brand styles (do not edit)\n└── data/           # Place your data files here"
+  },
+  {
+    "objectID": "vvn-insight.html#what-each-file-does",
+    "href": "vvn-insight.html#what-each-file-does",
+    "title": "VVN Insight",
+    "section": "What each file does",
+    "text": "What each file does\nindex.qmd is the complete narrative report. It contains all 12 sections — YAML front matter, setup chunk, hero banner, overview, background, data and methods, findings, discussion, conclusion, and rendering instructions — all as annotated placeholders ready to fill in.\n_quarto.yml configures the Quarto project: theme, TOC settings, figure dimensions, and output format. You rarely need to edit this file.\nstyles.scss is the compiled VVN brand stylesheet. Do not edit this file.\ndata/ is an empty folder for your data files. Load them in the setup chunk with readr::read_csv(\"data/my_data.csv\")."
+  },
+  {
+    "objectID": "vvn-insight.html#document-structure",
+    "href": "vvn-insight.html#document-structure",
+    "title": "VVN Insight",
+    "section": "Document structure",
+    "text": "Document structure\n\n\n\nSection\nElement\nRequired\n\n\n\n\nHero banner\n::: {.hero} div\nYes\n\n\nOverview and key finding\n&gt; blockquote\nYes\n\n\nBackground\n## section\nYes\n\n\nData and Methods\n## section + table\nYes\n\n\nFindings\n## section + charts + map + table\nYes\n\n\nDiscussion\n## section\nYes\n\n\nConclusion\n## section\nYes\n\n\n\n\nFor section requirements, narrative rules, and publishing checklist, see VVN Insights Standards →"
+  },
+  {
+    "objectID": "vvn-insight.html#full-index.qmd",
+    "href": "vvn-insight.html#full-index.qmd",
+    "title": "VVN Insight",
+    "section": "Full index.qmd",
+    "text": "Full index.qmd\nThis is the complete annotated index.qmd. Replace all [...] placeholders before publishing.\n\nSection 1 — YAML front matter\nPlace this at the very top of index.qmd. The embed-resources: true setting produces a single self-contained HTML file.\n---\ntitle: \"[YOUR INSIGHT TITLE]\"\nauthor: \"[YOUR NAME]\"\ndate: today\nformat:\n  html:\n    theme: [cosmo, styles.scss]\n    toc: true\n    toc-depth: 3\n    toc-location: right\n    toc-title: \"Contents\"\n    embed-resources: true\n    fig-width: 8\n    fig-height: 5\n    fig-dpi: 150\n    code-fold: true\n    code-summary: \"Show code\"\n    smooth-scroll: true\nexecute:\n  echo: false\n  warning: false\n  message: false\n---\n\n\nSection 2 — Setup chunk\nLoad libraries and data. Replace the sample data with your own readr::read_csv() call.\n\n\n\nSection 3 — Hero banner\nFull-width maroon banner with the insight title and VVN attribution line.\n::: {.hero}\n## [YOUR INSIGHT TITLE]\n\n::: {.hero-subtitle}\nVisualizing Virginia Numbers · Virginia Tech\n:::\n\nA data-driven look at [your topic] across Virginia communities.\n:::\n\n\nSection 4 — Overview and key finding\nState the key finding immediately after the hero — never bury it in the conclusion.\n---\n\n## Overview\n\n&gt; **Key Finding:** [State your most important result in 1–2 sentences. Be\n&gt; specific: include the metric, geography, time period, and direction of change.]\n\nThis story examines [topic] across Virginia's diverse regional contexts.\nWe find that [summary of main result], with meaningful variation across\n[geography / demographic group]. Our analysis draws on data from [source].\n\n\nSection 5 — Background\nExplain why this topic matters, the policy context, and who the intended audience is.\n---\n\n## Background\n\n**Why this matters.** Describe the policy or research context:\n\n- What problem or question does this story address?\n- Who is affected, and how?\n- What data gap does this analysis fill?\n\n**Audience.** Policymakers, advocates, and community organizations working\non [issue area] in Virginia.\n\n\nSection 6 — Data and methods\nA structured table with source, geography, time period, and variable, plus a data note callout.\n---\n\n## Data & Methods\n\n| Item | Details |\n|------|---------|\n| **Source** | [Dataset name, organization, year] |\n| **Geography** | Virginia counties / [other unit] |\n| **Period** | 2018–2023 |\n| **Variable** | [Description of key variable] |\n\n::: {.callout-note}\n**Data note:** [Any caveats, missing data, or comparability issues.]\n:::\n\n\nSection 7 — Findings: trend chart\nLine chart showing the primary metric over time, broken by a key grouping variable.\n---\n\n## Findings\n\n### Regional Trends Over Time\n\n\n::: {.cell}\n\n```{.r .cell-code}\nggplot(df, aes(x = year, y = value, color = region, group = region)) +\n  geom_line(linewidth = 1.2) +\n  geom_point(size = 2.5) +\n  scale_color_vvn(\"main\") +\n  labs(\n    title    = \"Regional Trends, 2018–2023\",\n    subtitle = \"Annual average values by region type\",\n    x        = \"Year\",\n    y        = \"Value\",\n    color    = \"Region\",\n    caption  = \"Source: [Dataset name] · VVN Analysis\"\n  ) +\n  scatter_grid()\n```\n:::\n::: {.callout-important}\n**Key observation:** [Interpret the trend chart in 1–2 sentences.]\n:::\n\n\nSection 8 — Findings: bar chart\nHorizontal bar chart comparing the latest-year values across categories.\n### Regional Comparison — Latest Year\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndf |&gt;\n  filter(year == max(year)) |&gt;\n  mutate(region    = reorder(region, value),\n         highlight = region == \"Rural\") |&gt;\n  ggplot(aes(x = value, y = region, fill = highlight)) +\n  geom_col(width = 0.65) +\n  geom_text(aes(label = round(value, 1)), hjust = -0.2, size = 3.5,\n            color = \"#3D3D3D\") +\n  scale_fill_manual(values = c(`TRUE` = \"#E5751F\", `FALSE` = \"#861F41\"),\n                    guide  = \"none\") +\n  scale_x_continuous(expand = expansion(mult = c(0, .15))) +\n  labs(title    = paste(\"Regional Comparison ·\", max(df$year)),\n       subtitle = \"Rural highlighted in orange\",\n       x = \"Value\", y = NULL,\n       caption  = \"Source: [Dataset name] · VVN Analysis\") +\n  remove_ticks()\n```\n:::\n\n\nSection 9 — Findings: county map\nInteractive Leaflet choropleth (requires leaflet + sf). A static fallback is provided until spatial data is available.\n### County Map\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Interactive choropleth (requires leaflet + sf):\n# library(leaflet); library(sf)\n# va_counties &lt;- sf::read_sf(\"data/va_counties.geojson\") |&gt;\n#   sf::st_transform(4326) |&gt;\n#   left_join(df |&gt; filter(year == max(year)), by = \"fips\")\n# leaflet(va_counties) |&gt;\n#   vvn_map_style(data = va_counties, value_col = \"value\", title = \"Value\")\n\n# Static fallback:\nggplot(df |&gt; filter(year == max(year)),\n       aes(x = reorder(region, value), y = value, fill = value)) +\n  geom_col() +\n  scale_fill_vvn_c(\"maroon_seq\") +\n  coord_flip() +\n  labs(title    = \"[ Replace with county map ]\",\n       subtitle = \"Add leaflet + vvn_map_style() for an interactive choropleth\",\n       x = NULL, y = \"Value\", fill = \"Value\",\n       caption  = \"Placeholder · VVN Analysis\")\n```\n:::\n\n\nSection 10 — Summary table\nSummary statistics table using gt + vvn_table().\n## Summary Table\n\n\n::: {#tbl-summary .cell tbl-cap='Summary statistics by region, 2018–2023.'}\n\n```{.r .cell-code}\nsummary_df &lt;- df |&gt;\n  group_by(Region = region) |&gt;\n  summarise(\n    `Mean`          = round(mean(value), 1),\n    `2023 Value`    = round(value[year == max(year)], 1),\n    `Change (pts)`  = round(value[year == max(year)] - value[year == min(year)], 1),\n    .groups = \"drop\"\n  ) |&gt;\n  arrange(desc(`2023 Value`))\n\nlibrary(gt)\ngt(summary_df) |&gt;\n  vvn_table(title       = \"Regional Summary Statistics, 2018–2023\",\n             source_note = \"Source: [Dataset] · VVN Analysis\")\n```\n:::\n\n\nSection 11 — Discussion\nInterpret the findings, connect to prior research or policy context, note equity implications and data limitations.\n---\n\n## Discussion\n\n**Interpretation of findings:**\n\n1. **Finding 1.** Describe and interpret the first major result.\n2. **Finding 2.** Connect to known context or prior research.\n3. **Equity implications.** Who benefits or is left behind?\n\n**Limitations:**\n\n- Data availability: [any gaps]\n- Geographic resolution: [county vs. sub-county]\n- Causal claims: [note that analysis is descriptive unless stated otherwise]\n\n\nSection 12 — Conclusion\n2–3 sentence takeaway, policy implication, and contact information.\n---\n\n## Conclusion\n\n[2–3 sentences summarizing the main takeaway.] These findings suggest that\n[policy implication]. Future work should examine [next research question].\n\n::: {.callout-tip}\n**For more:** Contact VVN at [vvn@vt.edu](mailto:vvn@vt.edu) or visit\n[vvn.vt.edu](https://vvn.vt.edu).\n:::\n\n---\n\n*Produced by the Visualizing Virginia Numbers · Virginia Tech*\n*Built with [vvnthemes](https://github.com/vt-vvn/vvnthemes)*"
+  },
+  {
+    "objectID": "vvn-insight.html#rendering",
+    "href": "vvn-insight.html#rendering",
+    "title": "VVN Insight",
+    "section": "Rendering",
+    "text": "Rendering\n# R console\nquarto::quarto_render(\"index.qmd\")\nIn RStudio, press Ctrl+Shift+K (Cmd+Shift+K on Mac)."
+  },
+  {
+    "objectID": "vvn-insight.html#publishing-checklist",
+    "href": "vvn-insight.html#publishing-checklist",
+    "title": "VVN Insight",
+    "section": "Publishing checklist",
+    "text": "Publishing checklist\nBefore submitting a VVN Insight for publication:\n\nAll [...] placeholders replaced\nHero banner present with title and VVN subtitle\nKey finding stated clearly in Overview\nBackground explains context and audience\nData & Methods table complete with source\nAt least 2 charts with titles, subtitles, and source lines\nAt least 1 map (interactive or static)\nSummary table with source note\nDiscussion covers interpretation and limitations\nConclusion with contact information\nAll chart titles use headline case\nAll chart subtitles use sentence case\nembed-resources: true in YAML (single-file HTML)"
+  }
+]

@@ -1,0 +1,43 @@
+project:
+  type: website
+
+website:
+  title: "VVN_TITLE"
+  favicon: "https://vt.edu/favicon.ico"
+  navbar:
+    background: "#861F41"
+    foreground: "white"
+    logo-alt: "Visualizing Virginia Numbers"
+    title: "VVN Insights"
+    left:
+      - text: "Home"
+        href: index.qmd
+    right:
+      - icon: github
+        href: "https://github.com/vt-vvn"
+  page-footer:
+    left: "© Visualizing Virginia Numbers · Virginia Tech"
+    right:
+      - text: "Built with vvnthemes"
+        href: "https://github.com/vt-vvn/vvnthemes"
+
+format:
+  html:
+    theme: [cosmo, styles.scss]
+    toc: true
+    toc-depth: 3
+    toc-location: right
+    embed-resources: true
+    fig-width: 8
+    fig-height: 5
+    fig-dpi: 150
+    code-fold: true
+    code-tools: true
+    smooth-scroll: true
+    link-external-icon: true
+
+execute:
+  echo: false
+  warning: false
+  message: false
+  freeze: auto

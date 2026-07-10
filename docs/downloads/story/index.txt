@@ -1,0 +1,268 @@
+---
+title: "VVN_TITLE"
+author: "VVN_AUTHOR"
+date: today
+format:
+  html:
+    theme: [cosmo, styles.scss]
+    toc: true
+    toc-depth: 3
+    toc-location: right
+    toc-title: "Contents"
+    embed-resources: true
+    fig-width: 8
+    fig-height: 5
+    fig-dpi: 150
+    code-fold: true
+    code-summary: "Show code"
+    smooth-scroll: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r setup}
+#| include: false
+library(vvnthemes)
+library(ggplot2)
+library(dplyr)
+
+# Apply VVN defaults to all charts in this document
+set_vvn_defaults()
+
+# ── Load your data ──────────────────────────────────────────────────────────
+# Replace with your actual data:
+# df <- readr::read_csv("data/processed/my_data.csv")
+
+set.seed(42)
+df <- data.frame(
+  year   = rep(2018:2023, each = 5),
+  region = rep(c("Rural", "Small City", "Suburban",
+                  "Urban Fringe", "Urban Core"), 6),
+  value  = c(
+    46, 50, 54, 58, 63,
+    47, 51, 55, 59, 64,
+    49, 53, 57, 61, 66,
+    50, 54, 58, 63, 67,
+    51, 56, 60, 64, 69,
+    52, 57, 62, 66, 71
+  ) + rnorm(30, 0, 0.5)
+)
+```
+
+::: {.hero}
+## VVN_TITLE
+
+::: {.hero-subtitle}
+Visualizing Virginia Numbers · Virginia Tech · `r format(Sys.Date(), "%Y")`
+:::
+
+A data-driven look at [your topic] across Virginia communities.
+:::
+
+---
+
+## Overview
+
+> **Key Finding:** Rural Virginia counties have experienced a **12% increase**
+> in [metric] between 2018 and 2023, narrowing the gap with urban areas for
+> the first time in a decade.
+
+This story examines [topic] across Virginia's diverse regional contexts.
+We find that [summary of main result], with meaningful variation across
+[geography / demographic group]. Our analysis draws on data from [source].
+
+---
+
+## Background
+
+**Why this matters.** Describe the policy or research context:
+
+- What problem or question does this story address?
+- Who is affected, and how?
+- What data gap does this analysis fill?
+
+**Audience.** Policymakers, advocates, and community organizations working
+on [issue area] in Virginia.
+
+---
+
+## Data & Methods
+
+| Item | Details |
+|------|---------|
+| **Source** | [Dataset name, organization, year] |
+| **Geography** | Virginia counties / [other unit] |
+| **Period** | 2018–2023 |
+| **Variable** | [Description of key variable] |
+
+::: {.callout-note}
+**Data note:** [Any caveats, missing data, or comparability issues.]
+:::
+
+```{r load-data}
+#| include: false
+# Data already loaded in setup chunk above.
+```
+
+---
+
+## Findings
+
+### Regional Trends Over Time
+
+```{r fig-trend}
+#| fig-cap: "Annual trends by region type, 2018–2023. Source: [Dataset]."
+#| fig-alt: "Line chart showing value trends for five Virginia region types."
+
+ggplot(df, aes(x = year, y = value, color = region, group = region)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 2.5) +
+  scale_color_vvn("main") +
+  labs(
+    title    = "Regional Trends, 2018–2023",
+    subtitle = "Visualizing Virginia Numbers",
+    x        = "Year",
+    y        = "Value",
+    color    = "Region"
+  ) +
+  vvn_source("[Dataset name]") +
+  scatter_grid()
+```
+
+::: {.callout-important}
+**Key observation:** Rural areas (maroon) show the steepest growth trajectory,
+while urban cores (lighter shades) remain significantly higher in absolute terms.
+:::
+
+### Regional Comparison — Latest Year
+
+```{r fig-bar}
+#| fig-cap: "2023 values by region. Rural highlighted in orange."
+#| fig-alt: "Horizontal bar chart comparing 2023 values across five region types."
+
+df |>
+  filter(year == max(year)) |>
+  mutate(region = reorder(region, value),
+         highlight = region == "Rural") |>
+  ggplot(aes(x = value, y = region, fill = highlight)) +
+  geom_col(width = 0.65) +
+  geom_text(aes(label = round(value, 1)), hjust = -0.2, size = 3.5,
+            color = "#3D3D3D") +
+  scale_fill_manual(values = c(`TRUE` = "#E5751F", `FALSE` = "#861F41"),
+                    guide  = "none") +
+  scale_x_continuous(expand = expansion(mult = c(0, .15))) +
+  labs(title    = paste("Regional Comparison ·", max(df$year)),
+       subtitle = "Rural highlighted in orange",
+       x = "Value", y = NULL) +
+  vvn_source("[Dataset name]") +
+  remove_ticks()
+```
+
+### Distribution of Values
+
+```{r fig-hist}
+#| fig-cap: "Distribution of values across all county-year observations."
+#| fig-width: 6
+#| fig-height: 3.5
+
+ggplot(df, aes(x = value)) +
+  geom_histogram(bins = 20, fill = "#861F41", color = "#FFFFFF", alpha = 0.9) +
+  geom_vline(xintercept = mean(df$value), color = "#E5751F",
+             linewidth = 1.2, linetype = "dashed") +
+  annotate("text", x = mean(df$value) + 0.8, y = Inf,
+           label = paste0("Mean: ", round(mean(df$value), 1)),
+           color = "#E5751F", hjust = 0, vjust = 1.5, size = 3.5) +
+  labs(title = "Value Distribution",
+       x = "Value", y = "Count") +
+  vvn_source("[Dataset name]")
+```
+
+### County Map
+
+```{r map}
+#| fig-cap: "County-level map. Replace with your spatial data."
+
+# Uncomment and replace with your county-level sf data:
+# library(leaflet)
+# leaflet(va_counties) |>
+#   vvn_map_style(
+#     data      = va_counties,
+#     value_col = "your_variable",
+#     title     = "Your Variable"
+#   )
+
+# Placeholder:
+ggplot(df |> filter(year == max(year)),
+       aes(x = reorder(region, value), y = value, fill = value)) +
+  geom_col() +
+  scale_fill_vvn_c("maroon_seq") +
+  coord_flip() +
+  labs(title    = "[ Replace with county map ]",
+       subtitle = "Add leaflet + vvn_map_style() for an interactive choropleth",
+       x = NULL, y = "Value", fill = "Value") +
+  vvn_source("Placeholder")
+```
+
+---
+
+## Summary Table
+
+```{r tbl-summary}
+#| tbl-cap: "Summary statistics by region, 2018–2023."
+
+summary_df <- df |>
+  group_by(Region = region) |>
+  summarise(
+    `Mean`          = round(mean(value), 1),
+    `2023 Value`    = round(value[year == max(year)], 1),
+    `Change (pts)`  = round(value[year == max(year)] - value[year == min(year)], 1),
+    .groups = "drop"
+  ) |>
+  arrange(desc(`2023 Value`))
+
+# With gt (recommended):
+# library(gt)
+# gt(summary_df) |>
+#   vvn_table(title       = "Regional Summary Statistics",
+#              source_note = "Source: [Dataset] · VVN Analysis")
+
+# Fallback to knitr::kable:
+knitr::kable(summary_df, align = c("l", "r", "r", "r"))
+```
+
+*Source: [Dataset] · VVN Analysis*
+
+---
+
+## Discussion
+
+**Interpretation of findings:**
+
+1. **Finding 1.** Describe and interpret the first major result.
+2. **Finding 2.** Connect the pattern to known context or prior research.
+3. **Equity implications.** Who benefits or is left behind?
+
+**Limitations:**
+
+- Data availability: [any gaps]
+- Geographic resolution: [county vs. sub-county]
+- Causal claims: [note that analysis is descriptive unless otherwise stated]
+
+---
+
+## Conclusion
+
+[2–3 sentences summarizing the main takeaway.] These findings suggest that
+[policy implication]. Future work should examine [next research question].
+
+::: {.callout-tip}
+**For more:** Contact VVN at [vvn@vt.edu](mailto:vvn@vt.edu) or visit
+[vvn.vt.edu](https://vvn.vt.edu).
+:::
+
+---
+
+*Produced by the Visualizing Virginia Numbers · Virginia Tech*
+*Built with [vvnthemes](https://github.com/vt-vvn/vvnthemes)*

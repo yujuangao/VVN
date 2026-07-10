@@ -9,8 +9,6 @@
 /Meta/
 NAMESPACE.bak
 
-# pkgdown site
-/docs/
 
 # macOS
 .DS_Store
