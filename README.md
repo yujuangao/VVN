@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 <!-- badges: end -->
 
-**vvnthemes** is the official R package for the [Virginia Voices Network (VVN)](https://vvn.vt.edu)
+**vvnthemes** is the official R package for the [Visualizing Virginia Numbers (VVN)](https://vvn.vt.edu)
 at Virginia Tech. It provides ggplot2 themes, color palettes, GT table styles,
 Leaflet map helpers, Shiny UI components, and one-command project scaffolding
 so that every VVN data story and dashboard shares a consistent, accessible,
@@ -92,7 +92,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   theme_vvn() +
   scale_color_vvn() +
   labs(title    = "Engine Displacement vs. Highway MPG",
-       subtitle = "Virginia Voices Network · VT Brand Theme",
+       subtitle = "Visualizing Virginia Numbers · VT Brand Theme",
        caption  = "Source: EPA fuel economy data")
 ```
 
@@ -262,4 +262,4 @@ Issues and pull requests welcome at <https://github.com/yujuangao/VVN>.
 
 ---
 
-*Virginia Voices Network · Virginia Tech*
+*Visualizing Virginia Numbers · Virginia Tech*
