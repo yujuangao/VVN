@@ -4,435 +4,258 @@
     "href": "filter.html",
     "title": "Filter Controls",
     "section": "",
-    "text": "Filter controls let users explore VVN data by region, year, and topic. Every filter must have a clear label, a tooltip, and a default value. Always pair Apply Filters with a Reset button.\nUse vvn_filter(), vvn_slider(), and vvn_button() from the vvnthemes library to build the sidebar panel.\n\nFor filter component functions and code examples, see the Interactive Components Library →",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Filter Controls"
-    ]
+    "text": "Filter controls let users explore VVN data by region, year, and topic. Every filter must have a clear label, a tooltip, and a default value. Always pair Apply Filters with a Reset button.\nUse vvn_filter(), vvn_slider(), and vvn_button() from the vvnthemes library to build the sidebar panel.\n\nFor filter component functions and code examples, see the Interactive Components Library →"
   },
   {
     "objectID": "filter.html#overview",
     "href": "filter.html#overview",
     "title": "Filter Controls",
     "section": "",
-    "text": "Filter controls let users explore VVN data by region, year, and topic. Every filter must have a clear label, a tooltip, and a default value. Always pair Apply Filters with a Reset button.\nUse vvn_filter(), vvn_slider(), and vvn_button() from the vvnthemes library to build the sidebar panel.\n\nFor filter component functions and code examples, see the Interactive Components Library →",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Filter Controls"
-    ]
+    "text": "Filter controls let users explore VVN data by region, year, and topic. Every filter must have a clear label, a tooltip, and a default value. Always pair Apply Filters with a Reset button.\nUse vvn_filter(), vvn_slider(), and vvn_button() from the vvnthemes library to build the sidebar panel.\n\nFor filter component functions and code examples, see the Interactive Components Library →"
   },
   {
     "objectID": "filter.html#how-to-add-filters",
     "href": "filter.html#how-to-add-filters",
     "title": "Filter Controls",
     "section": "How to add filters",
-    "text": "How to add filters\n\n\n\n1\n\n\nAdd the sidebar panelUse create_vvn_dashboard() to scaffold the sidebar. The sidebar is 260 px wide with a #F7F7F7 background. The panel header shows “Filters” in white bold on a VT Maroon bar.\n\n\n\n\n\n\n\n2\n\n\nAdd dropdowns and slidersCall vvn_filter() for each dropdown and vvn_slider() for each range input. Set a default value for every filter — never leave a filter blank on first load.\n\n\n\n\n\n\n\n3\n\n\nWrite a tooltip for each filterEvery filter requires a ⓘ tooltip. The tooltip must explain what the filter controls, what the options mean, and when the data was last updated.\n\n\n\n\n\n\n\n4\n\n\nAdd Apply and Reset buttonsUse vvn_button() for both buttons. Apply Filters is full-width VT Maroon. Reset is outline style, directly below Apply. Never omit the Reset button.",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Filter Controls"
-    ]
+    "text": "How to add filters\n\n\n\n1\n\n\nAdd the sidebar panelUse create_vvn_dashboard() to scaffold the sidebar. The sidebar is 260 px wide with a #F7F7F7 background. The panel header shows “Filters” in white bold on a VT Maroon bar.\n\n\n\n\n\n\n\n2\n\n\nAdd dropdowns and slidersCall vvn_filter() for each dropdown and vvn_slider() for each range input. Set a default value for every filter — never leave a filter blank on first load.\n\n\n\n\n\n\n\n3\n\n\nWrite a tooltip for each filterEvery filter requires a ⓘ tooltip. The tooltip must explain what the filter controls, what the options mean, and when the data was last updated.\n\n\n\n\n\n\n\n4\n\n\nAdd Apply and Reset buttonsUse vvn_button() for both buttons. Apply Filters is full-width VT Maroon. Reset is outline style, directly below Apply. Never omit the Reset button."
   },
   {
     "objectID": "filter.html#required-elements",
     "href": "filter.html#required-elements",
     "title": "Filter Controls",
     "section": "Required elements",
-    "text": "Required elements\nEvery VVN filter panel must include all four elements.\n\n\n\n\n\n\n\n\n\n#\nElement\nStandard\nLibrary function\n\n\n\n\n1\nFilter header\nFull-width VT Maroon #861F41. “Filters” in white bold. Include a funnel icon and a “Clear All” reset link.\ncreate_vvn_dashboard()\n\n\n2\nDropdown or slider\nBold label above each input. Set a clear default value. Group related filters under a subheading.\nvvn_filter(), vvn_slider()\n\n\n3\nInfo tooltip (ⓘ)\nRequired on every filter. Explains what it controls, available options, and data vintage.\nvvn_filter()\n\n\n4\nApply + Reset buttons\nApply: VT Maroon #861F41, full width. Reset: outline style, placed directly below Apply. Both required.\nvvn_button()",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Filter Controls"
-    ]
+    "text": "Required elements\nEvery VVN filter panel must include all four elements.\n\n\n\n\n\n\n\n\n\n#\nElement\nStandard\nLibrary function\n\n\n\n\n1\nFilter header\nFull-width VT Maroon #861F41. “Filters” in white bold. Include a funnel icon and a “Clear All” reset link.\ncreate_vvn_dashboard()\n\n\n2\nDropdown or slider\nBold label above each input. Set a clear default value. Group related filters under a subheading.\nvvn_filter(), vvn_slider()\n\n\n3\nInfo tooltip (ⓘ)\nRequired on every filter. Explains what it controls, available options, and data vintage.\nvvn_filter()\n\n\n4\nApply + Reset buttons\nApply: VT Maroon #861F41, full width. Reset: outline style, placed directly below Apply. Both required.\nvvn_button()"
   },
   {
     "objectID": "filter.html#design-standards",
     "href": "filter.html#design-standards",
     "title": "Filter Controls",
     "section": "Design standards",
-    "text": "Design standards\nSidebar layout\n\nWidth: 260 px fixed\nBackground: #F7F7F7\nHeader bar: VT Maroon #861F41, “Filters” label in white bold\n\nLabels\n\nEvery filter must have a bold label placed above the input\nLabel text: sentence case, charcoal #3D3D3D\nNever use placeholder text as a substitute for a label\n\nTooltips\n\nEvery filter must have a ⓘ icon tooltip\nTooltip must state: what the filter controls, what each option means, and when data was last updated\nTooltip text: 1–3 sentences; avoid jargon\n\nApply and Reset buttons\n\nApply Filters: VT Maroon fill, white text, full width of the sidebar\nReset: outline style (maroon border, transparent fill), placed immediately below Apply\nNever omit the Reset button — users must be able to return to the default view\nDisable Apply until at least one filter has changed from its default\n\nDefault values\n\nEvery filter must have a sensible default that shows data on first load\nNever require the user to set a filter before the dashboard will display\n\n\n\nFor step-by-step R code and filter examples, see the Interactive Components Library →",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Filter Controls"
-    ]
+    "text": "Design standards\nSidebar layout\n\nWidth: 260 px fixed\nBackground: #F7F7F7\nHeader bar: VT Maroon #861F41, “Filters” label in white bold\n\nLabels\n\nEvery filter must have a bold label placed above the input\nLabel text: sentence case, charcoal #3D3D3D\nNever use placeholder text as a substitute for a label\n\nTooltips\n\nEvery filter must have a ⓘ icon tooltip\nTooltip must state: what the filter controls, what each option means, and when data was last updated\nTooltip text: 1–3 sentences; avoid jargon\n\nApply and Reset buttons\n\nApply Filters: VT Maroon fill, white text, full width of the sidebar\nReset: outline style (maroon border, transparent fill), placed immediately below Apply\nNever omit the Reset button — users must be able to return to the default view\nDisable Apply until at least one filter has changed from its default\n\nDefault values\n\nEvery filter must have a sensible default that shows data on first load\nNever require the user to set a filter before the dashboard will display\n\n\n\nFor step-by-step R code and filter examples, see the Interactive Components Library →"
   },
   {
     "objectID": "insights.html",
     "href": "insights.html",
     "title": "VVN Insights",
     "section": "",
-    "text": "VVN Insights is a Quarto HTML document that tells one data story. It combines a written narrative with charts, an interactive county map, and a summary table — all styled to the VVN design standard.\nUse it when you want readers to follow a single argument from beginning to end. For interactive data exploration with filters, use Interactive Data Visualizations instead.",
-    "crumbs": [
-      "R Library Docs →",
-      "Products",
-      "VVN Insights"
-    ]
+    "text": "VVN Insights is a Quarto HTML document that tells one data story. It combines a written narrative with charts, an interactive county map, and a summary table — all styled to the VVN design standard.\nUse it when you want readers to follow a single argument from beginning to end. For interactive data exploration with filters, use Interactive Data Visualizations instead."
   },
   {
     "objectID": "insights.html#how-to-create-a-vvn-insight",
     "href": "insights.html#how-to-create-a-vvn-insight",
     "title": "VVN Insights",
     "section": "How to create a VVN Insight",
-    "text": "How to create a VVN Insight\n\n\n\n1\n\n\nScaffold the projectRun one command in R. The library creates the full folder, styles, and placeholder content — the document renders immediately with no setup.\n\nVVN Insight Library →\n\n\n\n\n\n\n\n\n\n2\n\n\nLoad your dataReplace the sample data at the top of index.qmd with your own CSV. Your data frame needs at minimum: fips (character), county (character), year (integer), and value (numeric).\n\n\n\n\n\n\n\n3\n\n\nWrite the narrativeReplace every [placeholder] with your content. Lead with the key finding. Reference every figure in the text before it appears (“Figure 1 shows…”). Keep paragraphs to 3–4 sentences.\n\n\n\n\n\n\n\n4\n\n\nBuild figures to VVN standardsEvery chart and map needs a title, subtitle, and source line. Use theme_vvn(), VVN palettes, and vvn_source(). See Charts and Maps for full rules.\n\n\n\n\n\n\n\n5\n\n\nRender and publishRun quarto render index.qmd. Make sure embed-resources: true is set in the YAML so the output is a single self-contained HTML file. Check the Publishing Checklist before sharing.",
-    "crumbs": [
-      "R Library Docs →",
-      "Products",
-      "VVN Insights"
-    ]
+    "text": "How to create a VVN Insight\n\n\n\n1\n\n\nScaffold the projectRun one command in R. The library creates the full folder, styles, and placeholder content — the document renders immediately with no setup.\n\nVVN Insight Library →\n\n\n\n\n\n\n\n\n\n2\n\n\nLoad your dataReplace the sample data at the top of index.qmd with your own CSV. Your data frame needs at minimum: fips (character), county (character), year (integer), and value (numeric).\n\n\n\n\n\n\n\n3\n\n\nWrite the narrativeReplace every [placeholder] with your content. Lead with the key finding. Reference every figure in the text before it appears (“Figure 1 shows…”). Keep paragraphs to 3–4 sentences.\n\n\n\n\n\n\n\n4\n\n\nBuild figures to VVN standardsEvery chart and map needs a title, subtitle, and source line. Use theme_vvn(), VVN palettes, and vvn_source(). See Charts and Maps for full rules.\n\n\n\n\n\n\n\n5\n\n\nRender and publishRun quarto render index.qmd. Make sure embed-resources: true is set in the YAML so the output is a single self-contained HTML file. Check the Publishing Checklist before sharing."
   },
   {
     "objectID": "insights.html#required-elements",
     "href": "insights.html#required-elements",
     "title": "VVN Insights",
     "section": "Required elements",
-    "text": "Required elements\nEvery VVN Insight must include all seven elements. Use the vvnthemes library functions to build each one.\n\n\n\n\n\n\n\n\n\n#\nElement\nStandard\nLibrary / tool\n\n\n\n\n1\nHero banner\nFull-width VT Maroon #861F41. “VVN INSIGHTS” label in small caps; title in white bold, headline case; one-sentence description below.\ncreate_vvn_story()\n\n\n2\nHeadline\nWhite, headline case, bold. States topic and geographic scope in one line.\ncreate_vvn_story()\n\n\n3\nDate & source tag\nPublication date + primary data source below the headline. Include dataset name and vintage year.\ncreate_vvn_story()\n\n\n4\nChoropleth map\nCounty-level interactive Leaflet map. maroon_seq palette. Tooltip: county name + value. Referenced in text before it appears.\nvvn_map_style()\n\n\n5\nKPI callouts\nKey statistics highlighted in callout boxes. Use sparingly — only the most important 2–3 numbers.\nvvn_kpi_card()\n\n\n6\nNarrative sections\nShort paragraphs (3–4 sentences). Section headings in sentence case. Sections: Overview, Background, Data & Methods, Findings, Discussion, Conclusion.\nQuarto markdown\n\n\n7\nSource lines\nRequired on every figure. Format: “Source: [Agency, Dataset, Year].”\nvvn_source()",
-    "crumbs": [
-      "R Library Docs →",
-      "Products",
-      "VVN Insights"
-    ]
+    "text": "Required elements\nEvery VVN Insight must include all seven elements. Use the vvnthemes library functions to build each one.\n\n\n\n\n\n\n\n\n\n#\nElement\nStandard\nLibrary / tool\n\n\n\n\n1\nHero banner\nFull-width VT Maroon #861F41. “VVN INSIGHTS” label in small caps; title in white bold, headline case; one-sentence description below.\ncreate_vvn_story()\n\n\n2\nHeadline\nWhite, headline case, bold. States topic and geographic scope in one line.\ncreate_vvn_story()\n\n\n3\nDate & source tag\nPublication date + primary data source below the headline. Include dataset name and vintage year.\ncreate_vvn_story()\n\n\n4\nChoropleth map\nCounty-level interactive Leaflet map. maroon_seq palette. Tooltip: county name + value. Referenced in text before it appears.\nvvn_map_style()\n\n\n5\nKPI callouts\nKey statistics highlighted in callout boxes. Use sparingly — only the most important 2–3 numbers.\nvvn_kpi_card()\n\n\n6\nNarrative sections\nShort paragraphs (3–4 sentences). Section headings in sentence case. Sections: Overview, Background, Data & Methods, Findings, Discussion, Conclusion.\nQuarto markdown\n\n\n7\nSource lines\nRequired on every figure. Format: “Source: [Agency, Dataset, Year].”\nvvn_source()"
   },
   {
     "objectID": "insights.html#design-standards",
     "href": "insights.html#design-standards",
     "title": "VVN Insights",
     "section": "Design standards",
-    "text": "Design standards\nHero banner\n\nBackground: VT Maroon #861F41\n“VVN INSIGHTS” label: small caps, 0.75 rem, rgba(255,255,255,0.75)\nTitle: white, bold, headline case, max 2 lines\nDescription: white, sentence case, 1 rem\n\nNarrative\n\nLead with the key finding — state the main result in the first paragraph\nEvery figure must be referenced in the text before it appears: “Figure 1 shows that …”\nParagraphs: 3–4 sentences maximum\nSection headings: sentence case (## level)\nInclude sections for: Overview · Background · Data & Methods · Findings · Discussion · Conclusion\n\nFigures\nFollow all Chart Standards and Map Standards. Source lines are required on every figure without exception.\nKPI callouts\n\nUse only for the 2–3 most important statistics\nOrange accent (#E5751F) for emphasis\nNever use KPI callouts in place of a proper explanation in the narrative\n\n\n\nFor the full annotated scaffold with all sections pre-built, see the VVN Insight Library →",
-    "crumbs": [
-      "R Library Docs →",
-      "Products",
-      "VVN Insights"
-    ]
+    "text": "Design standards\nHero banner\n\nBackground: VT Maroon #861F41\n“VVN INSIGHTS” label: small caps, 0.75 rem, rgba(255,255,255,0.75)\nTitle: white, bold, headline case, max 2 lines\nDescription: white, sentence case, 1 rem\n\nNarrative\n\nLead with the key finding — state the main result in the first paragraph\nEvery figure must be referenced in the text before it appears: “Figure 1 shows that …”\nParagraphs: 3–4 sentences maximum\nSection headings: sentence case (## level)\nInclude sections for: Overview · Background · Data & Methods · Findings · Discussion · Conclusion\n\nFigures\nFollow all Chart Standards and Map Standards. Source lines are required on every figure without exception.\nKPI callouts\n\nUse only for the 2–3 most important statistics\nOrange accent (#E5751F) for emphasis\nNever use KPI callouts in place of a proper explanation in the narrative\n\n\n\nFor the full annotated scaffold with all sections pre-built, see the VVN Insight Library →"
   },
   {
     "objectID": "maps.html",
     "href": "maps.html",
     "title": "Maps",
     "section": "",
-    "text": "VVN maps visualize geographic patterns at the Virginia county level. All maps use consistent palettes, clear legends, and informative tooltips. Every map must be referenced in the text before it appears.\nUse an interactive Leaflet map in dashboards (users hover for values). Use a static ggplot map in VVN Insights (rendered to PNG for the final document).\n\nFor R functions, palette options, and map implementation, see the Map Library →",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Maps"
-    ]
+    "text": "VVN maps visualize geographic patterns at the Virginia county level. All maps use consistent palettes, clear legends, and informative tooltips. Every map must be referenced in the text before it appears.\nUse an interactive Leaflet map in dashboards (users hover for values). Use a static ggplot map in VVN Insights (rendered to PNG for the final document).\n\nFor R functions, palette options, and map implementation, see the Map Library →"
   },
   {
     "objectID": "maps.html#overview",
     "href": "maps.html#overview",
     "title": "Maps",
     "section": "",
-    "text": "VVN maps visualize geographic patterns at the Virginia county level. All maps use consistent palettes, clear legends, and informative tooltips. Every map must be referenced in the text before it appears.\nUse an interactive Leaflet map in dashboards (users hover for values). Use a static ggplot map in VVN Insights (rendered to PNG for the final document).\n\nFor R functions, palette options, and map implementation, see the Map Library →",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Maps"
-    ]
+    "text": "VVN maps visualize geographic patterns at the Virginia county level. All maps use consistent palettes, clear legends, and informative tooltips. Every map must be referenced in the text before it appears.\nUse an interactive Leaflet map in dashboards (users hover for values). Use a static ggplot map in VVN Insights (rendered to PNG for the final document).\n\nFor R functions, palette options, and map implementation, see the Map Library →"
   },
   {
     "objectID": "maps.html#required-elements",
     "href": "maps.html#required-elements",
     "title": "Maps",
     "section": "Required elements",
-    "text": "Required elements\n\n\n\n\n\n\n\n\n\n#\nElement\nStandard\nLibrary function\n\n\n\n\n1\nTitle\nHeadline case. Names the variable and geography. Define any abbreviations.\nlabs(title = ...) + theme_vvn_map()\n\n\n2\nSubtitle\nSentence case. States data source and vintage year. Example: “2020 ACS 5-Year Estimates.”\nlabs(subtitle = ...)\n\n\n3\nLegend\nInside the map panel. Include variable name and units in the label. Use the VVN palette that matches the data type.\nscale_fill_vvn_c()\n\n\n4\nTooltip\nInteractive maps only. Shows county name, metric value, and unit on hover. Format values consistently with the legend.\nvvn_map_style()\n\n\n5\nSource line\nRequired on every map. Format: “Source: [Agency, Dataset, Year].” Add Notes for abbreviations and suppressed data.\nvvn_source()\n\n\n6\nBasemap\nMuted light gray. WGS84 (CRS 4326) for Leaflet; Albers Equal-Area (CRS 5070) for static ggplot maps.\nvvn_map_style() / sf\n\n\n7\nColor palette\nSequential: maroon_seq or orange_seq. Diverging: diverging. Categorical: main or accessible.\nvvn_palette(), scale_fill_vvn_c()",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Maps"
-    ]
+    "text": "Required elements\n\n\n\n\n\n\n\n\n\n#\nElement\nStandard\nLibrary function\n\n\n\n\n1\nTitle\nHeadline case. Names the variable and geography. Define any abbreviations.\nlabs(title = ...) + theme_vvn_map()\n\n\n2\nSubtitle\nSentence case. States data source and vintage year. Example: “2020 ACS 5-Year Estimates.”\nlabs(subtitle = ...)\n\n\n3\nLegend\nInside the map panel. Include variable name and units in the label. Use the VVN palette that matches the data type.\nscale_fill_vvn_c()\n\n\n4\nTooltip\nInteractive maps only. Shows county name, metric value, and unit on hover. Format values consistently with the legend.\nvvn_map_style()\n\n\n5\nSource line\nRequired on every map. Format: “Source: [Agency, Dataset, Year].” Add Notes for abbreviations and suppressed data.\nvvn_source()\n\n\n6\nBasemap\nMuted light gray. WGS84 (CRS 4326) for Leaflet; Albers Equal-Area (CRS 5070) for static ggplot maps.\nvvn_map_style() / sf\n\n\n7\nColor palette\nSequential: maroon_seq or orange_seq. Diverging: diverging. Categorical: main or accessible.\nvvn_palette(), scale_fill_vvn_c()"
   },
   {
     "objectID": "maps.html#design-standards",
     "href": "maps.html#design-standards",
     "title": "Maps",
     "section": "Design standards",
-    "text": "Design standards\nPalette selection\n\n\n\nData type\nPalette\n\n\n\n\nSequential (low → high)\nmaroon_seq (default) or orange_seq\n\n\nDiverging (negative ↔︎ positive, change)\ndiverging\n\n\nCategorical (unordered groups)\nmain or accessible\n\n\n\nNever use a rainbow or non-VVN palette. Color must encode one variable only.\nCounty boundaries\n\nBorder: thin white, 0.5 px\nSuppressed or missing counties: light gray fill with a note in the source line\n\nTooltip (interactive maps)\n\nCounty name: bold\nValue: formatted with units (e.g., “72.4%”, “$48,200”)\nNever display raw unformatted numbers\n\nStatic maps (VVN Insights)\n\nCRS: Albers Equal-Area (EPSG 5070) — preserves county area proportions\nExport at 300 dpi with vvn_save()\nDo not crop the legend out of the frame\n\n\n\nFor step-by-step R code and map examples, see the Map Library →",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Maps"
-    ]
+    "text": "Design standards\nPalette selection\n\n\n\nData type\nPalette\n\n\n\n\nSequential (low → high)\nmaroon_seq (default) or orange_seq\n\n\nDiverging (negative ↔︎ positive, change)\ndiverging\n\n\nCategorical (unordered groups)\nmain or accessible\n\n\n\nNever use a rainbow or non-VVN palette. Color must encode one variable only.\nCounty boundaries\n\nBorder: thin white, 0.5 px\nSuppressed or missing counties: light gray fill with a note in the source line\n\nTooltip (interactive maps)\n\nCounty name: bold\nValue: formatted with units (e.g., “72.4%”, “$48,200”)\nNever display raw unformatted numbers\n\nStatic maps (VVN Insights)\n\nCRS: Albers Equal-Area (EPSG 5070) — preserves county area proportions\nExport at 300 dpi with vvn_save()\nDo not crop the legend out of the frame\n\n\n\nFor step-by-step R code and map examples, see the Map Library →"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "VVN Style Guide",
     "section": "",
-    "text": "Visualizing Virginia Numbers · Virginia Tech\n\n\n\nDesign standards for every dashboard and report published by the Visualizing Virginia Numbers initiative.",
-    "crumbs": [
-      "R Library Docs →",
-      "Home"
-    ]
+    "text": "Visualizing Virginia Numbers · Virginia Tech\n\n\n\nDesign standards for every dashboard and report published by the Visualizing Virginia Numbers initiative."
   },
   {
     "objectID": "index.html#what-are-you-building",
     "href": "index.html#what-are-you-building",
     "title": "VVN Style Guide",
     "section": "What are you building?",
-    "text": "What are you building?\nVVN produces two types of products. Each has its own page in this guide.\n\n\nDashboard\nAn interactive R Shiny application — filters, KPI cards, charts, a county map, and a data table. Built for exploration.\nDashboard Standards →\n\n\nVVN Insights\nA Quarto HTML document — hero banner, narrative, charts, a map, and a summary table. Built for reading.\nInsights Standards →",
-    "crumbs": [
-      "R Library Docs →",
-      "Home"
-    ]
+    "text": "What are you building?\nVVN produces two types of products. Each has its own page in this guide.\n\n\nDashboard\nAn interactive R Shiny application — filters, KPI cards, charts, a county map, and a data table. Built for exploration.\nDashboard Standards →\n\n\nVVN Insights\nA Quarto HTML document — hero banner, narrative, charts, a map, and a summary table. Built for reading.\nInsights Standards →"
   },
   {
     "objectID": "index.html#how-to-build-a-vvn-product",
     "href": "index.html#how-to-build-a-vvn-product",
     "title": "VVN Style Guide",
     "section": "How to build a VVN product",
-    "text": "How to build a VVN product\n\n\n\n1\n\n\nChoose your product typeUse a Dashboard when users need to filter and explore data interactively. Use VVN Insights when you are telling a single data story for reading.Dashboard →VVN Insights →\n\n\n\n\n\n\n\n2\n\n\nScaffold with the vvnthemes libraryOne R command creates the full project — all files, folders, styles, and placeholder content already in place. No setup required.Dashboard Library →VVN Insight Library →\n\n\n\n\n\n\n\n3\n\n\nLoad and prepare your dataStore raw files in data/. All cleaning and derived variables belong in the data prep script — not in chart code. Document every source.\n\n\n\n\n\n\n\n4\n\n\nBuild figures following VVN standardsEvery chart, map, and table requires a title (headline case), subtitle (sentence case), and source line. Apply theme_vvn() and VVN palettes — never use off-palette colors.Charts →Maps →Tables →\n\n\n\n\n\n\n\n5\n\n\nWrite the narrativeLead with the key finding. Reference every figure in the text before it appears. Keep paragraphs to 3–4 sentences. Include background, methods, and limitations.\n\n\n\n\n\n\n\n6\n\n\nPublishDashboard: deploy with rsconnect::deployApp()  ·  VVN Insight: render with quarto render index.qmd and embed-resources: true.Publishing Checklist →",
-    "crumbs": [
-      "R Library Docs →",
-      "Home"
-    ]
+    "text": "How to build a VVN product\n\n\n\n1\n\n\nChoose your product typeUse a Dashboard when users need to filter and explore data interactively. Use VVN Insights when you are telling a single data story for reading.Dashboard →VVN Insights →\n\n\n\n\n\n\n\n2\n\n\nScaffold with the vvnthemes libraryOne R command creates the full project — all files, folders, styles, and placeholder content already in place. No setup required.Dashboard Library →VVN Insight Library →\n\n\n\n\n\n\n\n3\n\n\nLoad and prepare your dataStore raw files in data/. All cleaning and derived variables belong in the data prep script — not in chart code. Document every source.\n\n\n\n\n\n\n\n4\n\n\nBuild figures following VVN standardsEvery chart, map, and table requires a title (headline case), subtitle (sentence case), and source line. Apply theme_vvn() and VVN palettes — never use off-palette colors.Charts →Maps →Tables →\n\n\n\n\n\n\n\n5\n\n\nWrite the narrativeLead with the key finding. Reference every figure in the text before it appears. Keep paragraphs to 3–4 sentences. Include background, methods, and limitations.\n\n\n\n\n\n\n\n6\n\n\nPublishDashboard: deploy with rsconnect::deployApp()  ·  VVN Insight: render with quarto render index.qmd and embed-resources: true.Publishing Checklist →"
   },
   {
     "objectID": "index.html#design-standards",
     "href": "index.html#design-standards",
     "title": "VVN Style Guide",
     "section": "Design standards",
-    "text": "Design standards\nUse the sidebar to find standards for each component. Every figure in both products must follow these rules.\n\n\n\nStandard\nApplies to\n\n\n\n\nBrand — colors, typography, logo\nAll products\n\n\nCharts — titles, axes, palettes, source lines\nDashboards + Insights\n\n\nMaps — choropleth, legend, basemap\nDashboards + Insights\n\n\nTables — headers, alignment, source notes\nDashboards + Insights\n\n\nFilter Controls — labels, tooltips, Apply/Reset\nDashboards only",
-    "crumbs": [
-      "R Library Docs →",
-      "Home"
-    ]
+    "text": "Design standards\nUse the sidebar to find standards for each component. Every figure in both products must follow these rules.\n\n\n\nStandard\nApplies to\n\n\n\n\nBrand — colors, typography, logo\nAll products\n\n\nCharts — titles, axes, palettes, source lines\nDashboards + Insights\n\n\nMaps — choropleth, legend, basemap\nDashboards + Insights\n\n\nTables — headers, alignment, source notes\nDashboards + Insights\n\n\nFilter Controls — labels, tooltips, Apply/Reset\nDashboards only"
   },
   {
     "objectID": "charts.html",
     "href": "charts.html",
     "title": "Charts",
     "section": "",
-    "text": "VVN charts use a white background, VT Maroon titles, and VVN palettes. Every chart must be self-explanatory — a reader should understand the key message without reading surrounding text.\n\nFor R functions, code examples, and implementation, see the Chart Library →",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Charts"
-    ]
+    "text": "VVN charts use a white background, VT Maroon titles, and VVN palettes. Every chart must be self-explanatory — a reader should understand the key message without reading surrounding text.\n\nFor R functions, code examples, and implementation, see the Chart Library →"
   },
   {
     "objectID": "charts.html#overview",
     "href": "charts.html#overview",
     "title": "Charts",
     "section": "",
-    "text": "VVN charts use a white background, VT Maroon titles, and VVN palettes. Every chart must be self-explanatory — a reader should understand the key message without reading surrounding text.\n\nFor R functions, code examples, and implementation, see the Chart Library →",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Charts"
-    ]
+    "text": "VVN charts use a white background, VT Maroon titles, and VVN palettes. Every chart must be self-explanatory — a reader should understand the key message without reading surrounding text.\n\nFor R functions, code examples, and implementation, see the Chart Library →"
   },
   {
     "objectID": "charts.html#required-elements",
     "href": "charts.html#required-elements",
     "title": "Charts",
     "section": "Required elements",
-    "text": "Required elements\nEvery VVN chart must include all of the following elements.\n\n\n\n\n\n\n\n\n\n#\nElement\nStandard\nLibrary function\n\n\n\n\n1\nTitle\nHeadline case, active language. VT Maroon #861F41, bold, one line. State units once only — in the subtitle or y-axis, never both.\nlabs(title = ...) + theme_vvn()\n\n\n2\nSubtitle\nSentence case. Qualifies the title with time period, geography, units, or frequency. Never headline case.\nlabs(subtitle = ...)\n\n\n3\nAxis titles & labels\nSentence case. First letter and proper nouns capitalized only. Abbreviations defined in Notes below the chart.\ntheme_vvn()\n\n\n4\nLegend\nPlace at top of chart, between title and plot area. Mirror data order. Use direct labels on the chart and omit the legend whenever possible.\ntheme_vvn()\n\n\n5\nData labels\nPlace close to the data point. Use sparingly — highlight important or surprising values only, not every data point.\ngeom_text() / geom_label()\n\n\n6\nSource line\nRequired on every chart. Format: “Source: [Author, Title, Date].” Small gray text at bottom left.\nvvn_source()\n\n\n7\nNotes\nBelow source line. Define abbreviations, methodology, and significance levels. Superscript letters link notes to specific data points.\nvvn_note()",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Charts"
-    ]
+    "text": "Required elements\nEvery VVN chart must include all of the following elements.\n\n\n\n\n\n\n\n\n\n#\nElement\nStandard\nLibrary function\n\n\n\n\n1\nTitle\nHeadline case, active language. VT Maroon #861F41, bold, one line. State units once only — in the subtitle or y-axis, never both.\nlabs(title = ...) + theme_vvn()\n\n\n2\nSubtitle\nSentence case. Qualifies the title with time period, geography, units, or frequency. Never headline case.\nlabs(subtitle = ...)\n\n\n3\nAxis titles & labels\nSentence case. First letter and proper nouns capitalized only. Abbreviations defined in Notes below the chart.\ntheme_vvn()\n\n\n4\nLegend\nPlace at top of chart, between title and plot area. Mirror data order. Use direct labels on the chart and omit the legend whenever possible.\ntheme_vvn()\n\n\n5\nData labels\nPlace close to the data point. Use sparingly — highlight important or surprising values only, not every data point.\ngeom_text() / geom_label()\n\n\n6\nSource line\nRequired on every chart. Format: “Source: [Author, Title, Date].” Small gray text at bottom left.\nvvn_source()\n\n\n7\nNotes\nBelow source line. Define abbreviations, methodology, and significance levels. Superscript letters link notes to specific data points.\nvvn_note()"
   },
   {
     "objectID": "charts.html#design-standards",
     "href": "charts.html#design-standards",
     "title": "Charts",
     "section": "Design standards",
-    "text": "Design standards\nColors\n\nUse only VVN palettes: main, brand, maroon_seq, orange_seq, diverging, or accessible\nNever use off-palette colors, gradients, or transparency for data encoding\nApply the palette with scale_color_vvn() or scale_fill_vvn()\n\nTypography\n\nTitle: VT Maroon #861F41, bold, headline case\nSubtitle: charcoal #3D3D3D, sentence case\nAxis labels: charcoal, sentence case, same font size as body text\nSource and notes: gray #AAAAAA, 0.75 rem\n\nChart types\n\n\n\n\n\n\n\nUse this\nWhen\n\n\n\n\nHorizontal bar\nComparing categories with long labels\n\n\nVertical bar\nComparing categories with short labels or time periods\n\n\nLine\nShowing change over time for one or more series\n\n\nScatter\nShowing the relationship between two continuous variables\n\n\nSmall multiples\nComparing the same chart across groups or regions\n\n\n\nSaving\nExport at 300 dpi using vvn_save(). Default dimensions: 8 × 5 inches.\n\n\nFor step-by-step R code and chart examples, see the Chart Library →",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Charts"
-    ]
+    "text": "Design standards\nColors\n\nUse only VVN palettes: main, brand, maroon_seq, orange_seq, diverging, or accessible\nNever use off-palette colors, gradients, or transparency for data encoding\nApply the palette with scale_color_vvn() or scale_fill_vvn()\n\nTypography\n\nTitle: VT Maroon #861F41, bold, headline case\nSubtitle: charcoal #3D3D3D, sentence case\nAxis labels: charcoal, sentence case, same font size as body text\nSource and notes: gray #AAAAAA, 0.75 rem\n\nChart types\n\n\n\n\n\n\n\nUse this\nWhen\n\n\n\n\nHorizontal bar\nComparing categories with long labels\n\n\nVertical bar\nComparing categories with short labels or time periods\n\n\nLine\nShowing change over time for one or more series\n\n\nScatter\nShowing the relationship between two continuous variables\n\n\nSmall multiples\nComparing the same chart across groups or regions\n\n\n\nSaving\nExport at 300 dpi using vvn_save(). Default dimensions: 8 × 5 inches.\n\n\nFor step-by-step R code and chart examples, see the Chart Library →"
   },
   {
     "objectID": "dashboard.html",
     "href": "dashboard.html",
     "title": "Interactive Data Visualizations",
     "section": "",
-    "text": "Interactive Data Visualizations is a VVN dashboard — an interactive R Shiny web application. It lets users filter and explore VVN data on their own — choosing regions, years, and topics while charts, KPI cards, a county map, and a data table all update in real time.\nUse it when users need to explore data. For a fixed narrative with a single finding, use a VVN Insights report instead.",
-    "crumbs": [
-      "R Library Docs →",
-      "Products",
-      "Interactive Data Visualizations"
-    ]
+    "text": "Interactive Data Visualizations is a VVN dashboard — an interactive R Shiny web application. It lets users filter and explore VVN data on their own — choosing regions, years, and topics while charts, KPI cards, a county map, and a data table all update in real time.\nUse it when users need to explore data. For a fixed narrative with a single finding, use a VVN Insights report instead."
   },
   {
     "objectID": "dashboard.html#how-to-create-a-dashboard",
     "href": "dashboard.html#how-to-create-a-dashboard",
     "title": "Interactive Data Visualizations",
     "section": "How to create a dashboard",
-    "text": "How to create a dashboard\n\n\n\n1\n\n\nScaffold the projectRun one command in R. The library creates the full folder structure, all required files, VVN styles, and placeholder content — the dashboard runs immediately with no setup.\n\nDashboard Library →\n\n\n\n\n\n\n\n\n\n2\n\n\nLoad your data in R/data_prep.RReplace the sample data with your own CSV or database query. Your data frame needs at minimum: region (character), year (integer), and value (numeric). All charts and cards update automatically.\n\n\n\n\n\n\n\n3\n\n\nBuild figures to VVN standardsEvery chart and map needs a title, subtitle, and source line. Use theme_vvn() and VVN palettes. See Charts and Maps for full rules.\n\n\n\n\n\n\n\n4\n\n\nConfigure filtersEvery filter needs a bold label, a tooltip, and a default value. Always pair Apply Filters with a Reset button. See Filter Controls.\n\n\n\n\n\n\n\n5\n\n\nDeployRun rsconnect::deployApp() from the project root. Check the Publishing Checklist before deploying.",
-    "crumbs": [
-      "R Library Docs →",
-      "Products",
-      "Interactive Data Visualizations"
-    ]
+    "text": "How to create a dashboard\n\n\n\n1\n\n\nScaffold the projectRun one command in R. The library creates the full folder structure, all required files, VVN styles, and placeholder content — the dashboard runs immediately with no setup.\n\nDashboard Library →\n\n\n\n\n\n\n\n\n\n2\n\n\nLoad your data in R/data_prep.RReplace the sample data with your own CSV or database query. Your data frame needs at minimum: region (character), year (integer), and value (numeric). All charts and cards update automatically.\n\n\n\n\n\n\n\n3\n\n\nBuild figures to VVN standardsEvery chart and map needs a title, subtitle, and source line. Use theme_vvn() and VVN palettes. See Charts and Maps for full rules.\n\n\n\n\n\n\n\n4\n\n\nConfigure filtersEvery filter needs a bold label, a tooltip, and a default value. Always pair Apply Filters with a Reset button. See Filter Controls.\n\n\n\n\n\n\n\n5\n\n\nDeployRun rsconnect::deployApp() from the project root. Check the Publishing Checklist before deploying."
   },
   {
     "objectID": "dashboard.html#required-elements",
     "href": "dashboard.html#required-elements",
     "title": "Interactive Data Visualizations",
     "section": "Required elements",
-    "text": "Required elements\nEvery VVN Dashboard must include all six elements. Use the vvnthemes library functions to build each one.\n\n\n\n\n\n\n\n\n\n#\nElement\nStandard\nLibrary function\n\n\n\n\n1\nNavbar\nFull-width VT Maroon #861F41. Project name in white bold. Orange bottom border (3 px).\ncreate_vvn_dashboard()\n\n\n2\nKPI Cards\nMax 3 per row. Large value, short label, optional trend. One accent color per card — maroon, orange, or navy.\nvvn_kpi_card()\n\n\n3\nSidebar Filters\n260 px wide, #F7F7F7 background. Bold label + tooltip on every filter. Apply + Reset buttons required.\nvvn_filter(), vvn_slider(), vvn_button()\n\n\n4\nChoropleth Map\nCounty-level Leaflet map. maroon_seq palette. Tooltip with county name and value. Legend inside panel.\nvvn_map_style()\n\n\n5\nCharts\nWhite background, VT Maroon titles, VVN palettes, source line in every caption.\ntheme_vvn(), vvn_source()\n\n\n6\nFooter\nWhite text on VT Maroon background. Shows “Visualizing Virginia Numbers · Virginia Tech”.\ncreate_vvn_dashboard()",
-    "crumbs": [
-      "R Library Docs →",
-      "Products",
-      "Interactive Data Visualizations"
-    ]
+    "text": "Required elements\nEvery VVN Dashboard must include all six elements. Use the vvnthemes library functions to build each one.\n\n\n\n\n\n\n\n\n\n#\nElement\nStandard\nLibrary function\n\n\n\n\n1\nNavbar\nFull-width VT Maroon #861F41. Project name in white bold. Orange bottom border (3 px).\ncreate_vvn_dashboard()\n\n\n2\nKPI Cards\nMax 3 per row. Large value, short label, optional trend. One accent color per card — maroon, orange, or navy.\nvvn_kpi_card()\n\n\n3\nSidebar Filters\n260 px wide, #F7F7F7 background. Bold label + tooltip on every filter. Apply + Reset buttons required.\nvvn_filter(), vvn_slider(), vvn_button()\n\n\n4\nChoropleth Map\nCounty-level Leaflet map. maroon_seq palette. Tooltip with county name and value. Legend inside panel.\nvvn_map_style()\n\n\n5\nCharts\nWhite background, VT Maroon titles, VVN palettes, source line in every caption.\ntheme_vvn(), vvn_source()\n\n\n6\nFooter\nWhite text on VT Maroon background. Shows “Visualizing Virginia Numbers · Virginia Tech”.\ncreate_vvn_dashboard()"
   },
   {
     "objectID": "dashboard.html#design-standards",
     "href": "dashboard.html#design-standards",
     "title": "Interactive Data Visualizations",
     "section": "Design standards",
-    "text": "Design standards\nNavbar\n\nBackground: VT Maroon #861F41 · Bottom border: VT Orange #E5751F, 3 px\nProject name: white, bold, sentence case\nTab links: rgba(255,255,255,0.9) — never pure white\n\nKPI Cards\n\nLeft border accent: maroon, orange, or navy — one color per card, never mixed in the same row\nValue: 2 rem, bold · Label: 0.82 rem, charcoal, sentence case\nMaximum three cards per row\n\nSidebar Filters\n\nWidth: 260 px fixed · Background: #F7F7F7\nEvery filter must have: a bold label above, a tooltip (ⓘ) explaining what it controls, and a clear default\nApply Filters button: VT Maroon, full width · Reset button: outline style, directly below Apply\n\nMap\n\nPalette: maroon_seq for sequential data, diverging for change or comparison\nCounty borders: thin white (0.5 px) · Tooltip: county name + formatted value + unit\nNever use a non-VVN palette\n\nCharts\nFollow all Chart Standards. Source lines are required on every chart, even inside a dashboard.\nFooter\n\nBackground: VT Maroon #861F41 · Text: white, 0.8 rem\nContent: “Visualizing Virginia Numbers · Virginia Tech”\n\n\n\nFor the full annotated scaffold and deployment guide, see the Dashboard Library →",
-    "crumbs": [
-      "R Library Docs →",
-      "Products",
-      "Interactive Data Visualizations"
-    ]
+    "text": "Design standards\nNavbar\n\nBackground: VT Maroon #861F41 · Bottom border: VT Orange #E5751F, 3 px\nProject name: white, bold, sentence case\nTab links: rgba(255,255,255,0.9) — never pure white\n\nKPI Cards\n\nLeft border accent: maroon, orange, or navy — one color per card, never mixed in the same row\nValue: 2 rem, bold · Label: 0.82 rem, charcoal, sentence case\nMaximum three cards per row\n\nSidebar Filters\n\nWidth: 260 px fixed · Background: #F7F7F7\nEvery filter must have: a bold label above, a tooltip (ⓘ) explaining what it controls, and a clear default\nApply Filters button: VT Maroon, full width · Reset button: outline style, directly below Apply\n\nMap\n\nPalette: maroon_seq for sequential data, diverging for change or comparison\nCounty borders: thin white (0.5 px) · Tooltip: county name + formatted value + unit\nNever use a non-VVN palette\n\nCharts\nFollow all Chart Standards. Source lines are required on every chart, even inside a dashboard.\nFooter\n\nBackground: VT Maroon #861F41 · Text: white, 0.8 rem\nContent: “Visualizing Virginia Numbers · Virginia Tech”\n\n\n\nFor the full annotated scaffold and deployment guide, see the Dashboard Library →"
   },
   {
     "objectID": "checklist.html",
     "href": "checklist.html",
     "title": "Publishing Checklist",
     "section": "",
-    "text": "ImportantBefore you start\n\n\n\nSearch your file for [ — if any placeholder text remains, stop and fill it in first. Never publish with unfilled brackets.",
-    "crumbs": [
-      "R Library Docs →",
-      "Publishing Checklist"
-    ]
+    "text": "ImportantBefore you start\n\n\n\nSearch your file for [ — if any placeholder text remains, stop and fill it in first. Never publish with unfilled brackets."
   },
   {
     "objectID": "checklist.html#dashboard",
     "href": "checklist.html#dashboard",
     "title": "Publishing Checklist",
     "section": "Dashboard",
-    "text": "Dashboard\n\nSee Dashboard Library → and Interactive Components →\n\nComplete all items before running rsconnect::deployApp().\n\nLayout & navigation\n\nNavbar background: VT Maroon #861F41 · white project name, bold · orange bottom border 3 px\nExactly 3 KPI cards per row — one card per key metric, colors maroon / orange / navy\nEach KPI card has: metric value · short label · optional trend indicator (up / down / flat) with comparison period\nSidebar: 260 px wide · background #F7F7F7\nEvery filter has a tooltip (ⓘ icon) explaining what it controls and when data was last updated\nApply Filters button: maroon #861F41, full width · Reset button directly below (outline style)\nPage footer: white text on maroon · “Visualizing Virginia Numbers · Virginia Tech”\n\n\n\nTab structure\n\nTab 1 — Overview: sidebar filters + 3 KPI cards + trend line chart + comparison bar chart + distribution chart\nTab 2 — Map: Leaflet choropleth · Virginia county-level · WGS84 (CRS 4326) · maroon_seq or diverging palette · legend inside panel · tooltip shows county name + value + range on hover\nTab 3 — Data: paginated, searchable, sortable DT table · responds to sidebar filters · CSV download button · Excel download button · no raw IDs or processing artifacts\nTab 4 — About: 1–2 paragraph project description + full data source citations + methods note + contact email\n\n\n\nAll figures inside the dashboard\n\nEvery chart: theme_vvn() applied · title (headline case) · subtitle (sentence case) · source line in caption\nOnly VVN palette colors — no off-palette colors anywhere\nMap data normalized — rate or percentage, never raw counts\n\n\n\nPublish\n\nNo [PLACEHOLDER] text remains\nrsconnect::deployApp() runs without errors",
-    "crumbs": [
-      "R Library Docs →",
-      "Publishing Checklist"
-    ]
+    "text": "Dashboard\n\nSee Dashboard Library → and Interactive Components →\n\nComplete all items before running rsconnect::deployApp().\n\nLayout & navigation\n\nNavbar background: VT Maroon #861F41 · white project name, bold · orange bottom border 3 px\nExactly 3 KPI cards per row — one card per key metric, colors maroon / orange / navy\nEach KPI card has: metric value · short label · optional trend indicator (up / down / flat) with comparison period\nSidebar: 260 px wide · background #F7F7F7\nEvery filter has a tooltip (ⓘ icon) explaining what it controls and when data was last updated\nApply Filters button: maroon #861F41, full width · Reset button directly below (outline style)\nPage footer: white text on maroon · “Visualizing Virginia Numbers · Virginia Tech”\n\n\n\nTab structure\n\nTab 1 — Overview: sidebar filters + 3 KPI cards + trend line chart + comparison bar chart + distribution chart\nTab 2 — Map: Leaflet choropleth · Virginia county-level · WGS84 (CRS 4326) · maroon_seq or diverging palette · legend inside panel · tooltip shows county name + value + range on hover\nTab 3 — Data: paginated, searchable, sortable DT table · responds to sidebar filters · CSV download button · Excel download button · no raw IDs or processing artifacts\nTab 4 — About: 1–2 paragraph project description + full data source citations + methods note + contact email\n\n\n\nAll figures inside the dashboard\n\nEvery chart: theme_vvn() applied · title (headline case) · subtitle (sentence case) · source line in caption\nOnly VVN palette colors — no off-palette colors anywhere\nMap data normalized — rate or percentage, never raw counts\n\n\n\nPublish\n\nNo [PLACEHOLDER] text remains\nrsconnect::deployApp() runs without errors"
   },
   {
     "objectID": "checklist.html#vvn-insights",
     "href": "checklist.html#vvn-insights",
     "title": "Publishing Checklist",
     "section": "VVN Insights",
-    "text": "VVN Insights\n\nSee VVN Insight Library →\n\nComplete all items before running quarto render index.qmd.\n\nDocument sections (required in order)\n\n1 — Hero banner: #861F41 background · “VVN INSIGHTS” label in small caps · title white bold (headline case) · one-sentence description · publication date + primary data source below headline\n2 — Key Finding: 1–2 sentences immediately after the hero · the single most important result · key number bolded — not buried in the conclusion\n3 — Background: why this topic matters for Virginia · specific question addressed · intended audience named\n4 — Data & Methods: source table (Source / Geography / Period / Variable) + callout noting caveats or comparability issues\n5 — Findings: at least 2 charts · 1 map (interactive or static) · 1 summary table · organized into subsections by theme or geographic pattern\n6 — Discussion: interpretation (what findings mean, not just what they show) + prior research context + equity implications + limitations\n7 — Conclusion: 2–3 sentence takeaway + policy implication or future direction + contact information + VVN and Virginia Tech attribution\n\n\n\nFigures in the Insight\n\nEvery figure referenced in the narrative before it appears — “Figure 1 shows…”\nEvery chart: title (headline case) · subtitle (sentence case) · source line\nEvery map: normalized data · title · legend · source line\nEvery table: maroon header · alternating rows · em dash — for missing values · source line\nKPI callout boxes used only for the most important statistics (orange accent)\n\n\n\nPublish\n\nembed-resources: true set in the document YAML\nNo [PLACEHOLDER] text remains\nquarto render index.qmd completes with 0 errors · 0 warnings",
-    "crumbs": [
-      "R Library Docs →",
-      "Publishing Checklist"
-    ]
+    "text": "VVN Insights\n\nSee VVN Insight Library →\n\nComplete all items before running quarto render index.qmd.\n\nDocument sections (required in order)\n\n1 — Hero banner: #861F41 background · “VVN INSIGHTS” label in small caps · title white bold (headline case) · one-sentence description · publication date + primary data source below headline\n2 — Key Finding: 1–2 sentences immediately after the hero · the single most important result · key number bolded — not buried in the conclusion\n3 — Background: why this topic matters for Virginia · specific question addressed · intended audience named\n4 — Data & Methods: source table (Source / Geography / Period / Variable) + callout noting caveats or comparability issues\n5 — Findings: at least 2 charts · 1 map (interactive or static) · 1 summary table · organized into subsections by theme or geographic pattern\n6 — Discussion: interpretation (what findings mean, not just what they show) + prior research context + equity implications + limitations\n7 — Conclusion: 2–3 sentence takeaway + policy implication or future direction + contact information + VVN and Virginia Tech attribution\n\n\n\nFigures in the Insight\n\nEvery figure referenced in the narrative before it appears — “Figure 1 shows…”\nEvery chart: title (headline case) · subtitle (sentence case) · source line\nEvery map: normalized data · title · legend · source line\nEvery table: maroon header · alternating rows · em dash — for missing values · source line\nKPI callout boxes used only for the most important statistics (orange accent)\n\n\n\nPublish\n\nembed-resources: true set in the document YAML\nNo [PLACEHOLDER] text remains\nquarto render index.qmd completes with 0 errors · 0 warnings"
   },
   {
     "objectID": "checklist.html#all-figures",
     "href": "checklist.html#all-figures",
     "title": "Publishing Checklist",
     "section": "All Figures",
-    "text": "All Figures\nThese rules apply to every chart, map, and table in both product types.\n\nRequired elements — every figure\n\nTitle — headline case (capitalize all major words)\nSubtitle — sentence case · states geography and/or year\nSource line — “Source: [Agency, Dataset, Year].” — no exceptions\nUnit stated once only — subtitle or axis label, never both\n\n\n\nCharts\n\nSee Chart Library →\n\n\ntheme_vvn() applied to all ggplot2 figures\nOnly VVN palette colors: Maroon #861F41 · Orange #E5751F · Navy #1B5299\nLegend title present if the chart shows multiple series\nNotes appear below the source line when abbreviations or methodology need explanation\nSignificance stars use symbols in order: *, †, ‡, § — never use asterisks for general notes\n\n\n\nMaps\n\nSee Map Library →\n\n\nData normalized — rate or percentage, never raw counts on a choropleth\nSequential data: maroon_seq (primary) or orange_seq (secondary)\nAbove/below-average data: diverging palette\nCategorical / discrete groups: main or accessible palette\nInteractive (Leaflet): WGS84 CRS 4326 · tooltip shows county name + value + range\nStatic (ggplot2 + sf): Albers Equal-Area CRS 5070\n\n\n\nTables\n\nSee Table Library →\n\n\nMaroon #861F41 header row, white bold text\nColumn headings: sentence case · spanner headings: headline case\nAlternating light gray #F7F7F7 body rows · no internal borders by default\nNumbers decimal-aligned (bottom right) · text left-aligned (bottom left)\nEm dash — for all missing values — never leave a cell blank\nAbbreviations defined below the table (e.g., “FPL = federal poverty level”)\nSignificance noted with superscript letters linked to footnotes",
-    "crumbs": [
-      "R Library Docs →",
-      "Publishing Checklist"
-    ]
+    "text": "All Figures\nThese rules apply to every chart, map, and table in both product types.\n\nRequired elements — every figure\n\nTitle — headline case (capitalize all major words)\nSubtitle — sentence case · states geography and/or year\nSource line — “Source: [Agency, Dataset, Year].” — no exceptions\nUnit stated once only — subtitle or axis label, never both\n\n\n\nCharts\n\nSee Chart Library →\n\n\ntheme_vvn() applied to all ggplot2 figures\nOnly VVN palette colors: Maroon #861F41 · Orange #E5751F · Navy #1B5299\nLegend title present if the chart shows multiple series\nNotes appear below the source line when abbreviations or methodology need explanation\nSignificance stars use symbols in order: *, †, ‡, § — never use asterisks for general notes\n\n\n\nMaps\n\nSee Map Library →\n\n\nData normalized — rate or percentage, never raw counts on a choropleth\nSequential data: maroon_seq (primary) or orange_seq (secondary)\nAbove/below-average data: diverging palette\nCategorical / discrete groups: main or accessible palette\nInteractive (Leaflet): WGS84 CRS 4326 · tooltip shows county name + value + range\nStatic (ggplot2 + sf): Albers Equal-Area CRS 5070\n\n\n\nTables\n\nSee Table Library →\n\n\nMaroon #861F41 header row, white bold text\nColumn headings: sentence case · spanner headings: headline case\nAlternating light gray #F7F7F7 body rows · no internal borders by default\nNumbers decimal-aligned (bottom right) · text left-aligned (bottom left)\nEm dash — for all missing values — never leave a cell blank\nAbbreviations defined below the table (e.g., “FPL = federal poverty level”)\nSignificance noted with superscript letters linked to footnotes"
   },
   {
     "objectID": "brand.html",
     "href": "brand.html",
     "title": "Brand",
     "section": "",
-    "text": "For palette functions and color utilities in R, see the vvnthemes R Library →",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Brand"
-    ]
+    "text": "For palette functions and color utilities in R, see the vvnthemes R Library →"
   },
   {
     "objectID": "brand.html#color-palette",
     "href": "brand.html#color-palette",
     "title": "Brand",
     "section": "Color Palette",
-    "text": "Color Palette\n\nBrand Colors\n\n\n\n\n\n\nVT Maroon #861F41 Primary — navbars, titles, chart fill\n\n\n\n\n\n\n\nVT Orange #E5751F Secondary — highlights, buttons, callouts\n\n\n\n\n\n\n\nNavy #1B5299 Tertiary — chart series, accent\n\n\n\n\n\n\n\nCharcoal #3D3D3D Body text, axis labels\n\n\n\n\n\n\n\nGray #AAAAAA Captions, secondary text\n\n\n\n\n\n\n\nLight Gray #F7F7F7 Backgrounds, sidebar, table rows\n\n\n\nThe three colors used in charts and multi-series visualizations are Maroon, Orange, and Navy — access them via scale_fill_vvn(\"brand\").\n\n\n\nPalettes\n\n\n\n\n\n\n\n\nPalette\nType\nUse\n\n\n\n\nbrand\nCategorical\n3-group comparisons — maroon, orange, navy\n\n\nmain\nCategorical\nGeneral purpose — up to 10 categories\n\n\naccessible\nCategorical\nColorblind-safe — use when accessibility is critical\n\n\nmaroon_seq\nSequential\nPrimary continuous metric — choropleth maps\n\n\norange_seq\nSequential\nSecondary continuous metric\n\n\nnavy_seq\nSequential\nTertiary continuous metric\n\n\ndiverging\nDiverging\nData with a meaningful midpoint (above/below average)\n\n\n\n\n\n\n\n\n\nWarningColorblind Safety\n\n\n\nVT Maroon and VT Orange can appear identical under red-green colorblindness (~8% of men). When both appear on the same chart, differentiate with shape or line type in addition to color, or use scale_fill_vvn(\"accessible\").\n\n\n\nFor palette functions, see the vvnthemes R Library →",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Brand"
-    ]
+    "text": "Color Palette\n\nBrand Colors\n\n\n\n\n\n\nVT Maroon #861F41 Primary — navbars, titles, chart fill\n\n\n\n\n\n\n\nVT Orange #E5751F Secondary — highlights, buttons, callouts\n\n\n\n\n\n\n\nNavy #1B5299 Tertiary — chart series, accent\n\n\n\n\n\n\n\nCharcoal #3D3D3D Body text, axis labels\n\n\n\n\n\n\n\nGray #AAAAAA Captions, secondary text\n\n\n\n\n\n\n\nLight Gray #F7F7F7 Backgrounds, sidebar, table rows\n\n\n\nThe three colors used in charts and multi-series visualizations are Maroon, Orange, and Navy — access them via scale_fill_vvn(\"brand\").\n\n\n\nPalettes\n\n\n\n\n\n\n\n\nPalette\nType\nUse\n\n\n\n\nbrand\nCategorical\n3-group comparisons — maroon, orange, navy\n\n\nmain\nCategorical\nGeneral purpose — up to 10 categories\n\n\naccessible\nCategorical\nColorblind-safe — use when accessibility is critical\n\n\nmaroon_seq\nSequential\nPrimary continuous metric — choropleth maps\n\n\norange_seq\nSequential\nSecondary continuous metric\n\n\nnavy_seq\nSequential\nTertiary continuous metric\n\n\ndiverging\nDiverging\nData with a meaningful midpoint (above/below average)\n\n\n\n\n\n\n\n\n\nWarningColorblind Safety\n\n\n\nVT Maroon and VT Orange can appear identical under red-green colorblindness (~8% of men). When both appear on the same chart, differentiate with shape or line type in addition to color, or use scale_fill_vvn(\"accessible\").\n\n\n\nFor palette functions, see the vvnthemes R Library →"
   },
   {
     "objectID": "brand.html#typography",
     "href": "brand.html#typography",
     "title": "Brand",
     "section": "Typography",
-    "text": "Typography\n\nFonts and Sizes\n\n\n\n\n\n\n\n\n\n\nStyle\nFont\nSize\nColor\nUse\n\n\n\n\nHeading\nInter Bold\nH1 32px · H2 24px · H3 18px\nMaroon #861F41\nTitles, section headings, tab labels\n\n\nBody\nInter Regular\n16px\nCharcoal #3D3D3D\nParagraphs, axis labels, data labels\n\n\nCaption\nInter Regular\n14px\nGray #AAAAAA\nSource lines, notes\n\n\n\n\n\nCapitalization Rules\n\n\n\n\n\n\n\n\nElement\nRule\nExample\n\n\n\n\nChart title\nHeadline case\n“Labor Force Participation Rate by Region”\n\n\nChart subtitle\nSentence case\n“Virginia counties, 2018–2023”\n\n\nAxis labels\nSentence case\n“Percentage of households”\n\n\nMap title\nHeadline case\n“Median Household Income by County, Virginia”\n\n\nMap subtitle\nSentence case\n“2020 American Community Survey 5-year estimates”\n\n\nTable title\nHeadline case\n“Summary Statistics by County”\n\n\nColumn headings\nSentence case\n“Poverty rate (%)”",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Brand"
-    ]
+    "text": "Typography\n\nFonts and Sizes\n\n\n\n\n\n\n\n\n\n\nStyle\nFont\nSize\nColor\nUse\n\n\n\n\nHeading\nInter Bold\nH1 32px · H2 24px · H3 18px\nMaroon #861F41\nTitles, section headings, tab labels\n\n\nBody\nInter Regular\n16px\nCharcoal #3D3D3D\nParagraphs, axis labels, data labels\n\n\nCaption\nInter Regular\n14px\nGray #AAAAAA\nSource lines, notes\n\n\n\n\n\nCapitalization Rules\n\n\n\n\n\n\n\n\nElement\nRule\nExample\n\n\n\n\nChart title\nHeadline case\n“Labor Force Participation Rate by Region”\n\n\nChart subtitle\nSentence case\n“Virginia counties, 2018–2023”\n\n\nAxis labels\nSentence case\n“Percentage of households”\n\n\nMap title\nHeadline case\n“Median Household Income by County, Virginia”\n\n\nMap subtitle\nSentence case\n“2020 American Community Survey 5-year estimates”\n\n\nTable title\nHeadline case\n“Summary Statistics by County”\n\n\nColumn headings\nSentence case\n“Poverty rate (%)”"
   },
   {
     "objectID": "brand.html#logo-usage",
     "href": "brand.html#logo-usage",
     "title": "Brand",
     "section": "Logo Usage",
-    "text": "Logo Usage\n\nAlways use the official VT logo alongside VVN branding\nDo not alter, recolor, or reposition the logo\nMinimum clear space: equal to the height of the “V” in “Virginia” on all sides\nThe tagline “Invent the Future®” appears beneath the logo on branded materials",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Brand"
-    ]
+    "text": "Logo Usage\n\nAlways use the official VT logo alongside VVN branding\nDo not alter, recolor, or reposition the logo\nMinimum clear space: equal to the height of the “V” in “Virginia” on all sides\nThe tagline “Invent the Future®” appears beneath the logo on branded materials"
   },
   {
     "objectID": "tables.html",
     "href": "tables.html",
     "title": "Tables",
     "section": "",
-    "text": "VVN tables follow strict formatting rules for font styles, number alignment, and cell shading. These conventions make VVN tables look specific and consistent across all products. Every table must have a source line.\n\nFor R functions, gt styling, and implementation, see the Table Library →",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Tables"
-    ]
+    "text": "VVN tables follow strict formatting rules for font styles, number alignment, and cell shading. These conventions make VVN tables look specific and consistent across all products. Every table must have a source line.\n\nFor R functions, gt styling, and implementation, see the Table Library →"
   },
   {
     "objectID": "tables.html#overview",
     "href": "tables.html#overview",
     "title": "Tables",
     "section": "",
-    "text": "VVN tables follow strict formatting rules for font styles, number alignment, and cell shading. These conventions make VVN tables look specific and consistent across all products. Every table must have a source line.\n\nFor R functions, gt styling, and implementation, see the Table Library →",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Tables"
-    ]
+    "text": "VVN tables follow strict formatting rules for font styles, number alignment, and cell shading. These conventions make VVN tables look specific and consistent across all products. Every table must have a source line.\n\nFor R functions, gt styling, and implementation, see the Table Library →"
   },
   {
     "objectID": "tables.html#required-elements",
     "href": "tables.html#required-elements",
     "title": "Tables",
     "section": "Required elements",
-    "text": "Required elements\n\n\n\n\n\n\n\n\n\n#\nElement\nStandard\nLibrary function\n\n\n\n\n1\nTitle\nHeadline case, bold, one line. Short and active. Example: “Virginia Counties at a Glance.”\nvvn_table()\n\n\n2\nSubtitle\nSentence case (optional). States geography and year. Example: “Virginia, 2022 estimates.”\nvvn_table()\n\n\n3\nColumn headers\nVT Maroon #861F41 fill, white bold text. Sentence case for standard columns; headline case for spanner headings.\nvvn_table()\n\n\n4\nAlternating rows\nEven rows use light gray #F7F7F7. No internal borders by default. No empty rows or columns.\nvvn_table()\n\n\n5\nCell alignment\nNumbers: decimal-aligned, right. Text: left. Use consistent decimal places within each column.\nvvn_table()\n\n\n6\nSource & notes\nSource required below every table. Notes define abbreviations, methodology, and significance. Missing values: em dash (—), never blank.\nvvn_table()",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Tables"
-    ]
+    "text": "Required elements\n\n\n\n\n\n\n\n\n\n#\nElement\nStandard\nLibrary function\n\n\n\n\n1\nTitle\nHeadline case, bold, one line. Short and active. Example: “Virginia Counties at a Glance.”\nvvn_table()\n\n\n2\nSubtitle\nSentence case (optional). States geography and year. Example: “Virginia, 2022 estimates.”\nvvn_table()\n\n\n3\nColumn headers\nVT Maroon #861F41 fill, white bold text. Sentence case for standard columns; headline case for spanner headings.\nvvn_table()\n\n\n4\nAlternating rows\nEven rows use light gray #F7F7F7. No internal borders by default. No empty rows or columns.\nvvn_table()\n\n\n5\nCell alignment\nNumbers: decimal-aligned, right. Text: left. Use consistent decimal places within each column.\nvvn_table()\n\n\n6\nSource & notes\nSource required below every table. Notes define abbreviations, methodology, and significance. Missing values: em dash (—), never blank.\nvvn_table()"
   },
   {
     "objectID": "tables.html#design-standards",
     "href": "tables.html#design-standards",
     "title": "Tables",
     "section": "Design standards",
-    "text": "Design standards\nNumber formatting\n\n\n\nValue type\nFormat\n\n\n\n\nPercentages\n72.4% — one decimal place, percent sign\n\n\nDollar amounts\n$48,200 — no decimals for whole dollars\n\n\nCounts\n1,234 — comma separator, no decimals\n\n\nIndex values\n0.743 — three decimal places\n\n\nP-values\n&lt; 0.001 or 0.023 — never 0.000\n\n\n\nColumn alignment\n\nNumbers: right-aligned, decimal-point aligned\nText categories: left-aligned\nHeader text: centered over numeric columns, left-aligned over text columns\n\nMissing data\n\nAlways use an em dash (—) for missing or suppressed values\nDefine suppression rules in the notes below the table\nNever leave a cell blank\n\nSpanner headers\nUse spanner headings (headline case) to group related columns. Keep the spanner label short — 1–3 words.\n\n\nFor step-by-step R code and table examples, see the Table Library →",
-    "crumbs": [
-      "R Library Docs →",
-      "Design Standards",
-      "Tables"
-    ]
+    "text": "Design standards\nNumber formatting\n\n\n\nValue type\nFormat\n\n\n\n\nPercentages\n72.4% — one decimal place, percent sign\n\n\nDollar amounts\n$48,200 — no decimals for whole dollars\n\n\nCounts\n1,234 — comma separator, no decimals\n\n\nIndex values\n0.743 — three decimal places\n\n\nP-values\n&lt; 0.001 or 0.023 — never 0.000\n\n\n\nColumn alignment\n\nNumbers: right-aligned, decimal-point aligned\nText categories: left-aligned\nHeader text: centered over numeric columns, left-aligned over text columns\n\nMissing data\n\nAlways use an em dash (—) for missing or suppressed values\nDefine suppression rules in the notes below the table\nNever leave a cell blank\n\nSpanner headers\nUse spanner headings (headline case) to group related columns. Keep the spanner label short — 1–3 words.\n\n\nFor step-by-step R code and table examples, see the Table Library →"
   }
 ]
