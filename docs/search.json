@@ -490,11 +490,11 @@
     "text": "vvnthemes v0.0.1\nVirginia Tech brand compliance for all Visualizing Virginia Numbers projects\ndevtools::install_github(\"yujuangao/VVN\")\n\nView on GitHub →\nReference Manual →"
   },
   {
-    "objectID": "index.html#what-is-vvn",
-    "href": "index.html#what-is-vvn",
+    "objectID": "index.html#quick-demo",
+    "href": "index.html#quick-demo",
     "title": "Get Started",
-    "section": "What is VVN?",
-    "text": "What is VVN?\nVisualizing Virginia Numbers (VVN) is a data initiative at Virginia Tech that transforms complex public datasets into clear, accessible, and policy-relevant visualizations about life in Virginia. VVN projects cover topics including broadband access, housing affordability, workforce trends, healthcare coverage, and economic opportunity across the Commonwealth’s 133 counties and cities.\n\n\n133\nVirginia localities covered\n\n\n9\nLibrary modules\n\n\n25+\nFunctions in vvnthemes\n\n\n2\nReady-to-run templates\n\n\nEvery VVN product — dashboards, narrative reports, charts, and maps — must meet the same visual and data standards. vvnthemes is the R package that enforces those standards automatically."
+    "section": "Quick Demo",
+    "text": "Quick Demo\n\n\nR — VT-branded ggplot2 chart\n\n\n\n\n\nChart output"
   },
   {
     "objectID": "index.html#about-vvnthemes",
