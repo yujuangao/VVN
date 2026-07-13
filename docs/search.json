@@ -487,35 +487,63 @@
     "href": "index.html",
     "title": "Get Started",
     "section": "",
-    "text": "vvnthemes v0.0.1\nVirginia Tech brand compliance for all Visualizing Virginia Numbers projects\ndevtools::install_github(\"yujuangao/VVN\")\nView on GitHub →\nvvnthemes provides Virginia Tech brand colors, ggplot2 themes, map styling, styled tables, Shiny UI components, and project scaffolding for all VVN projects. It enforces consistent visual identity — VT Maroon, Burnt Orange, and Navy — across every chart, map, table, dashboard, and narrative report your team produces.\nFeatures"
+    "text": "vvnthemes v0.0.1\nVirginia Tech brand compliance for all Visualizing Virginia Numbers projects\ndevtools::install_github(\"yujuangao/VVN\")\n\nView on GitHub →\nReference Manual →"
   },
   {
-    "objectID": "index.html#three-ways-to-use-vvnthemes",
-    "href": "index.html#three-ways-to-use-vvnthemes",
+    "objectID": "index.html#what-is-vvn",
+    "href": "index.html#what-is-vvn",
     "title": "Get Started",
-    "section": "Three ways to use vvnthemes",
-    "text": "Three ways to use vvnthemes\n\n\nWorkflow 1\nBuild with the library\nUse individual functions to create charts, maps, and tables from your own data.\nGet started →\n\n\nWorkflow 2\nDashboard Template\nScaffold a complete, ready-to-run Shiny dashboard in one command.\nGet started →\n\n\nWorkflow 3\nVVN Insights Template\nScaffold a complete Quarto narrative report with branded styling.\nGet started →"
+    "section": "What is VVN?",
+    "text": "What is VVN?\nVisualizing Virginia Numbers (VVN) is a data initiative at Virginia Tech that transforms complex public datasets into clear, accessible, and policy-relevant visualizations about life in Virginia. VVN projects cover topics including broadband access, housing affordability, workforce trends, healthcare coverage, and economic opportunity across the Commonwealth’s 133 counties and cities.\n\n\n133\nVirginia localities covered\n\n\n9\nLibrary modules\n\n\n25+\nFunctions in vvnthemes\n\n\n2\nReady-to-run templates\n\n\nEvery VVN product — dashboards, narrative reports, charts, and maps — must meet the same visual and data standards. vvnthemes is the R package that enforces those standards automatically."
+  },
+  {
+    "objectID": "index.html#about-vvnthemes",
+    "href": "index.html#about-vvnthemes",
+    "title": "Get Started",
+    "section": "About vvnthemes",
+    "text": "About vvnthemes\nvvnthemes is the design system for all VVN projects. It provides Virginia Tech brand colors, ggplot2 themes, map styling, styled tables, Shiny UI components, and project scaffolding — so every chart, map, table, dashboard, and narrative report your team produces looks consistent and publication-ready.\n\n\n🎨\n\nVT Brand Colors\nVT Maroon, Burnt Orange, and Navy applied globally with a single call to set_vvn_defaults(). Discrete and continuous palettes for every chart type.\n\n\n\n📊\n\nggplot2 Themes & Scales\nThree themes for charts, maps, and minimal layouts. Categorical and continuous color scales with automatic VT palette mapping.\n\n\n\n🗺️\n\nInteractive Maps\nOne-function Leaflet county choropleth maps with VT branded fill, maroon hover highlight, tooltips, and a styled legend.\n\n\n\n📋\n\nStyled Tables\nBranded gt tables with maroon headers, alternating rows, source notes, and p-value color coding for regression output.\n\n\n\n🖥️\n\nShiny UI Components\nBranded filters, sliders, buttons, and KPI cards for Shiny dashboards — all styled to match VT brand guidelines.\n\n\n\n🚀\n\nProject Scaffolding\nOne-command setup for a complete Shiny dashboard or Quarto narrative report. Runs immediately with placeholder data."
   },
   {
     "objectID": "index.html#installation",
     "href": "index.html#installation",
     "title": "Get Started",
     "section": "Installation",
-    "text": "Installation\nTo install vvnthemes, you need the devtools package:\ninstall.packages(\"devtools\")\ndevtools::install_github(\"yujuangao/VVN\")\nThe source code and full release history are available at github.com/yujuangao/VVN."
+    "text": "Installation\nInstall vvnthemes directly from GitHub using devtools:\ninstall.packages(\"devtools\")\ndevtools::install_github(\"yujuangao/VVN\")\nAfter installation, load the package and apply VT brand defaults for the session:\nlibrary(vvnthemes)\nset_vvn_defaults()   # sets theme_vvn() + VT Maroon geom colors globally\nDependencies installed automatically: ggplot2, scales, rlang\nOptional packages (install separately if needed): gt (tables), leaflet + sf (maps), shiny + bslib (dashboards), broom (regression tables)"
   },
   {
-    "objectID": "index.html#build-with-the-library",
-    "href": "index.html#build-with-the-library",
+    "objectID": "index.html#library-structure",
+    "href": "index.html#library-structure",
     "title": "Get Started",
-    "section": "Build with the library",
-    "text": "Build with the library\nLoad vvnthemes at the top of every script or Quarto document. Call set_vvn_defaults() once per session — it applies VT Maroon and the VVN ggplot2 theme to all subsequent charts automatically. Every published figure requires vvn_source() for data attribution, and vvn_save() exports at 300 dpi.\n\n\nR — county choropleth map\n\n\n\n\n\nMap output\n\n\n\n\n\n\nThe same pattern applies to maps (theme_vvn_map(), scale_fill_vvn_c()) and tables (gt() |&gt; vvn_table()). Step-by-step tutorials are available for charts, maps, tables, and interactive Shiny components."
+    "section": "Library Structure",
+    "text": "Library Structure\nvvnthemes is organized into 9 modules. Each module is independent — use only what your project needs.\n\n\nSetup\nApply or remove VT brand defaults globally for the session.\nset_vvn_defaults() · undo_vvn_defaults()\n\n\nThemes\nggplot2 themes for charts, static maps, and minimal layouts.\ntheme_vvn() · theme_vvn_map() · theme_vvn_minimal()\n\n\nColor System\nAccess and preview VT brand color palettes by name.\nvvn_colors() · vvn_palette() · view_vvn_palette()\n\n\nScales\nDiscrete and continuous ggplot2 color/fill scales using VT palettes.\nscale_color_vvn() · scale_fill_vvn() · scale_*_vvn_c()\n\n\nChart Helpers\nAdd titles, sources, and notes; adjust layout; export at 300 dpi; check accessibility.\nvvn_title() · vvn_source() · vvn_save() · vvn_accessibility_check() +6 more\n\n\nTables\nStyle gt tables with maroon headers, alternating rows, and p-value highlighting.\nvvn_table() · vvn_table_pvalues()\n\n\nMaps\nBuild interactive Leaflet county choropleth maps for Shiny dashboards.\nvvn_map_style()\n\n\nShiny UI\nBranded input controls and KPI display cards for dashboards.\nvvn_filter() · vvn_slider() · vvn_button() · vvn_kpi_card()\n\n\nScaffolding\nGenerate a complete Shiny dashboard or Quarto narrative report from a VVN template.\ncreate_vvn_dashboard() · create_vvn_story() · check_vvn_story()"
+  },
+  {
+    "objectID": "index.html#typical-workflow",
+    "href": "index.html#typical-workflow",
+    "title": "Get Started",
+    "section": "Typical Workflow",
+    "text": "Typical Workflow\nFor most VVN projects, follow this five-step pattern:\n\n\n1\n\nInstall & load\nInstall from GitHub once. At the top of every script, call library(vvnthemes) and set_vvn_defaults() — this applies the VT theme and colors to all subsequent charts automatically.\n\n\n\n2\n\nLoad and prepare data\nImport your county-level data. VVN maps require a normalized variable — a rate, percentage, or per-capita figure, never a raw count. Join to va_counties by FIPS code.\n\n\n\n3\n\nBuild the visualization\nUse ggplot2 + theme_vvn() for charts, vvn_map_style() for interactive maps, or gt() |&gt; vvn_table() for tables. Add VVN scales to apply the correct color palette.\n\n\n\n4\n\nAdd titles and source attribution\nEvery published VVN figure requires vvn_title() for the headline (title case) and vvn_source() for the data citation. These are non-negotiable requirements before any figure is shared.\n\n\n\n5\n\nSave or deploy\nExport static figures at 300 dpi with vvn_save(). For dashboards, deploy to shinyapps.io with rsconnect::deployApp(). For narrative reports, render with quarto render."
+  },
+  {
+    "objectID": "index.html#three-ways-to-use-vvnthemes",
+    "href": "index.html#three-ways-to-use-vvnthemes",
+    "title": "Get Started",
+    "section": "Three Ways to Use vvnthemes",
+    "text": "Three Ways to Use vvnthemes\n\n\nWorkflow 1\nBuild with the library\nUse individual functions to create charts, maps, and tables from your own data. Full control over every element.\nSee chart tutorial →\n\n\nWorkflow 2\nDashboard Template\nScaffold a complete, ready-to-run Shiny dashboard in one command. Replace placeholder data and deploy.\nSee dashboard →\n\n\nWorkflow 3\nVVN Insights Template\nScaffold a complete Quarto narrative report with branded styling, pre-built sections, and figure folders.\nSee insights →"
+  },
+  {
+    "objectID": "index.html#demo-build-a-choropleth-map",
+    "href": "index.html#demo-build-a-choropleth-map",
+    "title": "Get Started",
+    "section": "Demo: Build a Choropleth Map",
+    "text": "Demo: Build a Choropleth Map\nLoad vvnthemes, join your county data, and call vvn_map_style() — the map is styled, labeled, and ready in under 10 lines of code.\n\n\nR — county choropleth map\n\n\n\n\n\nMap output"
   },
   {
     "objectID": "index.html#learn-more",
     "href": "index.html#learn-more",
     "title": "Get Started",
-    "section": "Learn more",
-    "text": "Learn more\nThe Reference Manual documents all function parameters in detail. The FAQ covers common errors and troubleshooting. For design rules — color standards, chart selection, normalization requirements — see the VVN Style Guide."
+    "section": "Learn More",
+    "text": "Learn More\nThe Reference Manual documents all function parameters. The Function Index gives a quick purpose summary for every function. Step-by-step tutorials are available for charts, maps, tables, and interactive Shiny components. The FAQ covers common errors. For design standards — color rules, chart selection, normalization requirements — see the VVN Style Guide."
   },
   {
     "objectID": "funcindex.html",
