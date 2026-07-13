@@ -15,9 +15,9 @@
 #'
 #' @examples
 #' library(ggplot2)
-#' ggplot(mpg, aes(displ, hwy)) + geom_point() +
+#' ggplot(ggplot2::mpg, aes(displ, hwy)) + geom_point() +
 #'   vvn_title("Engine Size vs Fuel Economy",
-#'              subtitle = "Visualizing Virginia Numbers · 2024")
+#'              subtitle = "Visualizing Virginia Numbers, 2024")
 vvn_title <- function(title, subtitle = NULL) {
   ggplot2::labs(title = title, subtitle = subtitle)
 }
@@ -36,7 +36,7 @@ vvn_title <- function(title, subtitle = NULL) {
 #'
 #' @examples
 #' library(ggplot2)
-#' ggplot(mpg, aes(displ, hwy)) + geom_point() +
+#' ggplot(ggplot2::mpg, aes(displ, hwy)) + geom_point() +
 #'   vvn_source("EPA Fuel Economy Guide")
 vvn_source <- function(source, note = NULL) {
   txt <- if (!is.null(note)) {
@@ -160,7 +160,7 @@ remove_legend <- function() {
 #'
 #' @examples
 #' \dontrun{
-#' p <- ggplot2::ggplot(mpg, ggplot2::aes(displ, hwy)) +
+#' p <- ggplot2::ggplot(ggplot2::mpg, ggplot2::aes(displ, hwy)) +
 #'   ggplot2::geom_point() + theme_vvn()
 #' vvn_save(p, "figures/mpg.png")
 #' vvn_save(p, "figures/mpg", formats = c("png", "pdf"))

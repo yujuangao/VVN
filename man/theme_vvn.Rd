@@ -22,7 +22,7 @@ and open axis styling. Mirrors the design philosophy of \code{theme_urbn_print()
 }
 \examples{
 library(ggplot2)
-ggplot(mpg, aes(class)) +
+ggplot(ggplot2::mpg, aes(class)) +
   geom_bar() +
   theme_vvn()
 }

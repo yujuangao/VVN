@@ -20,7 +20,7 @@ the VVN title style. Can be added to any ggplot object with \code{+}.
 }
 \examples{
 library(ggplot2)
-ggplot(mpg, aes(displ, hwy)) + geom_point() +
+ggplot(ggplot2::mpg, aes(displ, hwy)) + geom_point() +
   vvn_title("Engine Size vs Fuel Economy",
-             subtitle = "Visualizing Virginia Numbers · 2024")
+             subtitle = "Visualizing Virginia Numbers, 2024")
 }

@@ -20,6 +20,6 @@ Equivalent to \code{urbnthemes::urbn_source()}.
 }
 \examples{
 library(ggplot2)
-ggplot(mpg, aes(displ, hwy)) + geom_point() +
+ggplot(ggplot2::mpg, aes(displ, hwy)) + geom_point() +
   vvn_source("EPA Fuel Economy Guide")
 }

@@ -9,6 +9,26 @@
 
 ---
 
+`vvnthemes` is an R package built for the **Visualizing Virginia Numbers (VVN)** project at Virginia Tech. It provides everything needed to produce publication-ready, brand-consistent outputs for Virginia data analysis — from ggplot2 charts and GT tables to interactive Shiny dashboards and Leaflet choropleth maps.
+
+**The library includes 9 modules:**
+
+| Module | Functions | What it does |
+|--------|-----------|--------------|
+| **Color System** | `vvn_colors()`, `vvn_palette()`, `view_vvn_palette()` | VT brand hex values and named palettes (sequential, diverging, accessible) |
+| **ggplot2 Scales** | `scale_color_vvn()`, `scale_fill_vvn()`, `scale_*_vvn_c()` | Drop-in discrete and continuous color/fill scales |
+| **ggplot2 Theme** | `theme_vvn()`, `theme_vvn_map()`, `theme_vvn_minimal()` | VT-branded chart themes; map and infographic variants |
+| **Chart Helpers** | `vvn_title()`, `vvn_source()`, `vvn_save()`, `set_vvn_defaults()` | Add titles/source lines, export multi-format figures, set global defaults |
+| **GT Tables** | `vvn_table()`, `vvn_table_pvalues()` | Style `gt` tables with VT maroon headers and footnotes |
+| **Leaflet Maps** | `vvn_map_style()` | VT-branded choropleth maps with color scale, legend, and tooltips |
+| **Shiny UI** | `vvn_filter()`, `vvn_slider()`, `vvn_button()`, `vvn_kpi_card()` | Branded Shiny widgets: dropdowns, sliders, action buttons, KPI metric cards |
+| **Story Template** | `create_vvn_story()`, `check_vvn_story()` | Scaffold a Quarto data story project with VVN CSS, folder structure, and front matter |
+| **Dashboard Template** | `create_vvn_dashboard()` | Scaffold a full Shiny dashboard with sidebar filters, KPI row, charts, map, and data table |
+
+All outputs follow **VT Brand Guidelines** (Maroon `#861F41`, Orange `#E5751F`, Navy `#1B5299`) and meet **WCAG 2.1 AA** accessibility requirements.
+
+---
+
 ## Installation
 
 ```r

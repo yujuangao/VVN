@@ -36,7 +36,7 @@ white background, 8×5 inches). Supports simultaneous multi-format export.
 }
 \examples{
 \dontrun{
-p <- ggplot2::ggplot(mpg, ggplot2::aes(displ, hwy)) +
+p <- ggplot2::ggplot(ggplot2::mpg, ggplot2::aes(displ, hwy)) +
   ggplot2::geom_point() + theme_vvn()
 vvn_save(p, "figures/mpg.png")
 vvn_save(p, "figures/mpg", formats = c("png", "pdf"))

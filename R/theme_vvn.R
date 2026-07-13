@@ -16,7 +16,7 @@
 #'
 #' @examples
 #' library(ggplot2)
-#' ggplot(mpg, aes(class)) +
+#' ggplot(ggplot2::mpg, aes(class)) +
 #'   geom_bar() +
 #'   theme_vvn()
 theme_vvn <- function(base_size = 12, base_family = "sans", grid = "y") {
@@ -140,7 +140,7 @@ theme_vvn_minimal <- function(base_size = 12, base_family = "sans") {
 #'
 #' @examples
 #' set_vvn_defaults()
-#' ggplot2::ggplot(mpg, ggplot2::aes(displ, hwy)) +
+#' ggplot2::ggplot(ggplot2::mpg, ggplot2::aes(displ, hwy)) +
 #'   ggplot2::geom_point()   # automatically maroon points, VVN theme
 #'
 #' undo_vvn_defaults()       # revert when done

@@ -3,6 +3,9 @@
 # Visualizing Virginia Numbers · Virginia Tech
 # =============================================================================
 
+# Suppress R CMD check notes for ggplot2 aesthetic variables
+utils::globalVariables(c("x", "color", "label_col"))
+
 # ── Internal color constants (not exported) ───────────────────────────────────
 
 .VVN <- list(

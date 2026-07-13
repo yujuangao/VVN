@@ -1,5 +1,5 @@
 # =============================================================================
-# VVN Project Scaffolding — Data Story
+# VVN Project Scaffolding - Data Story
 # =============================================================================
 
 #' Create a VVN Insights data story project
@@ -118,7 +118,7 @@ check_vvn_story <- function(path = ".") {
 }
 
 
-# ── Internal helpers ──────────────────────────────────────────────────────────
+# Internal helpers -------------------------------------------------------
 
 .write_story_stubs <- function(proj) {
   # index.qmd stub (will be copied from inst/ if available)
@@ -156,7 +156,7 @@ check_vvn_story <- function(path = ".") {
       "## Conclusion",
       "",
       "---",
-      "*Visualizing Virginia Numbers · Virginia Tech*"
+      "*Visualizing Virginia Numbers \u00B7 Virginia Tech*"
     ),
     fs::path(proj, "index.qmd")
   )

@@ -21,7 +21,7 @@ every subsequent \code{ggplot()} call automatically uses VVN brand colors.
 }
 \examples{
 set_vvn_defaults()
-ggplot2::ggplot(mpg, ggplot2::aes(displ, hwy)) +
+ggplot2::ggplot(ggplot2::mpg, ggplot2::aes(displ, hwy)) +
   ggplot2::geom_point()   # automatically maroon points, VVN theme
 
 undo_vvn_defaults()       # revert when done

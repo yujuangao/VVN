@@ -26,6 +26,6 @@ Drop-in replacement for \code{\link[ggplot2:scale_colour_discrete]{ggplot2::scal
 }
 \examples{
 library(ggplot2)
-ggplot(mpg, aes(class, fill = class)) +
+ggplot(ggplot2::mpg, aes(class, fill = class)) +
   geom_bar() + scale_fill_vvn()
 }

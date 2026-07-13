@@ -14,7 +14,7 @@
 #' @export
 #' @examples
 #' library(ggplot2)
-#' ggplot(mpg, aes(class, fill = class)) +
+#' ggplot(ggplot2::mpg, aes(class, fill = class)) +
 #'   geom_bar() + scale_fill_vvn()
 scale_color_vvn <- function(palette = "main", reverse = FALSE, alpha = 1, ...) {
   pal_fn <- function(n) vvn_palette(palette, n = n, reverse = reverse, alpha = alpha)

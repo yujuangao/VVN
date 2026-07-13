@@ -11,7 +11,7 @@ vvn_accessibility_check(colors, background = "#FFFFFF", level = c("AA", "AAA"))
 
 \item{background}{Background hex code. Default \code{"#FFFFFF"}.}
 
-\item{level}{\code{"AA"} (≥ 4.5:1, default) or \code{"AAA"} (≥ 7.0:1).}
+\item{level}{\code{"AA"} (>= 4.5:1, default) or \code{"AAA"} (>= 7.0:1).}
 }
 \value{
 A data frame with columns \code{color}, \code{contrast_ratio}, \code{pass}.

@@ -136,7 +136,7 @@ vvn_kpi_card <- function(value, label, trend = NULL, trend_text = NULL,
 #'
 #' @param colors     Character vector of hex codes.
 #' @param background Background hex code. Default `"#FFFFFF"`.
-#' @param level      `"AA"` (≥ 4.5:1, default) or `"AAA"` (≥ 7.0:1).
+#' @param level      `"AA"` (>= 4.5:1, default) or `"AAA"` (>= 7.0:1).
 #'
 #' @return A data frame with columns `color`, `contrast_ratio`, `pass`.
 #'   Printed via `cli` with pass/fail badges.
@@ -164,7 +164,7 @@ vvn_accessibility_check <- function(colors, background = "#FFFFFF",
   result <- data.frame(color = colors, contrast_ratio = round(ratios, 2), pass = pass,
                         stringsAsFactors = FALSE)
 
-  cli::cli_h1("VVN Accessibility · WCAG {level} (threshold: {threshold}:1)")
+  cli::cli_h1("VVN Accessibility \u00B7 WCAG {level} (threshold: {threshold}:1)")
   for (i in seq_len(nrow(result))) {
     r <- result[i, ]
     if (r$pass) cli::cli_alert_success("{r$color}  {r$contrast_ratio}:1  PASS")
