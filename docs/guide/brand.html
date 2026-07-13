@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b8bdc80a46a6cdbbd6973c63cd148879.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b4f26b52904c7f2a7cbfa93fd5b329a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -137,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dashboard.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Dashboard</span></a>
+ <span class="menu-text">Interactive Data Visualizations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -181,6 +181,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Tables</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./filter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter Controls</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -196,7 +202,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
   <li><a href="#color-palette" id="toc-color-palette" class="nav-link active" data-scroll-target="#color-palette">Color Palette</a>
@@ -236,26 +242,6 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Key Rules at a Glance
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><strong>Never</strong> use colors outside the VVN palette in charts, maps, tables, or layouts</li>
-<li>Use <strong>VT Maroon <code>#861F41</code></strong> for primary headings, navbars, and accents; <strong>VT Orange <code>#E5751F</code></strong> for secondary highlights only</li>
-<li>Body text is always <strong>Charcoal <code>#3D3D3D</code></strong> — never pure black <code>#000000</code></li>
-<li>Chart and map titles: <strong>headline case</strong> · Subtitles and axis labels: <strong>sentence case</strong></li>
-<li>Use the <code>accessible</code> palette when colorblind safety is critical</li>
-</ul>
-</div>
-</div>
-<hr>
 <blockquote class="blockquote">
 <p>For palette functions and color utilities in R, see the <a href="../vvn-docs/vvnthemes.html">vvnthemes R Library →</a></p>
 </blockquote>
@@ -504,6 +490,43 @@ ul.task-list li input[type="checkbox"] {
 </section>
 
 </main> <!-- /main -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // ── Subtitle in right TOC sidebar ──────────────────────────────────────────
+  var sub = document.querySelector('.quarto-title .subtitle');
+  if (sub) {
+    var sidebar = document.getElementById('quarto-margin-sidebar');
+    if (sidebar) {
+      var desc = document.createElement('p');
+      desc.className = 'toc-page-desc';
+      desc.textContent = sub.textContent.trim();
+      sidebar.insertBefore(desc, sidebar.firstChild);
+    }
+  }
+
+  // ── Page indicator bar below main navbar ───────────────────────────────────
+  var header = document.getElementById('quarto-header');
+  if (!header) return;
+
+  // Get page name from active sidebar link, falling back to page h1
+  var activeLink = document.querySelector('#quarto-sidebar .sidebar-link.active');
+  var pageName = activeLink ? activeLink.textContent.trim() : '';
+  if (!pageName) {
+    var h1 = document.querySelector('.quarto-title h1, h1.title');
+    if (h1) pageName = h1.textContent.trim();
+  }
+  if (!pageName) return;
+
+  var bar = document.createElement('div');
+  bar.id = 'page-indicator-bar';
+  bar.textContent = pageName;
+  header.appendChild(bar);
+
+  var barH = bar.offsetHeight || 32;
+  var currentPad = parseInt(window.getComputedStyle(document.body).paddingTop) || 0;
+  document.body.style.paddingTop = (currentPad + barH) + 'px';
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Dashboard – VVN Style Guide</title>
+<title>Interactive Data Visualizations – VVN Style Guide</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b8bdc80a46a6cdbbd6973c63cd148879.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b4f26b52904c7f2a7cbfa93fd5b329a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -107,7 +107,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./dashboard.html">Products</a></li><li class="breadcrumb-item"><a href="./dashboard.html">Dashboard</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./dashboard.html">Products</a></li><li class="breadcrumb-item"><a href="./dashboard.html">Interactive Data Visualizations</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -137,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dashboard.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Dashboard</span></a>
+ <span class="menu-text">Interactive Data Visualizations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -181,6 +181,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Tables</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./filter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter Controls</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -196,28 +202,21 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
-  <li><a href="#tab-structure" id="toc-tab-structure" class="nav-link" data-scroll-target="#tab-structure">Tab Structure</a>
-  <ul class="collapse">
-  <li><a href="#tab-1-overview" id="toc-tab-1-overview" class="nav-link" data-scroll-target="#tab-1-overview">Tab 1 — Overview</a></li>
-  <li><a href="#tab-2-map" id="toc-tab-2-map" class="nav-link" data-scroll-target="#tab-2-map">Tab 2 — Map</a></li>
-  <li><a href="#tab-3-data" id="toc-tab-3-data" class="nav-link" data-scroll-target="#tab-3-data">Tab 3 — Data</a></li>
-  <li><a href="#tab-4-about" id="toc-tab-4-about" class="nav-link" data-scroll-target="#tab-4-about">Tab 4 — About</a></li>
-  </ul></li>
-  <li><a href="#filter-panel-requirements" id="toc-filter-panel-requirements" class="nav-link" data-scroll-target="#filter-panel-requirements">Filter Panel Requirements</a></li>
+  <li><a href="#how-to-create-a-dashboard" id="toc-how-to-create-a-dashboard" class="nav-link active" data-scroll-target="#how-to-create-a-dashboard">How to create a dashboard</a></li>
+  <li><a href="#required-elements" id="toc-required-elements" class="nav-link" data-scroll-target="#required-elements">Required elements</a></li>
+  <li><a href="#design-standards" id="toc-design-standards" class="nav-link" data-scroll-target="#design-standards">Design standards</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./dashboard.html">Products</a></li><li class="breadcrumb-item"><a href="./dashboard.html">Dashboard</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./dashboard.html">Products</a></li><li class="breadcrumb-item"><a href="./dashboard.html">Interactive Data Visualizations</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Dashboard</h1>
+<h1 class="title">Interactive Data Visualizations</h1>
 <p class="subtitle lead">Layout and component standards for VVN Interactive Data Visualizations (R Shiny).</p>
 </div>
 
@@ -235,264 +234,209 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p><strong>Interactive Data Visualizations</strong> is a VVN dashboard — an interactive R Shiny web application. It lets users filter and explore VVN data on their own — choosing regions, years, and topics while charts, KPI cards, a county map, and a data table all update in real time.</p>
+<p>Use it when users need to <strong>explore</strong> data. For a fixed narrative with a single finding, use a <a href="./insights.html">VVN Insights</a> report instead.</p>
+<hr>
+<section id="how-to-create-a-dashboard" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-create-a-dashboard">How to create a dashboard</h2>
+<div class="wf-flow">
+<div class="wf-step">
+<div class="wf-num">
+1
 </div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Key Rules at a Glance
+<div class="wf-body">
+<span class="wf-title">Scaffold the project</span><span class="wf-desc">Run one command in R. The library creates the full folder structure, all required files, VVN styles, and placeholder content — the dashboard runs immediately with no setup.</span>
+<div class="wf-links">
+<a class="wf-link" href="https://yujuangao.github.io/VVN/dashboard.html">Dashboard Library →</a>
+</div>
+
 </div>
 </div>
-<div class="callout-body-container callout-body">
+<div class="wf-connector">
+
+</div>
+<div class="wf-step">
+<div class="wf-num">
+2
+</div>
+<div class="wf-body">
+<span class="wf-title">Load your data in <code>R/data_prep.R</code></span><span class="wf-desc">Replace the sample data with your own CSV or database query. Your data frame needs at minimum: <code>region</code> (character), <code>year</code> (integer), and <code>value</code> (numeric). All charts and cards update automatically.</span>
+</div>
+</div>
+<div class="wf-connector">
+
+</div>
+<div class="wf-step">
+<div class="wf-num">
+3
+</div>
+<div class="wf-body">
+<span class="wf-title">Build figures to VVN standards</span><span class="wf-desc">Every chart and map needs a title, subtitle, and source line. Use <code>theme_vvn()</code> and VVN palettes. See <a href="./charts.html">Charts</a> and <a href="./maps.html">Maps</a> for full rules.</span>
+</div>
+</div>
+<div class="wf-connector">
+
+</div>
+<div class="wf-step">
+<div class="wf-num">
+4
+</div>
+<div class="wf-body">
+<span class="wf-title">Configure filters</span><span class="wf-desc">Every filter needs a bold label, a tooltip, and a default value. Always pair Apply Filters with a Reset button. See <a href="./filter.html">Filter Controls</a>.</span>
+</div>
+</div>
+<div class="wf-connector">
+
+</div>
+<div class="wf-step wf-step--final">
+<div class="wf-num wf-num--final">
+5
+</div>
+<div class="wf-body">
+<span class="wf-title">Deploy</span><span class="wf-desc">Run <code>rsconnect::deployApp()</code> from the project root. Check the <a href="./checklist.html">Publishing Checklist</a> before deploying.</span>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="required-elements" class="level2">
+<h2 class="anchored" data-anchor-id="required-elements">Required elements</h2>
+<p>Every VVN Dashboard must include all six elements. Use the vvnthemes library functions to build each one.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 23%">
+<col style="width: 25%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Element</th>
+<th>Standard</th>
+<th>Library function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><strong>Navbar</strong></td>
+<td>Full-width VT Maroon <code>#861F41</code>. Project name in white bold. Orange bottom border (3 px).</td>
+<td><code>create_vvn_dashboard()</code></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><strong>KPI Cards</strong></td>
+<td>Max 3 per row. Large value, short label, optional trend. One accent color per card — maroon, orange, or navy.</td>
+<td><code>vvn_kpi_card()</code></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><strong>Sidebar Filters</strong></td>
+<td>260 px wide, <code>#F7F7F7</code> background. Bold label + tooltip on every filter. Apply + Reset buttons required.</td>
+<td><code>vvn_filter()</code>, <code>vvn_slider()</code>, <code>vvn_button()</code></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><strong>Choropleth Map</strong></td>
+<td>County-level Leaflet map. <code>maroon_seq</code> palette. Tooltip with county name and value. Legend inside panel.</td>
+<td><code>vvn_map_style()</code></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><strong>Charts</strong></td>
+<td>White background, VT Maroon titles, VVN palettes, source line in every caption.</td>
+<td><code>theme_vvn()</code>, <code>vvn_source()</code></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td><strong>Footer</strong></td>
+<td>White text on VT Maroon background. Shows “Visualizing Virginia Numbers · Virginia Tech”.</td>
+<td><code>create_vvn_dashboard()</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="design-standards" class="level2">
+<h2 class="anchored" data-anchor-id="design-standards">Design standards</h2>
+<p><strong>Navbar</strong></p>
 <ul>
-<li><strong>Maroon navbar</strong> full width across the top; sidebar is 260 px wide and light gray</li>
-<li><strong>Three KPI cards</strong> per row — one card per key metric, no more</li>
-<li>Every filter set must have a corresponding <strong>Apply Filters</strong> button</li>
-<li>All charts and tables inside the dashboard follow the same title/source/capitalization rules as standalone figures</li>
+<li>Background: VT Maroon <code>#861F41</code> · Bottom border: VT Orange <code>#E5751F</code>, 3 px</li>
+<li>Project name: white, bold, sentence case</li>
+<li>Tab links: <code>rgba(255,255,255,0.9)</code> — never pure white</li>
 </ul>
-</div>
-</div>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>The <strong>Interactive Data Visualizations</strong> dashboard is an R Shiny application that provides an exploratory interface for VVN data. It uses a maroon navigation bar, sidebar filters, KPI summary cards, charts, an interactive county map, and a downloadable data table.</p>
-<p>Use <code>create_vvn_dashboard()</code> from the vvnthemes library to scaffold this structure with one command.</p>
+<p><strong>KPI Cards</strong></p>
+<ul>
+<li>Left border accent: maroon, orange, or navy — one color per card, never mixed in the same row</li>
+<li>Value: 2 rem, bold · Label: 0.82 rem, charcoal, sentence case</li>
+<li>Maximum three cards per row</li>
+</ul>
+<p><strong>Sidebar Filters</strong></p>
+<ul>
+<li>Width: 260 px fixed · Background: <code>#F7F7F7</code></li>
+<li>Every filter must have: a bold label above, a tooltip (ⓘ) explaining what it controls, and a clear default</li>
+<li>Apply Filters button: VT Maroon, full width · Reset button: outline style, directly below Apply</li>
+</ul>
+<p><strong>Map</strong></p>
+<ul>
+<li>Palette: <code>maroon_seq</code> for sequential data, <code>diverging</code> for change or comparison</li>
+<li>County borders: thin white (0.5 px) · Tooltip: county name + formatted value + unit</li>
+<li>Never use a non-VVN palette</li>
+</ul>
+<p><strong>Charts</strong></p>
+<p>Follow all <a href="./charts.html">Chart Standards</a>. Source lines are required on every chart, even inside a dashboard.</p>
+<p><strong>Footer</strong></p>
+<ul>
+<li>Background: VT Maroon <code>#861F41</code> · Text: white, 0.8 rem</li>
+<li>Content: “Visualizing Virginia Numbers · Virginia Tech”</li>
+</ul>
+<hr>
 <blockquote class="blockquote">
-<p>To scaffold and build a dashboard, see the <a href="../vvn-docs/dashboard.html">Dashboard Library →</a></p>
-</blockquote>
-<hr>
-</section>
-<section id="example" class="level2">
-<h2 class="anchored" data-anchor-id="example">Example</h2>
-<div class="example-block">
-<div class="example-caption">
-Dashboard Example — Broadband Access in Virginia
-</div>
-<div class="img-map-wrap">
-<p><img src="images/dashboard.png" class="example-img" alt="Annotated dashboard example with 6 labeled elements."> <a class="img-pin" href="#ann-1" aria-label="Jump to annotation 1" style="left:50%;top:3.4%"></a> <a class="img-pin" href="#ann-2" aria-label="Jump to annotation 2" style="left:54.9%;top:19.9%"></a> <a class="img-pin" href="#ann-3" aria-label="Jump to annotation 3" style="left:6%;top:44.9%"></a> <a class="img-pin" href="#ann-4" aria-label="Jump to annotation 4" style="left:78%;top:50%"></a> <a class="img-pin" href="#ann-5" aria-label="Jump to annotation 5" style="left:32.9%;top:56.9%"></a> <a class="img-pin" href="#ann-6" aria-label="Jump to annotation 6" style="left:50%;top:97.5%"></a></p>
-</div>
-</div>
-<div class="annotation-grid">
-<div id="ann-1" class="annotation-item">
-<span class="ann-num">1</span>
-<div class="ann-body">
-<strong>Navbar — VT Maroon, full width</strong> Background: maroon <code>#861F41</code>. Project name in white bold text. Tab links in white at 90% opacity. Orange bottom border (3px). Navigation tabs clearly labeled.
-</div>
-</div>
-<div id="ann-2" class="annotation-item">
-<span class="ann-num">2</span>
-<div class="ann-body">
-<strong>KPI Cards — Three per row</strong> Large metric value, short label, and optional trend indicator (up/down/flat). Use maroon, orange, or navy — one color per card, consistently applied across the dashboard.
-</div>
-</div>
-<div id="ann-3" class="annotation-item">
-<span class="ann-num">3</span>
-<div class="ann-body">
-<strong>Sidebar Filters — 260px, light gray</strong> Background: <code>#F7F7F7</code>. Contains dropdowns, range sliders, and Apply / Reset buttons. Always label each filter clearly and include a tooltip explaining what it controls.
-</div>
-</div>
-<div id="ann-4" class="annotation-item">
-<span class="ann-num">4</span>
-<div class="ann-body">
-<strong>Choropleth Map — maroon_seq palette</strong> Full-panel interactive Leaflet map on the Map tab. County-level fill. Tooltip shows county name and value. Legend inside panel.
-</div>
-</div>
-<div id="ann-5" class="annotation-item">
-<span class="ann-num">5</span>
-<div class="ann-body">
-<strong>Charts — VVN themes throughout</strong> All charts follow VVN standards: white background, maroon titles, VVN color palettes, source line in caption. Apply <a href="../vvn-docs/vvnthemes.html">vvnthemes →</a> to all.
-</div>
-</div>
-<div id="ann-6" class="annotation-item">
-<span class="ann-num">6</span>
-<div class="ann-body">
-<strong>Footer — Visualizing Virginia Numbers · Virginia Tech</strong> Thin footer bar: white text on maroon background. Include VVN name and Virginia Tech affiliation.
-</div>
-</div>
-</div>
-<hr>
-</section>
-<section id="tab-structure" class="level2">
-<h2 class="anchored" data-anchor-id="tab-structure">Tab Structure</h2>
-<p>The dashboard template has four tabs. Each tab has a defined purpose and required elements.</p>
-<section id="tab-1-overview" class="level3">
-<h3 class="anchored" data-anchor-id="tab-1-overview">Tab 1 — Overview</h3>
-<p>The landing page. Combines sidebar filters, KPI cards, and charts into a single exploratory view.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Element</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Sidebar filters</strong></td>
-<td>At least one dropdown + one range slider. Apply button (maroon, full width) and Reset button (outline) required.</td>
-</tr>
-<tr class="even">
-<td><strong>KPI cards</strong></td>
-<td>3 cards (maroon, orange, navy). Each card needs a value, a short label, and an optional directional trend indicator (up / down / flat) with a comparison period.</td>
-</tr>
-<tr class="odd">
-<td><strong>Trend chart</strong></td>
-<td>Line chart of the primary metric over time. Title (headline case), subtitle (sentence case), and source line required.</td>
-</tr>
-<tr class="even">
-<td><strong>Comparison chart</strong></td>
-<td>Bar or column chart of the latest-year comparison across categories. Title, subtitle, and source line required.</td>
-</tr>
-<tr class="odd">
-<td><strong>Distribution chart</strong></td>
-<td>Histogram or boxplot of the primary metric distribution. Title, subtitle, and source line required.</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tab-2-map" class="level3">
-<h3 class="anchored" data-anchor-id="tab-2-map">Tab 2 — Map</h3>
-<p>Full-panel county-level interactive choropleth map of Virginia.</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Element</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Choropleth map</strong></td>
-<td>Virginia county-level Leaflet map. Projection: WGS84 (CRS 4326). Use <code>maroon_seq</code> for sequential data; <code>diverging</code> for above/below-average data. See <a href="../vvn-docs/maps.html">Map Library →</a></td>
-</tr>
-<tr class="even">
-<td><strong>Legend</strong></td>
-<td>Value breaks clearly labeled; placed inside the map panel.</td>
-</tr>
-<tr class="odd">
-<td><strong>Tooltip</strong></td>
-<td>County name, metric value, and data range on hover. Format values consistently (e.g., “45.2%”, “$129,456”).</td>
-</tr>
-<tr class="even">
-<td><strong>Variable selector</strong></td>
-<td>Allow users to switch the mapped variable. The map panel header must name the variable displayed.</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tab-3-data" class="level3">
-<h3 class="anchored" data-anchor-id="tab-3-data">Tab 3 — Data</h3>
-<p>Downloadable, searchable table of the underlying data.</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Element</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Interactive data table</strong></td>
-<td>Paginated, searchable, sortable DT table. Responds to sidebar filters. Include only relevant columns — no raw IDs or processing artifacts. See <a href="../vvn-docs/tables.html">Table Library →</a></td>
-</tr>
-<tr class="even">
-<td><strong>CSV download</strong></td>
-<td>Download button for the filtered dataset.</td>
-</tr>
-<tr class="odd">
-<td><strong>Excel download</strong></td>
-<td>Download button for the filtered dataset.</td>
-</tr>
-<tr class="even">
-<td><strong>Column formatting</strong></td>
-<td>Numbers right-aligned; text left-aligned. Column headings use sentence capitalization. Apply color-bar to the primary numeric column for visual scanning.</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="tab-4-about" class="level3">
-<h3 class="anchored" data-anchor-id="tab-4-about">Tab 4 — About</h3>
-<p>Project documentation for transparency and reproducibility.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Element</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Project description</strong></td>
-<td>1–2 paragraphs explaining the dashboard’s purpose and audience.</td>
-</tr>
-<tr class="even">
-<td><strong>Data sources</strong></td>
-<td>Bulleted list with full citations for all data used.</td>
-</tr>
-<tr class="odd">
-<td><strong>Methods</strong></td>
-<td>Brief description of any data processing or analytical decisions.</td>
-</tr>
-<tr class="even">
-<td><strong>Contact</strong></td>
-<td>VVN contact email or link.</td>
-</tr>
-</tbody>
-</table>
-<hr>
-</section>
-</section>
-<section id="filter-panel-requirements" class="level2">
-<h2 class="anchored" data-anchor-id="filter-panel-requirements">Filter Panel Requirements</h2>
-<div class="example-block">
-<div class="example-caption">
-Filter Panel Example — Sidebar Filter Controls
-</div>
-<div class="img-map-wrap">
-<p><img src="images/filter.png" class="example-img" alt="Annotated filter panel example with 4 labeled elements."> <a class="img-pin" href="#ann-f1" aria-label="Jump to annotation 1" style="left:13%;top:7.5%"></a> <a class="img-pin" href="#ann-f2" aria-label="Jump to annotation 2" style="left:62%;top:25.5%"></a> <a class="img-pin" href="#ann-f3" aria-label="Jump to annotation 3" style="left:13%;top:30%"></a> <a class="img-pin" href="#ann-f4" aria-label="Jump to annotation 4" style="left:13%;top:87.5%"></a></p>
-</div>
-</div>
-<div class="annotation-grid">
-<div id="ann-f1" class="annotation-item">
-<span class="ann-num">1</span>
-<div class="ann-body">
-<strong>Filter header — Maroon <code>#861F41</code></strong> “Filters” label in white bold text. Include a Clear All reset link and funnel icon. Full-width maroon header bar.
-</div>
-</div>
-<div id="ann-f2" class="annotation-item">
-<span class="ann-num">2</span>
-<div class="ann-body">
-<strong>Dropdown — Clear label + info tooltip</strong> Each filter has a bold label above the input and an ⓘ icon that opens a tooltip explaining what the filter does and how data updates annually.
-</div>
-</div>
-<div id="ann-f3" class="annotation-item">
-<span class="ann-num">3</span>
-<div class="ann-body">
-<strong>Info tooltip — Explain each filter</strong> Always include a tooltip on each filter explaining what it controls, what the choices mean, and when the data was last updated.
-</div>
-</div>
-<div id="ann-f4" class="annotation-item">
-<span class="ann-num">4</span>
-<div class="ann-body">
-<strong>Apply Filters button — Maroon, full width</strong> Primary action button. Always pair with a Reset button directly below in outline style. Use <a href="../vvn-docs/interactive-components.html">Interactive Component Library →</a>
-</div>
-</div>
-</div>
-<blockquote class="blockquote">
-<p>For the full annotated scaffolding, filter components, and KPI card options, see the <a href="../vvn-docs/dashboard.html">Dashboard Library →</a> and <a href="../vvn-docs/interactive-components.html">Interactive Components →</a></p>
+<p>For the full annotated scaffold and deployment guide, see the <a href="https://yujuangao.github.io/VVN/dashboard.html">Dashboard Library →</a></p>
 </blockquote>
 
 
 </section>
 
 </main> <!-- /main -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // ── Subtitle in right TOC sidebar ──────────────────────────────────────────
+  var sub = document.querySelector('.quarto-title .subtitle');
+  if (sub) {
+    var sidebar = document.getElementById('quarto-margin-sidebar');
+    if (sidebar) {
+      var desc = document.createElement('p');
+      desc.className = 'toc-page-desc';
+      desc.textContent = sub.textContent.trim();
+      sidebar.insertBefore(desc, sidebar.firstChild);
+    }
+  }
+
+  // ── Page indicator bar below main navbar ───────────────────────────────────
+  var header = document.getElementById('quarto-header');
+  if (!header) return;
+
+  // Get page name from active sidebar link, falling back to page h1
+  var activeLink = document.querySelector('#quarto-sidebar .sidebar-link.active');
+  var pageName = activeLink ? activeLink.textContent.trim() : '';
+  if (!pageName) {
+    var h1 = document.querySelector('.quarto-title h1, h1.title');
+    if (h1) pageName = h1.textContent.trim();
+  }
+  if (!pageName) return;
+
+  var bar = document.createElement('div');
+  bar.id = 'page-indicator-bar';
+  bar.textContent = pageName;
+  header.appendChild(bar);
+
+  var barH = bar.offsetHeight || 32;
+  var currentPad = parseInt(window.getComputedStyle(document.body).paddingTop) || 0;
+  document.body.style.paddingTop = (currentPad + barH) + 'px';
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

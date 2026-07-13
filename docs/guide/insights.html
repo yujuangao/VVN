@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b8bdc80a46a6cdbbd6973c63cd148879.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b4f26b52904c7f2a7cbfa93fd5b329a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -137,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dashboard.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Dashboard</span></a>
+ <span class="menu-text">Interactive Data Visualizations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -181,6 +181,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Tables</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./filter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter Controls</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -196,12 +202,12 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
-  <li><a href="#document-structure" id="toc-document-structure" class="nav-link" data-scroll-target="#document-structure">Document Structure</a></li>
+  <li><a href="#how-to-create-a-vvn-insight" id="toc-how-to-create-a-vvn-insight" class="nav-link active" data-scroll-target="#how-to-create-a-vvn-insight">How to create a VVN Insight</a></li>
+  <li><a href="#required-elements" id="toc-required-elements" class="nav-link" data-scroll-target="#required-elements">Required elements</a></li>
+  <li><a href="#design-standards" id="toc-design-standards" class="nav-link" data-scroll-target="#design-standards">Design standards</a></li>
   </ul>
 </nav>
     </div>
@@ -228,161 +234,207 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Key Rules at a Glance
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><strong>Lead with the finding</strong> — state the most important result in the first paragraph</li>
-<li>Reference every figure in the text <strong>before</strong> it appears: “Figure 1 shows…”</li>
-<li>Search for <code>[</code> before publishing — no placeholder text in the final output</li>
-<li>Insights are for <strong>reading</strong>, not exploration — use the Dashboard for interactive filtering</li>
-</ul>
-</div>
-</div>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>A <strong>VVN Insight</strong> is a Quarto HTML document that tells a data story. It combines a narrative with charts, an interactive map, and a summary table — all styled to the VVN design standard. Insights are designed for reading, not exploration.</p>
-<p>Use <code>create_vvn_story()</code> from the vvnthemes library to scaffold this structure with one command.</p>
-<blockquote class="blockquote">
-<p>To scaffold and build a VVN Insight, see the <a href="../vvn-docs/vvn-insight.html">VVN Insight Library →</a></p>
-</blockquote>
+<p><strong>VVN Insights</strong> is a Quarto HTML document that tells one data story. It combines a written narrative with charts, an interactive county map, and a summary table — all styled to the VVN design standard.</p>
+<p>Use it when you want readers to <strong>follow a single argument</strong> from beginning to end. For interactive data exploration with filters, use <a href="./dashboard.html">Interactive Data Visualizations</a> instead.</p>
 <hr>
-</section>
-<section id="example" class="level2">
-<h2 class="anchored" data-anchor-id="example">Example</h2>
-<div class="example-block">
-<div class="example-caption">
-VVN Insights Example — Broadband Access Across Virginia’s Counties
+<section id="how-to-create-a-vvn-insight" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-create-a-vvn-insight">How to create a VVN Insight</h2>
+<div class="wf-flow">
+<div class="wf-step">
+<div class="wf-num">
+1
 </div>
-<div class="img-map-wrap">
-<p><img src="images/vvn-insights.png" class="example-img" alt="Annotated VVN Insights example with 7 labeled elements."> <a class="img-pin" href="#ann-1" aria-label="Jump to annotation 1" style="left:25%;top:3.9%"></a> <a class="img-pin" href="#ann-2" aria-label="Jump to annotation 2" style="left:35%;top:10%"></a> <a class="img-pin" href="#ann-3" aria-label="Jump to annotation 3" style="left:14%;top:18%"></a> <a class="img-pin" href="#ann-4" aria-label="Jump to annotation 4" style="left:71.9%;top:31.9%"></a> <a class="img-pin" href="#ann-5" aria-label="Jump to annotation 5" style="left:25%;top:47.9%"></a> <a class="img-pin" href="#ann-6" aria-label="Jump to annotation 6" style="left:21.9%;top:61.9%"></a> <a class="img-pin" href="#ann-7" aria-label="Jump to annotation 7" style="left:72%;top:68%"></a></p>
+<div class="wf-body">
+<span class="wf-title">Scaffold the project</span><span class="wf-desc">Run one command in R. The library creates the full folder, styles, and placeholder content — the document renders immediately with no setup.</span>
+<div class="wf-links">
+<a class="wf-link" href="https://yujuangao.github.io/VVN/vvn-insight.html">VVN Insight Library →</a>
 </div>
-</div>
-<div class="annotation-grid">
-<div id="ann-1" class="annotation-item">
-<span class="ann-num">1</span>
-<div class="ann-body">
-<strong>Hero banner — Full-width maroon</strong> Background: VT Maroon <code>#861F41</code>. Contains “VVN INSIGHTS” label in small caps, the full insight title in white bold (headline case), and a one-sentence description of the topic and geography. Subtitle reads “Visualizing Virginia Numbers · Virginia Tech” at 70% white opacity.
+
 </div>
 </div>
-<div id="ann-2" class="annotation-item">
-<span class="ann-num">2</span>
-<div class="ann-body">
-<strong>Headline — White, headline case, bold</strong> States the topic and scope. Example: “Broadband Access Across Virginia’s Counties.” Should communicate the subject immediately.
+<div class="wf-connector">
+
+</div>
+<div class="wf-step">
+<div class="wf-num">
+2
+</div>
+<div class="wf-body">
+<span class="wf-title">Load your data</span><span class="wf-desc">Replace the sample data at the top of <code>index.qmd</code> with your own CSV. Your data frame needs at minimum: <code>fips</code> (character), <code>county</code> (character), <code>year</code> (integer), and <code>value</code> (numeric).</span>
 </div>
 </div>
-<div id="ann-3" class="annotation-item">
-<span class="ann-num">3</span>
-<div class="ann-body">
-<strong>Publication date and source tag</strong> Publication date and primary data source appear below the headline. Include the dataset name and vintage year.
+<div class="wf-connector">
+
+</div>
+<div class="wf-step">
+<div class="wf-num">
+3
+</div>
+<div class="wf-body">
+<span class="wf-title">Write the narrative</span><span class="wf-desc">Replace every <code>[placeholder]</code> with your content. Lead with the key finding. Reference every figure in the text before it appears (“Figure 1 shows…”). Keep paragraphs to 3–4 sentences.</span>
 </div>
 </div>
-<div id="ann-4" class="annotation-item">
-<span class="ann-num">4</span>
-<div class="ann-body">
-<strong>Choropleth map — County level</strong> Primary geographic visualization. Uses <code>maroon_seq</code> palette. Interactive with tooltip showing county name and value. Referenced in the surrounding text.
+<div class="wf-connector">
+
+</div>
+<div class="wf-step">
+<div class="wf-num">
+4
+</div>
+<div class="wf-body">
+<span class="wf-title">Build figures to VVN standards</span><span class="wf-desc">Every chart and map needs a title, subtitle, and source line. Use <code>theme_vvn()</code>, VVN palettes, and <code>vvn_source()</code>. See <a href="./charts.html">Charts</a> and <a href="./maps.html">Maps</a> for full rules.</span>
 </div>
 </div>
-<div id="ann-5" class="annotation-item">
-<span class="ann-num">5</span>
-<div class="ann-body">
-<strong>KPI callout — Orange accent</strong> Key statistics highlighted in orange callout boxes. Use for the most important numbers only. Example: “76% of Virginia households have broadband.”
+<div class="wf-connector">
+
 </div>
+<div class="wf-step wf-step--final">
+<div class="wf-num wf-num--final">
+5
 </div>
-<div id="ann-6" class="annotation-item">
-<span class="ann-num">6</span>
-<div class="ann-body">
-<strong>Narrative — Left-aligned, structured sections</strong> Body text in Charcoal <code>#3D3D3D</code>. Short paragraphs, 3–4 sentences. Clear section headings in sentence case. Every figure referenced in the text before it appears.
-</div>
-</div>
-<div id="ann-7" class="annotation-item annotation-item-orange">
-<span class="ann-num">7</span>
-<div class="ann-body">
-<strong>Source line — Required on every figure</strong> Every chart, map, and table must have a source line below it. Format: “Source: [Agency, Dataset, Year]. [Percentage note or additional detail].”
+<div class="wf-body">
+<span class="wf-title">Render and publish</span><span class="wf-desc">Run <code>quarto render index.qmd</code>. Make sure <code>embed-resources: true</code> is set in the YAML so the output is a single self-contained HTML file. Check the <a href="./checklist.html">Publishing Checklist</a> before sharing.</span>
 </div>
 </div>
 </div>
 <hr>
 </section>
-<section id="document-structure" class="level2">
-<h2 class="anchored" data-anchor-id="document-structure">Document Structure</h2>
-<p>Every VVN Insight must follow this section order:</p>
+<section id="required-elements" class="level2">
+<h2 class="anchored" data-anchor-id="required-elements">Required elements</h2>
+<p>Every VVN Insight must include all seven elements. Use the vvnthemes library functions to build each one.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 6%">
-<col style="width: 20%">
+<col style="width: 7%">
 <col style="width: 23%">
-<col style="width: 48%">
+<col style="width: 26%">
+<col style="width: 42%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>#</th>
-<th>Section</th>
-<th style="text-align: center;">Required</th>
-<th>Content Requirements</th>
+<th>Element</th>
+<th>Standard</th>
+<th>Library / tool</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td><strong>Hero Banner</strong></td>
-<td style="text-align: center;">Yes</td>
-<td>“VVN INSIGHTS” label · headline (headline case) · one-sentence description of topic and geography · “Visualizing Virginia Numbers · Virginia Tech” in subtitle</td>
+<td><strong>Hero banner</strong></td>
+<td>Full-width VT Maroon <code>#861F41</code>. “VVN INSIGHTS” label in small caps; title in white bold, headline case; one-sentence description below.</td>
+<td><code>create_vvn_story()</code></td>
 </tr>
 <tr class="even">
 <td>2</td>
-<td><strong>Key Finding</strong></td>
-<td style="text-align: center;">Yes</td>
-<td>1–2 sentences · state the metric, geography, time period, and direction of change · use blockquote (<code>&gt;</code>) or <code>:::{.callout-important}</code> · bold the key number</td>
+<td><strong>Headline</strong></td>
+<td>White, headline case, bold. States topic and geographic scope in one line.</td>
+<td><code>create_vvn_story()</code></td>
 </tr>
 <tr class="odd">
 <td>3</td>
-<td><strong>Background</strong></td>
-<td style="text-align: center;">Yes</td>
-<td>Why this topic matters for Virginia · policy relevance · the specific question this Insight addresses · intended audience (policymakers, advocates, community organizations)</td>
+<td><strong>Date &amp; source tag</strong></td>
+<td>Publication date + primary data source below the headline. Include dataset name and vintage year.</td>
+<td><code>create_vvn_story()</code></td>
 </tr>
 <tr class="even">
 <td>4</td>
-<td><strong>Data &amp; Methods</strong></td>
-<td style="text-align: center;">Yes</td>
-<td>Data source table (Source, Geography, Period, Variable) · callout noting caveats or comparability issues</td>
+<td><strong>Choropleth map</strong></td>
+<td>County-level interactive Leaflet map. <code>maroon_seq</code> palette. Tooltip: county name + value. Referenced in text before it appears.</td>
+<td><code>vvn_map_style()</code></td>
 </tr>
 <tr class="odd">
 <td>5</td>
-<td><strong>Findings</strong></td>
-<td style="text-align: center;">Yes</td>
-<td>Subsections by theme · each subsection: heading (sentence case) + 1–3 paragraphs + at least one figure · minimum: <strong>2 charts</strong>, <strong>1 map</strong>, <strong>1 summary table</strong> · every figure referenced in text before it appears</td>
+<td><strong>KPI callouts</strong></td>
+<td>Key statistics highlighted in callout boxes. Use sparingly — only the most important 2–3 numbers.</td>
+<td><code>vvn_kpi_card()</code></td>
 </tr>
 <tr class="even">
 <td>6</td>
-<td><strong>Discussion</strong></td>
-<td style="text-align: center;">Yes</td>
-<td>Interpretation of findings · connection to prior research or policy context · equity implications · limitations (data gaps, geography, causal claims)</td>
+<td><strong>Narrative sections</strong></td>
+<td>Short paragraphs (3–4 sentences). Section headings in sentence case. Sections: Overview, Background, Data &amp; Methods, Findings, Discussion, Conclusion.</td>
+<td>Quarto markdown</td>
 </tr>
 <tr class="odd">
 <td>7</td>
-<td><strong>Conclusion</strong></td>
-<td style="text-align: center;">Yes</td>
-<td>2–3 sentence takeaway · policy implication or future work direction · VVN contact info and Virginia Tech attribution</td>
+<td><strong>Source lines</strong></td>
+<td>Required on every figure. Format: “Source: [Agency, Dataset, Year].”</td>
+<td><code>vvn_source()</code></td>
 </tr>
 </tbody>
 </table>
-<p>See <a href="./charts.html">Chart Standards →</a> · <a href="./maps.html">Map Standards →</a> · <a href="./tables.html">Table Standards →</a></p>
+<hr>
+</section>
+<section id="design-standards" class="level2">
+<h2 class="anchored" data-anchor-id="design-standards">Design standards</h2>
+<p><strong>Hero banner</strong></p>
+<ul>
+<li>Background: VT Maroon <code>#861F41</code></li>
+<li>“VVN INSIGHTS” label: small caps, 0.75 rem, <code>rgba(255,255,255,0.75)</code></li>
+<li>Title: white, bold, headline case, max 2 lines</li>
+<li>Description: white, sentence case, 1 rem</li>
+</ul>
+<p><strong>Narrative</strong></p>
+<ul>
+<li>Lead with the key finding — state the main result in the first paragraph</li>
+<li>Every figure must be referenced in the text before it appears: “Figure 1 shows that …”</li>
+<li>Paragraphs: 3–4 sentences maximum</li>
+<li>Section headings: sentence case (<code>##</code> level)</li>
+<li>Include sections for: Overview · Background · Data &amp; Methods · Findings · Discussion · Conclusion</li>
+</ul>
+<p><strong>Figures</strong></p>
+<p>Follow all <a href="./charts.html">Chart Standards</a> and <a href="./maps.html">Map Standards</a>. Source lines are required on every figure without exception.</p>
+<p><strong>KPI callouts</strong></p>
+<ul>
+<li>Use only for the 2–3 most important statistics</li>
+<li>Orange accent (<code>#E5751F</code>) for emphasis</li>
+<li>Never use KPI callouts in place of a proper explanation in the narrative</li>
+</ul>
+<hr>
 <blockquote class="blockquote">
-<p>For the full annotated scaffolding with all sections pre-built, see the <a href="../vvn-docs/vvn-insight.html">VVN Insight Library →</a></p>
+<p>For the full annotated scaffold with all sections pre-built, see the <a href="https://yujuangao.github.io/VVN/vvn-insight.html">VVN Insight Library →</a></p>
 </blockquote>
 
 
 </section>
 
 </main> <!-- /main -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // ── Subtitle in right TOC sidebar ──────────────────────────────────────────
+  var sub = document.querySelector('.quarto-title .subtitle');
+  if (sub) {
+    var sidebar = document.getElementById('quarto-margin-sidebar');
+    if (sidebar) {
+      var desc = document.createElement('p');
+      desc.className = 'toc-page-desc';
+      desc.textContent = sub.textContent.trim();
+      sidebar.insertBefore(desc, sidebar.firstChild);
+    }
+  }
+
+  // ── Page indicator bar below main navbar ───────────────────────────────────
+  var header = document.getElementById('quarto-header');
+  if (!header) return;
+
+  // Get page name from active sidebar link, falling back to page h1
+  var activeLink = document.querySelector('#quarto-sidebar .sidebar-link.active');
+  var pageName = activeLink ? activeLink.textContent.trim() : '';
+  if (!pageName) {
+    var h1 = document.querySelector('.quarto-title h1, h1.title');
+    if (h1) pageName = h1.textContent.trim();
+  }
+  if (!pageName) return;
+
+  var bar = document.createElement('div');
+  bar.id = 'page-indicator-bar';
+  bar.textContent = pageName;
+  header.appendChild(bar);
+
+  var barH = bar.offsetHeight || 32;
+  var currentPad = parseInt(window.getComputedStyle(document.body).paddingTop) || 0;
+  document.body.style.paddingTop = (currentPad + barH) + 'px';
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

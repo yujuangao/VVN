@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b8bdc80a46a6cdbbd6973c63cd148879.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b4f26b52904c7f2a7cbfa93fd5b329a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -75,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light">
+<body class="nav-sidebar docked nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -137,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dashboard.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Dashboard</span></a>
+ <span class="menu-text">Interactive Data Visualizations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -181,6 +181,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Tables</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./filter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter Controls</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -194,17 +200,7 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#what-are-you-building" id="toc-what-are-you-building" class="nav-link active" data-scroll-target="#what-are-you-building">What Are You Building?</a></li>
-  <li><a href="#how-to-build-a-vvn-product" id="toc-how-to-build-a-vvn-product" class="nav-link" data-scroll-target="#how-to-build-a-vvn-product">How to Build a VVN Product</a></li>
-  <li><a href="#design-reference" id="toc-design-reference" class="nav-link" data-scroll-target="#design-reference">Design Reference</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -233,38 +229,35 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <section id="vvn-style-guide" class="level1">
 <h1>VVN Style Guide</h1>
-<p>The definitive design standard for every product published under the Visualizing Virginia Numbers initiative at Virginia Tech.</p>
+<p>Design standards for every dashboard and report published by the Visualizing Virginia Numbers initiative.</p>
 </section>
 </div>
-<p>This guide defines the design and content standards for every VVN dashboard and Insight post. <strong>Start by choosing your product type below, then follow the 6-step workflow.</strong> Use the sidebar to find standards for specific components — charts, maps, tables, and brand.</p>
-<hr>
 <section id="what-are-you-building" class="level2">
-<h2 class="anchored" data-anchor-id="what-are-you-building">What Are You Building?</h2>
-<p>VVN produces two types of products. Choose yours to begin:</p>
+<h2 class="anchored" data-anchor-id="what-are-you-building">What are you building?</h2>
+<p>VVN produces two types of products. Each has its own page in this guide.</p>
 <div class="card-grid">
 <section id="dashboard" class="level3 vvn-card vvn-card-orange">
 <h3 class="anchored" data-anchor-id="dashboard">Dashboard</h3>
-<p>An interactive R Shiny application — maroon navbar, sidebar filters, KPI cards, charts, a county choropleth map, and a searchable data table.</p>
+<p>An interactive R Shiny application — filters, KPI cards, charts, a county map, and a data table. Built for exploration.</p>
 <p><a href="./dashboard.html" class="card-link">Dashboard Standards →</a></p>
 </section>
 <section id="vvn-insights" class="level3 vvn-card vvn-card-navy">
 <h3 class="anchored" data-anchor-id="vvn-insights">VVN Insights</h3>
-<p>A Quarto HTML document that tells a data story — hero banner, narrative, charts, an interactive map, and a summary table. Built for reading, not filtering.</p>
+<p>A Quarto HTML document — hero banner, narrative, charts, a map, and a summary table. Built for reading.</p>
 <p><a href="./insights.html" class="card-link">Insights Standards →</a></p>
 </section>
 </div>
 <hr>
 </section>
 <section id="how-to-build-a-vvn-product" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-build-a-vvn-product">How to Build a VVN Product</h2>
-<p>Follow these six steps in order — every step links to the relevant section of this guide or the R Library.</p>
+<h2 class="anchored" data-anchor-id="how-to-build-a-vvn-product">How to build a VVN product</h2>
 <div class="wf-flow">
 <div class="wf-step">
 <div class="wf-num">
 1
 </div>
 <div class="wf-body">
-<span class="wf-title">Choose your project type</span><span class="wf-desc">Dashboards are for <strong>exploration</strong> — interactive filtering, maps, and KPI cards. VVN Insights are for <strong>reading</strong> — a narrative data story with figures.</span><span class="wf-links"><a class="wf-link wf-link--orange" href="./dashboard.html">Dashboard →</a><a class="wf-link wf-link--navy" href="./insights.html">VVN Insights →</a></span>
+<span class="wf-title">Choose your product type</span><span class="wf-desc">Use a <strong>Dashboard</strong> when users need to filter and explore data interactively. Use <strong>VVN Insights</strong> when you are telling a single data story for reading.</span><span class="wf-links"><a class="wf-link wf-link--orange" href="./dashboard.html">Dashboard →</a><a class="wf-link wf-link--navy" href="./insights.html">VVN Insights →</a></span>
 </div>
 </div>
 <div class="wf-connector">
@@ -275,7 +268,7 @@ ul.task-list li input[type="checkbox"] {
 2
 </div>
 <div class="wf-body">
-<span class="wf-title">Scaffold with the VVN library</span><span class="wf-desc">One R command from the vvnthemes library creates the project with all required files, folders, styles, and placeholder content already in place.</span><span class="wf-links"><a class="wf-link" href="https://yujuangao.github.io/VVN/dashboard.html">Dashboard Library →</a><a class="wf-link" href="https://yujuangao.github.io/VVN/vvn-insight.html">VVN Insight Library →</a></span>
+<span class="wf-title">Scaffold with the vvnthemes library</span><span class="wf-desc">One R command creates the full project — all files, folders, styles, and placeholder content already in place. No setup required.</span><span class="wf-links"><a class="wf-link" href="https://yujuangao.github.io/VVN/dashboard.html">Dashboard Library →</a><a class="wf-link" href="https://yujuangao.github.io/VVN/vvn-insight.html">VVN Insight Library →</a></span>
 </div>
 </div>
 <div class="wf-connector">
@@ -286,7 +279,7 @@ ul.task-list li input[type="checkbox"] {
 3
 </div>
 <div class="wf-body">
-<span class="wf-title">Load and prepare your data</span><span class="wf-desc">Store raw files in <code>data/</code>. All cleaning and derived variables go in the data prep script — not in chart code. Document every source.</span>
+<span class="wf-title">Load and prepare your data</span><span class="wf-desc">Store raw files in <code>data/</code>. All cleaning and derived variables belong in the data prep script — not in chart code. Document every source.</span>
 </div>
 </div>
 <div class="wf-connector">
@@ -297,7 +290,7 @@ ul.task-list li input[type="checkbox"] {
 4
 </div>
 <div class="wf-body">
-<span class="wf-title">Build figures following VVN standards</span><span class="wf-desc">Every chart, map, and table needs a <strong>title</strong> (headline case), <strong>subtitle</strong> (sentence case), and <strong>source line</strong>. Apply <code>theme_vvn()</code> and VVN palettes to all figures — never use off-palette colors.</span><span class="wf-links"><a class="wf-link" href="./charts.html">Charts →</a><a class="wf-link" href="./maps.html">Maps →</a><a class="wf-link" href="./tables.html">Tables →</a><a class="wf-link" href="./brand.html">Brand →</a></span>
+<span class="wf-title">Build figures following VVN standards</span><span class="wf-desc">Every chart, map, and table requires a title (headline case), subtitle (sentence case), and source line. Apply <code>theme_vvn()</code> and VVN palettes — never use off-palette colors.</span><span class="wf-links"><a class="wf-link" href="./charts.html">Charts →</a><a class="wf-link" href="./maps.html">Maps →</a><a class="wf-link" href="./tables.html">Tables →</a></span>
 </div>
 </div>
 <div class="wf-connector">
@@ -308,7 +301,7 @@ ul.task-list li input[type="checkbox"] {
 5
 </div>
 <div class="wf-body">
-<span class="wf-title">Write the narrative</span><span class="wf-desc">Lead with the key finding. Reference every figure in the text before it appears (“Figure 1 shows…”). Keep paragraphs to 3–4 sentences. Include background, methods, and limitations.</span>
+<span class="wf-title">Write the narrative</span><span class="wf-desc">Lead with the key finding. Reference every figure in the text before it appears. Keep paragraphs to 3–4 sentences. Include background, methods, and limitations.</span>
 </div>
 </div>
 <div class="wf-connector">
@@ -319,45 +312,87 @@ ul.task-list li input[type="checkbox"] {
 6
 </div>
 <div class="wf-body">
-<span class="wf-title">Publish</span><span class="wf-desc"><strong>Dashboard:</strong> deploy via <code>rsconnect::deployApp()</code> &nbsp;·&nbsp; <strong>VVN Insight:</strong> run <code>quarto render index.qmd</code> with <code>embed-resources: true</code> in the YAML.</span><span class="wf-links"><a class="wf-link" href="https://yujuangao.github.io/VVN/dashboard.html">Dashboard Library →</a><a class="wf-link" href="https://yujuangao.github.io/VVN/vvn-insight.html">VVN Insight Library →</a></span>
+<span class="wf-title">Publish</span><span class="wf-desc"><strong>Dashboard:</strong> deploy with <code>rsconnect::deployApp()</code> &nbsp;·&nbsp; <strong>VVN Insight:</strong> render with <code>quarto render index.qmd</code> and <code>embed-resources: true</code>.</span><span class="wf-links"><a class="wf-link" href="./checklist.html">Publishing Checklist →</a></span>
 </div>
 </div>
 </div>
 <hr>
 </section>
-<section id="design-reference" class="level2">
-<h2 class="anchored" data-anchor-id="design-reference">Design Reference</h2>
-<p>Every figure in both products must follow these standards:</p>
-<div class="card-grid">
-<section id="brand" class="level3 vvn-card">
-<h3 class="anchored" data-anchor-id="brand">Brand</h3>
-<p>Colors, typography, and logo usage — the visual foundation every VVN product is built on.</p>
-<p><a href="./brand.html" class="card-link">Brand Guidelines →</a></p>
-</section>
-<section id="charts" class="level3 vvn-card">
-<h3 class="anchored" data-anchor-id="charts">Charts</h3>
-<p>Bar, line, scatter, histogram, and boxplot standards with annotated examples.</p>
-<p><a href="./charts.html" class="card-link">Chart Standards →</a></p>
-</section>
-<section id="maps" class="level3 vvn-card">
-<h3 class="anchored" data-anchor-id="maps">Maps</h3>
-<p>Choropleth, point, and interactive map standards with annotated examples.</p>
-<p><a href="./maps.html" class="card-link">Map Standards →</a></p>
-</section>
-<section id="tables" class="level3 vvn-card">
-<h3 class="anchored" data-anchor-id="tables">Tables</h3>
-<p>Summary and data table standards with annotated examples.</p>
-<p><a href="./tables.html" class="card-link">Table Standards →</a></p>
-</section>
-</div>
-<blockquote class="blockquote">
-<p>For R functions, code templates, and implementation details, see the <a href="https://yujuangao.github.io/VVN/">VVN R Library Documentation →</a></p>
-</blockquote>
+<section id="design-standards" class="level2">
+<h2 class="anchored" data-anchor-id="design-standards">Design standards</h2>
+<p>Use the sidebar to find standards for each component. Every figure in both products must follow these rules.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Standard</th>
+<th>Applies to</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="./brand.html">Brand</a> — colors, typography, logo</td>
+<td>All products</td>
+</tr>
+<tr class="even">
+<td><a href="./charts.html">Charts</a> — titles, axes, palettes, source lines</td>
+<td>Dashboards + Insights</td>
+</tr>
+<tr class="odd">
+<td><a href="./maps.html">Maps</a> — choropleth, legend, basemap</td>
+<td>Dashboards + Insights</td>
+</tr>
+<tr class="even">
+<td><a href="./tables.html">Tables</a> — headers, alignment, source notes</td>
+<td>Dashboards + Insights</td>
+</tr>
+<tr class="odd">
+<td><a href="./filter.html">Filter Controls</a> — labels, tooltips, Apply/Reset</td>
+<td>Dashboards only</td>
+</tr>
+</tbody>
+</table>
 
 
 </section>
 
 </main> <!-- /main -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // ── Subtitle in right TOC sidebar ──────────────────────────────────────────
+  var sub = document.querySelector('.quarto-title .subtitle');
+  if (sub) {
+    var sidebar = document.getElementById('quarto-margin-sidebar');
+    if (sidebar) {
+      var desc = document.createElement('p');
+      desc.className = 'toc-page-desc';
+      desc.textContent = sub.textContent.trim();
+      sidebar.insertBefore(desc, sidebar.firstChild);
+    }
+  }
+
+  // ── Page indicator bar below main navbar ───────────────────────────────────
+  var header = document.getElementById('quarto-header');
+  if (!header) return;
+
+  // Get page name from active sidebar link, falling back to page h1
+  var activeLink = document.querySelector('#quarto-sidebar .sidebar-link.active');
+  var pageName = activeLink ? activeLink.textContent.trim() : '';
+  if (!pageName) {
+    var h1 = document.querySelector('.quarto-title h1, h1.title');
+    if (h1) pageName = h1.textContent.trim();
+  }
+  if (!pageName) return;
+
+  var bar = document.createElement('div');
+  bar.id = 'page-indicator-bar';
+  bar.textContent = pageName;
+  header.appendChild(bar);
+
+  var barH = bar.offsetHeight || 32;
+  var currentPad = parseInt(window.getComputedStyle(document.body).paddingTop) || 0;
+  document.body.style.paddingTop = (currentPad + barH) + 'px';
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b8bdc80a46a6cdbbd6973c63cd148879.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b4f26b52904c7f2a7cbfa93fd5b329a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -137,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dashboard.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Dashboard</span></a>
+ <span class="menu-text">Interactive Data Visualizations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -181,6 +181,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Tables</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./filter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter Controls</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -196,12 +202,12 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
-  <li><a href="#table-types" id="toc-table-types" class="nav-link" data-scroll-target="#table-types">Table Types</a></li>
+  <li><a href="#required-elements" id="toc-required-elements" class="nav-link" data-scroll-target="#required-elements">Required elements</a></li>
+  <li><a href="#design-standards" id="toc-design-standards" class="nav-link" data-scroll-target="#design-standards">Design standards</a></li>
   </ul>
 </nav>
     </div>
@@ -228,132 +234,165 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Key Rules at a Glance
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><strong>Source line required</strong> on every table — no exceptions</li>
-<li>Use <code>—</code> (em dash) for missing values — never leave cells blank</li>
-<li>Table titles: <strong>headline case</strong> · Column headings: <strong>sentence case</strong></li>
-<li>Full-width layout only — never narrow or centered tables</li>
-<li>Maroon header row, alternating light gray body rows</li>
-</ul>
-</div>
-</div>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>VVN tables follow strict style guidelines for font styles, font sizes, number formatting, number alignment, and cell shading. These conventions make VVN tables look specific and consistent across all products.</p>
-<p>As with VVN charts, every table must have a source line.</p>
+<p>VVN tables follow strict formatting rules for font styles, number alignment, and cell shading. These conventions make VVN tables look specific and consistent across all products. Every table must have a source line.</p>
 <blockquote class="blockquote">
-<p>For table functions, styling options, and implementation, see the <a href="../vvn-docs/tables.html">Table Library →</a></p>
+<p>For R functions, gt styling, and implementation, see the <a href="https://yujuangao.github.io/VVN/tables.html">Table Library →</a></p>
 </blockquote>
 <hr>
 </section>
-<section id="example" class="level2">
-<h2 class="anchored" data-anchor-id="example">Example</h2>
-<div class="example-block">
-<div class="example-caption">
-Table Example — Virginia Counties at a Glance (2022)
-</div>
-<div class="img-map-wrap">
-<p><img src="images/table.png" class="example-img" alt="Annotated table example with 6 labeled elements."> <a class="img-pin" href="#ann-1" aria-label="Jump to annotation 1" style="left:20%;top:8.5%"></a> <a class="img-pin" href="#ann-2" aria-label="Jump to annotation 2" style="left:18%;top:16.4%"></a> <a class="img-pin" href="#ann-3" aria-label="Jump to annotation 3" style="left:50%;top:27.4%"></a> <a class="img-pin" href="#ann-4" aria-label="Jump to annotation 4" style="left:78%;top:39.9%"></a> <a class="img-pin" href="#ann-5" aria-label="Jump to annotation 5" style="left:50%;top:50%"></a> <a class="img-pin" href="#ann-6" aria-label="Jump to annotation 6" style="left:20%;top:87.5%"></a></p>
-</div>
-</div>
-<div class="annotation-grid">
-<div id="ann-1" class="annotation-item">
-<span class="ann-num">1</span>
-<div class="ann-body">
-<strong>Title — Headline case, bold</strong> Short and active. Example: “Virginia Counties at a Glance” — not “Table showing Virginia county-level indicators.” Keep to one line where possible.
-</div>
-</div>
-<div id="ann-2" class="annotation-item">
-<span class="ann-num">2</span>
-<div class="ann-body">
-<strong>Subtitle — Sentence case (optional)</strong> States geography and year. Example: “Virginia, 2022 estimates.” Use to add context not captured in the title.
-</div>
-</div>
-<div id="ann-3" class="annotation-item">
-<span class="ann-num">3</span>
-<div class="ann-body">
-<strong>Column header — Maroon background, white text</strong> Maroon <code>#861F41</code> fill, white bold text. Sentence capitalization for standard column headings; headline case for spanner headings (spanning multiple columns); small caps for supra-spanner headings. 1pt black border beneath all column headings and the last row.
-</div>
-</div>
-<div id="ann-4" class="annotation-item">
-<span class="ann-num">4</span>
-<div class="ann-body">
-<strong>Alternating rows — Light gray <code>#F7F7F7</code></strong> Even rows use light gray fill. No internal borders by default. Add row borders (1pt, round dot, <code>#D9D9D9</code>) only when needed for readability. No empty rows or columns.
-</div>
-</div>
-<div id="ann-5" class="annotation-item">
-<span class="ann-num">5</span>
-<div class="ann-body">
-<strong>Cell alignment — Decimal-aligned numbers</strong> Data cells: decimal-aligned, bottom right. Text cells: bottom left. Format numbers consistently within each column (same decimal places). Never mix alignment within a single column.
-</div>
-</div>
-<div id="ann-6" class="annotation-item">
-<span class="ann-num">6</span>
-<div class="ann-body">
-<strong>Source &amp; notes — Required below the table</strong> Source line is mandatory. Format: “Source: [Agency, Dataset, Year].” Notes: define abbreviations (“FPL = federal poverty level”), explain methodology, and flag significance. Missing values: em dash (—) — never blank. Significance: *, †, ‡, § in that order. Use superscript letters to link notes to specific cells.
-</div>
-</div>
-</div>
-<hr>
-</section>
-<section id="table-types" class="level2">
-<h2 class="anchored" data-anchor-id="table-types">Table Types</h2>
+<section id="required-elements" class="level2">
+<h2 class="anchored" data-anchor-id="required-elements">Required elements</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 40%">
-<col style="width: 60%">
+<col style="width: 7%">
+<col style="width: 23%">
+<col style="width: 25%">
+<col style="width: 43%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Type</th>
-<th>Best for</th>
+<th>#</th>
+<th>Element</th>
+<th>Standard</th>
+<th>Library function</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Summary table</strong></td>
-<td>Key statistics for a geography or time period</td>
+<td>1</td>
+<td><strong>Title</strong></td>
+<td>Headline case, bold, one line. Short and active. Example: “Virginia Counties at a Glance.”</td>
+<td><code>vvn_table()</code></td>
 </tr>
 <tr class="even">
-<td><strong>Ranking table</strong></td>
-<td>Ordered comparison across localities</td>
+<td>2</td>
+<td><strong>Subtitle</strong></td>
+<td>Sentence case (optional). States geography and year. Example: “Virginia, 2022 estimates.”</td>
+<td><code>vvn_table()</code></td>
 </tr>
 <tr class="odd">
-<td><strong>Regression table</strong></td>
-<td>Statistical model results with significance stars</td>
+<td>3</td>
+<td><strong>Column headers</strong></td>
+<td>VT Maroon <code>#861F41</code> fill, white bold text. Sentence case for standard columns; headline case for spanner headings.</td>
+<td><code>vvn_table()</code></td>
 </tr>
 <tr class="even">
-<td><strong>Crosstabulation</strong></td>
-<td>Two-variable frequency or rate breakdowns</td>
+<td>4</td>
+<td><strong>Alternating rows</strong></td>
+<td>Even rows use light gray <code>#F7F7F7</code>. No internal borders by default. No empty rows or columns.</td>
+<td><code>vvn_table()</code></td>
 </tr>
 <tr class="odd">
-<td><strong>Data dictionary</strong></td>
-<td>Variable definitions and coding notes</td>
+<td>5</td>
+<td><strong>Cell alignment</strong></td>
+<td>Numbers: decimal-aligned, right. Text: left. Use consistent decimal places within each column.</td>
+<td><code>vvn_table()</code></td>
 </tr>
 <tr class="even">
-<td><strong>Interactive table</strong></td>
-<td>Dashboard exploration with filtering and download</td>
+<td>6</td>
+<td><strong>Source &amp; notes</strong></td>
+<td>Source required below every table. Notes define abbreviations, methodology, and significance. Missing values: em dash (—), never blank.</td>
+<td><code>vvn_table()</code></td>
 </tr>
 </tbody>
 </table>
+<hr>
+</section>
+<section id="design-standards" class="level2">
+<h2 class="anchored" data-anchor-id="design-standards">Design standards</h2>
+<p><strong>Number formatting</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Value type</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Percentages</td>
+<td><code>72.4%</code> — one decimal place, percent sign</td>
+</tr>
+<tr class="even">
+<td>Dollar amounts</td>
+<td><code>$48,200</code> — no decimals for whole dollars</td>
+</tr>
+<tr class="odd">
+<td>Counts</td>
+<td><code>1,234</code> — comma separator, no decimals</td>
+</tr>
+<tr class="even">
+<td>Index values</td>
+<td><code>0.743</code> — three decimal places</td>
+</tr>
+<tr class="odd">
+<td>P-values</td>
+<td><code>&lt; 0.001</code> or <code>0.023</code> — never <code>0.000</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Column alignment</strong></p>
+<ul>
+<li>Numbers: right-aligned, decimal-point aligned</li>
+<li>Text categories: left-aligned</li>
+<li>Header text: centered over numeric columns, left-aligned over text columns</li>
+</ul>
+<p><strong>Missing data</strong></p>
+<ul>
+<li>Always use an em dash (—) for missing or suppressed values</li>
+<li>Define suppression rules in the notes below the table</li>
+<li>Never leave a cell blank</li>
+</ul>
+<p><strong>Spanner headers</strong></p>
+<p>Use spanner headings (headline case) to group related columns. Keep the spanner label short — 1–3 words.</p>
+<hr>
 <blockquote class="blockquote">
-<p>For styled table functions, interactive table setup, and code examples, see the <a href="../vvn-docs/tables.html">Table Library →</a></p>
+<p>For step-by-step R code and table examples, see the <a href="https://yujuangao.github.io/VVN/tables.html">Table Library →</a></p>
 </blockquote>
 
 
 </section>
 
 </main> <!-- /main -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // ── Subtitle in right TOC sidebar ──────────────────────────────────────────
+  var sub = document.querySelector('.quarto-title .subtitle');
+  if (sub) {
+    var sidebar = document.getElementById('quarto-margin-sidebar');
+    if (sidebar) {
+      var desc = document.createElement('p');
+      desc.className = 'toc-page-desc';
+      desc.textContent = sub.textContent.trim();
+      sidebar.insertBefore(desc, sidebar.firstChild);
+    }
+  }
+
+  // ── Page indicator bar below main navbar ───────────────────────────────────
+  var header = document.getElementById('quarto-header');
+  if (!header) return;
+
+  // Get page name from active sidebar link, falling back to page h1
+  var activeLink = document.querySelector('#quarto-sidebar .sidebar-link.active');
+  var pageName = activeLink ? activeLink.textContent.trim() : '';
+  if (!pageName) {
+    var h1 = document.querySelector('.quarto-title h1, h1.title');
+    if (h1) pageName = h1.textContent.trim();
+  }
+  if (!pageName) return;
+
+  var bar = document.createElement('div');
+  bar.id = 'page-indicator-bar';
+  bar.textContent = pageName;
+  header.appendChild(bar);
+
+  var barH = bar.offsetHeight || 32;
+  var currentPad = parseInt(window.getComputedStyle(document.body).paddingTop) || 0;
+  document.body.style.paddingTop = (currentPad + barH) + 'px';
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
