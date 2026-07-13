@@ -7,12 +7,6 @@
 
 **Websites:** [R Library Docs](https://yujuangao.github.io/VVN/) · [Style Guide](https://yujuangao.github.io/VVN/guide/)
 
-**vvnthemes** is the official R package for the [Visualizing Virginia Numbers (VVN)](https://vvn.vt.edu)
-at Virginia Tech. It provides ggplot2 themes, color palettes, GT table styles,
-Leaflet map helpers, Shiny UI components, and one-command project scaffolding
-so that every VVN data story and dashboard shares a consistent, accessible,
-VT-branded look.
-
 ---
 
 ## Installation
