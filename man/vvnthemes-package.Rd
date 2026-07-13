@@ -6,37 +6,149 @@
 \alias{vvnthemes-package}
 \title{vvnthemes: Visualizing Virginia Numbers Themes and Templates}
 \description{
-Provides ggplot2 themes, color palettes, scales, GT table styles, Leaflet
-map helpers, Shiny UI components, and ready-to-use project templates for the
-Visualizing Virginia Numbers (VVN) at Virginia Tech. Inspired by
-\href{https://urbaninstitute.github.io/urbnthemes/}{urbnthemes}.
+\code{vvnthemes} is the design system for all Visualizing Virginia Numbers (VVN)
+projects at Virginia Tech. It enforces VT brand colors, typography, and
+layout rules so every chart, map, table, dashboard, and narrative report
+produced by VVN teams is consistent and publication-ready.
+
+VT brand colors: \strong{Maroon} \verb{#861F41} · \strong{Orange} \verb{#E5751F} · \strong{Navy} \verb{#1B5299}
 }
-\section{Get started}{
+\section{Quick start}{
 
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{library(vvnthemes)
-
-# Apply VVN brand theme globally
-set_vvn_defaults()
-
-# View a color palette
-view_vvn_palette("main")
-
-# Create a new data story (Quarto → HTML)
-create_vvn_story("my_story", title = "Housing in Rural Virginia")
-
-# Create a Shiny dashboard
-create_vvn_dashboard("my_dashboard", title = "Virginia Data Explorer")
+set_vvn_defaults()        # apply VT Maroon theme + geom colors globally
+view_vvn_palette("main")  # preview the brand palette
 }\if{html}{\out{</div>}}
 }
 
-\seealso{
-Useful links:
+\section{Setup}{
+
+Apply or remove VT brand defaults for the session.
 \itemize{
-  \item \url{https://github.com/vt-vvn/vvnthemes}
-  \item Report bugs at \url{https://github.com/vt-vvn/vvnthemes/issues}
+\item \code{\link[=set_vvn_defaults]{set_vvn_defaults()}} — Set \code{theme_vvn()} as the global ggplot2 theme and
+change default geom colors to VT Maroon and VT Orange. Call once per script.
+\item \code{\link[=undo_vvn_defaults]{undo_vvn_defaults()}} — Revert ggplot2 to factory defaults.
+}
 }
 
+\section{Themes}{
+
+ggplot2 themes built on \code{\link[ggplot2:ggtheme]{ggplot2::theme_minimal()}}.
+\itemize{
+\item \code{\link[=theme_vvn]{theme_vvn()}} — Standard VVN chart theme: white background, maroon titles,
+light gray horizontal gridlines. Use for bar charts, line charts, histograms.
+\item \code{\link[=theme_vvn_map]{theme_vvn_map()}} — Map variant: removes axes, muted background, legend at
+bottom. Use with \code{\link[ggplot2:ggsf]{ggplot2::geom_sf()}} for static choropleth maps.
+\item \code{\link[=theme_vvn_minimal]{theme_vvn_minimal()}} — No gridlines, no axes. For small multiples and
+annotation-heavy figures.
+}
+}
+
+\section{Color system}{
+
+Access and preview VT brand palettes. Palettes: \code{"main"}, \code{"brand"},
+\code{"maroon_seq"}, \code{"orange_seq"}, \code{"navy_seq"}, \code{"diverging"}, \code{"accessible"}.
+\itemize{
+\item \code{\link[=vvn_colors]{vvn_colors()}} — Return hex codes for named VVN brand colors.
+\item \code{\link[=vvn_palette]{vvn_palette()}} — Build a color vector from a named palette.
+Sequential palettes interpolate to any number of steps.
+\item \code{\link[=view_vvn_palette]{view_vvn_palette()}} — Render a swatch strip using \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
+}
+}
+
+\section{Scales}{
+
+Drop-in replacements for \code{\link[ggplot2:scale_colour_discrete]{ggplot2::scale_color_discrete()}} and
+\code{\link[ggplot2:scale_gradient]{ggplot2::scale_fill_gradient()}}.
+\itemize{
+\item \code{\link[=scale_color_vvn]{scale_color_vvn()}} — Discrete color scale for grouped line/scatter charts.
+\item \code{\link[=scale_fill_vvn]{scale_fill_vvn()}} — Discrete fill scale for grouped bar/area charts.
+\item \code{\link[=scale_color_vvn_c]{scale_color_vvn_c()}} — Continuous color scale (sequential or diverging).
+\item \code{\link[=scale_fill_vvn_c]{scale_fill_vvn_c()}} — Continuous fill scale; primary function for static
+choropleth maps with \code{\link[ggplot2:ggsf]{ggplot2::geom_sf()}}.
+}
+}
+
+\section{Chart helpers}{
+
+Wrappers around \code{\link[ggplot2:labs]{ggplot2::labs()}} and \code{\link[ggplot2:theme]{ggplot2::theme()}}.
+\itemize{
+\item \code{\link[=vvn_title]{vvn_title()}} — Add headline-case title and sentence-case subtitle.
+\item \code{\link[=vvn_source]{vvn_source()}} — Add required source attribution caption. \strong{Required on
+every published VVN figure.}
+\item \code{\link[=vvn_note]{vvn_note()}} — Add a footnote annotation without a source line.
+\item \code{\link[=remove_ticks]{remove_ticks()}} — Remove axis tick marks.
+\item \code{\link[=remove_axis]{remove_axis()}} — Remove a full axis (text, title, ticks, line).
+\item \code{\link[=scatter_grid]{scatter_grid()}} — Add gridlines on both axes for scatter plots.
+\item \code{\link[=legend_bottom]{legend_bottom()}} — Move legend to bottom in horizontal orientation.
+\item \code{\link[=remove_legend]{remove_legend()}} — Remove the legend entirely.
+\item \code{\link[=vvn_save]{vvn_save()}} — Export at 300 dpi using \code{\link[ggplot2:ggsave]{ggplot2::ggsave()}}.
+\item \code{\link[=vvn_accessibility_check]{vvn_accessibility_check()}} — Check WCAG 2.1 contrast ratios (AA/AAA).
+}
+}
+
+\section{Tables}{
+
+Requires the \pkg{gt} package (\code{install.packages("gt")}).
+See \code{\link[gt:gt]{gt::gt()}} for how to create a gt table before styling.
+\itemize{
+\item \code{\link[=vvn_table]{vvn_table()}} — Apply VT Maroon headers, alternating rows, and orange
+accent border to a \code{\link[gt:gt]{gt::gt()}} table.
+\item \code{\link[=vvn_table_pvalues]{vvn_table_pvalues()}} — Color-code a p-value column in a regression table.
+Pipe after \code{\link[=vvn_table]{vvn_table()}}.
+}
+}
+
+\section{Maps}{
+
+Requires \pkg{leaflet} and \pkg{sf}.
+See \code{\link[leaflet:leaflet]{leaflet::leaflet()}} and \code{\link[sf:st_read]{sf::st_read()}} for prerequisites.
+\itemize{
+\item \code{\link[=vvn_map_style]{vvn_map_style()}} — Build an interactive Leaflet county choropleth map with
+VT brand colors, maroon hover highlight, popup tooltips, and a styled legend.
+}
+}
+
+\section{Shiny UI}{
+
+Requires \pkg{shiny} (\code{install.packages("shiny")}).
+See \code{\link[shiny:fluidPage]{shiny::fluidPage()}} and \code{\link[shiny:sidebarLayout]{shiny::sidebarLayout()}} for dashboard structure.
+\itemize{
+\item \code{\link[=vvn_filter]{vvn_filter()}} — Branded \code{\link[shiny:selectInput]{shiny::selectInput()}} dropdown with maroon label.
+\item \code{\link[=vvn_slider]{vvn_slider()}} — Branded \code{\link[shiny:sliderInput]{shiny::sliderInput()}} with maroon track.
+\item \code{\link[=vvn_button]{vvn_button()}} — Styled \code{\link[shiny:actionButton]{shiny::actionButton()}} in primary, secondary, or
+outline variants.
+\item \code{\link[=vvn_kpi_card]{vvn_kpi_card()}} — Large-number KPI card with label and trend indicator.
+Use three per row: maroon, orange, navy.
+}
+}
+
+\section{Scaffolding}{
+
+One-command project setup. Both templates run immediately with placeholder data.
+\itemize{
+\item \code{\link[=create_vvn_dashboard]{create_vvn_dashboard()}} — Generate a complete Shiny dashboard:
+\code{app.R}, \code{R/data_prep.R}, \code{www/vvn.css}, \verb{data/} folders.
+Run with \code{\link[shiny:runApp]{shiny::runApp()}}; deploy with \code{rsconnect::deployApp()}.
+\item \code{\link[=create_vvn_story]{create_vvn_story()}} — Generate a VVN Insights Quarto project:
+\code{index.qmd}, \verb{_quarto.yml}, \code{styles.scss}, \verb{figures/}, \verb{scripts/}.
+Render with \code{quarto::quarto_render()}.
+\item \code{\link[=check_vvn_story]{check_vvn_story()}} — Validate a VVN Insights \code{index.qmd} before
+publishing (checks sections, \code{\link[=theme_vvn]{theme_vvn()}}, \code{\link[=vvn_source]{vvn_source()}}).
+}
+}
+
+\seealso{
+\strong{Documentation:} \url{https://yujuangao.github.io/VVN/}
+
+\strong{Style guide:} \url{https://yujuangao.github.io/VVN/guide/}
+
+\strong{GitHub:} \url{https://github.com/yujuangao/VVN}
+
+\strong{Key dependencies:}
+\code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}, \code{\link[gt:gt]{gt::gt()}}, \code{\link[leaflet:leaflet]{leaflet::leaflet()}},
+\code{\link[shiny:shinyApp]{shiny::shinyApp()}}, \code{\link[sf:st_read]{sf::st_read()}}
 }
 \author{
 \strong{Maintainer}: Visualizing Virginia Numbers Virginia Tech \email{vvn@vt.edu}
