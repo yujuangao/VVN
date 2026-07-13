@@ -9,7 +9,22 @@
 
 ---
 
-`vvnthemes` is an R package built for the **Visualizing Virginia Numbers (VVN)** project at Virginia Tech. It provides everything needed to produce publication-ready, brand-consistent outputs for Virginia data analysis — from ggplot2 charts and GT tables to interactive Shiny dashboards and Leaflet choropleth maps.
+This repository hosts the **vvnthemes** R package for the **Visualizing Virginia Numbers (VVN)** project at Virginia Tech. VVN transforms complex public datasets — broadband, housing, workforce, healthcare, and economic data — into clear, accessible visualizations covering all 133 Virginia localities. `vvnthemes` gives every VVN team member a shared toolkit to produce consistent, VT-branded, publication-ready charts, maps, tables, dashboards, and reports without rebuilding brand styles from scratch.
+
+## About vvnthemes
+
+`vvnthemes` is the design system for all VVN projects. It provides everything needed to produce consistent, publication-ready outputs — so every chart, map, table, dashboard, and report your team creates follows the same visual standard automatically.
+
+| Feature | What it provides |
+|---------|-----------------|
+| 🎨 **VT Brand Colors** | VT Maroon, Burnt Orange, and Navy applied globally with `set_vvn_defaults()`. Discrete and continuous palettes for every chart type. |
+| 📊 **ggplot2 Themes & Scales** | Three themes for charts, maps, and minimal layouts. Categorical and continuous color scales with automatic VT palette mapping. |
+| 🗺️ **Interactive Maps** | One-function Leaflet county choropleth maps with VT branded fill, maroon hover highlight, tooltips, and a styled legend. |
+| 📋 **Styled Tables** | Branded `gt` tables with maroon headers, alternating rows, source notes, and p-value color coding. |
+| 🖥️ **Shiny UI Components** | Branded filters, sliders, buttons, and KPI cards for Shiny dashboards — all styled to VT brand guidelines. |
+| 🚀 **Project Scaffolding** | One-command setup for a complete Shiny dashboard or Quarto narrative report, ready to run immediately. |
+
+---
 
 **The library includes 9 modules:**
 

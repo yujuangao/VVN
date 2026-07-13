@@ -203,8 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of Contents</h2>
    
   <ul class="collapse">
-  <li><a href="#quick-demo" id="toc-quick-demo" class="nav-link active" data-scroll-target="#quick-demo">Quick Demo</a></li>
-  <li><a href="#about-vvnthemes" id="toc-about-vvnthemes" class="nav-link" data-scroll-target="#about-vvnthemes">About vvnthemes</a></li>
+  <li><a href="#about-vvnthemes" id="toc-about-vvnthemes" class="nav-link active" data-scroll-target="#about-vvnthemes">About vvnthemes</a></li>
   <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
   <li><a href="#library-structure" id="toc-library-structure" class="nav-link" data-scroll-target="#library-structure">Library Structure</a></li>
   <li><a href="#typical-workflow" id="toc-typical-workflow" class="nav-link" data-scroll-target="#typical-workflow">Typical Workflow</a></li>
@@ -246,70 +245,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <hr>
-<section id="quick-demo" class="level2">
-<h2 class="anchored" data-anchor-id="quick-demo">Quick Demo</h2>
-<div class="demo-panel demo-panel--stacked">
-<div class="demo-panel-code">
-<div class="demo-panel-header">R — VT-branded ggplot2 chart</div>
-<div class="demo-panel-body">
-<pre><code id="demo-qs-code"></code><span class="demo-cursor" id="demo-qs-cursor"></span></pre>
-</div>
-</div>
-<div class="demo-panel-output" id="demo-qs-output" style="opacity:0;transition:opacity 0.7s ease;">
-<div class="demo-panel-header">Chart output</div>
-<div class="demo-panel-body">
-<img src="images/demo-chart.png" alt="VVN branded ggplot2 chart">
-</div>
-</div>
-</div>
-<script>
-(function(){
-var code = [
-'library(vvnthemes)',
-'library(ggplot2)',
-'',
-'# Apply VT brand globally',
-'set_vvn_defaults()',
-'',
-'# Build a branded bar chart',
-'ggplot(ggplot2::mpg, aes(class, fill = class)) +',
-'  geom_bar() +',
-'  scale_fill_vvn() +',
-'  theme_vvn() +',
-'  vvn_title("Vehicles by Class",',
-'             subtitle = "EPA fuel economy data") +',
-'  vvn_source("Source: ggplot2::mpg")'
-].join('\n');
-function startQS() {
-  var el = document.getElementById('demo-qs-code');
-  var cur = document.getElementById('demo-qs-cursor');
-  var out = document.getElementById('demo-qs-output');
-  if (!el) return;
-  var i = 0, revealed = false;
-  function type(){
-    if(i < code.length){
-      el.textContent += code[i++];
-      if(!revealed && i >= Math.floor(code.length * 0.25)){
-        revealed = true;
-        if(out) out.style.opacity = '1';
-      }
-      setTimeout(type, i < 60 ? 35 : 18);
-    } else {
-      if(cur) cur.style.display = 'none';
-      if(!revealed && out) out.style.opacity = '1';
-    }
-  }
-  setTimeout(type, 500);
-}
-if(document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', startQS);
-} else {
-  startQS();
-}
-})();
-</script>
-<hr>
-</section>
 <section id="about-vvnthemes" class="level2">
 <h2 class="anchored" data-anchor-id="about-vvnthemes">About vvnthemes</h2>
 <p><code>vvnthemes</code> is the design system for all VVN projects. It provides Virginia Tech brand colors, ggplot2 themes, map styling, styled tables, Shiny UI components, and project scaffolding — so every chart, map, table, dashboard, and narrative report your team produces looks consistent and publication-ready.</p>
@@ -1085,356 +1020,289 @@ document.addEventListener('DOMContentLoaded', function () {
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>---</span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quick Demo</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## About vvnthemes</span></span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel demo-panel--stacked"&gt;</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-code"&gt;</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-header"&gt;R — VT-branded ggplot2 chart&lt;/div&gt;</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-body"&gt;</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;pre&gt;&lt;code id="demo-qs-code"&gt;&lt;/code&gt;&lt;span class="demo-cursor" id="demo-qs-cursor"&gt;&lt;/span&gt;&lt;/pre&gt;</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-output" id="demo-qs-output" style="opacity:0;transition:opacity 0.7s ease;"&gt;</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-header"&gt;Chart output&lt;/div&gt;</span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-body"&gt;</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;img src="images/demo-chart.png" alt="VVN branded ggplot2 chart"&gt;</span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;script&gt;</span></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="in">(function(){</span></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="in">var code = [</span></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="in">'library(vvnthemes)',</span></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="in">'library(ggplot2)',</span></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="in">'',</span></span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="in">'# Apply VT brand globally',</span></span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="in">'set_vvn_defaults()',</span></span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="in">'',</span></span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="in">'# Build a branded bar chart',</span></span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="in">'ggplot(ggplot2::mpg, aes(class, fill = class)) +',</span></span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="in">'  geom_bar() +',</span></span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="in">'  scale_fill_vvn() +',</span></span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="in">'  theme_vvn() +',</span></span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="in">'  vvn_title("Vehicles by Class",',</span></span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="in">'             subtitle = "EPA fuel economy data") +',</span></span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="in">'  vvn_source("Source: ggplot2::mpg")'</span></span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="in">].join('\n');</span></span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="in">function startQS() {</span></span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="in">  var el = document.getElementById('demo-qs-code');</span></span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="in">  var cur = document.getElementById('demo-qs-cursor');</span></span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="in">  var out = document.getElementById('demo-qs-output');</span></span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="in">  if (!el) return;</span></span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="in">  var i = 0, revealed = false;</span></span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="in">  function type(){</span></span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="in">    if(i &lt; code.length){</span></span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="in">      el.textContent += code[i++];</span></span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="in">      if(!revealed &amp;&amp; i &gt;= Math.floor(code.length * 0.25)){</span></span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="in">        revealed = true;</span></span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="in">        if(out) out.style.opacity = '1';</span></span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="in">      }</span></span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="in">      setTimeout(type, i &lt; 60 ? 35 : 18);</span></span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="in">    } else {</span></span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a><span class="in">      if(cur) cur.style.display = 'none';</span></span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="in">      if(!revealed &amp;&amp; out) out.style.opacity = '1';</span></span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="in">  setTimeout(type, 500);</span></span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="in">if(document.readyState === 'loading'){</span></span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="in">  document.addEventListener('DOMContentLoaded', startQS);</span></span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="in">} else {</span></span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a><span class="in">  startQS();</span></span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="in">})();</span></span>
-<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/script&gt;</span></span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a><span class="fu">## About vvnthemes</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="in">`vvnthemes`</span> is the design system for all VVN projects. It provides Virginia Tech brand colors, ggplot2 themes, map styling, styled tables, Shiny UI components, and project scaffolding — so every chart, map, table, dashboard, and narrative report your team produces looks consistent and publication-ready.</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-grid"&gt;</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature"&gt;</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-icon gs-feature-icon--maroon"&gt;🎨&lt;/div&gt;</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-body"&gt;</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-title"&gt;VT Brand Colors&lt;/div&gt;</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-desc"&gt;VT Maroon, Burnt Orange, and Navy applied globally with a single call to &lt;code&gt;set_vvn_defaults()&lt;/code&gt;. Discrete and continuous palettes for every chart type.&lt;/div&gt;</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature"&gt;</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-icon gs-feature-icon--orange"&gt;📊&lt;/div&gt;</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-body"&gt;</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-title"&gt;ggplot2 Themes &amp; Scales&lt;/div&gt;</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-desc"&gt;Three themes for charts, maps, and minimal layouts. Categorical and continuous color scales with automatic VT palette mapping.&lt;/div&gt;</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature"&gt;</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-icon gs-feature-icon--navy"&gt;🗺️&lt;/div&gt;</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-body"&gt;</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-title"&gt;Interactive Maps&lt;/div&gt;</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-desc"&gt;One-function Leaflet county choropleth maps with VT branded fill, maroon hover highlight, tooltips, and a styled legend.&lt;/div&gt;</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature"&gt;</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-icon gs-feature-icon--maroon"&gt;📋&lt;/div&gt;</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-body"&gt;</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-title"&gt;Styled Tables&lt;/div&gt;</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-desc"&gt;Branded &lt;code&gt;gt&lt;/code&gt; tables with maroon headers, alternating rows, source notes, and p-value color coding for regression output.&lt;/div&gt;</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature"&gt;</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-icon gs-feature-icon--orange"&gt;🖥️&lt;/div&gt;</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-body"&gt;</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-title"&gt;Shiny UI Components&lt;/div&gt;</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-desc"&gt;Branded filters, sliders, buttons, and KPI cards for Shiny dashboards — all styled to match VT brand guidelines.&lt;/div&gt;</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature"&gt;</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-icon gs-feature-icon--navy"&gt;🚀&lt;/div&gt;</span></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-body"&gt;</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-title"&gt;Project Scaffolding&lt;/div&gt;</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-desc"&gt;One-command setup for a complete Shiny dashboard or Quarto narrative report. Runs immediately with placeholder data.&lt;/div&gt;</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="fu">## Installation</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>Install <span class="in">`vvnthemes`</span> directly from GitHub using <span class="in">`devtools`</span>:</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"yujuangao/VVN"</span>)</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>After installation, load the package and apply VT brand defaults for the session:</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vvnthemes)</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a><span class="fu">set_vvn_defaults</span>()   <span class="co"># sets theme_vvn() + VT Maroon geom colors globally</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="in">`vvnthemes`</span> is the design system for all VVN projects. It provides Virginia Tech brand colors, ggplot2 themes, map styling, styled tables, Shiny UI components, and project scaffolding — so every chart, map, table, dashboard, and narrative report your team produces looks consistent and publication-ready.</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>**Dependencies installed automatically:** <span class="in">`ggplot2`</span>, <span class="in">`scales`</span>, <span class="in">`rlang`</span></span>
 <span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
-<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-grid"&gt;</span></span>
-<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature"&gt;</span></span>
-<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-icon gs-feature-icon--maroon"&gt;🎨&lt;/div&gt;</span></span>
-<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-body"&gt;</span></span>
-<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-title"&gt;VT Brand Colors&lt;/div&gt;</span></span>
-<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-desc"&gt;VT Maroon, Burnt Orange, and Navy applied globally with a single call to &lt;code&gt;set_vvn_defaults()&lt;/code&gt;. Discrete and continuous palettes for every chart type.&lt;/div&gt;</span></span>
-<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature"&gt;</span></span>
-<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-icon gs-feature-icon--orange"&gt;📊&lt;/div&gt;</span></span>
-<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-body"&gt;</span></span>
-<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-title"&gt;ggplot2 Themes &amp; Scales&lt;/div&gt;</span></span>
-<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-desc"&gt;Three themes for charts, maps, and minimal layouts. Categorical and continuous color scales with automatic VT palette mapping.&lt;/div&gt;</span></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>**Optional packages** (install separately if needed): <span class="in">`gt`</span> (tables), <span class="in">`leaflet`</span> + <span class="in">`sf`</span> (maps), <span class="in">`shiny`</span> + <span class="in">`bslib`</span> (dashboards), <span class="in">`broom`</span> (regression tables)</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="fu">## Library Structure</span></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a><span class="in">`vvnthemes`</span> is organized into 9 modules. Each module is independent — use only what your project needs.</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-grid"&gt;</span></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--maroon"&gt;</span></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Setup&lt;/div&gt;</span></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;Apply or remove VT brand defaults globally for the session.&lt;/div&gt;</span></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;set_vvn_defaults()&lt;/code&gt; · &lt;code&gt;undo_vvn_defaults()&lt;/code&gt;&lt;/div&gt;</span></span>
 <span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature"&gt;</span></span>
-<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-icon gs-feature-icon--navy"&gt;🗺️&lt;/div&gt;</span></span>
-<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-body"&gt;</span></span>
-<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-title"&gt;Interactive Maps&lt;/div&gt;</span></span>
-<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-desc"&gt;One-function Leaflet county choropleth maps with VT branded fill, maroon hover highlight, tooltips, and a styled legend.&lt;/div&gt;</span></span>
-<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature"&gt;</span></span>
-<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-icon gs-feature-icon--maroon"&gt;📋&lt;/div&gt;</span></span>
-<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-body"&gt;</span></span>
-<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-title"&gt;Styled Tables&lt;/div&gt;</span></span>
-<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-desc"&gt;Branded &lt;code&gt;gt&lt;/code&gt; tables with maroon headers, alternating rows, source notes, and p-value color coding for regression output.&lt;/div&gt;</span></span>
-<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--maroon"&gt;</span></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Themes&lt;/div&gt;</span></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;ggplot2 themes for charts, static maps, and minimal layouts.&lt;/div&gt;</span></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;theme_vvn()&lt;/code&gt; · &lt;code&gt;theme_vvn_map()&lt;/code&gt; · &lt;code&gt;theme_vvn_minimal()&lt;/code&gt;&lt;/div&gt;</span></span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--orange"&gt;</span></span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Color System&lt;/div&gt;</span></span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;Access and preview VT brand color palettes by name.&lt;/div&gt;</span></span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;vvn_colors()&lt;/code&gt; · &lt;code&gt;vvn_palette()&lt;/code&gt; · &lt;code&gt;view_vvn_palette()&lt;/code&gt;&lt;/div&gt;</span></span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--orange"&gt;</span></span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Scales&lt;/div&gt;</span></span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;Discrete and continuous ggplot2 color/fill scales using VT palettes.&lt;/div&gt;</span></span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;scale_color_vvn()&lt;/code&gt; · &lt;code&gt;scale_fill_vvn()&lt;/code&gt; · &lt;code&gt;scale_*_vvn_c()&lt;/code&gt;&lt;/div&gt;</span></span>
 <span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature"&gt;</span></span>
-<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-icon gs-feature-icon--orange"&gt;🖥️&lt;/div&gt;</span></span>
-<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-body"&gt;</span></span>
-<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-title"&gt;Shiny UI Components&lt;/div&gt;</span></span>
-<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-desc"&gt;Branded filters, sliders, buttons, and KPI cards for Shiny dashboards — all styled to match VT brand guidelines.&lt;/div&gt;</span></span>
-<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature"&gt;</span></span>
-<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-icon gs-feature-icon--navy"&gt;🚀&lt;/div&gt;</span></span>
-<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-body"&gt;</span></span>
-<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-title"&gt;Project Scaffolding&lt;/div&gt;</span></span>
-<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-feature-desc"&gt;One-command setup for a complete Shiny dashboard or Quarto narrative report. Runs immediately with placeholder data.&lt;/div&gt;</span></span>
-<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--orange"&gt;</span></span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Chart Helpers&lt;/div&gt;</span></span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;Add titles, sources, and notes; adjust layout; export at 300 dpi; check accessibility.&lt;/div&gt;</span></span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;vvn_title()&lt;/code&gt; · &lt;code&gt;vvn_source()&lt;/code&gt; · &lt;code&gt;vvn_save()&lt;/code&gt; · &lt;code&gt;vvn_accessibility_check()&lt;/code&gt; &lt;em&gt;+6 more&lt;/em&gt;&lt;/div&gt;</span></span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--navy"&gt;</span></span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Tables&lt;/div&gt;</span></span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;Style &lt;code&gt;gt&lt;/code&gt; tables with maroon headers, alternating rows, and p-value highlighting.&lt;/div&gt;</span></span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;vvn_table()&lt;/code&gt; · &lt;code&gt;vvn_table_pvalues()&lt;/code&gt;&lt;/div&gt;</span></span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--maroon"&gt;</span></span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Maps&lt;/div&gt;</span></span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;Build interactive Leaflet county choropleth maps for Shiny dashboards.&lt;/div&gt;</span></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;vvn_map_style()&lt;/code&gt;&lt;/div&gt;</span></span>
 <span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a><span class="fu">## Installation</span></span>
-<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>Install <span class="in">`vvnthemes`</span> directly from GitHub using <span class="in">`devtools`</span>:</span>
-<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
-<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"yujuangao/VVN"</span>)</span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--navy"&gt;</span></span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Shiny UI&lt;/div&gt;</span></span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;Branded input controls and KPI display cards for dashboards.&lt;/div&gt;</span></span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;vvn_filter()&lt;/code&gt; · &lt;code&gt;vvn_slider()&lt;/code&gt; · &lt;code&gt;vvn_button()&lt;/code&gt; · &lt;code&gt;vvn_kpi_card()&lt;/code&gt;&lt;/div&gt;</span></span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--navy"&gt;</span></span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Scaffolding&lt;/div&gt;</span></span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;Generate a complete Shiny dashboard or Quarto narrative report from a VVN template.&lt;/div&gt;</span></span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;create_vvn_dashboard()&lt;/code&gt; · &lt;code&gt;create_vvn_story()&lt;/code&gt; · &lt;code&gt;check_vvn_story()&lt;/code&gt;&lt;/div&gt;</span></span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
 <span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a>After installation, load the package and apply VT brand defaults for the session:</span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a>---</span>
 <span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vvnthemes)</span>
-<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a><span class="fu">set_vvn_defaults</span>()   <span class="co"># sets theme_vvn() + VT Maroon geom colors globally</span></span>
-<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a>**Dependencies installed automatically:** <span class="in">`ggplot2`</span>, <span class="in">`scales`</span>, <span class="in">`rlang`</span></span>
-<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a>**Optional packages** (install separately if needed): <span class="in">`gt`</span> (tables), <span class="in">`leaflet`</span> + <span class="in">`sf`</span> (maps), <span class="in">`shiny`</span> + <span class="in">`bslib`</span> (dashboards), <span class="in">`broom`</span> (regression tables)</span>
-<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a><span class="fu">## Library Structure</span></span>
-<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a><span class="in">`vvnthemes`</span> is organized into 9 modules. Each module is independent — use only what your project needs.</span>
-<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
-<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-grid"&gt;</span></span>
-<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--maroon"&gt;</span></span>
-<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Setup&lt;/div&gt;</span></span>
-<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;Apply or remove VT brand defaults globally for the session.&lt;/div&gt;</span></span>
-<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;set_vvn_defaults()&lt;/code&gt; · &lt;code&gt;undo_vvn_defaults()&lt;/code&gt;&lt;/div&gt;</span></span>
-<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--maroon"&gt;</span></span>
-<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Themes&lt;/div&gt;</span></span>
-<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;ggplot2 themes for charts, static maps, and minimal layouts.&lt;/div&gt;</span></span>
-<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;theme_vvn()&lt;/code&gt; · &lt;code&gt;theme_vvn_map()&lt;/code&gt; · &lt;code&gt;theme_vvn_minimal()&lt;/code&gt;&lt;/div&gt;</span></span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a><span class="fu">## Typical Workflow</span></span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a>For most VVN projects, follow this five-step pattern:</span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-steps"&gt;</span></span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step"&gt;</span></span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-num"&gt;1&lt;/div&gt;</span></span>
+<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-body"&gt;</span></span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-title"&gt;Install &amp;amp; load&lt;/div&gt;</span></span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-desc"&gt;Install from GitHub once. At the top of every script, call &lt;code&gt;library(vvnthemes)&lt;/code&gt; and &lt;code&gt;set_vvn_defaults()&lt;/code&gt; — this applies the VT theme and colors to all subsequent charts automatically.&lt;/div&gt;</span></span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step"&gt;</span></span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-num"&gt;2&lt;/div&gt;</span></span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-body"&gt;</span></span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-title"&gt;Load and prepare data&lt;/div&gt;</span></span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-desc"&gt;Import your county-level data. VVN maps require a normalized variable — a rate, percentage, or per-capita figure, never a raw count. Join to &lt;code&gt;va_counties&lt;/code&gt; by FIPS code.&lt;/div&gt;</span></span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step"&gt;</span></span>
+<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-num"&gt;3&lt;/div&gt;</span></span>
+<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-body"&gt;</span></span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-title"&gt;Build the visualization&lt;/div&gt;</span></span>
+<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-desc"&gt;Use &lt;code&gt;ggplot2&lt;/code&gt; + &lt;code&gt;theme_vvn()&lt;/code&gt; for charts, &lt;code&gt;vvn_map_style()&lt;/code&gt; for interactive maps, or &lt;code&gt;gt() |&amp;gt; vvn_table()&lt;/code&gt; for tables. Add VVN scales to apply the correct color palette.&lt;/div&gt;</span></span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
 <span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--orange"&gt;</span></span>
-<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Color System&lt;/div&gt;</span></span>
-<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;Access and preview VT brand color palettes by name.&lt;/div&gt;</span></span>
-<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;vvn_colors()&lt;/code&gt; · &lt;code&gt;vvn_palette()&lt;/code&gt; · &lt;code&gt;view_vvn_palette()&lt;/code&gt;&lt;/div&gt;</span></span>
-<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--orange"&gt;</span></span>
-<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Scales&lt;/div&gt;</span></span>
-<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;Discrete and continuous ggplot2 color/fill scales using VT palettes.&lt;/div&gt;</span></span>
-<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;scale_color_vvn()&lt;/code&gt; · &lt;code&gt;scale_fill_vvn()&lt;/code&gt; · &lt;code&gt;scale_*_vvn_c()&lt;/code&gt;&lt;/div&gt;</span></span>
-<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--orange"&gt;</span></span>
-<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Chart Helpers&lt;/div&gt;</span></span>
-<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;Add titles, sources, and notes; adjust layout; export at 300 dpi; check accessibility.&lt;/div&gt;</span></span>
-<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;vvn_title()&lt;/code&gt; · &lt;code&gt;vvn_source()&lt;/code&gt; · &lt;code&gt;vvn_save()&lt;/code&gt; · &lt;code&gt;vvn_accessibility_check()&lt;/code&gt; &lt;em&gt;+6 more&lt;/em&gt;&lt;/div&gt;</span></span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step"&gt;</span></span>
+<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-num"&gt;4&lt;/div&gt;</span></span>
+<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-body"&gt;</span></span>
+<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-title"&gt;Add titles and source attribution&lt;/div&gt;</span></span>
+<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-desc"&gt;Every published VVN figure requires &lt;code&gt;vvn_title()&lt;/code&gt; for the headline (title case) and &lt;code&gt;vvn_source()&lt;/code&gt; for the data citation. These are non-negotiable requirements before any figure is shared.&lt;/div&gt;</span></span>
+<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step"&gt;</span></span>
+<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-num"&gt;5&lt;/div&gt;</span></span>
+<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-body"&gt;</span></span>
+<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-title"&gt;Save or deploy&lt;/div&gt;</span></span>
+<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-desc"&gt;Export static figures at 300 dpi with &lt;code&gt;vvn_save()&lt;/code&gt;. For dashboards, deploy to shinyapps.io with &lt;code&gt;rsconnect::deployApp()&lt;/code&gt;. For narrative reports, render with &lt;code&gt;quarto render&lt;/code&gt;.&lt;/div&gt;</span></span>
+<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
 <span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--navy"&gt;</span></span>
-<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Tables&lt;/div&gt;</span></span>
-<span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;Style &lt;code&gt;gt&lt;/code&gt; tables with maroon headers, alternating rows, and p-value highlighting.&lt;/div&gt;</span></span>
-<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;vvn_table()&lt;/code&gt; · &lt;code&gt;vvn_table_pvalues()&lt;/code&gt;&lt;/div&gt;</span></span>
-<span id="cb3-199"><a href="#cb3-199" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--maroon"&gt;</span></span>
-<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Maps&lt;/div&gt;</span></span>
-<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;Build interactive Leaflet county choropleth maps for Shiny dashboards.&lt;/div&gt;</span></span>
-<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;vvn_map_style()&lt;/code&gt;&lt;/div&gt;</span></span>
-<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--navy"&gt;</span></span>
-<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Shiny UI&lt;/div&gt;</span></span>
-<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;Branded input controls and KPI display cards for dashboards.&lt;/div&gt;</span></span>
-<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;vvn_filter()&lt;/code&gt; · &lt;code&gt;vvn_slider()&lt;/code&gt; · &lt;code&gt;vvn_button()&lt;/code&gt; · &lt;code&gt;vvn_kpi_card()&lt;/code&gt;&lt;/div&gt;</span></span>
-<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-card gs-struct-card--navy"&gt;</span></span>
-<span id="cb3-211"><a href="#cb3-211" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-label"&gt;Scaffolding&lt;/div&gt;</span></span>
-<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-desc"&gt;Generate a complete Shiny dashboard or Quarto narrative report from a VVN template.&lt;/div&gt;</span></span>
-<span id="cb3-213"><a href="#cb3-213" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-struct-fns"&gt;&lt;code&gt;create_vvn_dashboard()&lt;/code&gt; · &lt;code&gt;create_vvn_story()&lt;/code&gt; · &lt;code&gt;check_vvn_story()&lt;/code&gt;&lt;/div&gt;</span></span>
+<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-199"><a href="#cb3-199" aria-hidden="true" tabindex="-1"></a><span class="fu">## Three Ways to Use vvnthemes</span></span>
+<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
+<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-row"&gt;</span></span>
+<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card"&gt;</span></span>
+<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-num"&gt;Workflow 1&lt;/div&gt;</span></span>
+<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-title"&gt;Build with the library&lt;/div&gt;</span></span>
+<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-desc"&gt;Use individual functions to create charts, maps, and tables from your own data. Full control over every element.&lt;/div&gt;</span></span>
+<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;a href="charts.html"&gt;See chart tutorial →&lt;/a&gt;</span></span>
+<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card"&gt;</span></span>
+<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-num"&gt;Workflow 2&lt;/div&gt;</span></span>
+<span id="cb3-211"><a href="#cb3-211" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-title"&gt;Dashboard Template&lt;/div&gt;</span></span>
+<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-desc"&gt;Scaffold a complete, ready-to-run Shiny dashboard in one command. Replace placeholder data and deploy.&lt;/div&gt;</span></span>
+<span id="cb3-213"><a href="#cb3-213" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;a href="dashboard.html"&gt;See dashboard →&lt;/a&gt;</span></span>
 <span id="cb3-214"><a href="#cb3-214" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-215"><a href="#cb3-215" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-220"><a href="#cb3-220" aria-hidden="true" tabindex="-1"></a><span class="fu">## Typical Workflow</span></span>
-<span id="cb3-221"><a href="#cb3-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-222"><a href="#cb3-222" aria-hidden="true" tabindex="-1"></a>For most VVN projects, follow this five-step pattern:</span>
+<span id="cb3-215"><a href="#cb3-215" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card"&gt;</span></span>
+<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-num"&gt;Workflow 3&lt;/div&gt;</span></span>
+<span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-title"&gt;VVN Insights Template&lt;/div&gt;</span></span>
+<span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-desc"&gt;Scaffold a complete Quarto narrative report with branded styling, pre-built sections, and figure folders.&lt;/div&gt;</span></span>
+<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;a href="vvn-insight.html"&gt;See insights →&lt;/a&gt;</span></span>
+<span id="cb3-220"><a href="#cb3-220" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-221"><a href="#cb3-221" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-222"><a href="#cb3-222" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb3-223"><a href="#cb3-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-224"><a href="#cb3-224" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
-<span id="cb3-225"><a href="#cb3-225" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-steps"&gt;</span></span>
-<span id="cb3-226"><a href="#cb3-226" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step"&gt;</span></span>
-<span id="cb3-227"><a href="#cb3-227" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-num"&gt;1&lt;/div&gt;</span></span>
-<span id="cb3-228"><a href="#cb3-228" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-body"&gt;</span></span>
-<span id="cb3-229"><a href="#cb3-229" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-title"&gt;Install &amp;amp; load&lt;/div&gt;</span></span>
-<span id="cb3-230"><a href="#cb3-230" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-desc"&gt;Install from GitHub once. At the top of every script, call &lt;code&gt;library(vvnthemes)&lt;/code&gt; and &lt;code&gt;set_vvn_defaults()&lt;/code&gt; — this applies the VT theme and colors to all subsequent charts automatically.&lt;/div&gt;</span></span>
-<span id="cb3-231"><a href="#cb3-231" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-232"><a href="#cb3-232" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-233"><a href="#cb3-233" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step"&gt;</span></span>
-<span id="cb3-234"><a href="#cb3-234" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-num"&gt;2&lt;/div&gt;</span></span>
-<span id="cb3-235"><a href="#cb3-235" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-body"&gt;</span></span>
-<span id="cb3-236"><a href="#cb3-236" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-title"&gt;Load and prepare data&lt;/div&gt;</span></span>
-<span id="cb3-237"><a href="#cb3-237" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-desc"&gt;Import your county-level data. VVN maps require a normalized variable — a rate, percentage, or per-capita figure, never a raw count. Join to &lt;code&gt;va_counties&lt;/code&gt; by FIPS code.&lt;/div&gt;</span></span>
-<span id="cb3-238"><a href="#cb3-238" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-239"><a href="#cb3-239" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-240"><a href="#cb3-240" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step"&gt;</span></span>
-<span id="cb3-241"><a href="#cb3-241" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-num"&gt;3&lt;/div&gt;</span></span>
-<span id="cb3-242"><a href="#cb3-242" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-body"&gt;</span></span>
-<span id="cb3-243"><a href="#cb3-243" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-title"&gt;Build the visualization&lt;/div&gt;</span></span>
-<span id="cb3-244"><a href="#cb3-244" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-desc"&gt;Use &lt;code&gt;ggplot2&lt;/code&gt; + &lt;code&gt;theme_vvn()&lt;/code&gt; for charts, &lt;code&gt;vvn_map_style()&lt;/code&gt; for interactive maps, or &lt;code&gt;gt() |&amp;gt; vvn_table()&lt;/code&gt; for tables. Add VVN scales to apply the correct color palette.&lt;/div&gt;</span></span>
-<span id="cb3-245"><a href="#cb3-245" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-246"><a href="#cb3-246" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-247"><a href="#cb3-247" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step"&gt;</span></span>
-<span id="cb3-248"><a href="#cb3-248" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-num"&gt;4&lt;/div&gt;</span></span>
-<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-body"&gt;</span></span>
-<span id="cb3-250"><a href="#cb3-250" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-title"&gt;Add titles and source attribution&lt;/div&gt;</span></span>
-<span id="cb3-251"><a href="#cb3-251" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-desc"&gt;Every published VVN figure requires &lt;code&gt;vvn_title()&lt;/code&gt; for the headline (title case) and &lt;code&gt;vvn_source()&lt;/code&gt; for the data citation. These are non-negotiable requirements before any figure is shared.&lt;/div&gt;</span></span>
-<span id="cb3-252"><a href="#cb3-252" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-253"><a href="#cb3-253" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-254"><a href="#cb3-254" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step"&gt;</span></span>
-<span id="cb3-255"><a href="#cb3-255" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-num"&gt;5&lt;/div&gt;</span></span>
-<span id="cb3-256"><a href="#cb3-256" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-body"&gt;</span></span>
-<span id="cb3-257"><a href="#cb3-257" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-title"&gt;Save or deploy&lt;/div&gt;</span></span>
-<span id="cb3-258"><a href="#cb3-258" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-step-desc"&gt;Export static figures at 300 dpi with &lt;code&gt;vvn_save()&lt;/code&gt;. For dashboards, deploy to shinyapps.io with &lt;code&gt;rsconnect::deployApp()&lt;/code&gt;. For narrative reports, render with &lt;code&gt;quarto render&lt;/code&gt;.&lt;/div&gt;</span></span>
-<span id="cb3-259"><a href="#cb3-259" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-260"><a href="#cb3-260" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-261"><a href="#cb3-261" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-262"><a href="#cb3-262" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-263"><a href="#cb3-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-264"><a href="#cb3-264" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb3-265"><a href="#cb3-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-266"><a href="#cb3-266" aria-hidden="true" tabindex="-1"></a><span class="fu">## Three Ways to Use vvnthemes</span></span>
-<span id="cb3-267"><a href="#cb3-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-268"><a href="#cb3-268" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
-<span id="cb3-269"><a href="#cb3-269" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-row"&gt;</span></span>
-<span id="cb3-270"><a href="#cb3-270" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card"&gt;</span></span>
-<span id="cb3-271"><a href="#cb3-271" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-num"&gt;Workflow 1&lt;/div&gt;</span></span>
-<span id="cb3-272"><a href="#cb3-272" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-title"&gt;Build with the library&lt;/div&gt;</span></span>
-<span id="cb3-273"><a href="#cb3-273" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-desc"&gt;Use individual functions to create charts, maps, and tables from your own data. Full control over every element.&lt;/div&gt;</span></span>
-<span id="cb3-274"><a href="#cb3-274" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;a href="charts.html"&gt;See chart tutorial →&lt;/a&gt;</span></span>
-<span id="cb3-275"><a href="#cb3-275" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-276"><a href="#cb3-276" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card"&gt;</span></span>
-<span id="cb3-277"><a href="#cb3-277" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-num"&gt;Workflow 2&lt;/div&gt;</span></span>
-<span id="cb3-278"><a href="#cb3-278" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-title"&gt;Dashboard Template&lt;/div&gt;</span></span>
-<span id="cb3-279"><a href="#cb3-279" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-desc"&gt;Scaffold a complete, ready-to-run Shiny dashboard in one command. Replace placeholder data and deploy.&lt;/div&gt;</span></span>
-<span id="cb3-280"><a href="#cb3-280" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;a href="dashboard.html"&gt;See dashboard →&lt;/a&gt;</span></span>
-<span id="cb3-281"><a href="#cb3-281" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-282"><a href="#cb3-282" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card"&gt;</span></span>
-<span id="cb3-283"><a href="#cb3-283" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-num"&gt;Workflow 3&lt;/div&gt;</span></span>
-<span id="cb3-284"><a href="#cb3-284" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-title"&gt;VVN Insights Template&lt;/div&gt;</span></span>
-<span id="cb3-285"><a href="#cb3-285" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="gs-card-desc"&gt;Scaffold a complete Quarto narrative report with branded styling, pre-built sections, and figure folders.&lt;/div&gt;</span></span>
-<span id="cb3-286"><a href="#cb3-286" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;a href="vvn-insight.html"&gt;See insights →&lt;/a&gt;</span></span>
-<span id="cb3-287"><a href="#cb3-287" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-288"><a href="#cb3-288" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-289"><a href="#cb3-289" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-290"><a href="#cb3-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-291"><a href="#cb3-291" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb3-292"><a href="#cb3-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-293"><a href="#cb3-293" aria-hidden="true" tabindex="-1"></a><span class="fu">## Demo: Build a Choropleth Map</span></span>
-<span id="cb3-294"><a href="#cb3-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-295"><a href="#cb3-295" aria-hidden="true" tabindex="-1"></a>Load <span class="in">`vvnthemes`</span>, join your county data, and call <span class="in">`vvn_map_style()`</span> — the map is styled, labeled, and ready in under 10 lines of code.</span>
-<span id="cb3-296"><a href="#cb3-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-297"><a href="#cb3-297" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
-<span id="cb3-298"><a href="#cb3-298" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel demo-panel--stacked"&gt;</span></span>
-<span id="cb3-299"><a href="#cb3-299" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-code"&gt;</span></span>
-<span id="cb3-300"><a href="#cb3-300" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-header"&gt;R — county choropleth map&lt;/div&gt;</span></span>
-<span id="cb3-301"><a href="#cb3-301" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-body"&gt;</span></span>
-<span id="cb3-302"><a href="#cb3-302" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;pre&gt;&lt;code id="demo-gs-code"&gt;&lt;/code&gt;&lt;span class="demo-cursor" id="demo-gs-cursor"&gt;&lt;/span&gt;&lt;/pre&gt;</span></span>
-<span id="cb3-303"><a href="#cb3-303" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-304"><a href="#cb3-304" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-305"><a href="#cb3-305" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-output" id="demo-gs-output" style="opacity:0;transition:opacity 0.7s ease;"&gt;</span></span>
-<span id="cb3-306"><a href="#cb3-306" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-header"&gt;Map output&lt;/div&gt;</span></span>
-<span id="cb3-307"><a href="#cb3-307" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-body"&gt;</span></span>
-<span id="cb3-308"><a href="#cb3-308" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;img src="images/demo-map.png" alt="VVN county choropleth map of Virginia"&gt;</span></span>
-<span id="cb3-309"><a href="#cb3-309" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-310"><a href="#cb3-310" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-311"><a href="#cb3-311" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb3-312"><a href="#cb3-312" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;script&gt;</span></span>
-<span id="cb3-313"><a href="#cb3-313" aria-hidden="true" tabindex="-1"></a><span class="in">(function(){</span></span>
-<span id="cb3-314"><a href="#cb3-314" aria-hidden="true" tabindex="-1"></a><span class="in">var code = [</span></span>
-<span id="cb3-315"><a href="#cb3-315" aria-hidden="true" tabindex="-1"></a><span class="in">'library(vvnthemes)',</span></span>
-<span id="cb3-316"><a href="#cb3-316" aria-hidden="true" tabindex="-1"></a><span class="in">'library(leaflet)',</span></span>
-<span id="cb3-317"><a href="#cb3-317" aria-hidden="true" tabindex="-1"></a><span class="in">'library(sf)',</span></span>
-<span id="cb3-318"><a href="#cb3-318" aria-hidden="true" tabindex="-1"></a><span class="in">'',</span></span>
-<span id="cb3-319"><a href="#cb3-319" aria-hidden="true" tabindex="-1"></a><span class="in">'# Load Virginia county boundaries',</span></span>
-<span id="cb3-320"><a href="#cb3-320" aria-hidden="true" tabindex="-1"></a><span class="in">'va &lt;- vvnthemes::va_counties',</span></span>
-<span id="cb3-321"><a href="#cb3-321" aria-hidden="true" tabindex="-1"></a><span class="in">'',</span></span>
-<span id="cb3-322"><a href="#cb3-322" aria-hidden="true" tabindex="-1"></a><span class="in">'# Join your data (FIPS + value)',</span></span>
-<span id="cb3-323"><a href="#cb3-323" aria-hidden="true" tabindex="-1"></a><span class="in">'va$value &lt;- c(0.42, 0.61, 0.55, 0.73, 0.38,',</span></span>
-<span id="cb3-324"><a href="#cb3-324" aria-hidden="true" tabindex="-1"></a><span class="in">'              0.67, 0.49, 0.81, 0.57, 0.44)',</span></span>
-<span id="cb3-325"><a href="#cb3-325" aria-hidden="true" tabindex="-1"></a><span class="in">'',</span></span>
-<span id="cb3-326"><a href="#cb3-326" aria-hidden="true" tabindex="-1"></a><span class="in">'# Build choropleth map',</span></span>
-<span id="cb3-327"><a href="#cb3-327" aria-hidden="true" tabindex="-1"></a><span class="in">'vvn_map_style(',</span></span>
-<span id="cb3-328"><a href="#cb3-328" aria-hidden="true" tabindex="-1"></a><span class="in">'  data        = va,',</span></span>
-<span id="cb3-329"><a href="#cb3-329" aria-hidden="true" tabindex="-1"></a><span class="in">'  variable    = "value",',</span></span>
-<span id="cb3-330"><a href="#cb3-330" aria-hidden="true" tabindex="-1"></a><span class="in">'  palette     = "maroon_seq",',</span></span>
-<span id="cb3-331"><a href="#cb3-331" aria-hidden="true" tabindex="-1"></a><span class="in">'  title       = "Economic Index by County, 2023",',</span></span>
-<span id="cb3-332"><a href="#cb3-332" aria-hidden="true" tabindex="-1"></a><span class="in">'  subtitle    = "Virginia ACS 5-Year Estimates",',</span></span>
-<span id="cb3-333"><a href="#cb3-333" aria-hidden="true" tabindex="-1"></a><span class="in">'  tooltip_var = "value",',</span></span>
-<span id="cb3-334"><a href="#cb3-334" aria-hidden="true" tabindex="-1"></a><span class="in">'  label_fmt   = scales::label_percent()',</span></span>
-<span id="cb3-335"><a href="#cb3-335" aria-hidden="true" tabindex="-1"></a><span class="in">')'</span></span>
-<span id="cb3-336"><a href="#cb3-336" aria-hidden="true" tabindex="-1"></a><span class="in">].join('\n');</span></span>
-<span id="cb3-337"><a href="#cb3-337" aria-hidden="true" tabindex="-1"></a><span class="in">function startDemo() {</span></span>
-<span id="cb3-338"><a href="#cb3-338" aria-hidden="true" tabindex="-1"></a><span class="in">  var el = document.getElementById('demo-gs-code');</span></span>
-<span id="cb3-339"><a href="#cb3-339" aria-hidden="true" tabindex="-1"></a><span class="in">  var cur = document.getElementById('demo-gs-cursor');</span></span>
-<span id="cb3-340"><a href="#cb3-340" aria-hidden="true" tabindex="-1"></a><span class="in">  var out = document.getElementById('demo-gs-output');</span></span>
-<span id="cb3-341"><a href="#cb3-341" aria-hidden="true" tabindex="-1"></a><span class="in">  if (!el) return;</span></span>
-<span id="cb3-342"><a href="#cb3-342" aria-hidden="true" tabindex="-1"></a><span class="in">  var i = 0, revealed = false;</span></span>
-<span id="cb3-343"><a href="#cb3-343" aria-hidden="true" tabindex="-1"></a><span class="in">  function type(){</span></span>
-<span id="cb3-344"><a href="#cb3-344" aria-hidden="true" tabindex="-1"></a><span class="in">    if(i &lt; code.length){</span></span>
-<span id="cb3-345"><a href="#cb3-345" aria-hidden="true" tabindex="-1"></a><span class="in">      el.textContent += code[i++];</span></span>
-<span id="cb3-346"><a href="#cb3-346" aria-hidden="true" tabindex="-1"></a><span class="in">      if(!revealed &amp;&amp; i &gt;= Math.floor(code.length * 0.2)){</span></span>
-<span id="cb3-347"><a href="#cb3-347" aria-hidden="true" tabindex="-1"></a><span class="in">        revealed = true;</span></span>
-<span id="cb3-348"><a href="#cb3-348" aria-hidden="true" tabindex="-1"></a><span class="in">        if(out) out.style.opacity = '1';</span></span>
-<span id="cb3-349"><a href="#cb3-349" aria-hidden="true" tabindex="-1"></a><span class="in">      }</span></span>
-<span id="cb3-350"><a href="#cb3-350" aria-hidden="true" tabindex="-1"></a><span class="in">      setTimeout(type, i &lt; 80 ? 35 : 16);</span></span>
-<span id="cb3-351"><a href="#cb3-351" aria-hidden="true" tabindex="-1"></a><span class="in">    } else {</span></span>
-<span id="cb3-352"><a href="#cb3-352" aria-hidden="true" tabindex="-1"></a><span class="in">      if(cur) cur.style.display = 'none';</span></span>
-<span id="cb3-353"><a href="#cb3-353" aria-hidden="true" tabindex="-1"></a><span class="in">      if(!revealed &amp;&amp; out) out.style.opacity = '1';</span></span>
-<span id="cb3-354"><a href="#cb3-354" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb3-355"><a href="#cb3-355" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb3-356"><a href="#cb3-356" aria-hidden="true" tabindex="-1"></a><span class="in">  setTimeout(type, 700);</span></span>
-<span id="cb3-357"><a href="#cb3-357" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb3-358"><a href="#cb3-358" aria-hidden="true" tabindex="-1"></a><span class="in">if(document.readyState === 'loading'){</span></span>
-<span id="cb3-359"><a href="#cb3-359" aria-hidden="true" tabindex="-1"></a><span class="in">  document.addEventListener('DOMContentLoaded', startDemo);</span></span>
-<span id="cb3-360"><a href="#cb3-360" aria-hidden="true" tabindex="-1"></a><span class="in">} else {</span></span>
-<span id="cb3-361"><a href="#cb3-361" aria-hidden="true" tabindex="-1"></a><span class="in">  startDemo();</span></span>
-<span id="cb3-362"><a href="#cb3-362" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb3-363"><a href="#cb3-363" aria-hidden="true" tabindex="-1"></a><span class="in">})();</span></span>
-<span id="cb3-364"><a href="#cb3-364" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/script&gt;</span></span>
-<span id="cb3-365"><a href="#cb3-365" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-366"><a href="#cb3-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-367"><a href="#cb3-367" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb3-368"><a href="#cb3-368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-369"><a href="#cb3-369" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learn More</span></span>
-<span id="cb3-370"><a href="#cb3-370" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-371"><a href="#cb3-371" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">Reference Manual</span><span class="co">](refman.html)</span> documents all function parameters. The <span class="co">[</span><span class="ot">Function Index</span><span class="co">](funcindex.html)</span> gives a quick purpose summary for every function. Step-by-step tutorials are available for <span class="co">[</span><span class="ot">charts</span><span class="co">](charts.html)</span>, <span class="co">[</span><span class="ot">maps</span><span class="co">](maps.html)</span>, <span class="co">[</span><span class="ot">tables</span><span class="co">](tables.html)</span>, and <span class="co">[</span><span class="ot">interactive Shiny components</span><span class="co">](interactive-components.html)</span>. The <span class="co">[</span><span class="ot">FAQ</span><span class="co">](faq.html)</span> covers common errors. For design standards — color rules, chart selection, normalization requirements — see the <span class="co">[</span><span class="ot">VVN Style Guide</span><span class="co">](https://yujuangao.github.io/VVN/guide/)</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb3-224"><a href="#cb3-224" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb3-225"><a href="#cb3-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-226"><a href="#cb3-226" aria-hidden="true" tabindex="-1"></a><span class="fu">## Demo: Build a Choropleth Map</span></span>
+<span id="cb3-227"><a href="#cb3-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-228"><a href="#cb3-228" aria-hidden="true" tabindex="-1"></a>Load <span class="in">`vvnthemes`</span>, join your county data, and call <span class="in">`vvn_map_style()`</span> — the map is styled, labeled, and ready in under 10 lines of code.</span>
+<span id="cb3-229"><a href="#cb3-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-230"><a href="#cb3-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
+<span id="cb3-231"><a href="#cb3-231" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel demo-panel--stacked"&gt;</span></span>
+<span id="cb3-232"><a href="#cb3-232" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-code"&gt;</span></span>
+<span id="cb3-233"><a href="#cb3-233" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-header"&gt;R — county choropleth map&lt;/div&gt;</span></span>
+<span id="cb3-234"><a href="#cb3-234" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-body"&gt;</span></span>
+<span id="cb3-235"><a href="#cb3-235" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;pre&gt;&lt;code id="demo-gs-code"&gt;&lt;/code&gt;&lt;span class="demo-cursor" id="demo-gs-cursor"&gt;&lt;/span&gt;&lt;/pre&gt;</span></span>
+<span id="cb3-236"><a href="#cb3-236" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-237"><a href="#cb3-237" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-238"><a href="#cb3-238" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-output" id="demo-gs-output" style="opacity:0;transition:opacity 0.7s ease;"&gt;</span></span>
+<span id="cb3-239"><a href="#cb3-239" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-header"&gt;Map output&lt;/div&gt;</span></span>
+<span id="cb3-240"><a href="#cb3-240" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="demo-panel-body"&gt;</span></span>
+<span id="cb3-241"><a href="#cb3-241" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;img src="images/demo-map.png" alt="VVN county choropleth map of Virginia"&gt;</span></span>
+<span id="cb3-242"><a href="#cb3-242" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-243"><a href="#cb3-243" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-244"><a href="#cb3-244" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb3-245"><a href="#cb3-245" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;script&gt;</span></span>
+<span id="cb3-246"><a href="#cb3-246" aria-hidden="true" tabindex="-1"></a><span class="in">(function(){</span></span>
+<span id="cb3-247"><a href="#cb3-247" aria-hidden="true" tabindex="-1"></a><span class="in">var code = [</span></span>
+<span id="cb3-248"><a href="#cb3-248" aria-hidden="true" tabindex="-1"></a><span class="in">'library(vvnthemes)',</span></span>
+<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a><span class="in">'library(leaflet)',</span></span>
+<span id="cb3-250"><a href="#cb3-250" aria-hidden="true" tabindex="-1"></a><span class="in">'library(sf)',</span></span>
+<span id="cb3-251"><a href="#cb3-251" aria-hidden="true" tabindex="-1"></a><span class="in">'',</span></span>
+<span id="cb3-252"><a href="#cb3-252" aria-hidden="true" tabindex="-1"></a><span class="in">'# Load Virginia county boundaries',</span></span>
+<span id="cb3-253"><a href="#cb3-253" aria-hidden="true" tabindex="-1"></a><span class="in">'va &lt;- vvnthemes::va_counties',</span></span>
+<span id="cb3-254"><a href="#cb3-254" aria-hidden="true" tabindex="-1"></a><span class="in">'',</span></span>
+<span id="cb3-255"><a href="#cb3-255" aria-hidden="true" tabindex="-1"></a><span class="in">'# Join your data (FIPS + value)',</span></span>
+<span id="cb3-256"><a href="#cb3-256" aria-hidden="true" tabindex="-1"></a><span class="in">'va$value &lt;- c(0.42, 0.61, 0.55, 0.73, 0.38,',</span></span>
+<span id="cb3-257"><a href="#cb3-257" aria-hidden="true" tabindex="-1"></a><span class="in">'              0.67, 0.49, 0.81, 0.57, 0.44)',</span></span>
+<span id="cb3-258"><a href="#cb3-258" aria-hidden="true" tabindex="-1"></a><span class="in">'',</span></span>
+<span id="cb3-259"><a href="#cb3-259" aria-hidden="true" tabindex="-1"></a><span class="in">'# Build choropleth map',</span></span>
+<span id="cb3-260"><a href="#cb3-260" aria-hidden="true" tabindex="-1"></a><span class="in">'vvn_map_style(',</span></span>
+<span id="cb3-261"><a href="#cb3-261" aria-hidden="true" tabindex="-1"></a><span class="in">'  data        = va,',</span></span>
+<span id="cb3-262"><a href="#cb3-262" aria-hidden="true" tabindex="-1"></a><span class="in">'  variable    = "value",',</span></span>
+<span id="cb3-263"><a href="#cb3-263" aria-hidden="true" tabindex="-1"></a><span class="in">'  palette     = "maroon_seq",',</span></span>
+<span id="cb3-264"><a href="#cb3-264" aria-hidden="true" tabindex="-1"></a><span class="in">'  title       = "Economic Index by County, 2023",',</span></span>
+<span id="cb3-265"><a href="#cb3-265" aria-hidden="true" tabindex="-1"></a><span class="in">'  subtitle    = "Virginia ACS 5-Year Estimates",',</span></span>
+<span id="cb3-266"><a href="#cb3-266" aria-hidden="true" tabindex="-1"></a><span class="in">'  tooltip_var = "value",',</span></span>
+<span id="cb3-267"><a href="#cb3-267" aria-hidden="true" tabindex="-1"></a><span class="in">'  label_fmt   = scales::label_percent()',</span></span>
+<span id="cb3-268"><a href="#cb3-268" aria-hidden="true" tabindex="-1"></a><span class="in">')'</span></span>
+<span id="cb3-269"><a href="#cb3-269" aria-hidden="true" tabindex="-1"></a><span class="in">].join('\n');</span></span>
+<span id="cb3-270"><a href="#cb3-270" aria-hidden="true" tabindex="-1"></a><span class="in">function startDemo() {</span></span>
+<span id="cb3-271"><a href="#cb3-271" aria-hidden="true" tabindex="-1"></a><span class="in">  var el = document.getElementById('demo-gs-code');</span></span>
+<span id="cb3-272"><a href="#cb3-272" aria-hidden="true" tabindex="-1"></a><span class="in">  var cur = document.getElementById('demo-gs-cursor');</span></span>
+<span id="cb3-273"><a href="#cb3-273" aria-hidden="true" tabindex="-1"></a><span class="in">  var out = document.getElementById('demo-gs-output');</span></span>
+<span id="cb3-274"><a href="#cb3-274" aria-hidden="true" tabindex="-1"></a><span class="in">  if (!el) return;</span></span>
+<span id="cb3-275"><a href="#cb3-275" aria-hidden="true" tabindex="-1"></a><span class="in">  var i = 0, revealed = false;</span></span>
+<span id="cb3-276"><a href="#cb3-276" aria-hidden="true" tabindex="-1"></a><span class="in">  function type(){</span></span>
+<span id="cb3-277"><a href="#cb3-277" aria-hidden="true" tabindex="-1"></a><span class="in">    if(i &lt; code.length){</span></span>
+<span id="cb3-278"><a href="#cb3-278" aria-hidden="true" tabindex="-1"></a><span class="in">      el.textContent += code[i++];</span></span>
+<span id="cb3-279"><a href="#cb3-279" aria-hidden="true" tabindex="-1"></a><span class="in">      if(!revealed &amp;&amp; i &gt;= Math.floor(code.length * 0.2)){</span></span>
+<span id="cb3-280"><a href="#cb3-280" aria-hidden="true" tabindex="-1"></a><span class="in">        revealed = true;</span></span>
+<span id="cb3-281"><a href="#cb3-281" aria-hidden="true" tabindex="-1"></a><span class="in">        if(out) out.style.opacity = '1';</span></span>
+<span id="cb3-282"><a href="#cb3-282" aria-hidden="true" tabindex="-1"></a><span class="in">      }</span></span>
+<span id="cb3-283"><a href="#cb3-283" aria-hidden="true" tabindex="-1"></a><span class="in">      setTimeout(type, i &lt; 80 ? 35 : 16);</span></span>
+<span id="cb3-284"><a href="#cb3-284" aria-hidden="true" tabindex="-1"></a><span class="in">    } else {</span></span>
+<span id="cb3-285"><a href="#cb3-285" aria-hidden="true" tabindex="-1"></a><span class="in">      if(cur) cur.style.display = 'none';</span></span>
+<span id="cb3-286"><a href="#cb3-286" aria-hidden="true" tabindex="-1"></a><span class="in">      if(!revealed &amp;&amp; out) out.style.opacity = '1';</span></span>
+<span id="cb3-287"><a href="#cb3-287" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb3-288"><a href="#cb3-288" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb3-289"><a href="#cb3-289" aria-hidden="true" tabindex="-1"></a><span class="in">  setTimeout(type, 700);</span></span>
+<span id="cb3-290"><a href="#cb3-290" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb3-291"><a href="#cb3-291" aria-hidden="true" tabindex="-1"></a><span class="in">if(document.readyState === 'loading'){</span></span>
+<span id="cb3-292"><a href="#cb3-292" aria-hidden="true" tabindex="-1"></a><span class="in">  document.addEventListener('DOMContentLoaded', startDemo);</span></span>
+<span id="cb3-293"><a href="#cb3-293" aria-hidden="true" tabindex="-1"></a><span class="in">} else {</span></span>
+<span id="cb3-294"><a href="#cb3-294" aria-hidden="true" tabindex="-1"></a><span class="in">  startDemo();</span></span>
+<span id="cb3-295"><a href="#cb3-295" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb3-296"><a href="#cb3-296" aria-hidden="true" tabindex="-1"></a><span class="in">})();</span></span>
+<span id="cb3-297"><a href="#cb3-297" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/script&gt;</span></span>
+<span id="cb3-298"><a href="#cb3-298" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-299"><a href="#cb3-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-300"><a href="#cb3-300" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb3-301"><a href="#cb3-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-302"><a href="#cb3-302" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learn More</span></span>
+<span id="cb3-303"><a href="#cb3-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-304"><a href="#cb3-304" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">Reference Manual</span><span class="co">](refman.html)</span> documents all function parameters. The <span class="co">[</span><span class="ot">Function Index</span><span class="co">](funcindex.html)</span> gives a quick purpose summary for every function. Step-by-step tutorials are available for <span class="co">[</span><span class="ot">charts</span><span class="co">](charts.html)</span>, <span class="co">[</span><span class="ot">maps</span><span class="co">](maps.html)</span>, <span class="co">[</span><span class="ot">tables</span><span class="co">](tables.html)</span>, and <span class="co">[</span><span class="ot">interactive Shiny components</span><span class="co">](interactive-components.html)</span>. The <span class="co">[</span><span class="ot">FAQ</span><span class="co">](faq.html)</span> covers common errors. For design standards — color rules, chart selection, normalization requirements — see the <span class="co">[</span><span class="ot">VVN Style Guide</span><span class="co">](https://yujuangao.github.io/VVN/guide/)</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
