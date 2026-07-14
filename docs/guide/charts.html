@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-63632906e216c49526e730d1152f2065.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9ad50940d05695617f36198319ce7ff5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -340,6 +340,37 @@ document.addEventListener('DOMContentLoaded', function () {
       sidebar.insertBefore(desc, sidebar.firstChild);
     }
   }
+
+  // ── Breadcrumb bar below navbar ─────────────────────────────────────────────
+  var page = window.location.pathname.split('/').pop().replace('.html','');
+  var breadcrumbs = {
+    'index':     [],
+    'dashboard': ['Products', 'Interactive Data Visualizations'],
+    'insights':  ['Products', 'VVN Insights'],
+    'brand':     ['Design Standards', 'Brand'],
+    'charts':    ['Design Standards', 'Charts'],
+    'maps':      ['Design Standards', 'Maps'],
+    'tables':    ['Design Standards', 'Tables'],
+    'filter':    ['Design Standards', 'Filter Controls'],
+    'checklist': ['Publishing Checklist']
+  };
+  var crumbs = breadcrumbs[page] || [];
+  if (crumbs.length === 0) return;
+
+  var header = document.getElementById('quarto-header');
+  if (!header) return;
+
+  var bar = document.createElement('div');
+  bar.id = 'vvn-breadcrumb-bar';
+  bar.innerHTML = '<a href="index.html">VVN Style Guide</a>' +
+    crumbs.map(function(c, i) {
+      return '<span class="vvn-bc-sep">›</span><span' + (i === crumbs.length - 1 ? ' class="vvn-bc-active"' : '') + '>' + c + '</span>';
+    }).join('');
+  header.appendChild(bar);
+
+  var barH = bar.offsetHeight || 30;
+  var currentPad = parseInt(window.getComputedStyle(document.body).paddingTop) || 0;
+  document.body.style.paddingTop = (currentPad + barH) + 'px';
 });
 </script>
 <script id="quarto-html-after-body" type="application/javascript">

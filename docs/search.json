@@ -543,7 +543,70 @@
     "href": "funcindex.html",
     "title": "Function Index",
     "section": "",
-    "text": "Category\nFunction\nPurpose\n\n\n\n\nSetup\nset_vvn_defaults()\nSets theme_vvn() as the global ggplot2 theme and changes default geom colors to VT Maroon (bars, points, lines) and VT Orange (smooth lines). Call once per script — every chart after this is automatically branded.\n\n\nSetup\nundo_vvn_defaults()\nReverts ggplot2 to factory defaults. Use at the end of a script or when switching to non-VVN work.\n\n\nThemes\ntheme_vvn()\nStandard VVN ggplot2 theme — white background, maroon titles, light gray horizontal gridlines. Use for bar charts, line charts, and histograms.\n\n\nThemes\ntheme_vvn_map()\nMap variant for ggplot2 + sf static choropleth maps. Removes axes, adds muted panel background, moves legend to bottom.\n\n\nThemes\ntheme_vvn_minimal()\nStripped-down variant — no gridlines, no axes. For small multiples, annotation-heavy figures, or inset charts.\n\n\nColor System\nvvn_colors()\nReturns hex codes for named VVN brand colors (maroon, orange, navy, charcoal, etc.). Use when you need a specific color value directly.\n\n\nColor System\nvvn_palette()\nReturns a vector of hex codes from a named palette (\"main\", \"brand\", \"maroon_seq\", \"diverging\", etc.). Sequential palettes interpolate to any number of steps.\n\n\nColor System\nview_vvn_palette()\nRenders a horizontal color swatch strip for any palette — use to preview available colors before building a chart.\n\n\nScales\nscale_color_vvn()\nApplies a VVN categorical palette to the color aesthetic. Use for grouped line charts and scatter plots.\n\n\nScales\nscale_fill_vvn()\nApplies a VVN categorical palette to the fill aesthetic. Use for grouped bar charts and area charts.\n\n\nScales\nscale_color_vvn_c()\nApplies a sequential or diverging palette to a continuous color aesthetic. Use for scatter plots where color encodes a numeric variable.\n\n\nScales\nscale_fill_vvn_c()\nApplies a sequential or diverging palette to a continuous fill. The primary function for static choropleth maps.\n\n\nChart Helpers\nvvn_title()\nAdds a headline-case title and optional sentence-case subtitle to a ggplot via labs().\n\n\nChart Helpers\nvvn_source()\nAdds a source attribution caption. Required on every published VVN figure.\n\n\nChart Helpers\nvvn_note()\nAdds a footnote-style annotation without a source line.\n\n\nChart Helpers\nremove_ticks()\nRemoves axis tick marks. Recommended for bar charts and categorical axes.\n\n\nChart Helpers\nremove_axis()\nRemoves an entire axis (text, title, ticks, and line). Use when category labels are self-evident.\n\n\nChart Helpers\nscatter_grid()\nAdds major gridlines on both axes. Shorthand for theme_vvn(grid = \"both\").\n\n\nChart Helpers\nlegend_bottom()\nMoves the legend to the bottom of the chart in horizontal orientation.\n\n\nChart Helpers\nremove_legend()\nRemoves the legend entirely. Use when colors are labeled directly on the chart.\n\n\nChart Helpers\nvvn_save()\nExports a ggplot at 300 dpi, 8 × 5 in, white background. Supports multi-format export in one call (e.g. c(\"png\",\"pdf\",\"svg\")).\n\n\nChart Helpers\nvvn_accessibility_check()\nComputes WCAG 2.1 contrast ratios and reports pass/fail for AA (≥ 4.5:1) or AAA (≥ 7.0:1) standards.\n\n\nTables\nvvn_table()\nStyles a gt table with VT Maroon headers, alternating gray rows, and an orange accent border. Accepts title, subtitle, and source note.\n\n\nTables\nvvn_table_pvalues()\nColor-codes a p-value column — maroon for p &lt; 0.001, orange for p &lt; 0.05. Pipe after vvn_table().\n\n\nMaps\nvvn_map_style()\nBuilds an interactive Leaflet choropleth map with VVN branding: CartoDB muted basemap, VVN palette fill, maroon hover highlight, popup tooltips, and a styled legend.\n\n\nShiny UI\nvvn_filter()\nA branded selectInput dropdown with a maroon label. Use in dashboard sidebars for county, year, or category filters.\n\n\nShiny UI\nvvn_slider()\nA branded sliderInput with a maroon track. Supports single-value and two-handle range sliders.\n\n\nShiny UI\nvvn_button()\nA styled actionButton in three variants: primary (maroon fill, for Apply Filters), secondary (orange fill), or outline (maroon border, for Reset).\n\n\nShiny UI\nvvn_kpi_card()\nRenders a large-number KPI metric card with a label and optional trend arrow. Design in sets of three per row — one maroon, one orange, one navy.\n\n\nScaffolding\ncreate_vvn_dashboard()\nGenerates a complete, runnable Shiny dashboard project in one command: app.R, R/data_prep.R, www/vvn.css, and a data/ folder. Replace placeholder data and deploy.\n\n\nScaffolding\ncreate_vvn_story()\nGenerates a VVN Insights Quarto project with pre-built narrative sections (Overview, Background, Findings, Conclusion), branded styles, and figures/ + scripts/ folders.\n\n\nScaffolding\ncheck_vvn_story()\nValidates a VVN Insights index.qmd before publishing — checks for required sections and confirms theme_vvn() and vvn_source() are used."
+    "text": "Quick-reference for every function in vvnthemes. Click any function name to jump to its full documentation in the Reference Manual."
+  },
+  {
+    "objectID": "funcindex.html#setup",
+    "href": "funcindex.html#setup",
+    "title": "Function Index",
+    "section": "Setup",
+    "text": "Setup\n\n\n\n\n\n\n\nFunction\nPurpose\n\n\n\n\nset_vvn_defaults()\nSets theme_vvn() as the global ggplot2 theme and changes default geom colors to VT Maroon (bars, points, lines) and VT Orange (smooth lines). Call once per script — every chart after this is automatically branded.\n\n\nundo_vvn_defaults()\nReverts ggplot2 to factory defaults. Use at the end of a script or when switching to non-VVN work."
+  },
+  {
+    "objectID": "funcindex.html#themes",
+    "href": "funcindex.html#themes",
+    "title": "Function Index",
+    "section": "Themes",
+    "text": "Themes\n\n\n\n\n\n\n\nFunction\nPurpose\n\n\n\n\ntheme_vvn()\nStandard VVN ggplot2 theme — white background, maroon titles, light gray horizontal gridlines. Use for bar charts, line charts, and histograms.\n\n\ntheme_vvn_map()\nMap variant for ggplot2 + sf static choropleth maps. Removes axes, adds muted panel background, moves legend to bottom.\n\n\ntheme_vvn_minimal()\nStripped-down variant — no gridlines, no axes. For small multiples, annotation-heavy figures, or inset charts."
+  },
+  {
+    "objectID": "funcindex.html#color-system",
+    "href": "funcindex.html#color-system",
+    "title": "Function Index",
+    "section": "Color System",
+    "text": "Color System\n\n\n\n\n\n\n\nFunction\nPurpose\n\n\n\n\nvvn_colors()\nReturns hex codes for named VVN brand colors (maroon, orange, navy, charcoal, etc.). Use when you need a specific color value directly.\n\n\nvvn_palette()\nReturns a vector of hex codes from a named palette (\"main\", \"brand\", \"maroon_seq\", \"diverging\", etc.). Sequential palettes interpolate to any number of steps.\n\n\nview_vvn_palette()\nRenders a horizontal color swatch strip for any palette — use to preview available colors before building a chart."
+  },
+  {
+    "objectID": "funcindex.html#scales",
+    "href": "funcindex.html#scales",
+    "title": "Function Index",
+    "section": "Scales",
+    "text": "Scales\n\n\n\n\n\n\n\nFunction\nPurpose\n\n\n\n\nscale_color_vvn()\nApplies a VVN categorical palette to the color aesthetic. Use for grouped line charts and scatter plots.\n\n\nscale_fill_vvn()\nApplies a VVN categorical palette to the fill aesthetic. Use for grouped bar charts and area charts.\n\n\nscale_color_vvn_c()\nApplies a sequential or diverging palette to a continuous color aesthetic. Use for scatter plots where color encodes a numeric variable.\n\n\nscale_fill_vvn_c()\nApplies a sequential or diverging palette to a continuous fill. The primary function for static choropleth maps."
+  },
+  {
+    "objectID": "funcindex.html#chart-helpers",
+    "href": "funcindex.html#chart-helpers",
+    "title": "Function Index",
+    "section": "Chart Helpers",
+    "text": "Chart Helpers\n\n\n\n\n\n\n\nFunction\nPurpose\n\n\n\n\nvvn_title()\nAdds a headline-case title and optional sentence-case subtitle to a ggplot via labs().\n\n\nvvn_source()\nAdds a source attribution caption. Required on every published VVN figure.\n\n\nvvn_note()\nAdds a footnote-style annotation without a source line.\n\n\nremove_ticks()\nRemoves axis tick marks. Recommended for bar charts and categorical axes.\n\n\nremove_axis()\nRemoves an entire axis (text, title, ticks, and line). Use when category labels are self-evident.\n\n\nscatter_grid()\nAdds major gridlines on both axes. Shorthand for theme_vvn(grid = \"both\").\n\n\nlegend_bottom()\nMoves the legend to the bottom of the chart in horizontal orientation.\n\n\nremove_legend()\nRemoves the legend entirely. Use when colors are labeled directly on the chart.\n\n\nvvn_save()\nExports a ggplot at 300 dpi, 8 × 5 in, white background. Supports multi-format export in one call (e.g. c(\"png\",\"pdf\",\"svg\")).\n\n\nvvn_accessibility_check()\nComputes WCAG 2.1 contrast ratios and reports pass/fail for AA (&gt;= 4.5:1) or AAA (&gt;= 7.0:1) standards."
+  },
+  {
+    "objectID": "funcindex.html#tables",
+    "href": "funcindex.html#tables",
+    "title": "Function Index",
+    "section": "Tables",
+    "text": "Tables\n\n\n\n\n\n\n\nFunction\nPurpose\n\n\n\n\nvvn_table()\nStyles a gt table with VT Maroon headers, alternating gray rows, and an orange accent border. Accepts title, subtitle, and source note.\n\n\nvvn_table_pvalues()\nColor-codes a p-value column — maroon for p &lt; 0.001, orange for p &lt; 0.05. Pipe after vvn_table()."
+  },
+  {
+    "objectID": "funcindex.html#maps",
+    "href": "funcindex.html#maps",
+    "title": "Function Index",
+    "section": "Maps",
+    "text": "Maps\n\n\n\n\n\n\n\nFunction\nPurpose\n\n\n\n\nvvn_map_style()\nBuilds an interactive Leaflet choropleth map with VVN branding: CartoDB muted basemap, VVN palette fill, maroon hover highlight, popup tooltips, and a styled legend."
+  },
+  {
+    "objectID": "funcindex.html#shiny-ui",
+    "href": "funcindex.html#shiny-ui",
+    "title": "Function Index",
+    "section": "Shiny UI",
+    "text": "Shiny UI\n\n\n\n\n\n\n\nFunction\nPurpose\n\n\n\n\nvvn_filter()\nA branded selectInput dropdown with a maroon label. Use in dashboard sidebars for county, year, or category filters.\n\n\nvvn_slider()\nA branded sliderInput with a maroon track. Supports single-value and two-handle range sliders.\n\n\nvvn_button()\nA styled actionButton in three variants: primary (maroon fill, for Apply Filters), secondary (orange fill), or outline (maroon border, for Reset).\n\n\nvvn_kpi_card()\nRenders a large-number KPI metric card with a label and optional trend arrow. Design in sets of three per row — one maroon, one orange, one navy."
+  },
+  {
+    "objectID": "funcindex.html#scaffolding",
+    "href": "funcindex.html#scaffolding",
+    "title": "Function Index",
+    "section": "Scaffolding",
+    "text": "Scaffolding\n\n\n\n\n\n\n\nFunction\nPurpose\n\n\n\n\ncreate_vvn_dashboard()\nGenerates a complete, runnable Shiny dashboard project in one command: app.R, R/data_prep.R, www/vvn.css, and a data/ folder. Replace placeholder data and deploy.\n\n\ncreate_vvn_story()\nGenerates a VVN Insights Quarto project with pre-built narrative sections (Overview, Background, Findings, Conclusion), branded styles, and figures/ + scripts/ folders.\n\n\ncheck_vvn_story()\nValidates a VVN Insights index.qmd before publishing — checks for required sections and confirms theme_vvn() and vvn_source() are used."
   },
   {
     "objectID": "vvn-insight.html",
