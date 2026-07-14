@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-acf12a64177840b8d86f2d4f01b2e9fb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-71bd93bf73a5281e69cbd034b7b923c6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-67233ca26d885051b5a3f2f4cfce9b07.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -445,26 +445,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 (function(){
 var code = [
 'library(vvnthemes)',
-'library(leaflet)',
+'library(ggplot2)',
 'library(sf)',
 '',
 '# Load Virginia county boundaries',
 'va <- vvnthemes::va_counties',
 '',
-'# Join your data (FIPS + value)',
-'va$value <- c(0.42, 0.61, 0.55, 0.73, 0.38,',
-'              0.67, 0.49, 0.81, 0.57, 0.44)',
+'# Join your data (FIPS + normalized value)',
+'va$broadband <- your_county_data$rate',
 '',
 '# Build choropleth map',
-'vvn_map_style(',
-'  data        = va,',
-'  variable    = "value",',
-'  palette     = "maroon_seq",',
-'  title       = "Economic Index by County, 2023",',
-'  subtitle    = "Virginia ACS 5-Year Estimates",',
-'  tooltip_var = "value",',
-'  label_fmt   = scales::label_percent()',
-')'
+'ggplot(va) +',
+'  geom_sf(aes(fill = broadband), color = "white") +',
+'  scale_fill_vvn_c("maroon_seq",',
+'    name   = "Broadband Access",',
+'    labels = scales::label_percent()) +',
+'  theme_vvn_map() +',
+'  vvn_title("Broadband Access by County, 2023") +',
+'  vvn_source("American Community Survey")'
 ].join('\n');
 function startDemo() {
   var el = document.getElementById('demo-gs-code');
@@ -1263,62 +1261,60 @@ document.addEventListener('DOMContentLoaded', function () {
 <span id="cb3-246"><a href="#cb3-246" aria-hidden="true" tabindex="-1"></a><span class="in">(function(){</span></span>
 <span id="cb3-247"><a href="#cb3-247" aria-hidden="true" tabindex="-1"></a><span class="in">var code = [</span></span>
 <span id="cb3-248"><a href="#cb3-248" aria-hidden="true" tabindex="-1"></a><span class="in">'library(vvnthemes)',</span></span>
-<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a><span class="in">'library(leaflet)',</span></span>
+<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a><span class="in">'library(ggplot2)',</span></span>
 <span id="cb3-250"><a href="#cb3-250" aria-hidden="true" tabindex="-1"></a><span class="in">'library(sf)',</span></span>
 <span id="cb3-251"><a href="#cb3-251" aria-hidden="true" tabindex="-1"></a><span class="in">'',</span></span>
 <span id="cb3-252"><a href="#cb3-252" aria-hidden="true" tabindex="-1"></a><span class="in">'# Load Virginia county boundaries',</span></span>
 <span id="cb3-253"><a href="#cb3-253" aria-hidden="true" tabindex="-1"></a><span class="in">'va &lt;- vvnthemes::va_counties',</span></span>
 <span id="cb3-254"><a href="#cb3-254" aria-hidden="true" tabindex="-1"></a><span class="in">'',</span></span>
-<span id="cb3-255"><a href="#cb3-255" aria-hidden="true" tabindex="-1"></a><span class="in">'# Join your data (FIPS + value)',</span></span>
-<span id="cb3-256"><a href="#cb3-256" aria-hidden="true" tabindex="-1"></a><span class="in">'va$value &lt;- c(0.42, 0.61, 0.55, 0.73, 0.38,',</span></span>
-<span id="cb3-257"><a href="#cb3-257" aria-hidden="true" tabindex="-1"></a><span class="in">'              0.67, 0.49, 0.81, 0.57, 0.44)',</span></span>
-<span id="cb3-258"><a href="#cb3-258" aria-hidden="true" tabindex="-1"></a><span class="in">'',</span></span>
-<span id="cb3-259"><a href="#cb3-259" aria-hidden="true" tabindex="-1"></a><span class="in">'# Build choropleth map',</span></span>
-<span id="cb3-260"><a href="#cb3-260" aria-hidden="true" tabindex="-1"></a><span class="in">'vvn_map_style(',</span></span>
-<span id="cb3-261"><a href="#cb3-261" aria-hidden="true" tabindex="-1"></a><span class="in">'  data        = va,',</span></span>
-<span id="cb3-262"><a href="#cb3-262" aria-hidden="true" tabindex="-1"></a><span class="in">'  variable    = "value",',</span></span>
-<span id="cb3-263"><a href="#cb3-263" aria-hidden="true" tabindex="-1"></a><span class="in">'  palette     = "maroon_seq",',</span></span>
-<span id="cb3-264"><a href="#cb3-264" aria-hidden="true" tabindex="-1"></a><span class="in">'  title       = "Economic Index by County, 2023",',</span></span>
-<span id="cb3-265"><a href="#cb3-265" aria-hidden="true" tabindex="-1"></a><span class="in">'  subtitle    = "Virginia ACS 5-Year Estimates",',</span></span>
-<span id="cb3-266"><a href="#cb3-266" aria-hidden="true" tabindex="-1"></a><span class="in">'  tooltip_var = "value",',</span></span>
-<span id="cb3-267"><a href="#cb3-267" aria-hidden="true" tabindex="-1"></a><span class="in">'  label_fmt   = scales::label_percent()',</span></span>
-<span id="cb3-268"><a href="#cb3-268" aria-hidden="true" tabindex="-1"></a><span class="in">')'</span></span>
-<span id="cb3-269"><a href="#cb3-269" aria-hidden="true" tabindex="-1"></a><span class="in">].join('\n');</span></span>
-<span id="cb3-270"><a href="#cb3-270" aria-hidden="true" tabindex="-1"></a><span class="in">function startDemo() {</span></span>
-<span id="cb3-271"><a href="#cb3-271" aria-hidden="true" tabindex="-1"></a><span class="in">  var el = document.getElementById('demo-gs-code');</span></span>
-<span id="cb3-272"><a href="#cb3-272" aria-hidden="true" tabindex="-1"></a><span class="in">  var cur = document.getElementById('demo-gs-cursor');</span></span>
-<span id="cb3-273"><a href="#cb3-273" aria-hidden="true" tabindex="-1"></a><span class="in">  var out = document.getElementById('demo-gs-output');</span></span>
-<span id="cb3-274"><a href="#cb3-274" aria-hidden="true" tabindex="-1"></a><span class="in">  if (!el) return;</span></span>
-<span id="cb3-275"><a href="#cb3-275" aria-hidden="true" tabindex="-1"></a><span class="in">  var i = 0, revealed = false;</span></span>
-<span id="cb3-276"><a href="#cb3-276" aria-hidden="true" tabindex="-1"></a><span class="in">  function type(){</span></span>
-<span id="cb3-277"><a href="#cb3-277" aria-hidden="true" tabindex="-1"></a><span class="in">    if(i &lt; code.length){</span></span>
-<span id="cb3-278"><a href="#cb3-278" aria-hidden="true" tabindex="-1"></a><span class="in">      el.textContent += code[i++];</span></span>
-<span id="cb3-279"><a href="#cb3-279" aria-hidden="true" tabindex="-1"></a><span class="in">      if(!revealed &amp;&amp; i &gt;= Math.floor(code.length * 0.2)){</span></span>
-<span id="cb3-280"><a href="#cb3-280" aria-hidden="true" tabindex="-1"></a><span class="in">        revealed = true;</span></span>
-<span id="cb3-281"><a href="#cb3-281" aria-hidden="true" tabindex="-1"></a><span class="in">        if(out) out.style.opacity = '1';</span></span>
-<span id="cb3-282"><a href="#cb3-282" aria-hidden="true" tabindex="-1"></a><span class="in">      }</span></span>
-<span id="cb3-283"><a href="#cb3-283" aria-hidden="true" tabindex="-1"></a><span class="in">      setTimeout(type, i &lt; 80 ? 35 : 16);</span></span>
-<span id="cb3-284"><a href="#cb3-284" aria-hidden="true" tabindex="-1"></a><span class="in">    } else {</span></span>
-<span id="cb3-285"><a href="#cb3-285" aria-hidden="true" tabindex="-1"></a><span class="in">      if(cur) cur.style.display = 'none';</span></span>
-<span id="cb3-286"><a href="#cb3-286" aria-hidden="true" tabindex="-1"></a><span class="in">      if(!revealed &amp;&amp; out) out.style.opacity = '1';</span></span>
-<span id="cb3-287"><a href="#cb3-287" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb3-288"><a href="#cb3-288" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb3-289"><a href="#cb3-289" aria-hidden="true" tabindex="-1"></a><span class="in">  setTimeout(type, 700);</span></span>
-<span id="cb3-290"><a href="#cb3-290" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb3-291"><a href="#cb3-291" aria-hidden="true" tabindex="-1"></a><span class="in">if(document.readyState === 'loading'){</span></span>
-<span id="cb3-292"><a href="#cb3-292" aria-hidden="true" tabindex="-1"></a><span class="in">  document.addEventListener('DOMContentLoaded', startDemo);</span></span>
-<span id="cb3-293"><a href="#cb3-293" aria-hidden="true" tabindex="-1"></a><span class="in">} else {</span></span>
-<span id="cb3-294"><a href="#cb3-294" aria-hidden="true" tabindex="-1"></a><span class="in">  startDemo();</span></span>
-<span id="cb3-295"><a href="#cb3-295" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb3-296"><a href="#cb3-296" aria-hidden="true" tabindex="-1"></a><span class="in">})();</span></span>
-<span id="cb3-297"><a href="#cb3-297" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/script&gt;</span></span>
-<span id="cb3-298"><a href="#cb3-298" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-255"><a href="#cb3-255" aria-hidden="true" tabindex="-1"></a><span class="in">'# Join your data (FIPS + normalized value)',</span></span>
+<span id="cb3-256"><a href="#cb3-256" aria-hidden="true" tabindex="-1"></a><span class="in">'va$broadband &lt;- your_county_data$rate',</span></span>
+<span id="cb3-257"><a href="#cb3-257" aria-hidden="true" tabindex="-1"></a><span class="in">'',</span></span>
+<span id="cb3-258"><a href="#cb3-258" aria-hidden="true" tabindex="-1"></a><span class="in">'# Build choropleth map',</span></span>
+<span id="cb3-259"><a href="#cb3-259" aria-hidden="true" tabindex="-1"></a><span class="in">'ggplot(va) +',</span></span>
+<span id="cb3-260"><a href="#cb3-260" aria-hidden="true" tabindex="-1"></a><span class="in">'  geom_sf(aes(fill = broadband), color = "white") +',</span></span>
+<span id="cb3-261"><a href="#cb3-261" aria-hidden="true" tabindex="-1"></a><span class="in">'  scale_fill_vvn_c("maroon_seq",',</span></span>
+<span id="cb3-262"><a href="#cb3-262" aria-hidden="true" tabindex="-1"></a><span class="in">'    name   = "Broadband Access",',</span></span>
+<span id="cb3-263"><a href="#cb3-263" aria-hidden="true" tabindex="-1"></a><span class="in">'    labels = scales::label_percent()) +',</span></span>
+<span id="cb3-264"><a href="#cb3-264" aria-hidden="true" tabindex="-1"></a><span class="in">'  theme_vvn_map() +',</span></span>
+<span id="cb3-265"><a href="#cb3-265" aria-hidden="true" tabindex="-1"></a><span class="in">'  vvn_title("Broadband Access by County, 2023") +',</span></span>
+<span id="cb3-266"><a href="#cb3-266" aria-hidden="true" tabindex="-1"></a><span class="in">'  vvn_source("American Community Survey")'</span></span>
+<span id="cb3-267"><a href="#cb3-267" aria-hidden="true" tabindex="-1"></a><span class="in">].join('\n');</span></span>
+<span id="cb3-268"><a href="#cb3-268" aria-hidden="true" tabindex="-1"></a><span class="in">function startDemo() {</span></span>
+<span id="cb3-269"><a href="#cb3-269" aria-hidden="true" tabindex="-1"></a><span class="in">  var el = document.getElementById('demo-gs-code');</span></span>
+<span id="cb3-270"><a href="#cb3-270" aria-hidden="true" tabindex="-1"></a><span class="in">  var cur = document.getElementById('demo-gs-cursor');</span></span>
+<span id="cb3-271"><a href="#cb3-271" aria-hidden="true" tabindex="-1"></a><span class="in">  var out = document.getElementById('demo-gs-output');</span></span>
+<span id="cb3-272"><a href="#cb3-272" aria-hidden="true" tabindex="-1"></a><span class="in">  if (!el) return;</span></span>
+<span id="cb3-273"><a href="#cb3-273" aria-hidden="true" tabindex="-1"></a><span class="in">  var i = 0, revealed = false;</span></span>
+<span id="cb3-274"><a href="#cb3-274" aria-hidden="true" tabindex="-1"></a><span class="in">  function type(){</span></span>
+<span id="cb3-275"><a href="#cb3-275" aria-hidden="true" tabindex="-1"></a><span class="in">    if(i &lt; code.length){</span></span>
+<span id="cb3-276"><a href="#cb3-276" aria-hidden="true" tabindex="-1"></a><span class="in">      el.textContent += code[i++];</span></span>
+<span id="cb3-277"><a href="#cb3-277" aria-hidden="true" tabindex="-1"></a><span class="in">      if(!revealed &amp;&amp; i &gt;= Math.floor(code.length * 0.2)){</span></span>
+<span id="cb3-278"><a href="#cb3-278" aria-hidden="true" tabindex="-1"></a><span class="in">        revealed = true;</span></span>
+<span id="cb3-279"><a href="#cb3-279" aria-hidden="true" tabindex="-1"></a><span class="in">        if(out) out.style.opacity = '1';</span></span>
+<span id="cb3-280"><a href="#cb3-280" aria-hidden="true" tabindex="-1"></a><span class="in">      }</span></span>
+<span id="cb3-281"><a href="#cb3-281" aria-hidden="true" tabindex="-1"></a><span class="in">      setTimeout(type, i &lt; 80 ? 35 : 16);</span></span>
+<span id="cb3-282"><a href="#cb3-282" aria-hidden="true" tabindex="-1"></a><span class="in">    } else {</span></span>
+<span id="cb3-283"><a href="#cb3-283" aria-hidden="true" tabindex="-1"></a><span class="in">      if(cur) cur.style.display = 'none';</span></span>
+<span id="cb3-284"><a href="#cb3-284" aria-hidden="true" tabindex="-1"></a><span class="in">      if(!revealed &amp;&amp; out) out.style.opacity = '1';</span></span>
+<span id="cb3-285"><a href="#cb3-285" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb3-286"><a href="#cb3-286" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb3-287"><a href="#cb3-287" aria-hidden="true" tabindex="-1"></a><span class="in">  setTimeout(type, 700);</span></span>
+<span id="cb3-288"><a href="#cb3-288" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb3-289"><a href="#cb3-289" aria-hidden="true" tabindex="-1"></a><span class="in">if(document.readyState === 'loading'){</span></span>
+<span id="cb3-290"><a href="#cb3-290" aria-hidden="true" tabindex="-1"></a><span class="in">  document.addEventListener('DOMContentLoaded', startDemo);</span></span>
+<span id="cb3-291"><a href="#cb3-291" aria-hidden="true" tabindex="-1"></a><span class="in">} else {</span></span>
+<span id="cb3-292"><a href="#cb3-292" aria-hidden="true" tabindex="-1"></a><span class="in">  startDemo();</span></span>
+<span id="cb3-293"><a href="#cb3-293" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb3-294"><a href="#cb3-294" aria-hidden="true" tabindex="-1"></a><span class="in">})();</span></span>
+<span id="cb3-295"><a href="#cb3-295" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/script&gt;</span></span>
+<span id="cb3-296"><a href="#cb3-296" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-297"><a href="#cb3-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-298"><a href="#cb3-298" aria-hidden="true" tabindex="-1"></a>---</span>
 <span id="cb3-299"><a href="#cb3-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-300"><a href="#cb3-300" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb3-300"><a href="#cb3-300" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learn More</span></span>
 <span id="cb3-301"><a href="#cb3-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-302"><a href="#cb3-302" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learn More</span></span>
-<span id="cb3-303"><a href="#cb3-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-304"><a href="#cb3-304" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">Reference Manual</span><span class="co">](refman.html)</span> documents all function parameters. The <span class="co">[</span><span class="ot">Function Index</span><span class="co">](funcindex.html)</span> gives a quick purpose summary for every function. Step-by-step tutorials are available for <span class="co">[</span><span class="ot">charts</span><span class="co">](charts.html)</span>, <span class="co">[</span><span class="ot">maps</span><span class="co">](maps.html)</span>, <span class="co">[</span><span class="ot">tables</span><span class="co">](tables.html)</span>, and <span class="co">[</span><span class="ot">interactive Shiny components</span><span class="co">](interactive-components.html)</span>. The <span class="co">[</span><span class="ot">FAQ</span><span class="co">](faq.html)</span> covers common errors. For design standards — color rules, chart selection, normalization requirements — see the <span class="co">[</span><span class="ot">VVN Style Guide</span><span class="co">](https://yujuangao.github.io/VVN/guide/)</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb3-302"><a href="#cb3-302" aria-hidden="true" tabindex="-1"></a>The <span class="co">[</span><span class="ot">Reference Manual</span><span class="co">](refman.html)</span> documents all function parameters. The <span class="co">[</span><span class="ot">Function Index</span><span class="co">](funcindex.html)</span> gives a quick purpose summary for every function. Step-by-step tutorials are available for <span class="co">[</span><span class="ot">charts</span><span class="co">](charts.html)</span>, <span class="co">[</span><span class="ot">maps</span><span class="co">](maps.html)</span>, <span class="co">[</span><span class="ot">tables</span><span class="co">](tables.html)</span>, and <span class="co">[</span><span class="ot">interactive Shiny components</span><span class="co">](interactive-components.html)</span>. The <span class="co">[</span><span class="ot">FAQ</span><span class="co">](faq.html)</span> covers common errors. For design standards — color rules, chart selection, normalization requirements — see the <span class="co">[</span><span class="ot">VVN Style Guide</span><span class="co">](https://yujuangao.github.io/VVN/guide/)</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
