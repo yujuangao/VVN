@@ -529,7 +529,7 @@
     "href": "index.html#demo-build-a-choropleth-map",
     "title": "Get Started",
     "section": "Demo: Build a Choropleth Map",
-    "text": "Demo: Build a Choropleth Map\nLoad vvnthemes, join your county data, and call vvn_map_style() — the map is styled, labeled, and ready in under 10 lines of code.\n\n\nR — county choropleth map\n\n\n\n\n\nMap output"
+    "text": "Demo: Build a Choropleth Map\nLoad vvnthemes, join your county data, and call vvn_map_style() — the map is styled, labeled, and ready in under 10 lines of code.\n\n\nvvnthemes · choropleth_map.R\n\n\n\n\n\nOutput"
   },
   {
     "objectID": "index.html#learn-more",
