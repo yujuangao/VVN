@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-acf12a64177840b8d86f2d4f01b2e9fb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-30b7a14dca8ff62f93abea2674e26bba.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-7bac25fbb771050e881862a1862898b3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -529,21 +529,37 @@ document.addEventListener('DOMContentLoaded', function () {
     );
   }
 
-  // ── Page indicator bar below main navbar ───────────────────────────────────
+  // ── Breadcrumb bar below main navbar ───────────────────────────────────────
+  var page = window.location.pathname.split('/').pop().replace('.html', '');
+  var breadcrumbs = {
+    'index':                  [],
+    'funcindex':              ['Reference', 'Function Index'],
+    'refman':                 ['Reference', 'Reference Manual'],
+    'dashboard':              ['Interactive Data Visualizations'],
+    'vvn-insight':            ['VVN Insight'],
+    'charts':                 ['Tutorials', 'Charts'],
+    'maps':                   ['Tutorials', 'Maps'],
+    'tables':                 ['Tutorials', 'Tables'],
+    'interactive-components': ['Tutorials', 'Interactive Components'],
+    'faq':                    ['FAQ']
+  };
+  var crumbs = breadcrumbs[page] || [];
+  if (crumbs.length === 0) return;
+
   var header = document.getElementById('quarto-header');
   if (!header) return;
 
-  var activeLink = header.querySelector('.nav-link.active');
-  var pageName = activeLink ? activeLink.textContent.trim() : '';
-  if (!pageName) return;
-
   var bar = document.createElement('div');
-  bar.id = 'page-indicator-bar';
-  bar.textContent = pageName;
+  bar.id = 'vvn-breadcrumb-bar';
+  bar.innerHTML = '<a href="index.html">vvnthemes</a>' +
+    crumbs.map(function(c, i) {
+      return '<span class="vvn-bc-sep">\u203a</span><span' +
+        (i === crumbs.length - 1 ? ' class="vvn-bc-active"' : '') +
+        '>' + c + '</span>';
+    }).join('');
   header.appendChild(bar);
 
-  // Add extra top padding to body to account for the extra bar height
-  var barH = bar.offsetHeight || 32;
+  var barH = bar.offsetHeight || 30;
   var currentPad = parseInt(window.getComputedStyle(document.body).paddingTop) || 0;
   document.body.style.paddingTop = (currentPad + barH) + 'px';
 });
