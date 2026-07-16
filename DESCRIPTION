@@ -1,6 +1,6 @@
 Package: vvnthemes
 Title: Visualizing Virginia Numbers Themes and Templates
-Version: 1.0.0
+Version: 0.0.1
 Authors@R:
     person("Visualizing Virginia Numbers", "Virginia Tech",
            email = "vvn@vt.edu",
