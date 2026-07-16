@@ -10,6 +10,7 @@
 # ── Dependencies ──────────────────────────────────────────────────────────────
 library(shiny)
 library(bslib)
+library(bsicons)
 library(ggplot2)
 library(dplyr)
 library(vvnthemes)
@@ -40,11 +41,10 @@ vvn_bs_theme <- bslib::bs_theme(
 # UI
 # ══════════════════════════════════════════════════════════════════════════════
 ui <- bslib::page_navbar(
-  title  = "VVN_TITLE",
-  id     = "main_nav",
-  bg     = "#861F41",
-  fg     = "#FFFFFF",
-  theme  = vvn_bs_theme,
+  title           = "VVN_TITLE",
+  id              = "main_nav",
+  navbar_options  = bslib::navbar_options(bg = "#861F41", fg = "#FFFFFF"),
+  theme           = vvn_bs_theme,
   header = tagList(
     tags$head(
       tags$link(rel = "stylesheet", href = "vvn.css"),
@@ -63,7 +63,7 @@ ui <- bslib::page_navbar(
   # Tab 1: Overview
   # ══════════════════════════════════════════════════════════════════════════
   bslib::nav_panel(
-    title = tagList(bslib::bs_icon("house-fill"), " Overview"),
+    title = tagList(bsicons::bs_icon("house-fill"), " Overview"),
     value = "overview",
 
     bslib::layout_sidebar(
@@ -99,11 +99,11 @@ ui <- bslib::page_navbar(
         hr(),
 
         vvn_button("apply_btn", "Apply Filters",
-                    icon  = bslib::bs_icon("funnel-fill"),
+                    icon  = bsicons::bs_icon("funnel-fill"),
                     style = "primary"),
         tags$br(), tags$br(),
         vvn_button("reset_btn", "Reset",
-                    icon  = bslib::bs_icon("arrow-counterclockwise"),
+                    icon  = bsicons::bs_icon("arrow-counterclockwise"),
                     style = "outline")
       ),
 
@@ -128,7 +128,7 @@ ui <- bslib::page_navbar(
             class = "vvn-card-header d-flex align-items-center justify-content-between",
             tags$span("Trend Over Time"),
             bslib::popover(
-              bslib::bs_icon("info-circle"),
+              bsicons::bs_icon("info-circle"),
               "Annual trend for the selected variable and regions.",
               title = "About this chart",
               placement = "left"
@@ -166,7 +166,7 @@ ui <- bslib::page_navbar(
   # Tab 2: County Map
   # ══════════════════════════════════════════════════════════════════════════
   bslib::nav_panel(
-    title = tagList(bslib::bs_icon("map-fill"), " Map"),
+    title = tagList(bsicons::bs_icon("map-fill"), " Map"),
     value = "map",
 
     bslib::card(
@@ -211,7 +211,7 @@ ui <- bslib::page_navbar(
   # Tab 3: Data Table
   # ══════════════════════════════════════════════════════════════════════════
   bslib::nav_panel(
-    title = tagList(bslib::bs_icon("table"), " Data"),
+    title = tagList(bsicons::bs_icon("table"), " Data"),
     value = "data",
 
     bslib::card(
@@ -231,7 +231,7 @@ ui <- bslib::page_navbar(
   # Tab 4: About
   # ══════════════════════════════════════════════════════════════════════════
   bslib::nav_panel(
-    title = tagList(bslib::bs_icon("info-circle"), " About"),
+    title = tagList(bsicons::bs_icon("info-circle"), " About"),
     value = "about",
 
     bslib::card(
