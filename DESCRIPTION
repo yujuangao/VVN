@@ -23,7 +23,9 @@ Imports:
     grDevices,
     cli    (>= 3.0.0),
     glue   (>= 1.6.0),
-    fs     (>= 1.5.0)
+    fs     (>= 1.5.0),
+    rlang  (>= 1.0.0),
+    dplyr  (>= 1.1.0)
 Suggests:
     gt       (>= 0.9.0),
     leaflet  (>= 2.1.0),
@@ -33,7 +35,6 @@ Suggests:
     DT       (>= 0.28),
     plotly   (>= 4.10.0),
     quarto,
-    dplyr,
     usethis,
     knitr,
     rmarkdown,

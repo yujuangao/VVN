@@ -110,16 +110,16 @@ vvn_table_pvalues <- function(gt_tbl,
     cli::cli_abort("Package {.pkg gt} required.")
   }
   tholds <- as.numeric(names(thresholds))
+  col_sym <- rlang::sym(col_name)
   for (i in seq_along(tholds)) {
-    out <- gt_tbl |>
+    gt_tbl <- gt_tbl |>
       gt::tab_style(
         style     = gt::cell_text(color = thresholds[[i]], weight = "bold"),
         locations = gt::cells_body(
-          columns = gt::any_of(col_name),
-          rows    = gt::any_of(col_name) < tholds[[i]]
+          columns = dplyr::all_of(col_name),
+          rows    = !!col_sym < tholds[[i]]
         )
       )
-    gt_tbl <- out
   }
   gt_tbl
 }
