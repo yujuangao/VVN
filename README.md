@@ -46,10 +46,45 @@ All outputs follow **VT Brand Guidelines** (Maroon `#861F41`, Orange `#E5751F`, 
 
 ## Installation
 
+**Recommended — no extra packages needed in R 4.4+:**
+
 ```r
-# Install from GitHub (requires remotes)
-remotes::install_github("yujuangao/VVN")
+pak::pkg_install("yujuangao/VVN")
 ```
+
+**Alternatives:**
+
+```r
+# Option B
+install.packages("remotes")
+remotes::install_github("yujuangao/VVN")
+
+# Option C
+install.packages("devtools")
+devtools::install_github("yujuangao/VVN")
+```
+
+Then load in any script:
+
+```r
+library(vvnthemes)
+set_vvn_defaults()   # applies VT Maroon theme + geom colors globally
+```
+
+> **Note for developers working on the package locally:** always install with
+> `R CMD build` + `R CMD INSTALL` rather than `devtools::install()` to avoid
+> a corrupt help database (`lazy-load database … is corrupt`).
+>
+> ```bash
+> cd /path/to/VVN
+> R CMD build vvnthemes --no-build-vignettes
+> R CMD INSTALL vvnthemes_0.0.1.tar.gz
+> rm vvnthemes_0.0.1.tar.gz
+> ```
+
+> **Namespace note:** if `urbnthemes` is also loaded, use the `vvn_`-prefixed
+> aliases (`vvn_remove_legend()`, `vvn_remove_ticks()`, etc.) to avoid
+> conflicts with functions of the same name in that package.
 
 ---
 
