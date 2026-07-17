@@ -40,9 +40,14 @@ utils::globalVariables(c("x", "color", "label_col"))
   diverging = c("#1B5299", "#5B9BD5", "#AED0F0", "#F4F4F4",
                 "#F5C8D4", "#C05878", "#861F41"),
 
-  # ── Colorblind-friendly (Okabe-Ito) ─────────────────────────────────────
+  # ── Colorblind-friendly (Okabe-Ito) — distinguishable, NOT all WCAG AA ──
   accessible = c("#0077BB", "#EE7733", "#009988", "#CC3311",
                  "#33BBEE", "#EE3377", "#BBBBBB"),
+
+  # ── WCAG AA compliant — all pass 4.5:1 on white, visually distinct ──────
+  # Contrast ratios: maroon 9.2, navy 7.7, blue 4.8, vermillion 5.2,
+  #                  forest 5.7, purple 8.6
+  wcag = c("#861F41", "#1B5299", "#0077BB", "#CC3311", "#117733", "#5C3893"),
 
   # ── Monochrome ──────────────────────────────────────────────────────────
   gray_seq = c("#F7F7F7", "#DDDDDD", "#BBBBBB", "#888888", "#555555", "#222222")
@@ -98,7 +103,8 @@ vvn_colors <- function(...) {
 #'   - Categorical: `"main"` (10 colors), `"brand"` (3 colors)
 #'   - Sequential: `"maroon_seq"`, `"orange_seq"`, `"navy_seq"`
 #'   - Diverging: `"diverging"`
-#'   - Accessibility: `"accessible"` (Okabe-Ito inspired)
+#'   - Colorblind-safe: `"accessible"` (Okabe-Ito — distinguishable, not all WCAG AA)
+#'   - WCAG AA: `"wcag"` (6 colors, all ≥ 4.5:1 on white)
 #'   - Neutral: `"gray_seq"`
 #' @param n Number of colors. `NULL` returns all base colors.
 #' @param reverse Reverse the palette? Default `FALSE`.

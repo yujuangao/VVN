@@ -172,9 +172,11 @@ vvn_accessibility_check <- function(colors, background = "#FFFFFF",
   }
   n_fail <- sum(!pass)
   if (n_fail > 0) {
-    cli::cli_alert_info(
-      "{n_fail} color(s) fail. Try {.code vvn_palette('accessible')} for WCAG-safe colors."
-    )
+    cli::cli_alert_info(paste0(
+      "{n_fail} color(s) fail. ",
+      "Use {.code vvn_palette('wcag')} (all pass {threshold}:1) or ",
+      "{.code vvn_palette('accessible')} for colorblind-safe colors."
+    ))
   }
   invisible(result)
 }
