@@ -47,8 +47,8 @@ All outputs follow **VT Brand Guidelines** (Maroon `#861F41`, Orange `#E5751F`, 
 ## Installation
 
 ```r
-install.packages("remotes")
-remotes::install_github("yujuangao/VVN")
+install.packages("pak")
+pak::pak("yujuangao/VVN")
 ```
 
 Then in any script:
