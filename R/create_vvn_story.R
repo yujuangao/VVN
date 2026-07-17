@@ -8,10 +8,12 @@
 #' self-contained HTML page. Equivalent to creating a new Urban Institute
 #' analysis project.
 #'
-#' @param name   Project folder name (use snake_case, e.g. `"childcare_cost"`).
-#' @param path   Parent directory. Default: current working directory.
-#' @param title  Story title for YAML front matter and README.
-#' @param author Author name(s).
+#' @param name      Project folder name (use snake_case, e.g. `"childcare_cost"`).
+#' @param path      Parent directory. Default: current working directory.
+#' @param title     Story title for YAML front matter and README.
+#' @param author    Author name(s).
+#' @param overwrite If `TRUE`, delete and recreate an existing project folder.
+#'   Default `FALSE` (error if folder exists).
 #'
 #' @return Invisibly the project path (character).
 #' @export
@@ -21,16 +23,22 @@
 #' create_vvn_story("childcare_cost",
 #'                   title  = "Childcare Cost in Rural Virginia",
 #'                   author = "VVN Research Team")
+#' # Re-run without error:
+#' create_vvn_story("childcare_cost", overwrite = TRUE)
 #' # Renders to HTML:
 #' quarto::quarto_render("childcare_cost/index.qmd")
 #' }
 create_vvn_story <- function(name,
-                              path   = ".",
-                              title  = name,
-                              author = "Visualizing Virginia Numbers") {
+                              path      = ".",
+                              title     = name,
+                              author    = "Visualizing Virginia Numbers",
+                              overwrite = FALSE) {
 
   proj <- fs::path(path, name)
-  if (fs::dir_exists(proj)) cli::cli_abort("Directory {.path {proj}} already exists.")
+  if (fs::dir_exists(proj)) {
+    if (!overwrite) cli::cli_abort("Directory {.path {proj}} already exists. Use `overwrite = TRUE` to replace it.")
+    fs::dir_delete(proj)
+  }
 
   # Create directory structure
   for (d in c("data/raw", "data/processed", "figures", "scripts")) {

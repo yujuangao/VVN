@@ -8,10 +8,12 @@
 #' branding: maroon navbar, KPI cards, reactive charts, map, and filter panel.
 #' The generated `app.R` runs immediately on example data.
 #'
-#' @param name   Project folder name.
-#' @param path   Parent directory. Default: `"."`.
-#' @param title  Dashboard title shown in the navbar.
-#' @param author Author name(s).
+#' @param name      Project folder name.
+#' @param path      Parent directory. Default: `"."`.
+#' @param title     Dashboard title shown in the navbar.
+#' @param author    Author name(s).
+#' @param overwrite If `TRUE`, delete and recreate an existing project folder.
+#'   Default `FALSE` (error if folder exists).
 #'
 #' @return Invisibly the project path.
 #' @export
@@ -21,14 +23,20 @@
 #' create_vvn_dashboard("housing_dashboard",
 #'                       title = "Virginia Housing Affordability Dashboard")
 #' shiny::runApp("housing_dashboard")
+#' # Re-run without error:
+#' create_vvn_dashboard("housing_dashboard", overwrite = TRUE)
 #' }
 create_vvn_dashboard <- function(name,
-                                  path   = ".",
-                                  title  = name,
-                                  author = "Visualizing Virginia Numbers") {
+                                  path      = ".",
+                                  title     = name,
+                                  author    = "Visualizing Virginia Numbers",
+                                  overwrite = FALSE) {
 
   proj <- fs::path(path, name)
-  if (fs::dir_exists(proj)) cli::cli_abort("Directory {.path {proj}} already exists.")
+  if (fs::dir_exists(proj)) {
+    if (!overwrite) cli::cli_abort("Directory {.path {proj}} already exists. Use `overwrite = TRUE` to replace it.")
+    fs::dir_delete(proj)
+  }
 
   for (d in c("data/raw", "data/processed", "R", "www")) {
     fs::dir_create(fs::path(proj, d))
