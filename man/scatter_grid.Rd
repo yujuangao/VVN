@@ -2,9 +2,12 @@
 % Please edit documentation in R/plot_utils.R
 \name{scatter_grid}
 \alias{scatter_grid}
+\alias{vvn_scatter_grid}
 \title{Add a subtle grid to a scatter plot}
 \usage{
 scatter_grid()
+
+vvn_scatter_grid()
 }
 \value{
 A \code{ggplot2::theme()} call.

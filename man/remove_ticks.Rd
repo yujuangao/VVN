@@ -2,9 +2,12 @@
 % Please edit documentation in R/plot_utils.R
 \name{remove_ticks}
 \alias{remove_ticks}
+\alias{vvn_remove_ticks}
 \title{Remove axis ticks from a ggplot}
 \usage{
 remove_ticks(axis = "both")
+
+vvn_remove_ticks(axis = "both")
 }
 \arguments{
 \item{axis}{Which axis? \code{"both"}, \code{"x"}, or \code{"y"}. Default \code{"both"}.}

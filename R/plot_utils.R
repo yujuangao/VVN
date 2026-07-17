@@ -135,11 +135,44 @@ legend_bottom <- function() {
 
 #' Remove legend from a ggplot
 #'
+#' Returns a `ggplot2::theme()` object that can be added to a plot with `+`.
+#'
+#' **Namespace note:** If `urbnthemes` (or another package) is also loaded its
+#' `remove_legend()` takes a plot object and will mask this one.  Use
+#' `vvnthemes::remove_legend()` or the alias `vvn_remove_legend()` to be
+#' explicit.
+#'
 #' @return A `ggplot2::theme()` call.
 #' @export
 remove_legend <- function() {
   ggplot2::theme(legend.position = "none")
 }
+
+# =============================================================================
+# vvn_-prefixed aliases for all generic utility names.
+# Use these whenever another package (e.g. urbnthemes) is loaded alongside
+# vvnthemes to avoid namespace collisions.
+# =============================================================================
+
+#' @rdname remove_legend
+#' @export
+vvn_remove_legend <- remove_legend
+
+#' @rdname remove_ticks
+#' @export
+vvn_remove_ticks <- remove_ticks
+
+#' @rdname remove_axis
+#' @export
+vvn_remove_axis <- remove_axis
+
+#' @rdname legend_bottom
+#' @export
+vvn_legend_bottom <- legend_bottom
+
+#' @rdname scatter_grid
+#' @export
+vvn_scatter_grid <- scatter_grid
 
 
 #' Save a VVN plot at publication quality

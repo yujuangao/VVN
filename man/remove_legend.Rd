@@ -2,13 +2,22 @@
 % Please edit documentation in R/plot_utils.R
 \name{remove_legend}
 \alias{remove_legend}
+\alias{vvn_remove_legend}
 \title{Remove legend from a ggplot}
 \usage{
 remove_legend()
+
+vvn_remove_legend()
 }
 \value{
 A \code{ggplot2::theme()} call.
 }
 \description{
-Remove legend from a ggplot
+Returns a \code{ggplot2::theme()} object that can be added to a plot with \code{+}.
+}
+\details{
+\strong{Namespace note:} If \code{urbnthemes} (or another package) is also loaded its
+\code{remove_legend()} takes a plot object and will mask this one.  Use
+\code{vvnthemes::remove_legend()} or the alias \code{vvn_remove_legend()} to be
+explicit.
 }

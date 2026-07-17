@@ -2,9 +2,12 @@
 % Please edit documentation in R/plot_utils.R
 \name{legend_bottom}
 \alias{legend_bottom}
+\alias{vvn_legend_bottom}
 \title{Move legend to bottom of a ggplot}
 \usage{
 legend_bottom()
+
+vvn_legend_bottom()
 }
 \value{
 A \code{ggplot2::theme()} call.

@@ -2,9 +2,12 @@
 % Please edit documentation in R/plot_utils.R
 \name{remove_axis}
 \alias{remove_axis}
+\alias{vvn_remove_axis}
 \title{Remove an axis from a ggplot}
 \usage{
 remove_axis(axis = "x")
+
+vvn_remove_axis(axis = "x")
 }
 \arguments{
 \item{axis}{Which axis? \code{"x"}, \code{"y"}, or \code{"both"}. Default \code{"x"}.}
