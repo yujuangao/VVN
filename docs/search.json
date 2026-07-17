@@ -487,7 +487,7 @@
     "href": "index.html",
     "title": "Get Started",
     "section": "",
-    "text": "vvnthemes v0.0.1\nVirginia Tech brand compliance for all Visualizing Virginia Numbers projects\npak::pkg_install(\"yujuangao/VVN\")\n\nView on GitHub →\nReference Manual →"
+    "text": "vvnthemes v0.0.1\nVirginia Tech brand compliance for all Visualizing Virginia Numbers projects\nremotes::install_github(\"yujuangao/VVN\")\n\nView on GitHub →\nReference Manual →"
   },
   {
     "objectID": "index.html#about-vvnthemes",
@@ -501,7 +501,7 @@
     "href": "index.html#installation",
     "title": "Get Started",
     "section": "Installation",
-    "text": "Installation\nRecommended — no extra packages needed in R 4.4+:\npak::pkg_install(\"yujuangao/VVN\")\nAlternatives:\n# Option B\ninstall.packages(\"remotes\")\nremotes::install_github(\"yujuangao/VVN\")\n\n# Option C\ninstall.packages(\"devtools\")\ndevtools::install_github(\"yujuangao/VVN\")\nAfter installation, load the package and apply VT brand defaults for the session:\nlibrary(vvnthemes)\nset_vvn_defaults()   # sets theme_vvn() + VT Maroon geom colors globally\nDependencies installed automatically: ggplot2, scales, rlang, dplyr\nOptional packages (install separately if needed): gt (tables), leaflet + sf (maps), shiny + bslib + bsicons (dashboards), broom (regression tables)\n\n\n\n\n\n\nNoteNamespace conflict with urbnthemes\n\n\n\n\n\nIf urbnthemes is also loaded, its remove_legend(), remove_ticks(), and scatter_grid() will mask the vvnthemes versions. Use the vvn_-prefixed aliases to be explicit:\nvvn_remove_legend()   # always resolves to vvnthemes\nvvn_remove_ticks()\nvvn_remove_axis()\nvvn_legend_bottom()\nvvn_scatter_grid()\n\n\n\n\n\n\n\n\n\nWarningDeveloper install (working on the package source)\n\n\n\n\n\nAlways use R CMD build + R CMD INSTALL — not devtools::install() — to avoid a corrupt help database error (lazy-load database … is corrupt):\ncd /path/to/VVN\nR CMD build vvnthemes --no-build-vignettes\nR CMD INSTALL vvnthemes_0.0.1.tar.gz\nrm vvnthemes_0.0.1.tar.gz"
+    "text": "Installation\ninstall.packages(\"remotes\")\nremotes::install_github(\"yujuangao/VVN\")\nThen load the package and apply VT brand defaults:\nlibrary(vvnthemes)\nset_vvn_defaults()   # sets theme_vvn() + VT Maroon geom colors globally\nOptional packages (install separately if needed): gt (tables), leaflet + sf (maps), shiny + bslib (dashboards)"
   },
   {
     "objectID": "index.html#library-structure",
