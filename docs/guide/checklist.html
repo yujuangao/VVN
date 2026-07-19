@@ -173,6 +173,7 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#vvn-insights" id="toc-vvn-insights" class="nav-link" data-scroll-target="#vvn-insights">VVN Insights</a>
   <ul class="collapse">
+  <li><a href="#before-opening-index.qmd" id="toc-before-opening-index.qmd" class="nav-link" data-scroll-target="#before-opening-index.qmd">Before opening index.qmd</a></li>
   <li><a href="#document-sections-required-in-order" id="toc-document-sections-required-in-order" class="nav-link" data-scroll-target="#document-sections-required-in-order">Document sections (required in order)</a></li>
   <li><a href="#figures-in-the-insight" id="toc-figures-in-the-insight" class="nav-link" data-scroll-target="#figures-in-the-insight">Figures in the Insight</a></li>
   <li><a href="#publish-1" id="toc-publish-1" class="nav-link" data-scroll-target="#publish-1">Publish</a></li>
@@ -273,6 +274,14 @@ ul.task-list li input[type="checkbox"] {
 <p>See <a href="../vvn-docs/vvn-insight.html">VVN Insight Library →</a></p>
 </blockquote>
 <p>Complete all items before running <code>quarto render index.qmd</code>.</p>
+<section id="before-opening-index.qmd" class="level3">
+<h3 class="anchored" data-anchor-id="before-opening-index.qmd">Before opening index.qmd</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"><code>scripts/analysis.R</code> filled out with data loading and all chart code</label></li>
+<li><label><input type="checkbox"><code>scripts/analysis.R</code> sourced without errors — all figures present in <code>figures/</code></label></li>
+<li><label><input type="checkbox">Figure filenames in <code>index.qmd</code> (<code>include_graphics()</code> calls) updated to match files in <code>figures/</code></label></li>
+</ul>
+</section>
 <section id="document-sections-required-in-order" class="level3">
 <h3 class="anchored" data-anchor-id="document-sections-required-in-order">Document sections (required in order)</h3>
 <ul class="task-list">

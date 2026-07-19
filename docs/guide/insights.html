@@ -219,7 +219,7 @@ ul.task-list li input[type="checkbox"] {
 2
 </div>
 <div class="wf-body">
-<span class="wf-title">Load your data</span><span class="wf-desc">Replace the sample data at the top of <code>index.qmd</code> with your own CSV. Your data frame needs at minimum: <code>fips</code> (character), <code>county</code> (character), <code>year</code> (integer), and <code>value</code> (numeric).</span>
+<span class="wf-title">Fill out the analysis script</span><span class="wf-desc">Open <code>scripts/analysis.R</code>. Load your data, then uncomment the chart types you need from the gallery (line, bar, scatter, lollipop, map, …). Fill in your column names and labels. Every chart you build will be saved automatically to <code>figures/</code>.</span>
 </div>
 </div>
 <div class="wf-connector">
@@ -230,7 +230,7 @@ ul.task-list li input[type="checkbox"] {
 3
 </div>
 <div class="wf-body">
-<span class="wf-title">Write the narrative</span><span class="wf-desc">Replace every <code>[placeholder]</code> with your content. Lead with the key finding. Reference every figure in the text before it appears (“Figure 1 shows…”). Keep paragraphs to 3–4 sentences.</span>
+<span class="wf-title">Run the script — figures are saved</span><span class="wf-desc">Source <code>scripts/analysis.R</code> from RStudio. Figures are auto-numbered <code>01_</code>, <code>02_</code>, … and written to <code>figures/</code> in the order the script runs. Every chart must have a title, subtitle, and <code>vvn_source()</code> line. See <a href="./charts.html">Charts</a> and <a href="./maps.html">Maps</a> for full rules.</span>
 </div>
 </div>
 <div class="wf-connector">
@@ -241,7 +241,7 @@ ul.task-list li input[type="checkbox"] {
 4
 </div>
 <div class="wf-body">
-<span class="wf-title">Build figures to VVN standards</span><span class="wf-desc">Every chart and map needs a title, subtitle, and source line. Use <code>theme_vvn()</code>, VVN palettes, and <code>vvn_source()</code>. See <a href="./charts.html">Charts</a> and <a href="./maps.html">Maps</a> for full rules.</span>
+<span class="wf-title">Write the narrative and insert figures</span><span class="wf-desc">Open <code>index.qmd</code>. Replace every <code>[placeholder]</code> with your content. Lead with the key finding. Reference each figure in the text before it appears, then update the filename in <code>knitr::include_graphics(“figures/01_name.png”)</code>. Keep paragraphs to 3–4 sentences.</span>
 </div>
 </div>
 <div class="wf-connector">

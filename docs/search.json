@@ -228,7 +228,7 @@
     "href": "get-started.html#step-1-install",
     "title": "Get Started",
     "section": "Step 1 — Install",
-    "text": "Step 1 — Install\nInstall vvnthemes once per machine. You do not need to reinstall it every session.\ninstall.packages(\"devtools\")                       # skip if already installed\ndevtools::install_github(\"vt-vvn/vvnthemes\")\nThen add these two lines to the top of every script or Quarto chunk:\nlibrary(vvnthemes)\nset_vvn_defaults()   # one call transforms every subsequent ggplot2 chart\nset_vvn_defaults() does three things: it sets the global ggplot2 theme to theme_vvn(), changes all default geom colors to VT Maroon, and makes sure your charts look like VVN without any extra code."
+    "text": "Step 1 — Install\nInstall vvnthemes once per machine. You do not need to reinstall it every session.\ninstall.packages(\"pak\")                            # skip if already installed\npak::pak(\"yujuangao/VVN\")\nThen add these two lines to the top of every script or Quarto chunk:\nlibrary(vvnthemes)\nset_vvn_defaults()   # one call transforms every subsequent ggplot2 chart\nset_vvn_defaults() does three things: it sets the global ggplot2 theme to theme_vvn(), changes all default geom colors to VT Maroon, and makes sure your charts look like VVN without any extra code."
   },
   {
     "objectID": "get-started.html#step-2-your-first-chart",
@@ -256,7 +256,7 @@
     "href": "get-started.html#step-5-start-a-full-project",
     "title": "Get Started",
     "section": "Step 5 — Start a full project",
-    "text": "Step 5 — Start a full project\nInstead of building file by file, scaffold a complete VVN project in one command. The generated project runs immediately with placeholder data.\nDashboard (R Shiny):\nlibrary(vvnthemes)\n\ncreate_vvn_dashboard(\"my-dashboard\",\n                      title = \"Virginia Housing Dashboard\")\n# Created: my-dashboard/app.R · R/data_prep.R · www/vvn.css\n\nshiny::runApp(\"my-dashboard\")   # runs immediately\nVVN Insights document (Quarto):\ncreate_vvn_story(\"my-insight\",\n                  title  = \"Broadband Access in Rural Virginia\",\n                  author = \"VVN Research Team\")\n# Created: my-insight/index.qmd · _quarto.yml · styles.scss\n\nquarto::quarto_render(\"my-insight/index.qmd\")   # renders immediately\nReplace the placeholder data and you have a complete VVN product.\n\nSee Dashboard Template → and VVN Insights Template → for annotated walkthroughs."
+    "text": "Step 5 — Start a full project\nInstead of building file by file, scaffold a complete VVN project in one command. The generated project runs immediately with placeholder data.\nDashboard (R Shiny):\nlibrary(vvnthemes)\n\ncreate_vvn_dashboard(\"my-dashboard\",\n                      title = \"Virginia Housing Dashboard\")\n# Created: my-dashboard/app.R · R/data_prep.R · www/vvn.css\n\nshiny::runApp(\"my-dashboard\")   # runs immediately\nVVN Insights document (Quarto):\ncreate_vvn_story(\"my-insight\",\n                  title  = \"Broadband Access in Rural Virginia\",\n                  author = \"VVN Research Team\")\n# Created: my-insight/index.qmd · _quarto.yml · styles.scss\n#          scripts/analysis.R · data/raw/ · data/processed/ · figures/\nThen follow three steps:\n# Step 1 — open scripts/analysis.R, fill in your chart code, then source it\nsource(\"my-insight/scripts/analysis.R\")\n# → figures saved to my-insight/figures/01_name.png, 02_name.png, …\n\n# Step 2 — open my-insight/index.qmd, replace [placeholders] with your text\n#           and update filenames in knitr::include_graphics(\"figures/01_name.png\")\n\n# Step 3 — render\nquarto::quarto_render(\"my-insight/index.qmd\")\n\nSee VVN Insight Library → for the full annotated walkthrough and chart gallery.\n\n\nSee Dashboard Template → and VVN Insights Template → for annotated walkthroughs."
   },
   {
     "objectID": "get-started.html#next-steps",
@@ -270,14 +270,14 @@
     "href": "vvnthemes.html",
     "title": "vvnthemes",
     "section": "",
-    "text": "vvnthemes is the design foundation for all VVN projects. It provides ggplot2 themes, brand color palettes, scale functions, Shiny UI components, and project scaffolding — all consistent with the Virginia Tech visual identity.\n# Install once from GitHub\ndevtools::install_github(\"vt-vvn/vvnthemes\")\n\n# Load and apply\nlibrary(vvnthemes)\nset_vvn_defaults()   # styles all subsequent ggplot2 calls\n\nSee Get Started → for a step-by-step workflow guide."
+    "text": "vvnthemes is the design foundation for all VVN projects. It provides ggplot2 themes, brand color palettes, scale functions, Shiny UI components, and project scaffolding — all consistent with the Virginia Tech visual identity.\n# Install once from GitHub\npak::pak(\"yujuangao/VVN\")\n\n# Load and apply\nlibrary(vvnthemes)\nset_vvn_defaults()   # styles all subsequent ggplot2 calls\n\nSee Get Started → for a step-by-step workflow guide."
   },
   {
     "objectID": "vvnthemes.html#overview",
     "href": "vvnthemes.html#overview",
     "title": "vvnthemes",
     "section": "",
-    "text": "vvnthemes is the design foundation for all VVN projects. It provides ggplot2 themes, brand color palettes, scale functions, Shiny UI components, and project scaffolding — all consistent with the Virginia Tech visual identity.\n# Install once from GitHub\ndevtools::install_github(\"vt-vvn/vvnthemes\")\n\n# Load and apply\nlibrary(vvnthemes)\nset_vvn_defaults()   # styles all subsequent ggplot2 calls\n\nSee Get Started → for a step-by-step workflow guide."
+    "text": "vvnthemes is the design foundation for all VVN projects. It provides ggplot2 themes, brand color palettes, scale functions, Shiny UI components, and project scaffolding — all consistent with the Virginia Tech visual identity.\n# Install once from GitHub\npak::pak(\"yujuangao/VVN\")\n\n# Load and apply\nlibrary(vvnthemes)\nset_vvn_defaults()   # styles all subsequent ggplot2 calls\n\nSee Get Started → for a step-by-step workflow guide."
   },
   {
     "objectID": "vvnthemes.html#setup",
@@ -487,7 +487,7 @@
     "href": "index.html",
     "title": "Get Started",
     "section": "",
-    "text": "vvnthemes v0.0.1\nVirginia Tech brand compliance for all Visualizing Virginia Numbers projects\nremotes::install_github(\"yujuangao/VVN\")\n\nView on GitHub →\nReference Manual →"
+    "text": "vvnthemes v0.0.1\nVirginia Tech brand compliance for all Visualizing Virginia Numbers projects\npak::pak(\"yujuangao/VVN\")\n\nView on GitHub →\nReference Manual →"
   },
   {
     "objectID": "index.html#about-vvnthemes",
@@ -501,7 +501,7 @@
     "href": "index.html#installation",
     "title": "Get Started",
     "section": "Installation",
-    "text": "Installation\ninstall.packages(\"remotes\")\nremotes::install_github(\"yujuangao/VVN\")\nThen load the package and apply VT brand defaults:\nlibrary(vvnthemes)\nset_vvn_defaults()   # sets theme_vvn() + VT Maroon geom colors globally\nOptional packages (install separately if needed): gt (tables), leaflet + sf (maps), shiny + bslib (dashboards)"
+    "text": "Installation\ninstall.packages(\"pak\")\npak::pak(\"yujuangao/VVN\")\nThen load the package and apply VT brand defaults:\nlibrary(vvnthemes)\nset_vvn_defaults()   # sets theme_vvn() + VT Maroon geom colors globally\nOptional packages (install separately if needed): gt (tables), leaflet + sf (maps), shiny + bslib (dashboards)"
   },
   {
     "objectID": "index.html#library-structure",
@@ -613,28 +613,28 @@
     "href": "vvn-insight.html",
     "title": "VVN Insight",
     "section": "",
-    "text": "The create_vvn_story() function scaffolds a complete Quarto narrative report in one command. The document renders immediately with placeholder content — you only replace the data and written sections."
+    "text": "The create_vvn_story() function scaffolds a complete Quarto narrative report in one command. The analysis and the narrative are kept in separate files so each is easier to work on independently."
   },
   {
     "objectID": "vvn-insight.html#create-the-project",
     "href": "vvn-insight.html#create-the-project",
     "title": "VVN Insight",
     "section": "Create the project",
-    "text": "Create the project\nlibrary(vvnthemes)\ncreate_vvn_story(\n  \"my-insight\",\n  title  = \"Broadband Access in Rural Virginia\",\n  author = \"VVN Research Team\"\n)\nquarto::quarto_render(\"my-insight/index.qmd\")"
+    "text": "Create the project\nlibrary(vvnthemes)\ncreate_vvn_story(\n  \"my-insight\",\n  title  = \"Broadband Access in Rural Virginia\",\n  author = \"VVN Research Team\"\n)"
   },
   {
     "objectID": "vvn-insight.html#project-structure",
     "href": "vvn-insight.html#project-structure",
     "title": "VVN Insight",
     "section": "Project structure",
-    "text": "Project structure\nmy-insight/\n├── index.qmd       # Main document — edit this file\n├── _quarto.yml     # Quarto configuration\n├── styles.scss     # VVN brand styles (do not edit)\n└── data/           # Place your data files here"
+    "text": "Project structure\nmy-insight/\n├── index.qmd            # Narrative document — fill in text, insert figure names\n├── _quarto.yml          # Quarto configuration\n├── styles.scss          # VVN brand styles (do not edit)\n├── data/\n│   ├── raw/             # Place raw data files here\n│   └── processed/       # Place cleaned / analysis-ready data here\n├── scripts/\n│   └── analysis.R       # Build all figures here, then run this script\n└── figures/             # Auto-created when analysis.R runs — do not edit manually"
   },
   {
     "objectID": "vvn-insight.html#what-each-file-does",
     "href": "vvn-insight.html#what-each-file-does",
     "title": "VVN Insight",
     "section": "What each file does",
-    "text": "What each file does\nindex.qmd is the complete narrative report. It contains all 12 sections — YAML front matter, setup chunk, hero banner, overview, background, data and methods, findings, discussion, conclusion, and rendering instructions — all as annotated placeholders ready to fill in.\n_quarto.yml configures the Quarto project: theme, TOC settings, figure dimensions, and output format. You rarely need to edit this file.\nstyles.scss is the compiled VVN brand stylesheet. Do not edit this file.\ndata/ is an empty folder for your data files. Load them in the setup chunk with readr::read_csv(\"data/my_data.csv\")."
+    "text": "What each file does\nscripts/analysis.R is where you write all chart code. It loads your data, builds each figure using VVN functions, and saves numbered PNGs to figures/ automatically. Run this script first, before opening index.qmd.\nindex.qmd is the narrative document. It contains all section placeholders ready to fill in. Figures are embedded with knitr::include_graphics(\"figures/01_name.png\") — no chart code lives here.\nfigures/ is populated automatically when you run scripts/analysis.R. Files are named 01_, 02_, … in the order the script runs them.\ndata/raw/ holds your original data files unchanged. data/processed/ holds cleaned, analysis-ready files. Load processed files in scripts/analysis.R.\n_quarto.yml configures the Quarto project: theme, TOC settings, figure dimensions, and output format. You rarely need to edit this file.\nstyles.scss is the compiled VVN brand stylesheet. Do not edit this file."
   },
   {
     "objectID": "vvn-insight.html#document-structure",
@@ -644,17 +644,17 @@
     "text": "Document structure\n\n\n\nSection\nElement\nRequired\n\n\n\n\nHero banner\n::: {.hero} div\nYes\n\n\nOverview and key finding\n&gt; blockquote\nYes\n\n\nBackground\n## section\nYes\n\n\nData and Methods\n## section + table\nYes\n\n\nFindings\n## section + charts + map + table\nYes\n\n\nDiscussion\n## section\nYes\n\n\nConclusion\n## section\nYes\n\n\n\n\nFor section requirements, narrative rules, and publishing checklist, see VVN Insights Standards →"
   },
   {
-    "objectID": "vvn-insight.html#rendering",
-    "href": "vvn-insight.html#rendering",
+    "objectID": "vvn-insight.html#workflow",
+    "href": "vvn-insight.html#workflow",
     "title": "VVN Insight",
-    "section": "Rendering",
-    "text": "Rendering\n# R console\nquarto::quarto_render(\"index.qmd\")\nIn RStudio, press Ctrl+Shift+K (Cmd+Shift+K on Mac)."
+    "section": "Workflow",
+    "text": "Workflow\nFollow these three steps in order:\nStep 1 — Build figures\nOpen scripts/analysis.R in RStudio and fill in your chart code. The script contains a gallery of common VVN chart types — uncomment the ones you need and fill in your column names and labels. Then source the script:\n# In RStudio: open scripts/analysis.R, then click Source\n# Or from the R console:\nsource(\"scripts/analysis.R\")\nFigures are auto-numbered (01_, 02_, …) and saved to figures/ in the order they run.\nStep 2 — Write the narrative\nOpen index.qmd. Replace every [placeholder] with your content and update the filenames in each knitr::include_graphics() call to match what was saved in figures/:\n# Example — replace the placeholder filename with your actual figure name:\nknitr::include_graphics(\"figures/01_trend_statewide.png\")\nStep 3 — Render\nquarto::quarto_render(\"index.qmd\")\nIn RStudio, press Cmd+Shift+K (Ctrl+Shift+K on Windows)."
   },
   {
     "objectID": "vvn-insight.html#publishing-checklist",
     "href": "vvn-insight.html#publishing-checklist",
     "title": "VVN Insight",
     "section": "Publishing checklist",
-    "text": "Publishing checklist\nBefore submitting a VVN Insight for publication:\n\nAll [...] placeholders replaced\nHero banner present with title and VVN subtitle\nKey finding stated clearly in Overview\nBackground explains context and audience\nData & Methods table complete with source\nAt least 2 charts with titles, subtitles, and source lines\nAt least 1 map (interactive or static)\nSummary table with source note\nDiscussion covers interpretation and limitations\nConclusion with contact information\nAll chart titles use headline case\nAll chart subtitles use sentence case\nembed-resources: true in YAML (single-file HTML)"
+    "text": "Publishing checklist\nBefore submitting a VVN Insight for publication:\n\nscripts/analysis.R runs without errors and all figures appear in figures/\nAll [...] placeholders in index.qmd replaced\nFigure filenames in include_graphics() match actual files in figures/\nHero banner present with title and VVN subtitle\nKey finding stated clearly in Overview\nBackground explains context and audience\nData & Methods table complete with source\nAt least 2 charts with titles, subtitles, and source lines\nAt least 1 map (interactive or static)\nSummary table with source note\nDiscussion covers interpretation and limitations\nConclusion with contact information\nAll chart titles use headline case\nAll chart subtitles use sentence case\nembed-resources: true in YAML (single-file HTML)"
   }
 ]
