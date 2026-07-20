@@ -13,8 +13,6 @@ format:
     fig-width: 8
     fig-height: 5
     fig-dpi: 150
-    code-fold: true
-    code-summary: "Show code"
     smooth-scroll: true
 execute:
   echo: false
@@ -25,30 +23,15 @@ execute:
 ```{r setup}
 #| include: false
 library(vvnthemes)
-library(ggplot2)
+library(knitr)
+library(gt)
 library(dplyr)
+library(readr)
 
-# Apply VVN defaults to all charts in this document
 set_vvn_defaults()
 
-# ── Load your data ──────────────────────────────────────────────────────────
-# Replace with your actual data:
-# df <- readr::read_csv("data/processed/my_data.csv")
-
-set.seed(42)
-df <- data.frame(
-  year   = rep(2018:2023, each = 5),
-  region = rep(c("Rural", "Small City", "Suburban",
-                  "Urban Fringe", "Urban Core"), 6),
-  value  = c(
-    46, 50, 54, 58, 63,
-    47, 51, 55, 59, 64,
-    49, 53, 57, 61, 66,
-    50, 54, 58, 63, 67,
-    51, 56, 60, 64, 69,
-    52, 57, 62, 66, 71
-  ) + rnorm(30, 0, 0.5)
-)
+# Load your processed data (needed for the summary table)
+# df <- read_csv("data/processed/my_data.csv", show_col_types = FALSE)
 ```
 
 ::: {.hero}
@@ -58,33 +41,28 @@ df <- data.frame(
 Visualizing Virginia Numbers · Virginia Tech · `r format(Sys.Date(), "%Y")`
 :::
 
-A data-driven look at [your topic] across Virginia communities.
+[One sentence describing what this story is about and who it covers.]
 :::
 
 ---
 
 ## Overview
 
-> **Key Finding:** Rural Virginia counties have experienced a **12% increase**
-> in [metric] between 2018 and 2023, narrowing the gap with urban areas for
-> the first time in a decade.
+> **Key Finding:** [State your single most important result here. **Bold the key number.** Keep it to 1–2 sentences.]
 
-This story examines [topic] across Virginia's diverse regional contexts.
-We find that [summary of main result], with meaningful variation across
-[geography / demographic group]. Our analysis draws on data from [source].
+[2–3 sentences summarizing what you found and why it matters. Mention which figures support the finding and cite the data source.]
 
 ---
 
 ## Background
 
-**Why this matters.** Describe the policy or research context:
+**Why this matters.** [Describe the policy or research context:]
 
-- What problem or question does this story address?
-- Who is affected, and how?
-- What data gap does this analysis fill?
+- [What problem or question does this story address?]
+- [Who is affected, and how?]
+- [What data gap or opportunity does this analysis address?]
 
-**Audience.** Policymakers, advocates, and community organizations working
-on [issue area] in Virginia.
+**Audience.** [Name the intended readers — e.g., policymakers, advocates, community organizations — and the issue area.]
 
 ---
 
@@ -93,116 +71,70 @@ on [issue area] in Virginia.
 | Item | Details |
 |------|---------|
 | **Source** | [Dataset name, organization, year] |
-| **Geography** | Virginia counties / [other unit] |
-| **Period** | 2018–2023 |
-| **Variable** | [Description of key variable] |
+| **Geography** | [e.g., Virginia counties / independent cities] |
+| **Period** | [e.g., 2018–2023] |
+| **Variable** | [Description of the key variable(s) you are measuring] |
 
 ::: {.callout-note}
-**Data note:** [Any caveats, missing data, or comparability issues.]
+**Data note:** [Note any caveats — missing data, model-based estimates, comparability issues across years, or pandemic-related disruptions.]
 :::
-
-```{r load-data}
-#| include: false
-# Data already loaded in setup chunk above.
-```
 
 ---
 
 ## Findings
 
-### Regional Trends Over Time
+### [Section title — e.g., Statewide Trend]
 
-```{r fig-trend}
-#| fig-cap: "Annual trends by region type, 2018–2023. Source: [Dataset]."
-#| fig-alt: "Line chart showing value trends for five Virginia region types."
+[1–2 sentences introducing Figure 1. Point out what the reader should notice and reference a specific number from the chart.]
 
-ggplot(df, aes(x = year, y = value, color = region, group = region)) +
-  geom_line(linewidth = 1.2) +
-  geom_point(size = 2.5) +
-  scale_color_vvn("main") +
-  labs(
-    title    = "Regional Trends, 2018–2023",
-    subtitle = "Visualizing Virginia Numbers",
-    x        = "Year",
-    y        = "Value",
-    color    = "Region"
-  ) +
-  vvn_source("[Dataset name]") +
-  scatter_grid()
+```{r fig-01}
+#| fig-cap: "[Caption: what the figure shows and the data source.]"
+#| fig-alt: "[Alt text: chart type, key pattern, range of values — for screen readers.]"
+knitr::include_graphics("figures/01_[name].png")
+```
+
+### [Section title — e.g., Trends by Group]
+
+[1–2 sentences introducing Figure 2. Highlight the most important comparison or pattern.]
+
+```{r fig-02}
+#| fig-cap: "[Caption for Figure 2.]"
+#| fig-alt: "[Alt text for Figure 2.]"
+knitr::include_graphics("figures/02_[name].png")
 ```
 
 ::: {.callout-important}
-**Key observation:** Rural areas (maroon) show the steepest growth trajectory,
-while urban cores (lighter shades) remain significantly higher in absolute terms.
+**Key observation:** [One sentence stating the most striking finding from Figure 2 — a gap, a reversal, an outlier.]
 :::
 
-### Regional Comparison — Latest Year
+### [Section title — e.g., Latest-Year Comparison]
 
-```{r fig-bar}
-#| fig-cap: "2023 values by region. Rural highlighted in orange."
-#| fig-alt: "Horizontal bar chart comparing 2023 values across five region types."
+[1–2 sentences introducing Figure 3 and pointing out the key comparison.]
 
-df |>
-  filter(year == max(year)) |>
-  mutate(region = reorder(region, value),
-         highlight = region == "Rural") |>
-  ggplot(aes(x = value, y = region, fill = highlight)) +
-  geom_col(width = 0.65) +
-  geom_text(aes(label = round(value, 1)), hjust = -0.2, size = 3.5,
-            color = "#3D3D3D") +
-  scale_fill_manual(values = c(`TRUE` = "#E5751F", `FALSE` = "#861F41"),
-                    guide  = "none") +
-  scale_x_continuous(expand = expansion(mult = c(0, .15))) +
-  labs(title    = paste("Regional Comparison ·", max(df$year)),
-       subtitle = "Rural highlighted in orange",
-       x = "Value", y = NULL) +
-  vvn_source("[Dataset name]") +
-  remove_ticks()
+```{r fig-03}
+#| fig-cap: "[Caption for Figure 3.]"
+#| fig-alt: "[Alt text for Figure 3.]"
+knitr::include_graphics("figures/03_[name].png")
 ```
 
-### Distribution of Values
+### [Section title — e.g., Relationship Between Two Variables]
 
-```{r fig-hist}
-#| fig-cap: "Distribution of values across all county-year observations."
-#| fig-width: 6
-#| fig-height: 3.5
+[1–2 sentences introducing Figure 4. Explain what the two axes represent and what the pattern means.]
 
-ggplot(df, aes(x = value)) +
-  geom_histogram(bins = 20, fill = "#861F41", color = "#FFFFFF", alpha = 0.9) +
-  geom_vline(xintercept = mean(df$value), color = "#E5751F",
-             linewidth = 1.2, linetype = "dashed") +
-  annotate("text", x = mean(df$value) + 0.8, y = Inf,
-           label = paste0("Mean: ", round(mean(df$value), 1)),
-           color = "#E5751F", hjust = 0, vjust = 1.5, size = 3.5) +
-  labs(title = "Value Distribution",
-       x = "Value", y = "Count") +
-  vvn_source("[Dataset name]")
+```{r fig-04}
+#| fig-cap: "[Caption for Figure 4.]"
+#| fig-alt: "[Alt text for Figure 4.]"
+knitr::include_graphics("figures/04_[name].png")
 ```
 
-### County Map
+### [Section title — e.g., County or Group Rankings]
 
-```{r map}
-#| fig-cap: "County-level map. Replace with your spatial data."
+[1–2 sentences introducing Figure 5. Note the range from lowest to highest and any notable entries.]
 
-# Uncomment and replace with your county-level sf data:
-# library(leaflet)
-# leaflet(va_counties) |>
-#   vvn_map_style(
-#     data      = va_counties,
-#     value_col = "your_variable",
-#     title     = "Your Variable"
-#   )
-
-# Placeholder:
-ggplot(df |> filter(year == max(year)),
-       aes(x = reorder(region, value), y = value, fill = value)) +
-  geom_col() +
-  scale_fill_vvn_c("maroon_seq") +
-  coord_flip() +
-  labs(title    = "[ Replace with county map ]",
-       subtitle = "Add leaflet + vvn_map_style() for an interactive choropleth",
-       x = NULL, y = "Value", fill = "Value") +
-  vvn_source("Placeholder")
+```{r fig-05}
+#| fig-cap: "[Caption for Figure 5.]"
+#| fig-alt: "[Alt text for Figure 5.]"
+knitr::include_graphics("figures/05_[name].png")
 ```
 
 ---
@@ -210,29 +142,25 @@ ggplot(df |> filter(year == max(year)),
 ## Summary Table
 
 ```{r tbl-summary}
-#| tbl-cap: "Summary statistics by region, 2018–2023."
+#| tbl-cap: "[Caption for the summary table.]"
 
-summary_df <- df |>
-  group_by(Region = region) |>
-  summarise(
-    `Mean`          = round(mean(value), 1),
-    `2023 Value`    = round(value[year == max(year)], 1),
-    `Change (pts)`  = round(value[year == max(year)] - value[year == min(year)], 1),
-    .groups = "drop"
-  ) |>
-  arrange(desc(`2023 Value`))
-
-# With gt (recommended):
-# library(gt)
-# gt(summary_df) |>
-#   vvn_table(title       = "Regional Summary Statistics",
-#              source_note = "Source: [Dataset] · VVN Analysis")
-
-# Fallback to knitr::kable:
-knitr::kable(summary_df, align = c("l", "r", "r", "r"))
+# Replace with your own summary. Example:
+#
+# df |>
+#   filter(year == max(year)) |>
+#   group_by(`[Group]` = group_col) |>
+#   summarise(
+#     `[Column 1]` = round(mean(value_1), 1),
+#     `[Column 2]` = round(mean(value_2), 1),
+#     .groups = "drop"
+#   ) |>
+#   arrange(desc(`[Column 1]`)) |>
+#   gt() |>
+#   vvn_table(
+#     title       = "[Table title]",
+#     source_note = "Source: [Dataset] · VVN Analysis"
+#   )
 ```
-
-*Source: [Dataset] · VVN Analysis*
 
 ---
 
@@ -240,22 +168,21 @@ knitr::kable(summary_df, align = c("l", "r", "r", "r"))
 
 **Interpretation of findings:**
 
-1. **Finding 1.** Describe and interpret the first major result.
-2. **Finding 2.** Connect the pattern to known context or prior research.
-3. **Equity implications.** Who benefits or is left behind?
+1. **[Finding 1 title].** [Describe and interpret the first major result — what does the pattern mean, not just what it shows?]
+2. **[Finding 2 title].** [Connect the pattern to known context, prior research, or policy history.]
+3. **Equity implications.** [Who benefits from current trends? Who is left behind, and why does that matter?]
 
 **Limitations:**
 
-- Data availability: [any gaps]
-- Geographic resolution: [county vs. sub-county]
-- Causal claims: [note that analysis is descriptive unless otherwise stated]
+- [Data availability or lag]
+- [Geographic resolution — e.g., county-level data may mask sub-county variation]
+- [Causal claims — note that the analysis is descriptive unless stated otherwise]
 
 ---
 
 ## Conclusion
 
-[2–3 sentences summarizing the main takeaway.] These findings suggest that
-[policy implication]. Future work should examine [next research question].
+[2–3 sentences summarizing the main takeaway.] These findings suggest that [policy implication]. Future work should examine [next research question].
 
 ::: {.callout-tip}
 **For more:** Contact VVN at [vvn@vt.edu](mailto:vvn@vt.edu) or visit
@@ -264,5 +191,5 @@ knitr::kable(summary_df, align = c("l", "r", "r", "r"))
 
 ---
 
-*Produced by the Visualizing Virginia Numbers · Virginia Tech*
-*Built with [vvnthemes](https://github.com/vt-vvn/vvnthemes)*
+*Produced by Visualizing Virginia Numbers · Virginia Tech*
+*Built with [vvnthemes](https://github.com/yujuangao/VVN)*
