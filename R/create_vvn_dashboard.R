@@ -38,7 +38,7 @@ create_vvn_dashboard <- function(name,
     fs::dir_delete(proj)
   }
 
-  for (d in c("data/raw", "data/processed", "R", "www")) {
+  for (d in c("data/raw", "data/processed", "figures", "scripts", "R", "www")) {
     fs::dir_create(fs::path(proj, d))
   }
 
@@ -71,8 +71,12 @@ create_vvn_dashboard <- function(name,
 
   .write_readme(proj, name, title,
     body = paste0(
-      "## Run locally\n\n",
+      "## Workflow\n\n",
       "```r\n",
+      "# Step 1: load your data in R/data_prep.R\n",
+      "# Step 2: build charts in scripts/analysis.R, then source it\n",
+      "source(\"scripts/analysis.R\")\n",
+      "# Step 3: replace [placeholders] in app.R, then run\n",
       "shiny::runApp(\"", name, "\")\n",
       "```\n\n",
       "## Deploy\n\n",
@@ -82,9 +86,11 @@ create_vvn_dashboard <- function(name,
       "## Structure\n\n",
       "```\n",
       name, "/\n",
-      "\u251c\u2500\u2500 app.R            \u2190 Main dashboard\n",
-      "\u251c\u2500\u2500 R/data_prep.R    \u2190 Load & clean data\n",
-      "\u251c\u2500\u2500 www/vvn.css      \u2190 VVN brand CSS\n",
+      "\u251c\u2500\u2500 app.R                \u2190 Main dashboard (table, map, KPI cards)\n",
+      "\u251c\u2500\u2500 R/data_prep.R        \u2190 Load data from data/processed/\n",
+      "\u251c\u2500\u2500 scripts/analysis.R   \u2190 Build all charts here; source this first\n",
+      "\u251c\u2500\u2500 figures/             \u2190 Auto-created when analysis.R runs\n",
+      "\u251c\u2500\u2500 www/vvn.css          \u2190 VVN brand CSS\n",
       "\u2514\u2500\u2500 data/\n",
       "    \u251c\u2500\u2500 raw/\n",
       "    \u2514\u2500\u2500 processed/\n",
@@ -95,7 +101,8 @@ create_vvn_dashboard <- function(name,
   cli::cli_h1("VVN Dashboard: {name}")
   cli::cli_alert_success("Created at {.path {proj}}")
   cli::cli_bullets(c(
-    "*" = "Replace example data in {.path R/data_prep.R}",
+    "*" = "Load your data in {.path R/data_prep.R}",
+    "*" = "Build charts: {.code source(\"{name}/scripts/analysis.R\")}",
     "*" = "Run: {.code shiny::runApp(\"{name}\")}",
     "*" = "Deploy: {.code rsconnect::deployApp(\"{name}\")}"
   ))

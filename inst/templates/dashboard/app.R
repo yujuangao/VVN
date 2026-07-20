@@ -3,26 +3,28 @@
 # VVN_TITLE
 # VVN_AUTHOR · Visualizing Virginia Numbers · Virginia Tech
 #
-# QUICK START:
-#   1. Load your data in R/data_prep.R
-#   2. Replace every [placeholder] with your content
-#   3. Uncomment the components you need
-#   4. Run: shiny::runApp()
-#   5. Deploy: rsconnect::deployApp()
+# WORKFLOW:
+#   Step 1 — Load your data in R/data_prep.R
+#   Step 2 — Build charts in scripts/analysis.R, then source it
+#             (figures are auto-numbered and saved to figures/)
+#   Step 3 — Replace every [placeholder] in this file with your content
+#   Step 4 — Run: shiny::runApp()
+#   Step 5 — Deploy: rsconnect::deployApp()
+#
+# Charts are static PNGs built in scripts/analysis.R and displayed here.
+# Interactive components (KPI cards, table, map) are reactive to filters.
 # ==============================================================================
 
 # ── Libraries ─────────────────────────────────────────────────────────────────
 library(shiny)
 library(bslib)
 library(bsicons)
-library(ggplot2)
 library(dplyr)
 library(vvnthemes)          # VVN brand theme, colors, and UI components
 # library(leaflet)          # Uncomment for interactive county maps
 # library(sf)               # Uncomment for spatial data (required with leaflet)
 # library(DT)               # Uncomment for interactive data tables
 # library(gt)               # Uncomment for styled summary tables
-# library(plotly)           # Uncomment for interactive/hoverable charts
 # library(readr)            # Uncomment if loading CSV data in data_prep.R
 
 # ── Load data ─────────────────────────────────────────────────────────────────
@@ -60,7 +62,7 @@ ui <- bslib::page_navbar(
 
   # ============================================================================
   # Tab 1 — Overview
-  #   Sidebar filters + 3 KPI cards + trend line + bar chart + histogram
+  #   Sidebar filters + 3 KPI cards + static chart PNGs from figures/
   # ============================================================================
   bslib::nav_panel(
     title = tagList(bsicons::bs_icon("house-fill"), " Overview"),
@@ -128,6 +130,7 @@ ui <- bslib::page_navbar(
         gap        = "1rem",
 
         # ── KPI row: 3 metric cards (maroon · orange · navy) ─────────────────
+        # KPI values are reactive — computed from filtered data in the server.
         bslib::layout_columns(
           col_widths = c(4, 4, 4),
           gap        = "0.75rem",
@@ -136,47 +139,48 @@ ui <- bslib::page_navbar(
           uiOutput("kpi_3")
         ),
 
-        # ── Chart A: Trend line ───────────────────────────────────────────────
+        # ── Chart A: static PNG from figures/ (built by scripts/analysis.R) ──
+        # Update the filename after running analysis.R.
         bslib::card(
           full_screen = TRUE,
           bslib::card_header(
             class = "vvn-card-header d-flex align-items-center justify-content-between",
-            "[Trend Chart Title]",                  # <-- Replace
+            "[Chart A Title]",                      # <-- Replace
             bslib::popover(
               bsicons::bs_icon("info-circle"),
-              "[Describe what this chart shows.]",  # <-- Replace tooltip text
+              "[Describe what this chart shows.]",  # <-- Replace
               title     = "About this chart",
               placement = "left"
             )
           ),
-          bslib::card_body(plotOutput("trend_chart", height = "310px"))
+          bslib::card_body(uiOutput("chart_a"))
         ),
 
-        # ── Chart B and C: Bar + Histogram (side by side) ─────────────────────
+        # ── Chart B and C: side by side ────────────────────────────────────────
         bslib::layout_columns(
-          col_widths = c(7, 5),
+          col_widths = c(6, 6),
           gap        = "0.75rem",
 
           bslib::card(
             full_screen = TRUE,
-            bslib::card_header("[Bar Chart Title]",          # <-- Replace
+            bslib::card_header("[Chart B Title]",        # <-- Replace
                                 class = "vvn-card-header"),
-            bslib::card_body(plotOutput("bar_chart", height = "270px"))
+            bslib::card_body(uiOutput("chart_b"))
           ),
 
           bslib::card(
             full_screen = TRUE,
-            bslib::card_header("[Distribution Title]",       # <-- Replace
+            bslib::card_header("[Chart C Title]",        # <-- Replace
                                 class = "vvn-card-header"),
-            bslib::card_body(plotOutput("hist_chart", height = "270px"))
+            bslib::card_body(uiOutput("chart_c"))
           )
         )
 
-        # ── Chart D: Scatter plot (optional — uncomment to add) ───────────────
+        # ── Chart D: optional extra chart (uncomment to add) ──────────────────
         # bslib::card(
         #   full_screen = TRUE,
-        #   bslib::card_header("[Scatter Title]", class = "vvn-card-header"),
-        #   bslib::card_body(plotOutput("scatter_chart", height = "300px"))
+        #   bslib::card_header("[Chart D Title]", class = "vvn-card-header"),
+        #   bslib::card_body(uiOutput("chart_d"))
         # )
       )
     )
@@ -195,10 +199,19 @@ ui <- bslib::page_navbar(
       bslib::card_header("[Map Title]", class = "vvn-card-header"),   # <-- Replace
       bslib::card_body(
 
-        # Uncomment when leaflet + sf + your county shapefile are ready:
+        # ── Option A: Interactive Leaflet map ─────────────────────────────────
+        # Requires: library(leaflet) and library(sf) uncommented above.
+        # Requires: va_counties loaded in R/data_prep.R.
+        # Uncomment leafletOutput() and the matching renderLeaflet() in server.
+        #
         # leaflet::leafletOutput("county_map", height = "580px")
 
-        # Placeholder shown until the map is set up:
+        # ── Option B: Static map PNG from figures/ ────────────────────────────
+        # If you saved a static map PNG in scripts/analysis.R, display it here:
+        #
+        # uiOutput("map_static")
+
+        # Placeholder until map is set up:
         div(
           style = paste(
             "height:580px; display:flex; flex-direction:column;",
@@ -206,15 +219,19 @@ ui <- bslib::page_navbar(
             "background:#F7F7F7; border-radius:6px; gap:.75rem;"
           ),
           tags$p(style = "color:#861F41; font-weight:700; font-size:1.1rem; margin:0;",
-                 "County Map Placeholder"),
+                 "Map Placeholder"),
           tags$p(style = "color:#666; font-size:.85rem; text-align:center;
                           max-width:420px; margin:0; white-space:pre-line;",
                  paste(
-                   "To enable the map:",
-                   "1. Place your county shapefile in data/processed/va_counties.geojson",
-                   "2. Uncomment va_counties in R/data_prep.R",
-                   "3. Uncomment library(leaflet) and library(sf) at the top of app.R",
-                   "4. Uncomment leafletOutput() above and renderLeaflet() in the server",
+                   "Option A — Interactive Leaflet map:",
+                   "  1. Place county shapefile in data/processed/va_counties.geojson",
+                   "  2. Uncomment va_counties in R/data_prep.R",
+                   "  3. Uncomment library(leaflet), library(sf), and leafletOutput() above",
+                   "  4. Uncomment renderLeaflet() in the server",
+                   "",
+                   "Option B — Static PNG from scripts/analysis.R:",
+                   "  Uncomment uiOutput('map_static') above and",
+                   "  the matching renderUI('map_static') in the server",
                    sep = "\n"
                  ))
         )
@@ -288,10 +305,13 @@ ui <- bslib::page_navbar(
 # ==============================================================================
 server <- function(input, output, session) {
 
+  # Serve figures/ folder so chart PNGs can be displayed in the browser.
+  shiny::addResourcePath("figures", "figures")
+
   # ── Reactive: filter app_data based on sidebar inputs ────────────────────────
-  # Replace [your_group_col], [your_year_col], [your_value_col] with your
-  # actual column names from app_data. Use bindEvent() so filtering runs only
-  # when the user clicks "Apply Filters"; remove it for instant updates.
+  # Replace [your_group_col], [your_year_col] with your column names.
+  # Use bindEvent() so filtering runs only when "Apply Filters" is clicked;
+  # remove bindEvent() for instant updates.
   #
   # filtered <- reactive({
   #   d <- app_data
@@ -307,9 +327,6 @@ server <- function(input, output, session) {
   #   #   [your_year_col] <= input$year_range[2]
   #   # )
   #
-  #   # Select display variable (from vvn_filter "variable_sel"):
-  #   # d <- d |> mutate(display_value = .data[[input$variable_sel]])
-  #
   #   d
   # }) |> bindEvent(input$apply_btn, ignoreNULL = FALSE)
 
@@ -322,7 +339,7 @@ server <- function(input, output, session) {
 
 
   # ── KPI card 1 (maroon) ───────────────────────────────────────────────────────
-  # Replace value and label with your own metric.
+  # Reactive: computed from filtered data. Replace with your own metric.
   #
   # output$kpi_1 <- renderUI({
   #   vvn_kpi_card(
@@ -353,110 +370,79 @@ server <- function(input, output, session) {
   # })
 
 
-  # ── Chart A: Trend line ───────────────────────────────────────────────────────
-  # theme_vvn()        — applies the VVN ggplot2 theme
-  # scale_color_vvn()  — VVN brand colors for lines/points
+  # ── Chart A: display static PNG from figures/ ─────────────────────────────────
+  # Update the filename to match the file saved by scripts/analysis.R.
+  # The file.exists() guard shows a helpful message if the chart is not yet built.
   #
-  # output$trend_chart <- renderPlot({
-  #   req(nrow(filtered()) > 0)
-  #   filtered() |>
-  #     group_by([your_year_col], [your_group_col]) |>
-  #     summarise(v = mean([your_value_col], na.rm = TRUE), .groups = "drop") |>
-  #     ggplot(aes(x = [your_year_col], y = v,
-  #                color = [your_group_col], group = [your_group_col])) +
-  #     geom_line(linewidth = 1.3) +
-  #     geom_point(size = 2.8, alpha = 0.9) +
-  #     scale_color_vvn("main") +             # palette options: "main", "accessible", "brand"
-  #     theme_vvn() +                          # VVN ggplot2 theme
-  #     labs(
-  #       title    = "[Chart Title]",          # Headline case (capitalize major words)
-  #       subtitle = "[Geography · Year range]", # Sentence case
-  #       x        = "[X-axis label]",
-  #       y        = "[Y-axis label]",
-  #       color    = "[Legend title]",
-  #       caption  = "Source: [Agency, Dataset, Year]."
-  #     )
-  # }, res = 110)
+  # output$chart_a <- renderUI({
+  #   f <- "figures/01_[name].png"    # <-- Replace 01_[name].png with your filename
+  #   if (file.exists(f)) {
+  #     tags$img(src   = f,
+  #              style = "width:100%; display:block;",
+  #              alt   = "[Describe the chart for screen readers]")
+  #   } else {
+  #     tags$p(style = "color:#888; padding:1rem; font-size:.85rem;",
+  #            "Chart not found. Run scripts/analysis.R first, then refresh.")
+  #   }
+  # })
+
+  # ── Chart B ───────────────────────────────────────────────────────────────────
+  # output$chart_b <- renderUI({
+  #   f <- "figures/02_[name].png"    # <-- Replace with your filename
+  #   if (file.exists(f)) {
+  #     tags$img(src   = f,
+  #              style = "width:100%; display:block;",
+  #              alt   = "[Alt text for Chart B]")
+  #   } else {
+  #     tags$p(style = "color:#888; padding:1rem; font-size:.85rem;",
+  #            "Chart not found. Run scripts/analysis.R first, then refresh.")
+  #   }
+  # })
+
+  # ── Chart C ───────────────────────────────────────────────────────────────────
+  # output$chart_c <- renderUI({
+  #   f <- "figures/03_[name].png"    # <-- Replace with your filename
+  #   if (file.exists(f)) {
+  #     tags$img(src   = f,
+  #              style = "width:100%; display:block;",
+  #              alt   = "[Alt text for Chart C]")
+  #   } else {
+  #     tags$p(style = "color:#888; padding:1rem; font-size:.85rem;",
+  #            "Chart not found. Run scripts/analysis.R first, then refresh.")
+  #   }
+  # })
+
+  # ── Chart D (optional) ────────────────────────────────────────────────────────
+  # output$chart_d <- renderUI({
+  #   f <- "figures/04_[name].png"    # <-- Replace with your filename
+  #   if (file.exists(f)) {
+  #     tags$img(src   = f,
+  #              style = "width:100%; display:block;",
+  #              alt   = "[Alt text for Chart D]")
+  #   } else {
+  #     tags$p(style = "color:#888; padding:1rem; font-size:.85rem;",
+  #            "Chart not found. Run scripts/analysis.R first, then refresh.")
+  #   }
+  # })
 
 
-  # ── Chart B: Horizontal bar chart ─────────────────────────────────────────────
-  # Good for latest-year comparisons or rankings across groups.
-  # scale_fill_vvn() fills bars with VVN brand colors.
-  #
-  # output$bar_chart <- renderPlot({
-  #   req(nrow(filtered()) > 0)
-  #   filtered() |>
-  #     filter([your_year_col] == max([your_year_col])) |>
-  #     group_by([your_group_col]) |>
-  #     summarise(v = mean([your_value_col], na.rm = TRUE), .groups = "drop") |>
-  #     arrange(v) |>
-  #     mutate([your_group_col] = factor([your_group_col], levels = [your_group_col])) |>
-  #     ggplot(aes(x = v, y = [your_group_col], fill = [your_group_col])) +
-  #     geom_col(width = 0.65, show.legend = FALSE) +
-  #     geom_text(aes(label = round(v, 1)), hjust = -0.2, size = 3.2, color = "#3D3D3D") +
-  #     scale_fill_vvn("main") +
-  #     scale_x_continuous(expand = expansion(mult = c(0, .18))) +
-  #     theme_vvn(grid = "x") +
-  #     labs(
-  #       title    = "[Bar Chart Title]",
-  #       subtitle = paste("Latest year:", max(filtered()$[your_year_col])),
-  #       x        = "[X-axis label]",
-  #       y        = NULL,
-  #       caption  = "Source: [Agency, Dataset, Year]."
-  #     )
-  # }, res = 110)
+  # ── Static map PNG (Option B — uncomment if using a saved map PNG) ───────────
+  # output$map_static <- renderUI({
+  #   f <- "figures/05_[name].png"    # <-- Replace with your map filename
+  #   if (file.exists(f)) {
+  #     tags$img(src   = f,
+  #              style = "width:100%; max-height:580px; object-fit:contain;",
+  #              alt   = "[Describe the map for screen readers]")
+  #   } else {
+  #     tags$p(style = "color:#888; padding:1rem; font-size:.85rem;",
+  #            "Map not found. Run scripts/analysis.R first, then refresh.")
+  #   }
+  # })
 
-
-  # ── Chart C: Histogram / distribution ────────────────────────────────────────
-  # Shows the distribution of a variable across all rows in filtered data.
-  # The orange dashed line marks the mean.
-  #
-  # output$hist_chart <- renderPlot({
-  #   req(nrow(filtered()) > 0)
-  #   m <- mean(filtered()$[your_value_col], na.rm = TRUE)
-  #   ggplot(filtered(), aes(x = [your_value_col])) +
-  #     geom_histogram(bins = 20, fill = "#861F41", color = "#FFFFFF", alpha = 0.85) +
-  #     geom_vline(xintercept = m, color = "#E5751F", linewidth = 1.2,
-  #                linetype = "dashed") +
-  #     annotate("text", x = m, y = Inf, vjust = 2, hjust = -0.1, size = 3,
-  #              label = paste0("Mean: ", round(m, 1)), color = "#E5751F") +
-  #     theme_vvn() +
-  #     labs(
-  #       title   = "[Distribution Title]",
-  #       x       = "[Variable label]",
-  #       y       = "Count",
-  #       caption = "Source: [Agency, Dataset, Year]."
-  #     )
-  # }, res = 110)
-
-
-  # ── Chart D: Scatter plot (optional) ─────────────────────────────────────────
-  # Shows the relationship between two continuous variables.
-  # Add color = [your_group_col] to color points by group.
-  #
-  # output$scatter_chart <- renderPlot({
-  #   req(nrow(filtered()) > 0)
-  #   ggplot(filtered(), aes(x = [x_col], y = [y_col], color = [your_group_col])) +
-  #     geom_point(size = 2.5, alpha = 0.75) +
-  #     geom_smooth(method = "lm", se = FALSE, linewidth = 1, linetype = "dashed",
-  #                 color = "#3D3D3D") +
-  #     scale_color_vvn("main") +
-  #     theme_vvn() +
-  #     labs(
-  #       title    = "[Scatter Title]",
-  #       subtitle = "[Describe what the two axes show]",
-  #       x        = "[X-axis label]",
-  #       y        = "[Y-axis label]",
-  #       color    = "[Group label]",
-  #       caption  = "Source: [Agency, Dataset, Year]."
-  #     )
-  # }, res = 110)
-
-
-  # ── Map: Leaflet county choropleth (optional) ─────────────────────────────────
+  # ── Interactive Leaflet map (Option A) ───────────────────────────────────────
   # Requires: library(leaflet) and library(sf) uncommented above.
   # Requires: va_counties loaded in R/data_prep.R.
-  # vvn_map_style() applies the VVN Leaflet theme (maroon_seq palette, tooltip).
+  # vvn_map_style() applies VVN Leaflet theme (maroon_seq palette, tooltip).
   #
   # output$county_map <- leaflet::renderLeaflet({
   #   leaflet::leaflet(va_counties) |>
@@ -470,7 +456,7 @@ server <- function(input, output, session) {
 
   # ── DT interactive table — Option A ──────────────────────────────────────────
   # Good for large datasets. Users can search, sort, and download.
-  # Uncomment DT::dataTableOutput("dt_table") in the UI above.
+  # Uncomment DT::dataTableOutput("dt_table") in the UI above first.
   #
   # output$dt_table <- DT::renderDataTable({
   #   filtered() |>
@@ -492,7 +478,7 @@ server <- function(input, output, session) {
 
   # ── GT styled table — Option B ────────────────────────────────────────────────
   # Good for small summary tables. vvn_table() applies VVN maroon header style.
-  # Uncomment gt::gt_output("gt_table") in the UI above.
+  # Uncomment gt::gt_output("gt_table") in the UI above first.
   #
   # output$gt_table <- gt::render_gt({
   #   filtered() |>
