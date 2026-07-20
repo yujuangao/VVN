@@ -1,114 +1,108 @@
-# vvnthemes <img src="man/figures/logo.png" align="right" height="139" alt="vvnthemes logo"/>
+# vvnthemes
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/yujuangao/VVN/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/yujuangao/VVN/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 <!-- badges: end -->
 
-**Websites:** [R Library Docs](https://yujuangao.github.io/VVN/) · [Style Guide](https://yujuangao.github.io/VVN/guide/)
+📖 [R Library Docs](https://yujuangao.github.io/VVN/) · 🎨 [Style Guide](https://yujuangao.github.io/VVN/guide/)
 
 ---
 
 ## What is Visualizing Virginia's Numbers?
 
-**Visualizing Virginia's Numbers (VVN)** is a Virginia Tech initiative that transforms complex public data into clear, accessible visualizations for all 133 Virginia localities — covering broadband, housing, workforce, healthcare, and economic trends.
+**Visualizing Virginia's Numbers (VVN)** is a Virginia Tech initiative that turns complex public data into clear, accessible visualizations for all 133 Virginia localities — covering broadband, housing, workforce, healthcare, and economic trends.
 
-`vvnthemes` is the official design system for all VVN projects. It gives every team member a shared toolkit to produce consistent, VT-branded, publication-ready charts, maps, tables, dashboards, and narrative reports — without rebuilding brand styles from scratch.
-
-All outputs follow **VT Brand Guidelines** (Maroon `#861F41`, Orange `#E5751F`, Navy `#1B5299`) and meet **WCAG 2.1 AA** accessibility requirements.
+Every VVN output — charts, maps, tables, dashboards, and reports — must follow a consistent visual standard so the work is immediately recognizable, trustworthy, and publication-ready.
 
 ---
 
-## What the package includes
+## What is vvnthemes?
 
-`vvnthemes` is organized into **9 modules**:
+`vvnthemes` is the official R design system for all VVN projects. It packages Virginia Tech's brand colors, typography, and layout rules into a single toolkit so every team member can produce consistent outputs without building styles from scratch.
 
-| Module | Functions | What it does |
-|--------|-----------|--------------|
-| **Color System** | `vvn_colors()`, `vvn_palette()`, `view_vvn_palette()` | VT brand hex values and named palettes — sequential, diverging, accessible, and artistic |
+### What it includes
+
+| Module | Key functions | What it does |
+|--------|---------------|--------------|
+| **Colors** | `vvn_colors()`, `vvn_palette()`, `view_vvn_palette()` | VT brand hex values and named palettes (sequential, diverging, colorblind-safe, artistic) |
 | **ggplot2 Scales** | `scale_color_vvn()`, `scale_fill_vvn()`, `scale_*_vvn_c()` | Drop-in discrete and continuous color/fill scales |
-| **ggplot2 Theme** | `theme_vvn()`, `theme_vvn_map()`, `theme_vvn_minimal()` | VT-branded chart themes; map and infographic variants |
-| **Chart Helpers** | `vvn_title()`, `vvn_source()`, `vvn_save()`, `set_vvn_defaults()` | Add titles/source lines, export multi-format figures, set global defaults |
-| **GT Tables** | `vvn_table()`, `vvn_table_pvalues()` | Style `gt` tables with VT maroon headers and source footnotes |
-| **Leaflet Maps** | `vvn_map_style()` | One-function VT-branded county choropleth with fill scale, tooltip, and legend |
-| **Shiny UI** | `vvn_filter()`, `vvn_slider()`, `vvn_button()`, `vvn_kpi_card()`, `vvn_bs_theme()` | Branded Shiny widgets: dropdowns, sliders, action buttons, KPI metric cards, Bootstrap theme |
-| **Story Template** | `create_vvn_story()`, `check_vvn_story()` | Scaffold a Quarto data narrative project with VVN CSS, folder structure, and front matter |
-| **Dashboard Template** | `create_vvn_dashboard()` | Scaffold a full Shiny dashboard with sidebar, KPI row, chart tabs, map, and data table |
+| **ggplot2 Theme** | `theme_vvn()`, `theme_vvn_map()`, `theme_vvn_minimal()` | VT-branded chart themes for standard, map, and minimal layouts |
+| **Chart Helpers** | `vvn_source()`, `vvn_save()`, `set_vvn_defaults()` | Source lines, multi-format export, global brand defaults |
+| **Tables** | `vvn_table()`, `vvn_table_pvalues()` | Styled `gt` tables with VT maroon headers and footnotes |
+| **Maps** | `vvn_map_style()` | One-function VT-branded Leaflet county choropleth |
+| **Shiny UI** | `vvn_filter()`, `vvn_slider()`, `vvn_button()`, `vvn_kpi_card()`, `vvn_bs_theme()` | Branded dropdowns, sliders, buttons, KPI cards, Bootstrap theme |
+| **Story scaffold** | `create_vvn_story()`, `check_vvn_story()` | Generate a complete Quarto data story project |
+| **Dashboard scaffold** | `create_vvn_dashboard()` | Generate a complete Shiny dashboard project |
+
+All outputs follow **VT Brand Guidelines** (Maroon `#861F41`, Orange `#E5751F`) and meet **WCAG 2.1 AA** accessibility standards.
 
 ---
 
-## Before you start — set up your environment
+## Installation
 
-> **Create a `master.R` setup file in your project root and run it once before starting any VVN project.** This ensures all required packages are installed before you begin.
+### 1 · Create a master setup file
+
+Before starting any VVN project, create a `master.R` file in your project root and run it once. This installs everything you need.
 
 ```r
-# master.R
-# Run this file ONCE before starting any VVN project.
-# ─────────────────────────────────────────────────────
+# master.R — run this once before starting a VVN project
 
-# 1. Install the fast package installer (if you haven't already)
+# Install the fast package installer
 if (!requireNamespace("pak", quietly = TRUE)) install.packages("pak")
 
-# 2. Install vvnthemes from GitHub
+# vvnthemes (from GitHub)
 pak::pak("yujuangao/VVN")
 
-# 3. Install core data packages
-pak::pak(c(
-  "ggplot2",   # charts
-  "dplyr",     # data manipulation
-  "tidyr",     # data reshaping
-  "readr"      # CSV import
-))
+# Core packages — always needed
+pak::pak(c("ggplot2", "dplyr", "tidyr", "readr"))
 
-# 4. Install dashboard packages (needed for create_vvn_dashboard)
-pak::pak(c(
-  "shiny",     # web app framework
-  "bslib",     # Bootstrap 5 themes
-  "bsicons"    # Bootstrap icons
-))
+# Dashboard packages — needed for create_vvn_dashboard()
+pak::pak(c("shiny", "bslib", "bsicons"))
 
-# 5. Install optional packages (uncomment what you need)
-# pak::pak("gt")               # styled summary tables
-# pak::pak(c("leaflet", "sf")) # interactive county maps
-# pak::pak("DT")               # interactive data tables
-# pak::pak("mapshot2")         # save Leaflet maps as PNG
+# Optional — uncomment what you need
+# pak::pak("gt")                       # styled tables
+# pak::pak(c("leaflet", "sf"))         # interactive maps
+# pak::pak("DT")                       # interactive data tables
+# pak::pak("mapshot2")                 # save maps as PNG
 
-# ── Verify ───────────────────────────────────────────
+# Verify
 library(vvnthemes)
 set_vvn_defaults()
-message("vvnthemes is ready. Let's visualize Virginia!")
+message("vvnthemes ready!")
 ```
 
----
-
-## How to install vvnthemes
-
-```r
-# Option A — pak (recommended, fastest)
-install.packages("pak")
-pak::pak("yujuangao/VVN")
-
-# Option B — remotes
-install.packages("remotes")
-remotes::install_github("yujuangao/VVN")
-```
-
-Then load it in any script:
+### 2 · Load in any script
 
 ```r
 library(vvnthemes)
-set_vvn_defaults()   # applies VT brand theme + geom colors globally
+set_vvn_defaults()   # applies VT brand theme and geom colors globally
 ```
+
+> **Alternative install (without pak):**
+> ```r
+> install.packages("remotes")
+> remotes::install_github("yujuangao/VVN")
+> ```
 
 ---
 
 ## Workflow
 
-### Option 1 · Quarto Data Story (narrative report)
+VVN produces two types of outputs. Choose the one that fits your goal:
 
-Use this when you have a single finding to communicate as a scrollable, publishable report.
+| Goal | Output type | Function |
+|------|-------------|----------|
+| Tell a story with a fixed narrative | Quarto data story | `create_vvn_story()` |
+| Let users filter and explore data | Shiny dashboard | `create_vvn_dashboard()` |
 
-**Step 1 — Scaffold**
+---
+
+### Option A · Quarto Data Story
+
+Use when you have a single finding to communicate as a scrollable, publishable web page.
+
+**Step 1 — Scaffold the project**
 
 ```r
 library(vvnthemes)
@@ -120,27 +114,24 @@ create_vvn_story(
 )
 ```
 
-Creates:
+This creates a ready-to-run project:
 
 ```
 childcare_cost/
-├── index.qmd          ← Write your narrative here
-├── _quarto.yml        ← Site config (title, navbar, footer)
-├── styles.scss        ← VT brand CSS — do not edit
+├── index.qmd        ← write your narrative here
+├── _quarto.yml      ← site title, navbar, footer
+├── styles.scss      ← VT brand styles (do not edit)
 ├── scripts/
-│   └── analysis.R     ← Build all charts here; source this first
-├── figures/           ← Auto-numbered PNGs saved by analysis.R
-│   ├── 01_trend.png
-│   └── 02_map.png
+│   └── analysis.R   ← build all charts here; source this first
+├── figures/         ← auto-numbered PNGs from analysis.R
 └── data/
-    ├── raw/           ← Original source files — do not edit
-    └── processed/     ← Cleaned files used in analysis.R
+    ├── raw/         ← original source files (do not edit)
+    └── processed/   ← cleaned files used in analysis.R
 ```
 
 **Step 2 — Build charts in `scripts/analysis.R`**
 
 ```r
-# In scripts/analysis.R
 library(vvnthemes)
 library(ggplot2)
 
@@ -151,30 +142,32 @@ df <- readr::read_csv("data/processed/childcare.csv")
 p <- ggplot(df, aes(x = year, y = cost, color = region)) +
   geom_line(linewidth = 1.2) +
   scale_color_vvn("main") +
-  labs(
-    title    = "Annual Childcare Cost by Region",
-    subtitle = "Virginia, 2015–2023",
-    x = NULL, y = "Cost ($)"
-  ) +
+  labs(title    = "Annual Childcare Cost by Region",
+       subtitle = "Virginia, 2015–2023",
+       x = NULL, y = "Annual Cost ($)") +
   vvn_source("Virginia Department of Social Services")
 
 vvn_save(p, "figures/01_childcare_trend.png")
 ```
 
-**Step 3 — Write your story in `index.qmd`**
+Source the script to auto-number and save all figures to `figures/`.
+
+**Step 3 — Write your story and render**
+
+Open `index.qmd`, fill in your narrative, embed your figures, then render:
 
 ```r
-# Render to HTML
 quarto::quarto_render("index.qmd")
+# → index.html (self-contained, ready to publish)
 ```
 
 ---
 
-### Option 2 · Interactive Shiny Dashboard
+### Option B · Shiny Dashboard
 
-Use this when users need to filter and explore data themselves.
+Use when users need to filter and explore data themselves in real time.
 
-**Step 1 — Scaffold**
+**Step 1 — Scaffold the project**
 
 ```r
 create_vvn_dashboard(
@@ -183,26 +176,26 @@ create_vvn_dashboard(
 )
 ```
 
-Creates:
+This creates a ready-to-run project:
 
 ```
 housing_dashboard/
-├── app.R              ← Main Shiny app; load data + display charts + reactive UI
+├── app.R            ← Shiny app; load data, display charts, reactive UI
 ├── scripts/
-│   └── analysis.R     ← Build all ggplot2 charts here; source this first
-├── figures/           ← Auto-numbered PNGs saved by analysis.R
-│   ├── 01_trend_statewide.png
-│   └── 02_bar_by_region.png
+│   └── analysis.R   ← build all charts here; source this first
+├── figures/         ← auto-numbered PNGs from analysis.R
 ├── www/
-│   └── vvn.css        ← VVN brand styles — do not edit
+│   └── vvn.css      ← VVN brand styles (do not edit)
 └── data/
-    ├── raw/           ← Original source files — do not edit
-    └── processed/     ← Cleaned files loaded in app.R
+    ├── raw/         ← original source files (do not edit)
+    └── processed/   ← cleaned files loaded in app.R
 ```
 
-**Step 2 — Build charts in `scripts/analysis.R`**, then source it — figures are auto-numbered and saved to `figures/`.
+**Step 2 — Build charts in `scripts/analysis.R`**
 
-**Step 3 — Load data and wire charts in `app.R`**
+Same as Option A — uncomment the chart types you need from the gallery, fill in your column names, and source the script. Figures save automatically to `figures/`.
+
+**Step 3 — Load data in `app.R`**
 
 ```r
 # Near the top of app.R — uncomment and fill in your filename:
@@ -210,20 +203,20 @@ app_data <- readr::read_csv("data/processed/housing.csv",
                              show_col_types = FALSE)
 ```
 
-Then update each `renderUI` block with the matching filename from `figures/`.
+Then update each `renderUI` block with the filename saved in `figures/`.
 
 **Step 4 — Run and deploy**
 
 ```r
-shiny::runApp("housing_dashboard")
-rsconnect::deployApp("housing_dashboard")
+shiny::runApp("housing_dashboard")       # preview locally
+rsconnect::deployApp("housing_dashboard") # publish to shinyapps.io
 ```
 
 ---
 
-### Option 3 · Standalone Charts
+### Option C · Standalone Charts
 
-Use vvnthemes in any R script or Quarto document.
+Use `vvnthemes` in any existing R script or Quarto document.
 
 ```r
 library(ggplot2)
@@ -233,142 +226,72 @@ set_vvn_defaults()
 
 ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point(size = 2.5) +
-  theme_vvn() +
   scale_color_vvn("main") +
-  labs(
-    title    = "Engine Displacement vs. Highway MPG",
-    subtitle = "Visualizing Virginia's Numbers · VT Brand Theme",
-    x = "Displacement (L)", y = "Highway MPG"
-  ) +
+  labs(title    = "Engine Displacement vs. Highway MPG",
+       subtitle = "Virginia counties · VT Brand Theme",
+       x = "Displacement (L)", y = "Highway MPG") +
   vvn_source("EPA Fuel Economy Data")
 ```
 
 ---
 
-## Key functions at a glance
+## Quick reference
 
-### Colors & palettes
-
+**Colors**
 ```r
-vvn_colors("maroon")                    # single hex: "#861F41"
-vvn_colors("maroon", "orange", "navy")  # named vector
-
-vvn_palette("main")                     # 10-color categorical
-vvn_palette("accessible")               # Okabe-Ito colorblind-safe (7 colors)
-vvn_palette("maroon_seq", n = 8)        # 8-step sequential
-vvn_palette("diverging", n = 11)        # 11-step diverging
+vvn_colors("maroon")                 # "#861F41"
+vvn_palette("main")                  # 10-color categorical
+vvn_palette("accessible")            # Okabe-Ito colorblind-safe (7 colors)
+vvn_palette("maroon_seq", n = 8)     # 8-step sequential
+vvn_palette("vt_div", n = 11)        # 11-step diverging (maroon ↔ navy)
 ```
 
-### Themes & scales
-
+**Themes & scales**
 ```r
-# Themes
-theme_vvn()          # standard charts (bar, line, scatter)
-theme_vvn_map()      # choropleth / geom_sf() maps
-theme_vvn_minimal()  # infographic / panel-free layout
-
-# Discrete scales
-scale_color_vvn("main")      # 10-color categorical
-scale_fill_vvn("accessible") # colorblind-safe
-
-# Continuous scales
-scale_color_vvn_c("maroon_seq")  # sequential
-scale_fill_vvn_c("diverging")    # diverging
+theme_vvn()                          # standard charts
+theme_vvn_map()                      # choropleth maps
+scale_color_vvn("main")              # discrete, 10 colors
+scale_fill_vvn_c("maroon_seq")       # continuous sequential
+scale_fill_vvn_c("vt_div")          # continuous diverging
 ```
 
-### Tables
-
+**Tables**
 ```r
-library(gt)
-
-my_df |>
-  gt() |>
-  vvn_table(
-    title       = "Summary Statistics by County",
-    source_note = "Source: American Community Survey, 2022"
-  )
+my_df |> gt() |>
+  vvn_table(title = "Summary by County",
+            source_note = "Source: ACS 2022")
 ```
 
-### Maps
-
+**Maps**
 ```r
-library(leaflet)
-
 leaflet(va_counties) |>
-  vvn_map_style(
-    data      = va_counties,
-    value_col = "median_income",
-    title     = "Median Household Income ($)"
-  )
+  vvn_map_style(data = va_counties, value_col = "rate",
+                title = "Poverty Rate (%)")
 ```
 
-### Accessibility
-
+**Export**
 ```r
-vvn_accessibility_check(vvn_palette("brand"))
-# ■ VVN Accessibility Check · WCAG AA (4.5:1)
-# ✔ #861F41  10.5:1  PASS
-# ! #E5751F   3.8:1  FAIL → use vvn_palette("accessible") for text
-# ✔ #1B5299   8.3:1  PASS
-```
-
-### Export
-
-```r
-p <- ggplot(mpg, aes(displ, hwy)) + geom_point() + theme_vvn()
-
-vvn_save(p, "figures/plot.png")                          # PNG default
-vvn_save(p, "figures/plot", formats = c("png", "pdf"))   # multiple formats
+vvn_save(p, "figures/plot.png")
+vvn_save(p, "figures/plot", formats = c("png", "pdf", "svg"))
 ```
 
 ---
 
-## Brand reference
+## Brand colors
 
-| Token | Hex | Usage |
-|-------|-----|-------|
-| VT Maroon | `#861F41` | Titles, headers, primary accents |
-| VT Orange | `#E5751F` | Highlights, callouts, active states |
+| Color | Hex | Primary use |
+|-------|-----|-------------|
+| VT Maroon | `#861F41` | Titles, headers, fills |
+| VT Orange | `#E5751F` | Accents, highlights |
 | Navy | `#1B5299` | Secondary data series |
 | Charcoal | `#3D3D3D` | Body text |
-| Light Gray | `#F7F7F7` | Page and row backgrounds |
-
----
-
-## Package structure
-
-```
-vvnthemes/
-├── DESCRIPTION
-├── NAMESPACE
-├── R/
-│   ├── colors.R               # vvn_colors(), vvn_palette(), view_vvn_palette()
-│   ├── scales.R               # scale_color_vvn(), scale_fill_vvn(), _c variants
-│   ├── theme_vvn.R            # theme_vvn(), theme_vvn_map(), theme_vvn_minimal()
-│   ├── plot_utils.R           # vvn_title(), vvn_source(), set_vvn_defaults()
-│   ├── vvn_save.R             # vvn_save()
-│   ├── vvn_table.R            # vvn_table(), vvn_table_pvalues()
-│   ├── vvn_map.R              # vvn_map_style()
-│   ├── vvn_filter.R           # vvn_filter(), vvn_slider(), vvn_button(),
-│   │                          #   vvn_kpi_card(), vvn_bs_theme()
-│   ├── vvn_accessibility.R    # vvn_accessibility_check()
-│   ├── create_vvn_story.R     # create_vvn_story(), check_vvn_story()
-│   ├── create_vvn_dashboard.R # create_vvn_dashboard()
-│   └── zzz.R                  # package docs & startup message
-├── inst/
-│   ├── templates/
-│   │   ├── story/             # Quarto data story template
-│   │   └── dashboard/         # Shiny dashboard template (app.R + scripts/)
-│   └── www/
-│       └── vvn.css            # Compiled VVN CSS for Shiny apps
-└── man/                       # Auto-generated by roxygen2
-```
+| Light Gray | `#F7F7F7` | Backgrounds, rows |
 
 ---
 
 ## Contributing
 
-Issues and pull requests are welcome at <https://github.com/yujuangao/VVN>.
+Issues and pull requests welcome at <https://github.com/yujuangao/VVN>.
 
 ---
 
