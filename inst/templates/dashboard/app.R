@@ -4,7 +4,7 @@
 # VVN_AUTHOR · Visualizing Virginia Numbers · Virginia Tech
 #
 # WORKFLOW:
-#   Step 1 — Load your data in R/data_prep.R
+#   Step 1 — Load your data below (Section "Load data")
 #   Step 2 — Build charts in scripts/analysis.R, then source it
 #             (figures are auto-numbered and saved to figures/)
 #   Step 3 — Replace every [placeholder] in this file with your content
@@ -20,17 +20,21 @@ library(shiny)
 library(bslib)
 library(bsicons)
 library(dplyr)
+library(readr)
 library(vvnthemes)          # VVN brand theme, colors, and UI components
 # library(leaflet)          # Uncomment for interactive county maps
 # library(sf)               # Uncomment for spatial data (required with leaflet)
 # library(DT)               # Uncomment for interactive data tables
 # library(gt)               # Uncomment for styled summary tables
-# library(readr)            # Uncomment if loading CSV data in data_prep.R
 
 # ── Load data ─────────────────────────────────────────────────────────────────
-# data_prep.R loads your data from data/processed/ into app_data (and
-# optionally va_counties for the map tab).
-source("R/data_prep.R", local = TRUE)
+# Load your analysis-ready data directly from data/processed/ or data/raw/.
+# Uncomment the line(s) you need and update the filename(s).
+#
+# app_data   <- readr::read_csv("data/processed/[your_file].csv",   # <-- Replace
+#                show_col_types = FALSE)
+#
+# va_counties <- sf::read_sf("data/processed/va_counties.geojson")  # map tab only
 
 # ==============================================================================
 # UI

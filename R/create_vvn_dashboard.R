@@ -38,7 +38,7 @@ create_vvn_dashboard <- function(name,
     fs::dir_delete(proj)
   }
 
-  for (d in c("data/raw", "data/processed", "figures", "scripts", "R", "www")) {
+  for (d in c("data/raw", "data/processed", "figures", "scripts", "www")) {
     fs::dir_create(fs::path(proj, d))
   }
 
@@ -73,7 +73,7 @@ create_vvn_dashboard <- function(name,
     body = paste0(
       "## Workflow\n\n",
       "```r\n",
-      "# Step 1: load your data in R/data_prep.R\n",
+      "# Step 1: uncomment data loading in app.R (data/processed/ or data/raw/)\n",
       "# Step 2: build charts in scripts/analysis.R, then source it\n",
       "source(\"scripts/analysis.R\")\n",
       "# Step 3: replace [placeholders] in app.R, then run\n",
@@ -86,8 +86,7 @@ create_vvn_dashboard <- function(name,
       "## Structure\n\n",
       "```\n",
       name, "/\n",
-      "\u251c\u2500\u2500 app.R                \u2190 Main dashboard (table, map, KPI cards)\n",
-      "\u251c\u2500\u2500 R/data_prep.R        \u2190 Load data from data/processed/\n",
+      "\u251c\u2500\u2500 app.R                \u2190 Main dashboard; load data + interactive parts\n",
       "\u251c\u2500\u2500 scripts/analysis.R   \u2190 Build all charts here; source this first\n",
       "\u251c\u2500\u2500 figures/             \u2190 Auto-created when analysis.R runs\n",
       "\u251c\u2500\u2500 www/vvn.css          \u2190 VVN brand CSS\n",
@@ -101,7 +100,7 @@ create_vvn_dashboard <- function(name,
   cli::cli_h1("VVN Dashboard: {name}")
   cli::cli_alert_success("Created at {.path {proj}}")
   cli::cli_bullets(c(
-    "*" = "Load your data in {.path R/data_prep.R}",
+    "*" = "Uncomment data loading near the top of {.path app.R}",
     "*" = "Build charts: {.code source(\"{name}/scripts/analysis.R\")}",
     "*" = "Run: {.code shiny::runApp(\"{name}\")}",
     "*" = "Deploy: {.code rsconnect::deployApp(\"{name}\")}"
