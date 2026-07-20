@@ -23,9 +23,15 @@ vvn_palette(
 
 \strong{Sequential:} \code{"maroon_seq"}, \code{"orange_seq"}, \code{"navy_seq"}, \code{"gray_seq"}
 
-\strong{Diverging:} \code{"diverging"} (navy–white–maroon)
+\strong{Diverging (standard):} \code{"diverging"} (navy–white–maroon, 7 fixed colors)
 
 \strong{Colorblind-safe:} \code{"accessible"} (Okabe-Ito), \code{"wcag"} (all ≥ 4.5:1)
+
+\strong{VT brand diverging (interpolated to any n):}
+\itemize{
+\item \code{"vt_div"} — VT Maroon ↔ white ↔ Navy (classic VT)
+\item \code{"vt_orange_div"} — Impact Orange ↔ cream ↔ VT Maroon
+}
 
 \strong{Artistic themes (categorical):}
 \itemize{
@@ -63,11 +69,12 @@ Use \code{pick} to extract a single color by position.
 }
 \examples{
 vvn_palette()                          # all "main" colors
-vvn_palette("vt")                      # VT brand categorical
+vvn_palette("vt")                      # VT brand categorical (6 colors)
+vvn_palette("vt_div", n = 9)          # 9-step VT maroon-white-navy diverging
+vvn_palette("vt_orange_div", n = 7)   # 7-step VT orange-cream-maroon diverging
 vvn_palette("monet")                   # Monet Pond theme
 vvn_palette("monet", pick = 3)         # 3rd Monet color (#7FA7A6 teal)
 vvn_palette("sunflower_div", n = 9)    # 9-step diverging from sunflower
-vvn_palette("academic_div", n = 11)    # 11-step diverging
 vvn_palette("brand")                   # maroon, orange, navy
 vvn_palette("maroon_seq", n = 9)       # 9-step sequential
 }

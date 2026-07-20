@@ -130,11 +130,19 @@ utils::globalVariables(c("x", "color", "label_col"))
   # in vvn_palette() — use palette = "monet_div", "sunflower_div", etc.
 )
 
-# ── Diverging control points for artistic themes (internal) ──────────────────
+# ── Diverging control points (internal) ──────────────────────────────────────
 # Each entry is a 3-element vector: [pole A, neutral midpoint, pole B].
 # vvn_palette() interpolates these to n colors using colorRampPalette().
 
 .VVN_DIV <- list(
+
+  # ── VT Brand diverging ────────────────────────────────────────────────────
+  # Classic VT brand diverging: maroon ↔ neutral white ↔ navy
+  vt_div        = c("#861F41", "#F4F4F4", "#1B5299"),
+  # Orange-accented diverging: Impact Orange ↔ cream ↔ VT Maroon
+  vt_orange_div = c("#E87722", "#FDE8D4", "#861F41"),
+
+  # ── Artistic theme diverging ──────────────────────────────────────────────
   monet_div     = c("#A8C5D9", "#F3F1E6", "#7FA7A6"),
   sunflower_div = c("#1E4E8C", "#F7F4E7", "#F2C94C"),
   academic_div  = c("#0D1B3D", "#BFC7D5", "#F28E2B"),
@@ -196,9 +204,13 @@ vvn_colors <- function(...) {
 #'
 #'   **Sequential:** `"maroon_seq"`, `"orange_seq"`, `"navy_seq"`, `"gray_seq"`
 #'
-#'   **Diverging:** `"diverging"` (navy–white–maroon)
+#'   **Diverging (standard):** `"diverging"` (navy–white–maroon, 7 fixed colors)
 #'
 #'   **Colorblind-safe:** `"accessible"` (Okabe-Ito), `"wcag"` (all ≥ 4.5:1)
+#'
+#'   **VT brand diverging (interpolated to any n):**
+#'   - `"vt_div"` — VT Maroon ↔ white ↔ Navy (classic VT)
+#'   - `"vt_orange_div"` — Impact Orange ↔ cream ↔ VT Maroon
 #'
 #'   **Artistic themes (categorical):**
 #'   - `"monet"` — Monet Pond: cool blues and sage greens
@@ -224,11 +236,12 @@ vvn_colors <- function(...) {
 #'
 #' @examples
 #' vvn_palette()                          # all "main" colors
-#' vvn_palette("vt")                      # VT brand categorical
+#' vvn_palette("vt")                      # VT brand categorical (6 colors)
+#' vvn_palette("vt_div", n = 9)          # 9-step VT maroon-white-navy diverging
+#' vvn_palette("vt_orange_div", n = 7)   # 7-step VT orange-cream-maroon diverging
 #' vvn_palette("monet")                   # Monet Pond theme
 #' vvn_palette("monet", pick = 3)         # 3rd Monet color (#7FA7A6 teal)
 #' vvn_palette("sunflower_div", n = 9)    # 9-step diverging from sunflower
-#' vvn_palette("academic_div", n = 11)    # 11-step diverging
 #' vvn_palette("brand")                   # maroon, orange, navy
 #' vvn_palette("maroon_seq", n = 9)       # 9-step sequential
 vvn_palette <- function(palette = "main", n = NULL, reverse = FALSE,

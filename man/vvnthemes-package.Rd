@@ -49,11 +49,15 @@ annotation-heavy figures.
 
 Access and preview VT brand and artistic palettes.
 
-\strong{VT Brand (categorical):} \code{"vt"}, \code{"brand"}, \code{"main"}, \code{"accessible"}, \code{"wcag"}
+\strong{VT Theme (categorical):} \code{"vt"} (6-color VT brand), \code{"brand"}, \code{"main"},
+\code{"accessible"}, \code{"wcag"}
 
-\strong{Sequential:} \code{"maroon_seq"}, \code{"orange_seq"}, \code{"navy_seq"}, \code{"gray_seq"}
+\strong{VT Sequential:} \code{"maroon_seq"}, \code{"orange_seq"}, \code{"navy_seq"}, \code{"gray_seq"}
 
-\strong{Diverging:} \code{"diverging"} (navy–white–maroon)
+\strong{VT Diverging (interpolated to any n):}
+\code{"vt_div"} (maroon ↔ white ↔ navy),
+\code{"vt_orange_div"} (orange ↔ cream ↔ maroon),
+\code{"diverging"} (7-color fixed)
 
 \strong{Artistic themes (categorical):} \code{"monet"}, \code{"sunflower"}, \code{"academic"}, \code{"natural"}
 

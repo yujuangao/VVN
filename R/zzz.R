@@ -33,11 +33,15 @@
 #' @section Color system:
 #' Access and preview VT brand and artistic palettes.
 #'
-#' **VT Brand (categorical):** `"vt"`, `"brand"`, `"main"`, `"accessible"`, `"wcag"`
+#' **VT Theme (categorical):** `"vt"` (6-color VT brand), `"brand"`, `"main"`,
+#' `"accessible"`, `"wcag"`
 #'
-#' **Sequential:** `"maroon_seq"`, `"orange_seq"`, `"navy_seq"`, `"gray_seq"`
+#' **VT Sequential:** `"maroon_seq"`, `"orange_seq"`, `"navy_seq"`, `"gray_seq"`
 #'
-#' **Diverging:** `"diverging"` (navy–white–maroon)
+#' **VT Diverging (interpolated to any n):**
+#' `"vt_div"` (maroon ↔ white ↔ navy),
+#' `"vt_orange_div"` (orange ↔ cream ↔ maroon),
+#' `"diverging"` (7-color fixed)
 #'
 #' **Artistic themes (categorical):** `"monet"`, `"sunflower"`, `"academic"`, `"natural"`
 #'
