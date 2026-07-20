@@ -261,7 +261,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="what-each-file-does" class="level2">
 <h2 class="anchored" data-anchor-id="what-each-file-does">What each file does</h2>
 <p><strong><code>scripts/analysis.R</code></strong> is where you write all chart code. It loads your data, builds each figure using VVN functions, and saves numbered PNGs to <code>figures/</code> automatically. Run this script first, before opening <code>index.qmd</code>.</p>
-<p><strong><code>index.qmd</code></strong> is the narrative document. It contains all section placeholders ready to fill in. Figures are embedded with <code>knitr::include_graphics("figures/01_name.png")</code> — no chart code lives here.</p>
+<p><strong><code>index.qmd</code></strong> is the narrative document. It contains all section placeholders ready to fill in. Figures are embedded using a <code>file.exists()</code> guard — the document renders cleanly at any stage, even before figures are built. No chart code lives here.</p>
+<p><strong><code>index_example.qmd</code></strong> is a fully filled-out example showing completed narrative, actual figure filenames, captions, and a summary table. Use it as a reference while writing your own <code>index.qmd</code>.</p>
 <p><strong><code>figures/</code></strong> is populated automatically when you run <code>scripts/analysis.R</code>. Files are named <code>01_</code>, <code>02_</code>, … in the order the script runs them.</p>
 <p><strong><code>data/raw/</code></strong> holds your original data files unchanged. <strong><code>data/processed/</code></strong> holds cleaned, analysis-ready files. Load processed files in <code>scripts/analysis.R</code>.</p>
 <p><strong><code>_quarto.yml</code></strong> configures the Quarto project: theme, TOC settings, figure dimensions, and output format. You rarely need to edit this file.</p>
@@ -329,9 +330,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/analysis.R"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Figures are auto-numbered (<code>01_</code>, <code>02_</code>, …) and saved to <code>figures/</code> in the order they run.</p>
 <p><strong>Step 2 — Write the narrative</strong></p>
-<p>Open <code>index.qmd</code>. Replace every <code>[placeholder]</code> with your content and update the filenames in each <code>knitr::include_graphics()</code> call to match what was saved in <code>figures/</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example — replace the placeholder filename with your actual figure name:</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"figures/01_trend_statewide.png"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Open <code>index.qmd</code>. Replace every <code>[placeholder]</code> with your content. For each figure chunk, update the filename inside <code>f</code> to match the file saved in <code>figures/</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In index.qmd — replace [name] with your actual figure filename:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="st">"figures/01_trend_statewide.png"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">file.exists</span>(f)) knitr<span class="sc">::</span><span class="fu">include_graphics</span>(f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>file.exists()</code> guard means <code>index.qmd</code> renders without errors even if some figures are not yet built — missing figures simply leave a blank space. Once the correct filename is set and the figure exists, it appears automatically.</p>
+<blockquote class="blockquote">
+<p>See <code>index_example.qmd</code> in your project folder for a fully filled-out example with real figure names, captions, and narrative text.</p>
+</blockquote>
 <p><strong>Step 3 — Render</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>quarto<span class="sc">::</span><span class="fu">quarto_render</span>(<span class="st">"index.qmd"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>In RStudio, press <strong>Cmd+Shift+K</strong> (Ctrl+Shift+K on Windows).</p>
@@ -343,7 +349,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul class="task-list">
 <li><label><input type="checkbox"><code>scripts/analysis.R</code> runs without errors and all figures appear in <code>figures/</code></label></li>
 <li><label><input type="checkbox">All <code>[...]</code> placeholders in <code>index.qmd</code> replaced</label></li>
-<li><label><input type="checkbox">Figure filenames in <code>include_graphics()</code> match actual files in <code>figures/</code></label></li>
+<li><label><input type="checkbox">Figure filenames inside <code>f &lt;- "figures/..."</code> in each chunk match actual files in <code>figures/</code></label></li>
 <li><label><input type="checkbox">Hero banner present with title and VVN subtitle</label></li>
 <li><label><input type="checkbox">Key finding stated clearly in Overview</label></li>
 <li><label><input type="checkbox">Background explains context and audience</label></li>
@@ -912,85 +918,92 @@ document.addEventListener('DOMContentLoaded', function () {
 <span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>**`scripts/analysis.R`** is where you write all chart code. It loads your data, builds each figure using VVN functions, and saves numbered PNGs to <span class="in">`figures/`</span> automatically. Run this script first, before opening <span class="in">`index.qmd`</span>.</span>
 <span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>**`index.qmd`** is the narrative document. It contains all section placeholders ready to fill in. Figures are embedded with <span class="in">`knitr::include_graphics("figures/01_name.png")`</span> — no chart code lives here.</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>**`index.qmd`** is the narrative document. It contains all section placeholders ready to fill in. Figures are embedded using a <span class="in">`file.exists()`</span> guard — the document renders cleanly at any stage, even before figures are built. No chart code lives here.</span>
 <span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>**`figures/`** is populated automatically when you run <span class="in">`scripts/analysis.R`</span>. Files are named <span class="in">`01_`</span>, <span class="in">`02_`</span>, … in the order the script runs them.</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>**`index_example.qmd`** is a fully filled-out example showing completed narrative, actual figure filenames, captions, and a summary table. Use it as a reference while writing your own <span class="in">`index.qmd`</span>.</span>
 <span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>**`data/raw/`** holds your original data files unchanged. **`data/processed/`** holds cleaned, analysis-ready files. Load processed files in <span class="in">`scripts/analysis.R`</span>.</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>**`figures/`** is populated automatically when you run <span class="in">`scripts/analysis.R`</span>. Files are named <span class="in">`01_`</span>, <span class="in">`02_`</span>, … in the order the script runs them.</span>
 <span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>**`_quarto.yml`** configures the Quarto project: theme, TOC settings, figure dimensions, and output format. You rarely need to edit this file.</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>**`data/raw/`** holds your original data files unchanged. **`data/processed/`** holds cleaned, analysis-ready files. Load processed files in <span class="in">`scripts/analysis.R`</span>.</span>
 <span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>**`styles.scss`** is the compiled VVN brand stylesheet. Do not edit this file.</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>**`_quarto.yml`** configures the Quarto project: theme, TOC settings, figure dimensions, and output format. You rarely need to edit this file.</span>
 <span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="fu">## Document structure</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>**`styles.scss`** is the compiled VVN brand stylesheet. Do not edit this file.</span>
 <span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Section <span class="pp">|</span> Element <span class="pp">|</span> Required <span class="pp">|</span></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Hero banner <span class="pp">|</span> <span class="in">`::: {.hero}`</span> div <span class="pp">|</span> Yes <span class="pp">|</span></span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Overview and key finding <span class="pp">|</span> <span class="in">`&gt;`</span> blockquote <span class="pp">|</span> Yes <span class="pp">|</span></span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Background <span class="pp">|</span> <span class="in">`##`</span> section <span class="pp">|</span> Yes <span class="pp">|</span></span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Data and Methods <span class="pp">|</span> <span class="in">`##`</span> section + table <span class="pp">|</span> Yes <span class="pp">|</span></span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Findings <span class="pp">|</span> <span class="in">`##`</span> section + charts + map + table <span class="pp">|</span> Yes <span class="pp">|</span></span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Discussion <span class="pp">|</span> <span class="in">`##`</span> section <span class="pp">|</span> Yes <span class="pp">|</span></span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Conclusion <span class="pp">|</span> <span class="in">`##`</span> section <span class="pp">|</span> Yes <span class="pp">|</span></span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; For section requirements, narrative rules, and publishing checklist, see </span><span class="co">[</span><span class="ot">VVN Insights Standards →</span><span class="co">](../vvn-guide/insights.html)</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## Document structure</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Section <span class="pp">|</span> Element <span class="pp">|</span> Required <span class="pp">|</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Hero banner <span class="pp">|</span> <span class="in">`::: {.hero}`</span> div <span class="pp">|</span> Yes <span class="pp">|</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Overview and key finding <span class="pp">|</span> <span class="in">`&gt;`</span> blockquote <span class="pp">|</span> Yes <span class="pp">|</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Background <span class="pp">|</span> <span class="in">`##`</span> section <span class="pp">|</span> Yes <span class="pp">|</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Data and Methods <span class="pp">|</span> <span class="in">`##`</span> section + table <span class="pp">|</span> Yes <span class="pp">|</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Findings <span class="pp">|</span> <span class="in">`##`</span> section + charts + map + table <span class="pp">|</span> Yes <span class="pp">|</span></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Discussion <span class="pp">|</span> <span class="in">`##`</span> section <span class="pp">|</span> Yes <span class="pp">|</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Conclusion <span class="pp">|</span> <span class="in">`##`</span> section <span class="pp">|</span> Yes <span class="pp">|</span></span>
 <span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## Workflow</span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; For section requirements, narrative rules, and publishing checklist, see </span><span class="co">[</span><span class="ot">VVN Insights Standards →</span><span class="co">](../vvn-guide/insights.html)</span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>Follow these three steps in order:</span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## Workflow</span></span>
 <span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>**Step 1 — Build figures**</span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>Follow these three steps in order:</span>
 <span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>Open <span class="in">`scripts/analysis.R`</span> in RStudio and fill in your chart code. The script contains a gallery of common VVN chart types — uncomment the ones you need and fill in your column names and labels. Then source the script:</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>**Step 1 — Build figures**</span>
 <span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a><span class="co"># In RStudio: open scripts/analysis.R, then click Source</span></span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Or from the R console:</span></span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/analysis.R"</span>)</span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>Figures are auto-numbered (<span class="in">`01_`</span>, <span class="in">`02_`</span>, …) and saved to <span class="in">`figures/`</span> in the order they run.</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>Open <span class="in">`scripts/analysis.R`</span> in RStudio and fill in your chart code. The script contains a gallery of common VVN chart types — uncomment the ones you need and fill in your column names and labels. Then source the script:</span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="co"># In RStudio: open scripts/analysis.R, then click Source</span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="co"># Or from the R console:</span></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/analysis.R"</span>)</span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>**Step 2 — Write the narrative**</span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>Figures are auto-numbered (<span class="in">`01_`</span>, <span class="in">`02_`</span>, …) and saved to <span class="in">`figures/`</span> in the order they run.</span>
 <span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>Open <span class="in">`index.qmd`</span>. Replace every <span class="in">`[placeholder]`</span> with your content and update the filenames in each <span class="in">`knitr::include_graphics()`</span> call to match what was saved in <span class="in">`figures/`</span>:</span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>**Step 2 — Write the narrative**</span>
 <span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a><span class="co"># Example — replace the placeholder filename with your actual figure name:</span></span>
-<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"figures/01_trend_statewide.png"</span>)</span>
-<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>**Step 3 — Render**</span>
-<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>quarto<span class="sc">::</span><span class="fu">quarto_render</span>(<span class="st">"index.qmd"</span>)</span>
-<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>In RStudio, press **Cmd+Shift+K** (Ctrl+Shift+K on Windows).</span>
-<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a><span class="fu">## Publishing checklist</span></span>
-<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>Before submitting a VVN Insight for publication:</span>
-<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`scripts/analysis.R`</span> runs without errors and all figures appear in <span class="in">`figures/`</span></span>
-<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> All <span class="in">`[...]`</span> placeholders in <span class="in">`index.qmd`</span> replaced</span>
-<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Figure filenames in <span class="in">`include_graphics()`</span> match actual files in <span class="in">`figures/`</span></span>
-<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Hero banner present with title and VVN subtitle</span>
-<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Key finding stated clearly in Overview</span>
-<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Background explains context and audience</span>
-<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Data &amp; Methods table complete with source</span>
-<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> At least 2 charts with titles, subtitles, and source lines</span>
-<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> At least 1 map (interactive or static)</span>
-<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Summary table with source note</span>
-<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Discussion covers interpretation and limitations</span>
-<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Conclusion with contact information</span>
-<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> All chart titles use headline case</span>
-<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> All chart subtitles use sentence case</span>
-<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`embed-resources: true`</span> in YAML (single-file HTML)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>Open <span class="in">`index.qmd`</span>. Replace every <span class="in">`[placeholder]`</span> with your content. For each figure chunk, update the filename inside <span class="in">`f`</span> to match the file saved in <span class="in">`figures/`</span>:</span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a><span class="co"># In index.qmd — replace [name] with your actual figure filename:</span></span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="st">"figures/01_trend_statewide.png"</span></span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">file.exists</span>(f)) knitr<span class="sc">::</span><span class="fu">include_graphics</span>(f)</span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>The <span class="in">`file.exists()`</span> guard means <span class="in">`index.qmd`</span> renders without errors even if some figures are not yet built — missing figures simply leave a blank space. Once the correct filename is set and the figure exists, it appears automatically.</span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; See </span><span class="in">`index_example.qmd`</span><span class="at"> in your project folder for a fully filled-out example with real figure names, captions, and narrative text.</span></span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>**Step 3 — Render**</span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a>quarto<span class="sc">::</span><span class="fu">quarto_render</span>(<span class="st">"index.qmd"</span>)</span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a>In RStudio, press **Cmd+Shift+K** (Ctrl+Shift+K on Windows).</span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a><span class="fu">## Publishing checklist</span></span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a>Before submitting a VVN Insight for publication:</span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`scripts/analysis.R`</span> runs without errors and all figures appear in <span class="in">`figures/`</span></span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> All <span class="in">`[...]`</span> placeholders in <span class="in">`index.qmd`</span> replaced</span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Figure filenames inside <span class="in">`f &lt;- "figures/..."`</span> in each chunk match actual files in <span class="in">`figures/`</span></span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Hero banner present with title and VVN subtitle</span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Key finding stated clearly in Overview</span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Background explains context and audience</span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Data &amp; Methods table complete with source</span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> At least 2 charts with titles, subtitles, and source lines</span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> At least 1 map (interactive or static)</span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Summary table with source note</span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Discussion covers interpretation and limitations</span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Conclusion with contact information</span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> All chart titles use headline case</span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> All chart subtitles use sentence case</span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> <span class="in">`embed-resources: true`</span> in YAML (single-file HTML)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
