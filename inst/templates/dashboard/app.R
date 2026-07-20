@@ -229,7 +229,7 @@ ui <- bslib::page_navbar(
                  paste(
                    "Option A — Interactive Leaflet map:",
                    "  1. Place county shapefile in data/processed/va_counties.geojson",
-                   "  2. Uncomment va_counties in R/data_prep.R",
+                   "  2. Uncomment va_counties <- sf::read_sf(...) in app.R",
                    "  3. Uncomment library(leaflet), library(sf), and leafletOutput() above",
                    "  4. Uncomment renderLeaflet() in the server",
                    "",
@@ -445,7 +445,7 @@ server <- function(input, output, session) {
 
   # ── Interactive Leaflet map (Option A) ───────────────────────────────────────
   # Requires: library(leaflet) and library(sf) uncommented above.
-  # Requires: va_counties loaded in R/data_prep.R.
+  # Requires: va_counties loaded at the top of app.R.
   # vvn_map_style() applies VVN Leaflet theme (maroon_seq palette, tooltip).
   #
   # output$county_map <- leaflet::renderLeaflet({
