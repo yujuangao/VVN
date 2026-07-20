@@ -8,7 +8,8 @@ create_vvn_story(
   name,
   path = ".",
   title = name,
-  author = "Visualizing Virginia Numbers"
+  author = "Visualizing Virginia Numbers",
+  overwrite = FALSE
 )
 }
 \arguments{
@@ -19,6 +20,9 @@ create_vvn_story(
 \item{title}{Story title for YAML front matter and README.}
 
 \item{author}{Author name(s).}
+
+\item{overwrite}{If \code{TRUE}, delete and recreate an existing project folder.
+Default \code{FALSE} (error if folder exists).}
 }
 \value{
 Invisibly the project path (character).
@@ -33,6 +37,8 @@ analysis project.
 create_vvn_story("childcare_cost",
                   title  = "Childcare Cost in Rural Virginia",
                   author = "VVN Research Team")
+# Re-run without error:
+create_vvn_story("childcare_cost", overwrite = TRUE)
 # Renders to HTML:
 quarto::quarto_render("childcare_cost/index.qmd")
 }

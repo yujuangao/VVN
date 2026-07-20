@@ -129,7 +129,7 @@ Use three per row: maroon, orange, navy.
 One-command project setup. Both templates run immediately with placeholder data.
 \itemize{
 \item \code{\link[=create_vvn_dashboard]{create_vvn_dashboard()}} — Generate a complete Shiny dashboard:
-\code{app.R}, \code{R/data_prep.R}, \code{www/vvn.css}, \verb{data/} folders.
+\code{app.R}, \code{scripts/analysis.R}, \code{www/vvn.css}, \verb{data/}, \verb{figures/} folders.
 Run with \code{\link[shiny:runApp]{shiny::runApp()}}; deploy with \code{rsconnect::deployApp()}.
 \item \code{\link[=create_vvn_story]{create_vvn_story()}} — Generate a VVN Insights Quarto project:
 \code{index.qmd}, \verb{_quarto.yml}, \code{styles.scss}, \verb{figures/}, \verb{scripts/}.
@@ -154,4 +154,3 @@ publishing (checks sections, \code{\link[=theme_vvn]{theme_vvn()}}, \code{\link[
 \strong{Maintainer}: Visualizing Virginia Numbers Virginia Tech \email{vvn@vt.edu}
 
 }
-\keyword{internal}

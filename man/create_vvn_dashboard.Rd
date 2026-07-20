@@ -8,7 +8,8 @@ create_vvn_dashboard(
   name,
   path = ".",
   title = name,
-  author = "Visualizing Virginia Numbers"
+  author = "Visualizing Virginia Numbers",
+  overwrite = FALSE
 )
 }
 \arguments{
@@ -19,6 +20,9 @@ create_vvn_dashboard(
 \item{title}{Dashboard title shown in the navbar.}
 
 \item{author}{Author name(s).}
+
+\item{overwrite}{If \code{TRUE}, delete and recreate an existing project folder.
+Default \code{FALSE} (error if folder exists).}
 }
 \value{
 Invisibly the project path.
@@ -33,5 +37,7 @@ The generated \code{app.R} runs immediately on example data.
 create_vvn_dashboard("housing_dashboard",
                       title = "Virginia Housing Affordability Dashboard")
 shiny::runApp("housing_dashboard")
+# Re-run without error:
+create_vvn_dashboard("housing_dashboard", overwrite = TRUE)
 }
 }

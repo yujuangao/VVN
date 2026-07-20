@@ -88,7 +88,7 @@
 #' @section Scaffolding:
 #' One-command project setup. Both templates run immediately with placeholder data.
 #' - [create_vvn_dashboard()] — Generate a complete Shiny dashboard:
-#'   `app.R`, `R/data_prep.R`, `www/vvn.css`, `data/` folders.
+#'   `app.R`, `scripts/analysis.R`, `www/vvn.css`, `data/`, `figures/` folders.
 #'   Run with [shiny::runApp()]; deploy with `rsconnect::deployApp()`.
 #' - [create_vvn_story()] — Generate a VVN Insights Quarto project:
 #'   `index.qmd`, `_quarto.yml`, `styles.scss`, `figures/`, `scripts/`.
@@ -107,7 +107,6 @@
 #' [ggplot2::ggplot()], [gt::gt()], [leaflet::leaflet()],
 #' [shiny::shinyApp()], [sf::st_read()]
 #'
-#' @keywords internal
 "_PACKAGE"
 
 

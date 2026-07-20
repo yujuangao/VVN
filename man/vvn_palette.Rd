@@ -12,7 +12,8 @@ vvn_palette(palette = "main", n = NULL, reverse = FALSE, alpha = 1)
 \item Categorical: \code{"main"} (10 colors), \code{"brand"} (3 colors)
 \item Sequential: \code{"maroon_seq"}, \code{"orange_seq"}, \code{"navy_seq"}
 \item Diverging: \code{"diverging"}
-\item Accessibility: \code{"accessible"} (Okabe-Ito inspired)
+\item Colorblind-safe: \code{"accessible"} (Okabe-Ito — distinguishable, not all WCAG AA)
+\item WCAG AA: \code{"wcag"} (6 colors, all ≥ 4.5:1 on white)
 \item Neutral: \code{"gray_seq"}
 }}
 
