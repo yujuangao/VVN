@@ -90,7 +90,9 @@ Visualizing Virginia Numbers · Virginia Tech · `r format(Sys.Date(), "%Y")`
 ```{r fig-01}
 #| fig-cap: "[Caption: what the figure shows and the data source.]"
 #| fig-alt: "[Alt text: chart type, key pattern, range of values — for screen readers.]"
-knitr::include_graphics("figures/01_[name].png")
+# Replace 01_[name].png with your actual filename (e.g. 01_trend_statewide.png)
+f <- "figures/01_[name].png"
+if (file.exists(f)) knitr::include_graphics(f)
 ```
 
 ### [Section title — e.g., Trends by Group]
@@ -100,7 +102,9 @@ knitr::include_graphics("figures/01_[name].png")
 ```{r fig-02}
 #| fig-cap: "[Caption for Figure 2.]"
 #| fig-alt: "[Alt text for Figure 2.]"
-knitr::include_graphics("figures/02_[name].png")
+# Replace 02_[name].png with your actual filename
+f <- "figures/02_[name].png"
+if (file.exists(f)) knitr::include_graphics(f)
 ```
 
 ::: {.callout-important}
@@ -114,7 +118,9 @@ knitr::include_graphics("figures/02_[name].png")
 ```{r fig-03}
 #| fig-cap: "[Caption for Figure 3.]"
 #| fig-alt: "[Alt text for Figure 3.]"
-knitr::include_graphics("figures/03_[name].png")
+# Replace 03_[name].png with your actual filename
+f <- "figures/03_[name].png"
+if (file.exists(f)) knitr::include_graphics(f)
 ```
 
 ### [Section title — e.g., Relationship Between Two Variables]
@@ -124,7 +130,9 @@ knitr::include_graphics("figures/03_[name].png")
 ```{r fig-04}
 #| fig-cap: "[Caption for Figure 4.]"
 #| fig-alt: "[Alt text for Figure 4.]"
-knitr::include_graphics("figures/04_[name].png")
+# Replace 04_[name].png with your actual filename
+f <- "figures/04_[name].png"
+if (file.exists(f)) knitr::include_graphics(f)
 ```
 
 ### [Section title — e.g., County or Group Rankings]
@@ -134,7 +142,9 @@ knitr::include_graphics("figures/04_[name].png")
 ```{r fig-05}
 #| fig-cap: "[Caption for Figure 5.]"
 #| fig-alt: "[Alt text for Figure 5.]"
-knitr::include_graphics("figures/05_[name].png")
+# Replace 05_[name].png with your actual filename
+f <- "figures/05_[name].png"
+if (file.exists(f)) knitr::include_graphics(f)
 ```
 
 ---
