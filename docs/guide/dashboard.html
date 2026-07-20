@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -42,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dba9811da69910a128e3fa2f78628fbd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-62005262e91d3b3f49ef9ef028120a55.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -164,7 +199,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of Contents</h2>
    
   <ul>
-  <li><a href="#how-to-create-a-dashboard" id="toc-how-to-create-a-dashboard" class="nav-link active" data-scroll-target="#how-to-create-a-dashboard">How to create a dashboard</a></li>
+  <li><a href="#project-structure" id="toc-project-structure" class="nav-link active" data-scroll-target="#project-structure">Project structure</a></li>
+  <li><a href="#required-libraries" id="toc-required-libraries" class="nav-link" data-scroll-target="#required-libraries">Required libraries</a></li>
+  <li><a href="#how-to-create-a-dashboard" id="toc-how-to-create-a-dashboard" class="nav-link" data-scroll-target="#how-to-create-a-dashboard">How to create a dashboard</a></li>
   <li><a href="#required-elements" id="toc-required-elements" class="nav-link" data-scroll-target="#required-elements">Required elements</a></li>
   <li><a href="#design-standards" id="toc-design-standards" class="nav-link" data-scroll-target="#design-standards">Design standards</a></li>
   </ul>
@@ -196,6 +233,48 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Interactive Data Visualizations</strong> is a VVN dashboard — an interactive R Shiny web application. It lets users filter and explore VVN data on their own — choosing regions, years, and topics while charts, KPI cards, a county map, and a data table all update in real time.</p>
 <p>Use it when users need to <strong>explore</strong> data. For a fixed narrative with a single finding, use a <a href="./insights.html">VVN Insights</a> report instead.</p>
 <hr>
+<section id="project-structure" class="level2">
+<h2 class="anchored" data-anchor-id="project-structure">Project structure</h2>
+<p><code>create_vvn_dashboard()</code> scaffolds this folder structure automatically:</p>
+<pre><code>my-dashboard/
+├── app.R                    ← Main Shiny app; load data, display charts, reactive UI
+├── scripts/
+│   └── analysis.R           ← Build all ggplot2 charts here; source this first
+├── figures/                 ← Auto-created when analysis.R runs; holds numbered PNGs
+│   ├── 01_trend_statewide.png
+│   ├── 02_trend_by_region.png
+│   └── ...
+├── www/
+│   └── vvn.css              ← VVN brand styles (do not edit)
+└── data/
+    ├── raw/                 ← Original source files (do not edit)
+    │   ├── county_data.csv
+    │   └── demographics.csv
+    └── processed/           ← Cleaned, analysis-ready files (load in app.R)
+        └── my_data.csv</code></pre>
+<ul>
+<li><strong><code>app.R</code></strong> — displays static chart PNGs from <code>figures/</code> alongside reactive KPI cards, sidebar filters, data table, and optional map.</li>
+<li><strong><code>scripts/analysis.R</code></strong> — all chart code lives here. Source the script to auto-number and save PNGs to <code>figures/</code>.</li>
+<li><strong><code>data/raw/</code></strong> — place original downloaded files here and never modify them.</li>
+<li><strong><code>data/processed/</code></strong> — save cleaned, analysis-ready files here; load these in <code>app.R</code>.</li>
+<li><strong><code>www/vvn.css</code></strong> — compiled VVN brand stylesheet; do not edit.</li>
+</ul>
+<hr>
+</section>
+<section id="required-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="required-libraries">Required libraries</h2>
+<p>Install all packages before running <code>create_vvn_dashboard()</code>.</p>
+<p><strong><code>app.R</code> (dashboard runtime)</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"shiny"</span>, <span class="st">"bslib"</span>, <span class="st">"bsicons"</span>, <span class="st">"dplyr"</span>, <span class="st">"readr"</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional — uncomment in app.R when needed:</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(c("leaflet", "sf", "DT", "gt"))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong><code>scripts/analysis.R</code> (chart building)</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"ggplot2"</span>, <span class="st">"dplyr"</span>, <span class="st">"tidyr"</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional — for saving Leaflet maps as PNG:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("mapshot2")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>vvnthemes</code> is required in both files and is loaded automatically by the scaffold.</p>
+<hr>
+</section>
 <section id="how-to-create-a-dashboard" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-create-a-dashboard">How to create a dashboard</h2>
 <div class="wf-flow">
@@ -219,7 +298,7 @@ ul.task-list li input[type="checkbox"] {
 2
 </div>
 <div class="wf-body">
-<span class="wf-title">Load your data in <code>R/data_prep.R</code></span><span class="wf-desc">Replace the sample data with your own CSV or database query. Your data frame needs at minimum: <code>region</code> (character), <code>year</code> (integer), and <code>value</code> (numeric). All charts and cards update automatically.</span>
+<span class="wf-title">Load your data in <code>app.R</code></span><span class="wf-desc">Uncomment and fill in the data loading lines near the top of <code>app.R</code>. Load your CSV directly from <code>data/processed/</code> or <code>data/raw/</code> using <code>readr::read_csv()</code>. No separate data file is needed.</span>
 </div>
 </div>
 <div class="wf-connector">
@@ -230,7 +309,7 @@ ul.task-list li input[type="checkbox"] {
 3
 </div>
 <div class="wf-body">
-<span class="wf-title">Build figures to VVN standards</span><span class="wf-desc">Every chart and map needs a title, subtitle, and source line. Use <code>theme_vvn()</code> and VVN palettes. See <a href="./charts.html">Charts</a> and <a href="./maps.html">Maps</a> for full rules.</span>
+<span class="wf-title">Build figures in <code>scripts/analysis.R</code></span><span class="wf-desc">Open <code>scripts/analysis.R</code>. Uncomment the chart types you need from the gallery and fill in your column names and labels. Source the script — figures are auto-numbered <code>01_</code>, <code>02_</code>, … and saved to <code>figures/</code>. Every chart must have a title, subtitle, and <code>vvn_source()</code> line. See <a href="./charts.html">Charts</a> and <a href="./maps.html">Maps</a> for full rules.</span>
 </div>
 </div>
 <div class="wf-connector">
@@ -241,7 +320,7 @@ ul.task-list li input[type="checkbox"] {
 4
 </div>
 <div class="wf-body">
-<span class="wf-title">Configure filters</span><span class="wf-desc">Every filter needs a bold label, a tooltip, and a default value. Always pair Apply Filters with a Reset button. See <a href="./filter.html">Filter Controls</a>.</span>
+<span class="wf-title">Wire charts and components in <code>app.R</code></span><span class="wf-desc">In each <code>renderUI</code> block, update the filename to match the PNG saved in <code>figures/</code>. Uncomment and fill in KPI cards, sidebar filters, and the data table. Every filter needs a bold label, a tooltip, and a default value. Always pair Apply Filters with a Reset button. See <a href="./filter.html">Filter Controls</a>.</span>
 </div>
 </div>
 <div class="wf-connector">
@@ -280,8 +359,8 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td>1</td>
 <td><strong>Navbar</strong></td>
-<td>Full-width VT Maroon <code>#861F41</code>. Project name in white bold. Orange bottom border (3 px).</td>
-<td><code>create_vvn_dashboard()</code></td>
+<td>VT Maroon <code>#861F41</code> background, white text. Active tab: VT Orange bottom border, 2 px. Bootstrap 5 via <code>bslib</code>.</td>
+<td><code>vvn_bs_theme()</code></td>
 </tr>
 <tr class="even">
 <td>2</td>
@@ -292,7 +371,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td>3</td>
 <td><strong>Sidebar Filters</strong></td>
-<td>260 px wide, <code>#F7F7F7</code> background. Bold label + tooltip on every filter. Apply + Reset buttons required.</td>
+<td>260 px wide, <code>#F7F7F7</code> background. Bold label on every filter. Apply + Reset buttons required.</td>
 <td><code>vvn_filter()</code>, <code>vvn_slider()</code>, <code>vvn_button()</code></td>
 </tr>
 <tr class="even">
@@ -304,13 +383,13 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td>5</td>
 <td><strong>Charts</strong></td>
-<td>White background, VT Maroon titles, VVN palettes, source line in every caption.</td>
-<td><code>theme_vvn()</code>, <code>vvn_source()</code></td>
+<td>Built in <code>scripts/analysis.R</code>, saved as PNGs to <code>figures/</code>. VT Maroon titles, VVN palettes, <code>vvn_source()</code> required.</td>
+<td><code>theme_vvn()</code>, <code>vvn_source()</code>, <code>vvn_save()</code></td>
 </tr>
 <tr class="even">
 <td>6</td>
 <td><strong>Footer</strong></td>
-<td>White text on VT Maroon background. Shows “Visualizing Virginia Numbers · Virginia Tech”.</td>
+<td>White text on dark navy <code>#222C3D</code> background. Shows “Visualizing Virginia’s Numbers · Virginia Tech”.</td>
 <td><code>create_vvn_dashboard()</code></td>
 </tr>
 </tbody>
@@ -321,9 +400,11 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="design-standards">Design standards</h2>
 <p><strong>Navbar</strong></p>
 <ul>
-<li>Background: VT Maroon <code>#861F41</code> · Bottom border: VT Orange <code>#E5751F</code>, 3 px</li>
+<li>Background: VT Maroon <code>#861F41</code>, foreground white — set via <code>navbar_options = bslib::navbar_options(bg = "#861F41", fg = "#FFFFFF")</code></li>
+<li>Theme: Bootstrap 5 via <code>vvn_bs_theme()</code> — no manual CSS needed</li>
 <li>Project name: white, bold, sentence case</li>
-<li>Tab links: <code>rgba(255,255,255,0.9)</code> — never pure white</li>
+<li>Active tab: VT Orange <code>#E87722</code> bottom border, 2 px (from <code>vvn.css</code>)</li>
+<li>Tab links: white — never colored or underlined unless active</li>
 </ul>
 <p><strong>KPI Cards</strong></p>
 <ul>
@@ -347,8 +428,9 @@ ul.task-list li input[type="checkbox"] {
 <p>Follow all <a href="./charts.html">Chart Standards</a>. Source lines are required on every chart, even inside a dashboard.</p>
 <p><strong>Footer</strong></p>
 <ul>
-<li>Background: VT Maroon <code>#861F41</code> · Text: white, 0.8 rem</li>
-<li>Content: “Visualizing Virginia Numbers · Virginia Tech”</li>
+<li>Background: Dark navy <code>#222C3D</code> (from <code>--ui-footer</code> in <code>vvn.css</code>) · Text: white, 0.94 rem</li>
+<li>Content: “Visualizing Virginia’s Numbers · Virginia Tech · vvn.vt.edu”</li>
+<li>Rendered by <code>tags$footer()</code> in <code>app.R</code> — styled automatically by <code>vvn.css</code></li>
 </ul>
 <hr>
 <blockquote class="blockquote">
@@ -812,7 +894,7 @@ document.addEventListener('DOMContentLoaded', function () {
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Visualizing Virginia Numbers · Virginia Tech</p>
+<p>Visualizing Virginia’s Numbers · Virginia Tech</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

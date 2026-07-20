@@ -8,7 +8,7 @@ create_vvn_story(
   name,
   path = ".",
   title = name,
-  author = "Visualizing Virginia Numbers",
+  author = "Visualizing Virginia's Numbers",
   overwrite = FALSE
 )
 }

@@ -4,9 +4,9 @@
 \name{vvnthemes-package}
 \alias{vvnthemes}
 \alias{vvnthemes-package}
-\title{vvnthemes: Visualizing Virginia Numbers Themes and Templates}
+\title{vvnthemes: Visualizing Virginia's Numbers Themes and Templates}
 \description{
-\code{vvnthemes} is the design system for all Visualizing Virginia Numbers (VVN)
+\code{vvnthemes} is the design system for all Visualizing Virginia's Numbers (VVN)
 projects at Virginia Tech. It enforces VT brand colors, typography, and
 layout rules so every chart, map, table, dashboard, and narrative report
 produced by VVN teams is consistent and publication-ready.
@@ -165,6 +165,6 @@ publishing (checks sections, \code{\link[=theme_vvn]{theme_vvn()}}, \code{\link[
 \code{\link[shiny:shinyApp]{shiny::shinyApp()}}, \code{\link[sf:st_read]{sf::st_read()}}
 }
 \author{
-\strong{Maintainer}: Visualizing Virginia Numbers Virginia Tech \email{vvn@vt.edu}
+\strong{Maintainer}: Visualizing Virginia's Numbers Virginia Tech \email{vvn@vt.edu}
 
 }

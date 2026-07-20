@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -42,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dba9811da69910a128e3fa2f78628fbd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-62005262e91d3b3f49ef9ef028120a55.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -167,11 +202,34 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#color-palette" id="toc-color-palette" class="nav-link active" data-scroll-target="#color-palette">Color Palette</a>
   <ul class="collapse">
   <li><a href="#brand-colors" id="toc-brand-colors" class="nav-link" data-scroll-target="#brand-colors">Brand Colors</a></li>
-  <li><a href="#palettes" id="toc-palettes" class="nav-link" data-scroll-target="#palettes">Palettes</a></li>
+  <li><a href="#chart-map-palettes" id="toc-chart-map-palettes" class="nav-link" data-scroll-target="#chart-map-palettes">Chart &amp; Map Palettes</a></li>
+  <li><a href="#brand-3-group-comparisons" id="toc-brand-3-group-comparisons" class="nav-link" data-scroll-target="#brand-3-group-comparisons"><code>brand</code> — 3-Group Comparisons</a></li>
+  <li><a href="#main-general-purpose-10-colors" id="toc-main-general-purpose-10-colors" class="nav-link" data-scroll-target="#main-general-purpose-10-colors"><code>main</code> — General Purpose (10 Colors)</a></li>
+  <li><a href="#accessible-okabe-ito-colorblind-safe" id="toc-accessible-okabe-ito-colorblind-safe" class="nav-link" data-scroll-target="#accessible-okabe-ito-colorblind-safe"><code>accessible</code> — Okabe-Ito Colorblind-Safe</a></li>
+  <li><a href="#wcag-wcag-aa-compliant" id="toc-wcag-wcag-aa-compliant" class="nav-link" data-scroll-target="#wcag-wcag-aa-compliant"><code>wcag</code> — WCAG AA Compliant</a></li>
+  </ul></li>
+  <li><a href="#vt-theme" id="toc-vt-theme" class="nav-link" data-scroll-target="#vt-theme">VT Theme</a>
+  <ul class="collapse">
+  <li><a href="#vt-categorical" id="toc-vt-categorical" class="nav-link" data-scroll-target="#vt-categorical">VT Categorical</a></li>
+  <li><a href="#vt-sequential" id="toc-vt-sequential" class="nav-link" data-scroll-target="#vt-sequential">VT Sequential</a></li>
+  <li><a href="#vt-diverging" id="toc-vt-diverging" class="nav-link" data-scroll-target="#vt-diverging">VT Diverging</a></li>
+  </ul></li>
+  <li><a href="#artistic-themes" id="toc-artistic-themes" class="nav-link" data-scroll-target="#artistic-themes">Artistic Themes</a>
+  <ul class="collapse">
+  <li><a href="#monet-pond" id="toc-monet-pond" class="nav-link" data-scroll-target="#monet-pond">Monet Pond</a></li>
+  <li><a href="#van-gogh-sunflowers" id="toc-van-gogh-sunflowers" class="nav-link" data-scroll-target="#van-gogh-sunflowers">Van Gogh Sunflowers</a></li>
+  <li><a href="#academic-deep-blue" id="toc-academic-deep-blue" class="nav-link" data-scroll-target="#academic-deep-blue">Academic Deep Blue</a></li>
+  <li><a href="#natural-muted" id="toc-natural-muted" class="nav-link" data-scroll-target="#natural-muted">Natural Muted</a></li>
+  </ul></li>
+  <li><a href="#accessibility-considerations" id="toc-accessibility-considerations" class="nav-link" data-scroll-target="#accessibility-considerations">Accessibility Considerations</a>
+  <ul class="collapse">
+  <li><a href="#wcag-2.2-aa-guidelines" id="toc-wcag-2.2-aa-guidelines" class="nav-link" data-scroll-target="#wcag-2.2-aa-guidelines">WCAG 2.2 AA Guidelines</a></li>
+  <li><a href="#encoding-combinations-for-categorical-plots" id="toc-encoding-combinations-for-categorical-plots" class="nav-link" data-scroll-target="#encoding-combinations-for-categorical-plots">Encoding combinations for categorical plots</a></li>
+  <li><a href="#palette-color-usage-guide" id="toc-palette-color-usage-guide" class="nav-link" data-scroll-target="#palette-color-usage-guide">Palette color usage guide</a></li>
   </ul></li>
   <li><a href="#typography" id="toc-typography" class="nav-link" data-scroll-target="#typography">Typography</a>
   <ul class="collapse">
-  <li><a href="#fonts-and-sizes" id="toc-fonts-and-sizes" class="nav-link" data-scroll-target="#fonts-and-sizes">Fonts and Sizes</a></li>
+  <li><a href="#fonts" id="toc-fonts" class="nav-link" data-scroll-target="#fonts">Fonts</a></li>
   <li><a href="#capitalization-rules" id="toc-capitalization-rules" class="nav-link" data-scroll-target="#capitalization-rules">Capitalization Rules</a></li>
   </ul></li>
   <li><a href="#logo-usage" id="toc-logo-usage" class="nav-link" data-scroll-target="#logo-usage">Logo Usage</a></li>
@@ -184,7 +242,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Brand</h1>
-<p class="subtitle lead">VT color palette, typography rules, and logo usage for all VVN products.</p>
+<p class="subtitle lead">Color palettes, typography rules, and logo usage for all VVN products.</p>
 </div>
 
 
@@ -215,7 +273,7 @@ ul.task-list li input[type="checkbox"] {
 
 </div>
 <div class="swatch-info">
-<p><strong>VT Maroon</strong> <code>#861F41</code> Primary — navbars, titles, chart fill</p>
+<p><strong>VT Maroon</strong> <code>#861F41</code> Primary — chart fill, titles, buttons</p>
 </div>
 </div>
 <div class="swatch">
@@ -223,7 +281,15 @@ ul.task-list li input[type="checkbox"] {
 
 </div>
 <div class="swatch-info">
-<p><strong>VT Orange</strong> <code>#E5751F</code> Secondary — highlights, buttons, callouts</p>
+<p><strong>VT Orange</strong> <em>(print / chart)</em> <code>#E5751F</code> Secondary — highlights, callouts, chart series</p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#E87722;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Impact Orange</strong> <em>(digital UI)</em> <code>#E87722</code> Accent — active nav, buttons, digital highlights</p>
 </div>
 </div>
 <div class="swatch">
@@ -231,90 +297,199 @@ ul.task-list li input[type="checkbox"] {
 
 </div>
 <div class="swatch-info">
-<p><strong>Navy</strong> <code>#1B5299</code> Tertiary — chart series, accent</p>
+<p><strong>Navy</strong> <code>#1B5299</code> Tertiary — chart series, links, accent</p>
 </div>
 </div>
 <div class="swatch">
-<div class="swatch-color" style="background:#3D3D3D;">
+<div class="swatch-color" style="background:#1A1A1A;">
 
 </div>
 <div class="swatch-info">
-<p><strong>Charcoal</strong> <code>#3D3D3D</code> Body text, axis labels</p>
+<p><strong>Main Text</strong> <code>#1A1A1A</code> Body text, axis labels</p>
 </div>
 </div>
 <div class="swatch">
-<div class="swatch-color" style="background:#AAAAAA;">
+<div class="swatch-color" style="background:#3F4650;">
 
 </div>
 <div class="swatch-info">
-<p><strong>Gray</strong> <code>#AAAAAA</code> Captions, secondary text</p>
+<p><strong>Secondary Text</strong> <code>#3F4650</code> Subtitles, captions, secondary labels</p>
 </div>
 </div>
 <div class="swatch">
-<div class="swatch-color" style="background:#F7F7F7; border-bottom:1px solid #E0E0E0;">
+<div class="swatch-color" style="background:#F3F4F7; border-bottom:1px solid #D9D9D9;">
 
 </div>
 <div class="swatch-info">
-<p><strong>Light Gray</strong> <code>#F7F7F7</code> Backgrounds, sidebar, table rows</p>
+<p><strong>Page Background</strong> <code>#F3F4F7</code> App / web page background</p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#222C3D;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Footer / Breadcrumb</strong> <code>#222C3D</code> Footer bar, breadcrumb bar</p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#8A2045;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Launch Button</strong> <code>#8A2045</code> Primary CTA buttons, launch actions</p>
 </div>
 </div>
 </div>
-<p>The three colors used in charts and multi-series visualizations are <strong>Maroon</strong>, <strong>Orange</strong>, and <strong>Navy</strong> — access them via <code>scale_fill_vvn("brand")</code>.</p>
 <hr>
 </section>
-<section id="palettes" class="level3">
-<h3 class="anchored" data-anchor-id="palettes">Palettes</h3>
+<section id="chart-map-palettes" class="level3">
+<h3 class="anchored" data-anchor-id="chart-map-palettes">Chart &amp; Map Palettes</h3>
+<p>These palettes are used in <code>ggplot2</code> charts and Leaflet maps via <code>scale_fill_vvn()</code> and <code>scale_color_vvn()</code>.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 45%">
-<col style="width: 30%">
 <col style="width: 25%">
+<col style="width: 16%">
+<col style="width: 22%">
+<col style="width: 36%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Palette</th>
 <th>Type</th>
-<th>Use</th>
+<th>Colors</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>brand</code></td>
+<td><code>vt</code></td>
 <td>Categorical</td>
-<td>3-group comparisons — maroon, orange, navy</td>
+<td>6</td>
+<td>VT brand: maroon, orange, navy, forest, stone, sand</td>
 </tr>
 <tr class="even">
-<td><code>main</code></td>
+<td><code>brand</code></td>
 <td>Categorical</td>
-<td>General purpose — up to 10 categories</td>
+<td>3</td>
+<td>3-group comparisons: maroon, orange, navy</td>
 </tr>
 <tr class="odd">
+<td><code>main</code></td>
+<td>Categorical</td>
+<td>10</td>
+<td>General purpose — up to 10 categories</td>
+</tr>
+<tr class="even">
 <td><code>accessible</code></td>
 <td>Categorical</td>
-<td>Colorblind-safe — use when accessibility is critical</td>
+<td>7</td>
+<td>Okabe-Ito colorblind-safe</td>
+</tr>
+<tr class="odd">
+<td><code>wcag</code></td>
+<td>Categorical</td>
+<td>6</td>
+<td>All ≥ 4.5:1 contrast on white (WCAG AA)</td>
+</tr>
+<tr class="even">
+<td><code>monet</code></td>
+<td>Artistic</td>
+<td>5</td>
+<td>Monet Pond: blues, sage, cream</td>
+</tr>
+<tr class="odd">
+<td><code>sunflower</code></td>
+<td>Artistic</td>
+<td>5</td>
+<td>Van Gogh Sunflowers: cobalt + gold</td>
+</tr>
+<tr class="even">
+<td><code>academic</code></td>
+<td>Artistic</td>
+<td>5</td>
+<td>Academic Deep Blue: navy + amber</td>
+</tr>
+<tr class="odd">
+<td><code>natural</code></td>
+<td>Artistic</td>
+<td>5</td>
+<td>Natural Muted: sage, slate, linen</td>
 </tr>
 <tr class="even">
 <td><code>maroon_seq</code></td>
 <td>Sequential</td>
-<td>Primary continuous metric — choropleth maps</td>
+<td>6</td>
+<td>Light pink → VT Maroon</td>
 </tr>
 <tr class="odd">
 <td><code>orange_seq</code></td>
 <td>Sequential</td>
-<td>Secondary continuous metric</td>
+<td>6</td>
+<td>Cream → VT Orange</td>
 </tr>
 <tr class="even">
 <td><code>navy_seq</code></td>
 <td>Sequential</td>
-<td>Tertiary continuous metric</td>
+<td>6</td>
+<td>Sky blue → Navy</td>
 </tr>
 <tr class="odd">
+<td><code>gray_seq</code></td>
+<td>Sequential</td>
+<td>6</td>
+<td>Light → dark gray (monochrome)</td>
+</tr>
+<tr class="even">
+<td><code>vt_div</code></td>
+<td>Diverging</td>
+<td>any <em>n</em></td>
+<td>VT Maroon ↔︎ white ↔︎ Navy</td>
+</tr>
+<tr class="odd">
+<td><code>vt_orange_div</code></td>
+<td>Diverging</td>
+<td>any <em>n</em></td>
+<td>Impact Orange ↔︎ cream ↔︎ Maroon</td>
+</tr>
+<tr class="even">
 <td><code>diverging</code></td>
 <td>Diverging</td>
-<td>Data with a meaningful midpoint (above/below average)</td>
+<td>7</td>
+<td>Navy → white → maroon (fixed)</td>
+</tr>
+<tr class="odd">
+<td><code>monet_div</code></td>
+<td>Artistic diverging</td>
+<td>any <em>n</em></td>
+<td>Sky blue ↔︎ cream ↔︎ deep teal</td>
+</tr>
+<tr class="even">
+<td><code>sunflower_div</code></td>
+<td>Artistic diverging</td>
+<td>any <em>n</em></td>
+<td>Cobalt ↔︎ parchment ↔︎ yellow</td>
+</tr>
+<tr class="odd">
+<td><code>academic_div</code></td>
+<td>Artistic diverging</td>
+<td>any <em>n</em></td>
+<td>Deep navy ↔︎ blue-gray ↔︎ amber</td>
+</tr>
+<tr class="even">
+<td><code>natural_div</code></td>
+<td>Artistic diverging</td>
+<td>any <em>n</em></td>
+<td>Near-black ↔︎ off-white ↔︎ sage</td>
 </tr>
 </tbody>
 </table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_vvn</span>(<span class="st">"vt"</span>)              <span class="co"># VT brand categorical</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_vvn</span>(<span class="st">"brand"</span>)           <span class="co"># maroon, orange, navy</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_vvn</span>(<span class="st">"accessible"</span>)      <span class="co"># colorblind-safe</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_vvn_c</span>(<span class="st">"maroon_seq"</span>)    <span class="co"># continuous choropleth</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_vvn_c</span>(<span class="st">"vt_div"</span>)        <span class="co"># diverging above/below midpoint</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_vvn_c</span>(<span class="st">"diverging"</span>)     <span class="co"># classic 7-color diverging</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -325,60 +500,897 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>VT Maroon and VT Orange can appear identical under red-green colorblindness (~8% of men). When both appear on the same chart, differentiate with shape or line type in addition to color, or use <code>scale_fill_vvn("accessible")</code>.</p>
+<p>VT Maroon and VT Orange can appear identical under red-green colorblindness (~8% of men). When both appear on the same chart, add a shape or line-type distinction, or use <code>scale_fill_vvn("accessible")</code>.</p>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>For palette functions, see the <a href="../vvn-docs/vvnthemes.html#color-system">vvnthemes R Library →</a></p>
-</blockquote>
+<hr>
+</section>
+<section id="brand-3-group-comparisons" class="level3">
+<h3 class="anchored" data-anchor-id="brand-3-group-comparisons"><code>brand</code> — 3-Group Comparisons</h3>
+<div class="swatch-grid">
+<div class="swatch">
+<div class="swatch-color" style="background:#861F41;">
+
+</div>
+<div class="swatch-info">
+<p><strong>VT Maroon</strong> <code>#861F41</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#E5751F;">
+
+</div>
+<div class="swatch-info">
+<p><strong>VT Orange</strong> <code>#E5751F</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#1B5299;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Navy</strong> <code>#1B5299</code></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="main-general-purpose-10-colors" class="level3">
+<h3 class="anchored" data-anchor-id="main-general-purpose-10-colors"><code>main</code> — General Purpose (10 Colors)</h3>
+<div class="swatch-grid">
+<div class="swatch">
+<div class="swatch-color" style="background:#861F41;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Maroon</strong> <code>#861F41</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#E5751F;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Orange</strong> <code>#E5751F</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#1B5299;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Navy</strong> <code>#1B5299</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#2E7D32;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Forest</strong> <code>#2E7D32</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#7B1FA2;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Purple</strong> <code>#7B1FA2</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#C05878;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Rose</strong> <code>#C05878</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#5B9BD5;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Sky Blue</strong> <code>#5B9BD5</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#F0964A;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Peach</strong> <code>#F0964A</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#00838F;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Teal</strong> <code>#00838F</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#795548;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Brown</strong> <code>#795548</code></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="accessible-okabe-ito-colorblind-safe" class="level3">
+<h3 class="anchored" data-anchor-id="accessible-okabe-ito-colorblind-safe"><code>accessible</code> — Okabe-Ito Colorblind-Safe</h3>
+<p><em>Distinguishable under deuteranopia, protanopia, and tritanopia. Use when accessibility is critical.</em></p>
+<div class="swatch-grid">
+<div class="swatch">
+<div class="swatch-color" style="background:#0077BB;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Blue</strong> <code>#0077BB</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#EE7733;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Orange</strong> <code>#EE7733</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#009988;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Teal</strong> <code>#009988</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#CC3311;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Red</strong> <code>#CC3311</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#33BBEE;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Sky Blue</strong> <code>#33BBEE</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#EE3377;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Magenta</strong> <code>#EE3377</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#BBBBBB;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Gray</strong> <code>#BBBBBB</code></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="wcag-wcag-aa-compliant" class="level3">
+<h3 class="anchored" data-anchor-id="wcag-wcag-aa-compliant"><code>wcag</code> — WCAG AA Compliant</h3>
+<p><em>All colors meet ≥ 4.5:1 contrast ratio on a white background.</em></p>
+<div class="swatch-grid">
+<div class="swatch">
+<div class="swatch-color" style="background:#861F41;">
+
+</div>
+<div class="swatch-info">
+<p><strong>VT Maroon</strong> <code>#861F41</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#1B5299;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Navy</strong> <code>#1B5299</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#0077BB;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Blue</strong> <code>#0077BB</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#CC3311;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Red</strong> <code>#CC3311</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#117733;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Green</strong> <code>#117733</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#5C3893;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Violet</strong> <code>#5C3893</code></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="vt-theme" class="level2">
+<h2 class="anchored" data-anchor-id="vt-theme">VT Theme</h2>
+<p>The <strong>VT Theme</strong> is the official color system for all standard VVN charts and maps. It is built directly from Virginia Tech’s brand identity.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Categorical — up to 6 groups in VT brand colors</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_vvn</span>(<span class="st">"vt"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_vvn</span>(<span class="st">"vt"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Sequential — continuous data (choropleth maps, heatmaps)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_vvn_c</span>(<span class="st">"maroon_seq"</span>)   <span class="co"># light pink → VT Maroon</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_vvn_c</span>(<span class="st">"orange_seq"</span>)   <span class="co"># cream → VT Orange</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_vvn_c</span>(<span class="st">"navy_seq"</span>)     <span class="co"># sky blue → Navy</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Diverging — data with a meaningful midpoint</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_vvn_c</span>(<span class="st">"vt_div"</span>)           <span class="co"># VT Maroon ↔ white ↔ Navy</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_vvn_c</span>(<span class="st">"vt_orange_div"</span>)    <span class="co"># Impact Orange ↔ cream ↔ Maroon</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_palette</span>(<span class="st">"vt_div"</span>, <span class="at">n =</span> <span class="dv">11</span>)        <span class="co"># interpolate to any n</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Pick one color by index</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_palette</span>(<span class="st">"vt"</span>, <span class="at">pick =</span> <span class="dv">1</span>)   <span class="co"># #861F41 VT Maroon</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_palette</span>(<span class="st">"vt"</span>, <span class="at">pick =</span> <span class="dv">2</span>)   <span class="co"># #E87722 Impact Orange</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="vt-categorical" class="level3">
+<h3 class="anchored" data-anchor-id="vt-categorical">VT Categorical</h3>
+<div class="swatch-grid">
+<div class="swatch">
+<div class="swatch-color" style="background:#861F41;">
+
+</div>
+<div class="swatch-info">
+<p><strong>VT Maroon</strong> <code>#861F41</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#E87722;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Impact Orange</strong> <code>#E87722</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#1B5299;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Navy Blue</strong> <code>#1B5299</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#4B6734;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Forest Green</strong> <code>#4B6734</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#75757A;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Hokie Stone</strong> <code>#75757A</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#CEB893;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Sand / Wheat</strong> <code>#CEB893</code></p>
+</div>
+</div>
+</div>
+</section>
+<section id="vt-sequential" class="level3">
+<h3 class="anchored" data-anchor-id="vt-sequential">VT Sequential</h3>
+<div class="swatch-grid">
+<div class="swatch">
+<div class="swatch-color" style="background: linear-gradient(to right, #F5C8D4, #861F41);">
+
+</div>
+<div class="swatch-info">
+<p><strong>maroon_seq</strong> Light pink → VT Maroon</p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background: linear-gradient(to right, #FDE8D4, #E5751F);">
+
+</div>
+<div class="swatch-info">
+<p><strong>orange_seq</strong> Cream → VT Orange</p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background: linear-gradient(to right, #D0E0F5, #1B5299);">
+
+</div>
+<div class="swatch-info">
+<p><strong>navy_seq</strong> Sky blue → Navy</p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background: linear-gradient(to right, #F7F7F7, #888888, #222222); border-bottom:1px solid #D9D9D9;">
+
+</div>
+<div class="swatch-info">
+<p><strong>gray_seq</strong> Light → Dark gray</p>
+</div>
+</div>
+</div>
+</section>
+<section id="vt-diverging" class="level3">
+<h3 class="anchored" data-anchor-id="vt-diverging">VT Diverging</h3>
+<div class="swatch-grid">
+<div class="swatch">
+<div class="swatch-color" style="background: linear-gradient(to right, #861F41, #F4F4F4, #1B5299);">
+
+</div>
+<div class="swatch-info">
+<p><strong>vt_div</strong> VT Maroon ↔︎ white ↔︎ Navy <code>palette = "vt_div"</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background: linear-gradient(to right, #E87722, #FDE8D4, #861F41);">
+
+</div>
+<div class="swatch-info">
+<p><strong>vt_orange_div</strong> Impact Orange ↔︎ cream ↔︎ Maroon <code>palette = "vt_orange_div"</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background: linear-gradient(to right, #1B5299, #AED0F0, #F4F4F4, #F5C8D4, #861F41);">
+
+</div>
+<div class="swatch-info">
+<p><strong>diverging</strong> <em>(7 fixed)</em> Navy → white → Maroon <code>palette = "diverging"</code></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="artistic-themes" class="level2">
+<h2 class="anchored" data-anchor-id="artistic-themes">Artistic Themes</h2>
+<p>In addition to VT brand palettes, VVN provides four <strong>artistic themes</strong> inspired by iconic paintings. These are for editorial, design-forward, or thematic contexts — not default usage.</p>
+<p>Each theme has a <strong>categorical</strong> palette (5 colors) and a <strong>diverging</strong> variant that interpolates to any number of colors.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Categorical — assign groups to colors</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_vvn</span>(<span class="st">"monet"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_vvn</span>(<span class="st">"sunflower"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Pick a single color from a theme</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_palette</span>(<span class="st">"monet"</span>, <span class="at">pick =</span> <span class="dv">3</span>)          <span class="co"># #7FA7A6 deep teal</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_palette</span>(<span class="st">"academic"</span>, <span class="at">pick =</span> <span class="dv">5</span>)       <span class="co"># #F28E2B amber</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Diverging — continuous data with a neutral midpoint</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_vvn_c</span>(<span class="st">"monet_div"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_vvn_c</span>(<span class="st">"sunflower_div"</span>, <span class="at">n =</span> <span class="dv">11</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Preview any palette</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">view_vvn_palette</span>(<span class="st">"monet"</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">view_vvn_palette</span>(<span class="st">"academic_div"</span>, <span class="at">n =</span> <span class="dv">9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+<section id="monet-pond" class="level3">
+<h3 class="anchored" data-anchor-id="monet-pond">Monet Pond</h3>
+<p><em>Inspired by Claude Monet’s Water Lilies series.</em> Cool blues and sage greens with warm cream — impressionistic light on still water.</p>
+<div class="swatch-grid">
+<div class="swatch">
+<div class="swatch-color" style="background:#A8C5D9;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Sky Blue</strong> <code>#A8C5D9</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#B9CBAE;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Sage Green</strong> <code>#B9CBAE</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#7FA7A6;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Deep Teal</strong> <code>#7FA7A6</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#F3F1E6; border-bottom:1px solid #D9D9D9;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Cream</strong> <code>#F3F1E6</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#C7D5E3;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Soft Periwinkle</strong> <code>#C7D5E3</code></p>
+</div>
+</div>
+</div>
+<p><strong><code>monet_div</code></strong> — Diverging (interpolated to any <em>n</em>)</p>
+<div class="swatch-grid">
+<div class="swatch">
+<div class="swatch-color" style="background: linear-gradient(to right, #A8C5D9, #F3F1E6, #7FA7A6);">
+
+</div>
+<div class="swatch-info">
+<p><strong>monet_div</strong> Sky Blue ↔︎ Cream ↔︎ Deep Teal <code>palette = "monet_div"</code></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="van-gogh-sunflowers" class="level3">
+<h3 class="anchored" data-anchor-id="van-gogh-sunflowers">Van Gogh Sunflowers</h3>
+<p><em>Inspired by Van Gogh’s Sunflowers.</em> Deep cobalt blue grounds warm yellow and gold, anchored by earthy olive.</p>
+<div class="swatch-grid">
+<div class="swatch">
+<div class="swatch-color" style="background:#F2C94C;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Sunflower Yellow</strong> <code>#F2C94C</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#1E4E8C;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Cobalt Blue</strong> <code>#1E4E8C</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#D4A04A;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Warm Gold</strong> <code>#D4A04A</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#8A9B5B;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Olive Green</strong> <code>#8A9B5B</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#F7F4E7; border-bottom:1px solid #D9D9D9;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Warm Parchment</strong> <code>#F7F4E7</code></p>
+</div>
+</div>
+</div>
+<p><strong><code>sunflower_div</code></strong> — Diverging (interpolated to any <em>n</em>)</p>
+<div class="swatch-grid">
+<div class="swatch">
+<div class="swatch-color" style="background: linear-gradient(to right, #1E4E8C, #F7F4E7, #F2C94C);">
+
+</div>
+<div class="swatch-info">
+<p><strong>sunflower_div</strong> Cobalt ↔︎ Parchment ↔︎ Yellow <code>palette = "sunflower_div"</code></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="academic-deep-blue" class="level3">
+<h3 class="anchored" data-anchor-id="academic-deep-blue">Academic Deep Blue</h3>
+<p><em>Evokes academic publishing — journal covers, monographs, institutional graphics.</em> Deep navy to warm amber.</p>
+<div class="swatch-grid">
+<div class="swatch">
+<div class="swatch-color" style="background:#0D1B3D;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Deep Navy</strong> <code>#0D1B3D</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#385C8E;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Slate Blue</strong> <code>#385C8E</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#BFC7D5;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Blue-Gray</strong> <code>#BFC7D5</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#E8ECF4; border-bottom:1px solid #D9D9D9;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Ice Blue</strong> <code>#E8ECF4</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#F28E2B;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Warm Amber</strong> <code>#F28E2B</code></p>
+</div>
+</div>
+</div>
+<p><strong><code>academic_div</code></strong> — Diverging (interpolated to any <em>n</em>)</p>
+<div class="swatch-grid">
+<div class="swatch">
+<div class="swatch-color" style="background: linear-gradient(to right, #0D1B3D, #BFC7D5, #F28E2B);">
+
+</div>
+<div class="swatch-info">
+<p><strong>academic_div</strong> Deep Navy ↔︎ Blue-Gray ↔︎ Amber <code>palette = "academic_div"</code></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="natural-muted" class="level3">
+<h3 class="anchored" data-anchor-id="natural-muted">Natural Muted</h3>
+<p><em>Earthy, understated tones — sage, slate, linen.</em> For environmental, agricultural, or sustainability topics.</p>
+<div class="swatch-grid">
+<div class="swatch">
+<div class="swatch-color" style="background:#A6B89A;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Sage Green</strong> <code>#A6B89A</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#8CA3B7;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Muted Slate</strong> <code>#8CA3B7</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#DCCDB4;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Warm Linen</strong> <code>#DCCDB4</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#333333;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Near-Black</strong> <code>#333333</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#F7F7F5; border-bottom:1px solid #D9D9D9;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Warm Off-White</strong> <code>#F7F7F5</code></p>
+</div>
+</div>
+</div>
+<p><strong><code>natural_div</code></strong> — Diverging (interpolated to any <em>n</em>)</p>
+<div class="swatch-grid">
+<div class="swatch">
+<div class="swatch-color" style="background: linear-gradient(to right, #333333, #F7F7F5, #A6B89A);">
+
+</div>
+<div class="swatch-info">
+<p><strong>natural_div</strong> Near-Black ↔︎ Off-White ↔︎ Sage <code>palette = "natural_div"</code></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="accessibility-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="accessibility-considerations">Accessibility Considerations</h2>
+<p>The VVN color palettes were designed to complement the Virginia Tech brand while supporting effective data visualization. Rather than changing the overall aesthetic, accessibility is achieved through <strong>thoughtful application</strong> of the existing palettes.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Design Principle
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>About 80–90% of the current VVN colors can be retained as-is. Accessibility is met through usage rules and minor adjustments — not a redesign. This preserves the VT brand identity while broadening the audience for every VVN output.</p>
+</div>
+</div>
+<section id="wcag-2.2-aa-guidelines" class="level3">
+<h3 class="anchored" data-anchor-id="wcag-2.2-aa-guidelines">WCAG 2.2 AA Guidelines</h3>
+<p>To maximize compatibility with WCAG 2.2 AA while preserving the existing visual design:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 62%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rule</th>
+<th>Guidance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Text</strong></td>
+<td>Use only dark colors — VT Maroon <code>#861F41</code>, deep navy <code>#1B5299</code>, or charcoal <code>#3D3D3D</code>. Never use light palette colors for body text.</td>
+</tr>
+<tr class="even">
+<td><strong>Axes &amp; outlines</strong></td>
+<td>Use dark colors. Chart axis labels and border lines must meet ≥ 4.5:1 contrast on the background.</td>
+</tr>
+<tr class="odd">
+<td><strong>Bar / area fills</strong></td>
+<td>Any palette color is acceptable. Fills are evaluated by contrast relative to their outlines, not the page background.</td>
+</tr>
+<tr class="even">
+<td><strong>Background fills</strong></td>
+<td>Reserve the two lightest colors in each palette (<code>maroon_lt</code>, <code>orange_lt</code>, off-whites) for backgrounds and highlight zones only — not data encoding.</td>
+</tr>
+<tr class="odd">
+<td><strong>Categorical plots</strong></td>
+<td><strong>Never rely on color alone.</strong> Always combine color with at least one additional encoding: line type, point shape, direct labels, or fill patterns.</td>
+</tr>
+<tr class="even">
+<td><strong>All figures</strong></td>
+<td>Include a descriptive title, a legend or direct labels, a source line, and <code>alt</code> text when embedding in HTML.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="encoding-combinations-for-categorical-plots" class="level3">
+<h3 class="anchored" data-anchor-id="encoding-combinations-for-categorical-plots">Encoding combinations for categorical plots</h3>
+<p>When color alone may be insufficient (colorblindness, grayscale print), pair it with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Line type + color</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, y, <span class="at">color =</span> group, <span class="at">linetype =</span> group)) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_vvn</span>(<span class="st">"vt"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Point shape + color</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, y, <span class="at">color =</span> group, <span class="at">shape =</span> group)) <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_vvn</span>(<span class="st">"accessible"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Direct labels instead of legend</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, y, <span class="at">color =</span> group)) <span class="sc">+</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(<span class="at">data =</span> . <span class="sc">%&gt;%</span> <span class="fu">slice_max</span>(x, <span class="at">n =</span> <span class="dv">1</span>, <span class="at">by =</span> group),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">aes</span>(<span class="at">label =</span> group), <span class="at">nudge_x =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_vvn</span>(<span class="st">"vt"</span>) <span class="sc">+</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_legend</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="palette-color-usage-guide" class="level3">
+<h3 class="anchored" data-anchor-id="palette-color-usage-guide">Palette color usage guide</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 50%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Palette</th>
+<th>Colors safe for text/outlines</th>
+<th>Colors for fills only</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>vt</code></td>
+<td><code>#861F41</code> (Maroon), <code>#1B5299</code> (Navy), <code>#4B6734</code> (Forest)</td>
+<td><code>#E87722</code> (Orange), <code>#75757A</code> (Stone), <code>#CEB893</code> (Sand)</td>
+</tr>
+<tr class="even">
+<td><code>main</code></td>
+<td><code>#861F41</code>, <code>#1B5299</code>, <code>#2E7D32</code>, <code>#7B1FA2</code>, <code>#795548</code></td>
+<td><code>#E5751F</code>, <code>#C05878</code>, <code>#5B9BD5</code>, <code>#F0964A</code>, <code>#00838F</code></td>
+</tr>
+<tr class="odd">
+<td><code>accessible</code></td>
+<td>All 7 colors meet ≥ 3:1 on white; <code>#0077BB</code>, <code>#009988</code>, <code>#CC3311</code>, <code>#EE3377</code> meet ≥ 4.5:1</td>
+<td><code>#EE7733</code>, <code>#33BBEE</code>, <code>#BBBBBB</code> (fills only)</td>
+</tr>
+<tr class="even">
+<td><code>wcag</code></td>
+<td>All 6 colors meet ≥ 4.5:1 on white — safe for any use</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>Sequential / diverging</td>
+<td>Darkest end only (<code>#861F41</code>, <code>#1B5299</code>)</td>
+<td>All other stops</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Quick check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use <code>vvn_accessibility_check()</code> from <code>vvnthemes</code> to verify any color against any background in R:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_accessibility_check</span>(<span class="fu">vvn_palette</span>(<span class="st">"vt"</span>), <span class="at">background =</span> <span class="st">"#FFFFFF"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_accessibility_check</span>(<span class="fu">c</span>(<span class="st">"#FFFFFF"</span>), <span class="at">background =</span> <span class="st">"#861F41"</span>)  <span class="co"># white text on maroon</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
 <hr>
 </section>
 </section>
 <section id="typography" class="level2">
 <h2 class="anchored" data-anchor-id="typography">Typography</h2>
-<section id="fonts-and-sizes" class="level3">
-<h3 class="anchored" data-anchor-id="fonts-and-sizes">Fonts and Sizes</h3>
+<section id="fonts" class="level3">
+<h3 class="anchored" data-anchor-id="fonts">Fonts</h3>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 22%">
-<col style="width: 19%">
-<col style="width: 19%">
-<col style="width: 22%">
-<col style="width: 16%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Style</th>
+<th>Element</th>
 <th>Font</th>
+<th>Weight</th>
 <th>Size</th>
-<th>Color</th>
-<th>Use</th>
+<th>Line Height</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Heading</td>
-<td>Inter Bold</td>
-<td>H1 32px · H2 24px · H3 18px</td>
-<td>Maroon <code>#861F41</code></td>
-<td>Titles, section headings, tab labels</td>
+<td>Logo</td>
+<td>Inter</td>
+<td>700</td>
+<td>24–28 px</td>
+<td>1.1</td>
 </tr>
 <tr class="even">
-<td>Body</td>
-<td>Inter Regular</td>
-<td>16px</td>
-<td>Charcoal <code>#3D3D3D</code></td>
-<td>Paragraphs, axis labels, data labels</td>
+<td>Top navigation</td>
+<td>Inter</td>
+<td>500–600</td>
+<td>18 px</td>
+<td>1.4</td>
 </tr>
 <tr class="odd">
-<td>Caption</td>
-<td>Inter Regular</td>
-<td>14px</td>
-<td>Gray <code>#AAAAAA</code></td>
-<td>Source lines, notes</td>
+<td>Breadcrumb</td>
+<td>Inter Italic</td>
+<td>400 italic</td>
+<td>16 px</td>
+<td>1.3</td>
+</tr>
+<tr class="even">
+<td>Page title</td>
+<td>Barlow Condensed Italic*</td>
+<td>300–400</td>
+<td>58–64 px</td>
+<td>1.1</td>
+</tr>
+<tr class="odd">
+<td>Intro paragraph</td>
+<td>Inter</td>
+<td>400</td>
+<td>18–20 px</td>
+<td>1.6</td>
+</tr>
+<tr class="even">
+<td>Labels (“Group”)</td>
+<td>Inter</td>
+<td>600</td>
+<td>18 px</td>
+<td>1.4</td>
+</tr>
+<tr class="odd">
+<td>Dropdown</td>
+<td>Inter</td>
+<td>400</td>
+<td>18 px</td>
+<td>1.4</td>
+</tr>
+<tr class="even">
+<td>Card title</td>
+<td>Inter</td>
+<td>700</td>
+<td>28–32 px</td>
+<td>1.2</td>
+</tr>
+<tr class="odd">
+<td>Card description</td>
+<td>Inter</td>
+<td>400</td>
+<td>18 px</td>
+<td>1.6</td>
+</tr>
+<tr class="even">
+<td>Tag / small buttons</td>
+<td>Inter</td>
+<td>400</td>
+<td>16 px</td>
+<td>1.3</td>
+</tr>
+<tr class="odd">
+<td>Primary button</td>
+<td>Inter</td>
+<td>600</td>
+<td>18 px</td>
+<td>1.2</td>
+</tr>
+<tr class="even">
+<td>Footer headings</td>
+<td>Inter</td>
+<td>700</td>
+<td>18–20 px</td>
+<td>1.3</td>
+</tr>
+<tr class="odd">
+<td>Footer links</td>
+<td>Inter</td>
+<td>400</td>
+<td>16 px</td>
+<td>1.6</td>
+</tr>
+<tr class="even">
+<td>Copyright</td>
+<td>Inter</td>
+<td>400</td>
+<td>15–16 px</td>
+<td>1.5</td>
 </tr>
 </tbody>
 </table>
+<p>*Page title uses <strong>Barlow Condensed Italic</strong> as a substitute for Gineso Condensed Italic (not available on Google Fonts).</p>
 </section>
 <section id="capitalization-rules" class="level3">
 <h3 class="anchored" data-anchor-id="capitalization-rules">Capitalization Rules</h3>
@@ -417,16 +1429,11 @@ ul.task-list li input[type="checkbox"] {
 <td>“Median Household Income by County, Virginia”</td>
 </tr>
 <tr class="odd">
-<td>Map subtitle</td>
-<td><strong>Sentence case</strong></td>
-<td>“2020 American Community Survey 5-year estimates”</td>
-</tr>
-<tr class="even">
 <td>Table title</td>
 <td><strong>Headline case</strong></td>
 <td>“Summary Statistics by County”</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Column headings</td>
 <td><strong>Sentence case</strong></td>
 <td>“Poverty rate (%)”</td>
@@ -902,7 +1909,7 @@ document.addEventListener('DOMContentLoaded', function () {
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Visualizing Virginia Numbers · Virginia Tech</p>
+<p>Visualizing Virginia’s Numbers · Virginia Tech</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

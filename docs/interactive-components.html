@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-acf12a64177840b8d86f2d4f01b2e9fb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b862ab53a511195099db9539d290c144.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-85489e358d57b8a2ae311cd41d6be895.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -335,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <strong>Use when</strong> Letting users select one or more categories (region, variable, topic). Produces a styled dropdown with a bold label.
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_filter</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">id       =</span> <span class="st">"region_sel"</span>,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">inputId  =</span> <span class="st">"region_sel"</span>,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">label    =</span> <span class="st">"Select Region"</span>,</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">choices  =</span> <span class="fu">c</span>(<span class="st">"All"</span> <span class="ot">=</span> <span class="st">"All"</span>, <span class="st">"Rural"</span> <span class="ot">=</span> <span class="st">"Rural"</span>, <span class="st">"Urban"</span> <span class="ot">=</span> <span class="st">"Urban"</span>),</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">selected =</span> <span class="st">"All"</span>,</span>
@@ -360,10 +360,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>id</code></td>
+<td><code>inputId</code></td>
 <td>character</td>
 <td>required</td>
-<td>Shiny input ID</td>
+<td>Shiny input ID (accessed as <code>input$inputId</code> in server)</td>
 </tr>
 <tr class="even">
 <td><code>label</code></td>
@@ -492,10 +492,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>id</code></td>
+<td><code>inputId</code></td>
 <td>character</td>
 <td>required</td>
-<td>Shiny input ID</td>
+<td>Shiny input ID (accessed as <code>input$inputId</code> in server)</td>
 </tr>
 <tr class="even">
 <td><code>label</code></td>
@@ -1301,7 +1301,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
 <span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_filter</span>(</span>
-<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>  <span class="at">id       =</span> <span class="st">"region_sel"</span>,</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>  <span class="at">inputId  =</span> <span class="st">"region_sel"</span>,</span>
 <span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>  <span class="at">label    =</span> <span class="st">"Select Region"</span>,</span>
 <span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>  <span class="at">choices  =</span> <span class="fu">c</span>(<span class="st">"All"</span> <span class="ot">=</span> <span class="st">"All"</span>, <span class="st">"Rural"</span> <span class="ot">=</span> <span class="st">"Rural"</span>, <span class="st">"Urban"</span> <span class="ot">=</span> <span class="st">"Urban"</span>),</span>
 <span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>  <span class="at">selected =</span> <span class="st">"All"</span>,</span>
@@ -1313,7 +1313,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Parameter <span class="pp">|</span> Type <span class="pp">|</span> Default <span class="pp">|</span> Description <span class="pp">|</span></span>
 <span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
-<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`id`</span> <span class="pp">|</span> character <span class="pp">|</span> required <span class="pp">|</span> Shiny input ID <span class="pp">|</span></span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`inputId`</span> <span class="pp">|</span> character <span class="pp">|</span> required <span class="pp">|</span> Shiny input ID (accessed as <span class="in">`input$inputId`</span> in server) <span class="pp">|</span></span>
 <span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`label`</span> <span class="pp">|</span> character <span class="pp">|</span> required <span class="pp">|</span> Display label shown above the dropdown <span class="pp">|</span></span>
 <span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`choices`</span> <span class="pp">|</span> named vector <span class="pp">|</span> required <span class="pp">|</span> Options — name = displayed text, value = code <span class="pp">|</span></span>
 <span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`selected`</span> <span class="pp">|</span> character <span class="pp">|</span> <span class="in">`NULL`</span> <span class="pp">|</span> Initially selected value(s) <span class="pp">|</span></span>
@@ -1378,7 +1378,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Parameter <span class="pp">|</span> Type <span class="pp">|</span> Default <span class="pp">|</span> Description <span class="pp">|</span></span>
 <span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
-<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`id`</span> <span class="pp">|</span> character <span class="pp">|</span> required <span class="pp">|</span> Shiny input ID <span class="pp">|</span></span>
+<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`inputId`</span> <span class="pp">|</span> character <span class="pp">|</span> required <span class="pp">|</span> Shiny input ID (accessed as <span class="in">`input$inputId`</span> in server) <span class="pp">|</span></span>
 <span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`label`</span> <span class="pp">|</span> character <span class="pp">|</span> required <span class="pp">|</span> Button text <span class="pp">|</span></span>
 <span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`icon`</span> <span class="pp">|</span> icon <span class="pp">|</span> <span class="in">`NULL`</span> <span class="pp">|</span> Optional icon from <span class="in">`bslib::bs_icon()`</span> <span class="pp">|</span></span>
 <span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`style`</span> <span class="pp">|</span> character <span class="pp">|</span> <span class="in">`"primary"`</span> <span class="pp">|</span> <span class="in">`"primary"`</span> (maroon) · <span class="in">`"secondary"`</span> · <span class="in">`"outline"`</span> <span class="pp">|</span></span>
@@ -1570,7 +1570,7 @@ document.addEventListener('DOMContentLoaded', function () {
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Visualizing Virginia Numbers · Virginia Tech</p>
+<p>Visualizing Virginia’s Numbers · Virginia Tech</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;

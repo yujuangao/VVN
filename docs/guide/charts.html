@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-dba9811da69910a128e3fa2f78628fbd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-62005262e91d3b3f49ef9ef028120a55.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -270,10 +270,71 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="design-standards">Design standards</h2>
 <p><strong>Colors</strong></p>
 <ul>
-<li>Use only VVN palettes: <code>main</code>, <code>brand</code>, <code>maroon_seq</code>, <code>orange_seq</code>, <code>diverging</code>, or <code>accessible</code></li>
+<li>Use only VVN palettes — apply with <code>scale_color_vvn()</code> / <code>scale_fill_vvn()</code> (discrete) or <code>scale_color_vvn_c()</code> / <code>scale_fill_vvn_c()</code> (continuous)</li>
 <li>Never use off-palette colors, gradients, or transparency for data encoding</li>
-<li>Apply the palette with <code>scale_color_vvn()</code> or <code>scale_fill_vvn()</code></li>
 </ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 31%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Use case</th>
+<th>Palette</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2–3 groups</td>
+<td><code>"brand"</code></td>
+<td><code>scale_fill_vvn("brand")</code></td>
+</tr>
+<tr class="even">
+<td>Up to 6 groups (VT brand)</td>
+<td><code>"vt"</code></td>
+<td><code>scale_fill_vvn("vt")</code></td>
+</tr>
+<tr class="odd">
+<td>Up to 10 groups (general)</td>
+<td><code>"main"</code></td>
+<td><code>scale_fill_vvn("main")</code></td>
+</tr>
+<tr class="even">
+<td>Colorblind-safe</td>
+<td><code>"accessible"</code></td>
+<td><code>scale_fill_vvn("accessible")</code></td>
+</tr>
+<tr class="odd">
+<td>WCAG AA contrast</td>
+<td><code>"wcag"</code></td>
+<td><code>scale_fill_vvn("wcag")</code></td>
+</tr>
+<tr class="even">
+<td>Editorial / thematic</td>
+<td><code>"monet"</code>, <code>"sunflower"</code>, <code>"academic"</code>, <code>"natural"</code></td>
+<td><code>scale_fill_vvn("monet")</code></td>
+</tr>
+<tr class="odd">
+<td>Maps / continuous</td>
+<td><code>"maroon_seq"</code>, <code>"orange_seq"</code>, <code>"navy_seq"</code>, <code>"gray_seq"</code></td>
+<td><code>scale_fill_vvn_c("maroon_seq")</code></td>
+</tr>
+<tr class="even">
+<td>Above/below average</td>
+<td><code>"vt_div"</code>, <code>"vt_orange_div"</code>, <code>"diverging"</code></td>
+<td><code>scale_fill_vvn_c("vt_div")</code></td>
+</tr>
+<tr class="odd">
+<td>Editorial diverging</td>
+<td><code>"monet_div"</code>, <code>"sunflower_div"</code>, <code>"academic_div"</code>, <code>"natural_div"</code></td>
+<td><code>scale_fill_vvn_c("monet_div")</code></td>
+</tr>
+</tbody>
+</table>
+<p>For color swatches and full palette details, see the <a href="brand.html#chart-map-palettes">Brand Guide →</a>.</p>
 <p><strong>Typography</strong></p>
 <ul>
 <li>Title: VT Maroon <code>#861F41</code>, bold, headline case</li>
@@ -780,7 +841,7 @@ document.addEventListener('DOMContentLoaded', function () {
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Visualizing Virginia Numbers · Virginia Tech</p>
+<p>Visualizing Virginia’s Numbers · Virginia Tech</p>
 </div>
     <div class="nav-footer-right">
       &nbsp;
