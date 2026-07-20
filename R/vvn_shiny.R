@@ -182,6 +182,48 @@ vvn_accessibility_check <- function(colors, background = "#FFFFFF",
 }
 
 
+#' VVN-branded Bootstrap 5 theme for Shiny dashboards
+#'
+#' Wraps \code{bslib::bs_theme()} with VVN brand colors and fonts. Pass the
+#' return value to the \code{theme} argument of \code{bslib::page_navbar()} or
+#' any other bslib page function. No additional theme setup is required.
+#'
+#' @param ... Additional arguments passed to \code{bslib::bs_theme()}, such as
+#'   \code{bootswatch} or custom Sass variables.
+#'
+#' @return A \code{bslib} theme object.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' ui <- bslib::page_navbar(
+#'   title = "My Dashboard",
+#'   theme = vvn_bs_theme()
+#' )
+#' }
+vvn_bs_theme <- function(...) {
+  if (!requireNamespace("bslib", quietly = TRUE)) {
+    cli::cli_abort(
+      "Package {.pkg bslib} is required. Install it with {.code install.packages('bslib')}."
+    )
+  }
+  bslib::bs_theme(
+    version      = 5,
+    primary      = "#861F41",   # VT Maroon
+    secondary    = "#E5751F",   # VT Orange
+    success      = "#2E7D32",
+    info         = "#1B5299",   # VVN Navy
+    warning      = "#E5751F",
+    danger       = "#C62828",
+    base_font    = bslib::font_google("Source Sans Pro", wght = c(400, 600, 700)),
+    heading_font = bslib::font_google("Source Sans Pro", wght = c(700)),
+    code_font    = bslib::font_google("JetBrains Mono"),
+    "navbar-bg"  = "#861F41",
+    ...
+  )
+}
+
+
 # Internal helper
 .require_shiny <- function() {
   if (!requireNamespace("shiny", quietly = TRUE)) {

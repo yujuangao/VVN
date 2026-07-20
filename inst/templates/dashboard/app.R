@@ -1,430 +1,516 @@
-# =============================================================================
+# ==============================================================================
 # VVN Dashboard Template — app.R
 # VVN_TITLE
 # VVN_AUTHOR · Visualizing Virginia Numbers · Virginia Tech
 #
-# Run: shiny::runApp()
-# Deploy: rsconnect::deployApp()
-# =============================================================================
+# QUICK START:
+#   1. Load your data in R/data_prep.R
+#   2. Replace every [placeholder] with your content
+#   3. Uncomment the components you need
+#   4. Run: shiny::runApp()
+#   5. Deploy: rsconnect::deployApp()
+# ==============================================================================
 
-# ── Dependencies ──────────────────────────────────────────────────────────────
+# ── Libraries ─────────────────────────────────────────────────────────────────
 library(shiny)
 library(bslib)
 library(bsicons)
 library(ggplot2)
 library(dplyr)
-library(vvnthemes)
-# library(leaflet)   # Uncomment for interactive maps
-# library(gt)        # Uncomment for styled tables
-# library(DT)        # Uncomment for interactive data tables
-# library(plotly)    # Uncomment for interactive charts
+library(vvnthemes)          # VVN brand theme, colors, and UI components
+# library(leaflet)          # Uncomment for interactive county maps
+# library(sf)               # Uncomment for spatial data (required with leaflet)
+# library(DT)               # Uncomment for interactive data tables
+# library(gt)               # Uncomment for styled summary tables
+# library(plotly)           # Uncomment for interactive/hoverable charts
+# library(readr)            # Uncomment if loading CSV data in data_prep.R
 
 # ── Load data ─────────────────────────────────────────────────────────────────
-source("R/data_prep.R", local = TRUE)  # defines: app_data, va_regions
+# data_prep.R loads your data from data/processed/ into app_data (and
+# optionally va_counties for the map tab).
+source("R/data_prep.R", local = TRUE)
 
-# ── VVN bslib theme ───────────────────────────────────────────────────────────
-vvn_bs_theme <- bslib::bs_theme(
-  version      = 5,
-  primary      = "#861F41",
-  secondary    = "#E5751F",
-  success      = "#2E7D32",
-  info         = "#1B5299",
-  warning      = "#E5751F",
-  danger       = "#C62828",
-  base_font    = bslib::font_google("Source Sans Pro", wght = c(400, 600, 700)),
-  heading_font = bslib::font_google("Source Sans Pro", wght = c(700)),
-  code_font    = bslib::font_google("JetBrains Mono"),
-  "navbar-bg"  = "#861F41"
-)
-
-# ══════════════════════════════════════════════════════════════════════════════
+# ==============================================================================
 # UI
-# ══════════════════════════════════════════════════════════════════════════════
+# ==============================================================================
 ui <- bslib::page_navbar(
-  title           = "VVN_TITLE",
-  id              = "main_nav",
-  navbar_options  = bslib::navbar_options(bg = "#861F41", fg = "#FFFFFF"),
-  theme           = vvn_bs_theme,
+
+  # ── Page title ───────────────────────────────────────────────────────────────
+  title = "VVN_TITLE",                   # <-- Replace with your dashboard title
+  id    = "main_nav",
+
+  # ── VVN theme — no setup needed, provided by vvnthemes ──────────────────────
+  theme          = vvn_bs_theme(),        # VT Maroon + Orange, Bootstrap 5
+  navbar_options = bslib::navbar_options(bg = "#861F41", fg = "#FFFFFF"),
+
+  # ── Browser tab title and stylesheet ─────────────────────────────────────────
   header = tagList(
     tags$head(
       tags$link(rel = "stylesheet", href = "vvn.css"),
       tags$title("VVN_TITLE · Visualizing Virginia Numbers")
     )
   ),
+
+  # ── Page footer ──────────────────────────────────────────────────────────────
   footer = tags$footer(
     class = "text-center text-muted small py-2 border-top mt-3",
-    tags$span(
-      "Visualizing Virginia Numbers · Virginia Tech · ",
-      tags$a("vvn.vt.edu", href = "https://vvn.vt.edu", target = "_blank")
-    )
+    "Visualizing Virginia Numbers · Virginia Tech · ",
+    tags$a("vvn.vt.edu", href = "https://vvn.vt.edu", target = "_blank")
   ),
 
-  # ══════════════════════════════════════════════════════════════════════════
-  # Tab 1: Overview
-  # ══════════════════════════════════════════════════════════════════════════
+  # ============================================================================
+  # Tab 1 — Overview
+  #   Sidebar filters + 3 KPI cards + trend line + bar chart + histogram
+  # ============================================================================
   bslib::nav_panel(
     title = tagList(bsicons::bs_icon("house-fill"), " Overview"),
     value = "overview",
 
     bslib::layout_sidebar(
-      # ── Sidebar ──────────────────────────────────────────────────────────
+
+      # ── Sidebar ─────────────────────────────────────────────────────────────
       sidebar = bslib::sidebar(
         title = "Filters",
         width = 260,
-        open  = TRUE,
         bg    = "#F7F7F7",
 
-        vvn_filter(
-          "region_sel", "Region",
-          choices  = c("All" = "All",
-                       "Rural"        = "Rural",
-                       "Small City"   = "Small City",
-                       "Suburban"     = "Suburban",
-                       "Urban Fringe" = "Urban Fringe",
-                       "Urban Core"   = "Urban Core"),
-          selected = "All",
-          multiple = TRUE
-        ),
+        # ── Categorical filter (e.g., region, group, race/ethnicity) ─────────
+        # Uncomment and fill in your choices:
+        #
+        # vvn_filter(
+        #   inputId  = "group_sel",
+        #   label    = "[Group Label]",           # <-- e.g., "Region"
+        #   choices  = c("All" = "All",
+        #                "[Choice A]" = "a",      # <-- label = display, value = data value
+        #                "[Choice B]" = "b"),
+        #   selected = "All",
+        #   multiple = TRUE
+        # ),
 
-        vvn_slider("year_range", "Year Range",
-                    min = 2015, max = 2023, value = c(2015, 2023)),
+        # ── Year range slider ────────────────────────────────────────────────
+        # Uncomment and set min/max to your data's year range:
+        #
+        # vvn_slider(
+        #   inputId = "year_range",
+        #   label   = "Year Range",
+        #   min     = [start year],               # <-- e.g., 2018
+        #   max     = [end year],                 # <-- e.g., 2023
+        #   value   = c([start year], [end year])
+        # ),
 
-        vvn_filter(
-          "variable_sel", "Variable",
-          choices = c("Index Value"    = "value",
-                       "Employment Rate" = "employment",
-                       "Poverty Rate"    = "poverty")
-        ),
+        # ── Second categorical filter (e.g., variable to display) ────────────
+        # Uncomment to let users switch between variables:
+        #
+        # vvn_filter(
+        #   inputId = "variable_sel",
+        #   label   = "Variable",
+        #   choices = c("[Label A]" = "col_a",    # <-- label = display, value = column name
+        #               "[Label B]" = "col_b")
+        # ),
 
-        hr(),
+        tags$hr(),
 
-        vvn_button("apply_btn", "Apply Filters",
-                    icon  = bsicons::bs_icon("funnel-fill"),
-                    style = "primary"),
-        tags$br(), tags$br(),
-        vvn_button("reset_btn", "Reset",
-                    icon  = bsicons::bs_icon("arrow-counterclockwise"),
-                    style = "outline")
+        # ── Apply and Reset buttons ──────────────────────────────────────────
+        # Remove bindEvent() in the server to apply filters instantly instead.
+        #
+        # vvn_button("apply_btn", "Apply Filters",
+        #             icon  = bsicons::bs_icon("funnel-fill"),
+        #             style = "primary"),
+        # tags$br(), tags$br(),
+        # vvn_button("reset_btn", "Reset",
+        #             icon  = bsicons::bs_icon("arrow-counterclockwise"),
+        #             style = "outline")
       ),
 
-      # ── Main panel ────────────────────────────────────────────────────────
+      # ── Main panel ──────────────────────────────────────────────────────────
       bslib::layout_columns(
         col_widths = 12,
         gap        = "1rem",
 
-        # KPI row
+        # ── KPI row: 3 metric cards (maroon · orange · navy) ─────────────────
         bslib::layout_columns(
           col_widths = c(4, 4, 4),
           gap        = "0.75rem",
-          uiOutput("kpi_n"),
-          uiOutput("kpi_mean"),
-          uiOutput("kpi_change")
+          uiOutput("kpi_1"),
+          uiOutput("kpi_2"),
+          uiOutput("kpi_3")
         ),
 
-        # Chart row
+        # ── Chart A: Trend line ───────────────────────────────────────────────
         bslib::card(
           full_screen = TRUE,
           bslib::card_header(
             class = "vvn-card-header d-flex align-items-center justify-content-between",
-            tags$span("Trend Over Time"),
+            "[Trend Chart Title]",                  # <-- Replace
             bslib::popover(
               bsicons::bs_icon("info-circle"),
-              "Annual trend for the selected variable and regions.",
-              title = "About this chart",
+              "[Describe what this chart shows.]",  # <-- Replace tooltip text
+              title     = "About this chart",
               placement = "left"
             )
           ),
-          bslib::card_body(
-            plotOutput("trend_chart", height = "310px")
-          )
+          bslib::card_body(plotOutput("trend_chart", height = "310px"))
         ),
 
-        # Second row: bar + distribution
+        # ── Chart B and C: Bar + Histogram (side by side) ─────────────────────
         bslib::layout_columns(
           col_widths = c(7, 5),
           gap        = "0.75rem",
 
           bslib::card(
             full_screen = TRUE,
-            bslib::card_header("Latest Year Comparison",
+            bslib::card_header("[Bar Chart Title]",          # <-- Replace
                                 class = "vvn-card-header"),
             bslib::card_body(plotOutput("bar_chart", height = "270px"))
           ),
 
           bslib::card(
             full_screen = TRUE,
-            bslib::card_header("Value Distribution",
+            bslib::card_header("[Distribution Title]",       # <-- Replace
                                 class = "vvn-card-header"),
             bslib::card_body(plotOutput("hist_chart", height = "270px"))
           )
         )
+
+        # ── Chart D: Scatter plot (optional — uncomment to add) ───────────────
+        # bslib::card(
+        #   full_screen = TRUE,
+        #   bslib::card_header("[Scatter Title]", class = "vvn-card-header"),
+        #   bslib::card_body(plotOutput("scatter_chart", height = "300px"))
+        # )
       )
     )
   ),
 
-  # ══════════════════════════════════════════════════════════════════════════
-  # Tab 2: County Map
-  # ══════════════════════════════════════════════════════════════════════════
+  # ============================================================================
+  # Tab 2 — Map
+  #   Interactive Leaflet county choropleth (requires leaflet + sf)
+  # ============================================================================
   bslib::nav_panel(
     title = tagList(bsicons::bs_icon("map-fill"), " Map"),
     value = "map",
 
     bslib::card(
       full_screen = TRUE,
-      bslib::card_header("Virginia County Map", class = "vvn-card-header"),
+      bslib::card_header("[Map Title]", class = "vvn-card-header"),   # <-- Replace
       bslib::card_body(
-        # Uncomment when sf + leaflet + county data are available:
+
+        # Uncomment when leaflet + sf + your county shapefile are ready:
         # leaflet::leafletOutput("county_map", height = "580px")
 
-        # Placeholder:
+        # Placeholder shown until the map is set up:
         div(
           style = paste(
             "height:580px; display:flex; flex-direction:column;",
             "align-items:center; justify-content:center;",
-            "background:#F7F7F7; border-radius:6px;"
+            "background:#F7F7F7; border-radius:6px; gap:.75rem;"
           ),
-          tags$p(style = "color:#861F41; font-weight:700; font-size:1.1rem;",
-                 "County Map"),
-          tags$p(style = "color:#AAAAAA; font-size:.9rem;",
-                 "Replace this panel with:"),
-          tags$pre(style = "font-size:.8rem; background:#fff; padding:.75rem;
-                            border-left:3px solid #861F41; border-radius:4px;",
-                   HTML(paste(
-                     "library(leaflet)",
-                     "library(sf)",
-                     "",
-                     "leaflet(va_counties) |>",
-                     "  vvn_map_style(",
-                     "    data      = va_counties,",
-                     "    value_col = input$variable_sel,",
-                     "    title     = \"Your Variable\"",
-                     "  )",
-                     sep = "\n"
-                   ))
-          )
+          tags$p(style = "color:#861F41; font-weight:700; font-size:1.1rem; margin:0;",
+                 "County Map Placeholder"),
+          tags$p(style = "color:#666; font-size:.85rem; text-align:center;
+                          max-width:420px; margin:0; white-space:pre-line;",
+                 paste(
+                   "To enable the map:",
+                   "1. Place your county shapefile in data/processed/va_counties.geojson",
+                   "2. Uncomment va_counties in R/data_prep.R",
+                   "3. Uncomment library(leaflet) and library(sf) at the top of app.R",
+                   "4. Uncomment leafletOutput() above and renderLeaflet() in the server",
+                   sep = "\n"
+                 ))
         )
       )
     )
   ),
 
-  # ══════════════════════════════════════════════════════════════════════════
-  # Tab 3: Data Table
-  # ══════════════════════════════════════════════════════════════════════════
+  # ============================================================================
+  # Tab 3 — Data Table
+  #   Paginated, searchable table with CSV / Excel download
+  # ============================================================================
   bslib::nav_panel(
     title = tagList(bsicons::bs_icon("table"), " Data"),
     value = "data",
 
     bslib::card(
-      bslib::card_header("Summary Table", class = "vvn-card-header"),
+      bslib::card_header("[Data Table Title]", class = "vvn-card-header"),   # <-- Replace
       bslib::card_body(
-        # Option A — interactive DT table (default):
-        DT::dataTableOutput("dt_table"),
 
-        # Option B — styled GT table:
-        # Uncomment and remove DT above:
+        # ── Option A: Interactive DT table (recommended for large data) ────────
+        # Uncomment and remove the placeholder p() below:
+        # DT::dataTableOutput("dt_table")
+
+        # ── Option B: Styled GT table (recommended for small summary tables) ───
+        # Uncomment and remove the placeholder p() below:
         # gt::gt_output("gt_table")
+
+        # Placeholder:
+        p(style = "color:#888; padding:2rem;",
+          "Uncomment DT::dataTableOutput(\"dt_table\") or gt::gt_output(\"gt_table\") above,",
+          "then fill in the matching render function in the server.")
       )
     )
   ),
 
-  # ══════════════════════════════════════════════════════════════════════════
-  # Tab 4: About
-  # ══════════════════════════════════════════════════════════════════════════
+  # ============================================================================
+  # Tab 4 — About
+  #   Project description, data sources, methods, contact
+  # ============================================================================
   bslib::nav_panel(
     title = tagList(bsicons::bs_icon("info-circle"), " About"),
     value = "about",
 
     bslib::card(
       bslib::card_body(
-        tags$h3("About this Dashboard"),
-        tags$p(
-          "Built by the ",
-          tags$a("Visualizing Virginia Numbers (VVN)",
-                 href = "https://vvn.vt.edu", target = "_blank"),
-          " at Virginia Tech using the ",
-          tags$a("vvnthemes", href = "https://github.com/vt-vvn/vvnthemes"),
-          " R package."
-        ),
+        tags$h3("About This Dashboard"),
+        tags$p("[1–2 sentences describing what this dashboard shows and who it is for.]"),  # <-- Replace
         tags$h4("Data Sources"),
         tags$ul(
-          tags$li("[Replace with your data source 1]"),
-          tags$li("[Replace with your data source 2]")
+          tags$li("[Data source 1: Agency, Dataset, Year]"),   # <-- Replace
+          tags$li("[Data source 2: Agency, Dataset, Year]")    # <-- Replace
         ),
         tags$h4("Methods"),
-        tags$p("[Describe data processing and any analytical methods.]"),
+        tags$p("[Describe your data processing steps and any analytical methods.]"),        # <-- Replace
         tags$h4("Contact"),
-        tags$p(tags$a("vvn@vt.edu", href = "mailto:vvn@vt.edu"))
+        tags$p(
+          "Built by ",
+          tags$a("Visualizing Virginia Numbers (VVN)",
+                 href = "https://vvn.vt.edu", target = "_blank"),
+          " at Virginia Tech. Questions? ",
+          tags$a("vvn@vt.edu", href = "mailto:vvn@vt.edu")
+        )
       )
     )
   )
 )
 
 
-# ══════════════════════════════════════════════════════════════════════════════
+# ==============================================================================
 # Server
-# ══════════════════════════════════════════════════════════════════════════════
+# ==============================================================================
 server <- function(input, output, session) {
 
-  # ── Reactive filtered data ─────────────────────────────────────────────────
-  filtered <- reactive({
-    req(input$year_range)
-    d <- app_data
-    if (!("All" %in% (input$region_sel %||% "All")) && length(input$region_sel) > 0) {
-      d <- d |> filter(region %in% input$region_sel)
-    }
-    d |>
-      filter(year >= input$year_range[1], year <= input$year_range[2]) |>
-      mutate(display_value = .data[[input$variable_sel %||% "value"]])
-  }) |> bindEvent(input$apply_btn, ignoreNULL = FALSE)
+  # ── Reactive: filter app_data based on sidebar inputs ────────────────────────
+  # Replace [your_group_col], [your_year_col], [your_value_col] with your
+  # actual column names from app_data. Use bindEvent() so filtering runs only
+  # when the user clicks "Apply Filters"; remove it for instant updates.
+  #
+  # filtered <- reactive({
+  #   d <- app_data
+  #
+  #   # Filter by categorical group (from vvn_filter "group_sel"):
+  #   # if (!("All" %in% (input$group_sel %||% "All"))) {
+  #   #   d <- d |> filter([your_group_col] %in% input$group_sel)
+  #   # }
+  #
+  #   # Filter by year range (from vvn_slider "year_range"):
+  #   # d <- d |> filter(
+  #   #   [your_year_col] >= input$year_range[1],
+  #   #   [your_year_col] <= input$year_range[2]
+  #   # )
+  #
+  #   # Select display variable (from vvn_filter "variable_sel"):
+  #   # d <- d |> mutate(display_value = .data[[input$variable_sel]])
+  #
+  #   d
+  # }) |> bindEvent(input$apply_btn, ignoreNULL = FALSE)
 
-  # ── Reset button ────────────────────────────────────────────────────────────
-  observeEvent(input$reset_btn, {
-    updateSelectInput(session, "region_sel",   selected = "All")
-    updateSliderInput(session, "year_range",   value    = c(2015, 2023))
-    updateSelectInput(session, "variable_sel", selected = "value")
-  })
-
-  # ── KPI cards ──────────────────────────────────────────────────────────────
-  output$kpi_n <- renderUI({
-    n <- n_distinct(filtered()$region)
-    vvn_kpi_card(paste0(n, " Region", if(n!=1)"s"), "In Selection",
-                  color_scheme = "maroon")
-  })
-
-  output$kpi_mean <- renderUI({
-    m <- round(mean(filtered()$display_value, na.rm = TRUE), 1)
-    vvn_kpi_card(m, "Average Value", color_scheme = "orange")
-  })
-
-  output$kpi_change <- renderUI({
-    d  <- filtered()
-    v1 <- mean(d$display_value[d$year == min(d$year)], na.rm = TRUE)
-    v2 <- mean(d$display_value[d$year == max(d$year)], na.rm = TRUE)
-    ch <- round(v2 - v1, 1)
-    vvn_kpi_card(
-      value        = paste0(if(ch >= 0) "+" else "", ch),
-      label        = paste0("Change (", min(d$year), "\u2013", max(d$year), ")"),
-      trend        = if(ch >= 0) "up" else "down",
-      trend_text   = paste0(abs(round(ch/v1*100)), "% vs start"),
-      color_scheme = "navy"
-    )
-  })
-
-  # ── Trend chart ─────────────────────────────────────────────────────────────
-  output$trend_chart <- renderPlot({
-    req(nrow(filtered()) > 0)
-
-    filtered() |>
-      group_by(year, region) |>
-      summarise(v = mean(display_value, na.rm = TRUE), .groups = "drop") |>
-      ggplot(aes(x = year, y = v, color = region, group = region)) +
-      geom_line(linewidth = 1.3) +
-      geom_point(size = 2.8, alpha = 0.9) +
-      scale_color_vvn("main") +
-      theme_vvn() +
-      labs(
-        title    = "Trend by Region",
-        subtitle = paste0(input$year_range[1], "\u2013", input$year_range[2]),
-        x        = "Year",
-        y        = "Value",
-        color    = "Region",
-        caption  = "Source: [Replace with data source]"
-      )
-  }, res = 110)
-
-  # ── Bar chart ───────────────────────────────────────────────────────────────
-  output$bar_chart <- renderPlot({
-    req(nrow(filtered()) > 0)
-
-    latest <- filtered() |>
-      filter(year == max(year)) |>
-      group_by(region) |>
-      summarise(v = mean(display_value, na.rm = TRUE), .groups = "drop") |>
-      arrange(v) |>
-      mutate(region = factor(region, levels = unique(region)))
-
-    ggplot(latest, aes(x = v, y = region, fill = region)) +
-      geom_col(width = 0.65, show.legend = FALSE) +
-      geom_text(aes(label = round(v, 1)), hjust = -0.2, size = 3.2,
-                color = "#3D3D3D") +
-      scale_fill_vvn("main") +
-      scale_x_continuous(expand = expansion(mult = c(0, .18))) +
-      theme_vvn(grid = "x") +
-      remove_ticks() +
-      labs(title = paste("Comparison ·", max(filtered()$year)),
-           x = "Value", y = NULL)
-  }, res = 110)
-
-  # ── Histogram ───────────────────────────────────────────────────────────────
-  output$hist_chart <- renderPlot({
-    req(nrow(filtered()) > 0)
-
-    m <- mean(filtered()$display_value, na.rm = TRUE)
-    ggplot(filtered(), aes(x = display_value)) +
-      geom_histogram(bins = 18, fill = "#861F41", color = "#FFFFFF", alpha = 0.9) +
-      geom_vline(xintercept = m, color = "#E5751F", linewidth = 1.2, linetype = "dashed") +
-      annotate("text", x = m + 0.3, y = Inf, vjust = 2, hjust = 0, size = 3,
-               label = paste0("Mean: ", round(m, 1)), color = "#E5751F") +
-      theme_vvn() +
-      labs(title = "Distribution", x = "Value", y = "Count")
-  }, res = 110)
-
-  # ── DT table ────────────────────────────────────────────────────────────────
-  output$dt_table <- DT::renderDataTable({
-    filtered() |>
-      group_by(region, year) |>
-      summarise(
-        `Value`      = round(mean(display_value, na.rm = TRUE), 2),
-        `Employment` = round(mean(employment,    na.rm = TRUE), 1),
-        `Poverty %`  = round(mean(poverty,        na.rm = TRUE), 1),
-        .groups      = "drop"
-      ) |>
-      arrange(desc(year), region) |>
-      DT::datatable(
-        rownames = FALSE,
-        class    = "stripe hover compact",
-        options  = list(
-          pageLength = 15,
-          scrollX    = TRUE,
-          dom        = "Bfrtip",
-          buttons    = c("csv", "excel")
-        ),
-        extensions = "Buttons"
-      ) |>
-      DT::formatStyle(
-        "Value",
-        background = DT::styleColorBar(range(filtered()$display_value, na.rm = TRUE),
-                                        "#F5C8D4"),
-        backgroundSize    = "100% 80%",
-        backgroundRepeat  = "no-repeat",
-        backgroundPosition = "center"
-      )
-  })
-
-  # ── GT table (optional alternative) ─────────────────────────────────────────
-  # output$gt_table <- gt::render_gt({
-  #   filtered() |>
-  #     group_by(region, year) |>
-  #     summarise(Mean = round(mean(display_value, na.rm = TRUE), 1), .groups = "drop") |>
-  #     gt::gt() |>
-  #     vvn_table(title = "Summary by Region & Year",
-  #                source_note = "Source: [Replace with data source]")
+  # ── Reset button: restore filter inputs to their defaults ────────────────────
+  # observeEvent(input$reset_btn, {
+  #   updateSelectInput(session, "group_sel",    selected = "All")
+  #   updateSliderInput(session, "year_range",   value    = c([start year], [end year]))
+  #   updateSelectInput(session, "variable_sel", selected = "col_a")
   # })
 
-  # ── County map (optional) ────────────────────────────────────────────────────
+
+  # ── KPI card 1 (maroon) ───────────────────────────────────────────────────────
+  # Replace value and label with your own metric.
+  #
+  # output$kpi_1 <- renderUI({
+  #   vvn_kpi_card(
+  #     value        = "[statistic]",         # e.g., nrow(filtered()) or a computed value
+  #     label        = "[KPI Label]",         # e.g., "Total Counties"
+  #     color_scheme = "maroon"
+  #   )
+  # })
+
+  # ── KPI card 2 (orange) ───────────────────────────────────────────────────────
+  # output$kpi_2 <- renderUI({
+  #   vvn_kpi_card(
+  #     value        = "[statistic]",
+  #     label        = "[KPI Label]",
+  #     trend        = "up",                  # "up", "down", or NULL — shows arrow
+  #     trend_text   = "[+X% vs last year]",  # short trend annotation
+  #     color_scheme = "orange"
+  #   )
+  # })
+
+  # ── KPI card 3 (navy) ────────────────────────────────────────────────────────
+  # output$kpi_3 <- renderUI({
+  #   vvn_kpi_card(
+  #     value        = "[statistic]",
+  #     label        = "[KPI Label]",
+  #     color_scheme = "navy"
+  #   )
+  # })
+
+
+  # ── Chart A: Trend line ───────────────────────────────────────────────────────
+  # theme_vvn()        — applies the VVN ggplot2 theme
+  # scale_color_vvn()  — VVN brand colors for lines/points
+  #
+  # output$trend_chart <- renderPlot({
+  #   req(nrow(filtered()) > 0)
+  #   filtered() |>
+  #     group_by([your_year_col], [your_group_col]) |>
+  #     summarise(v = mean([your_value_col], na.rm = TRUE), .groups = "drop") |>
+  #     ggplot(aes(x = [your_year_col], y = v,
+  #                color = [your_group_col], group = [your_group_col])) +
+  #     geom_line(linewidth = 1.3) +
+  #     geom_point(size = 2.8, alpha = 0.9) +
+  #     scale_color_vvn("main") +             # palette options: "main", "accessible", "brand"
+  #     theme_vvn() +                          # VVN ggplot2 theme
+  #     labs(
+  #       title    = "[Chart Title]",          # Headline case (capitalize major words)
+  #       subtitle = "[Geography · Year range]", # Sentence case
+  #       x        = "[X-axis label]",
+  #       y        = "[Y-axis label]",
+  #       color    = "[Legend title]",
+  #       caption  = "Source: [Agency, Dataset, Year]."
+  #     )
+  # }, res = 110)
+
+
+  # ── Chart B: Horizontal bar chart ─────────────────────────────────────────────
+  # Good for latest-year comparisons or rankings across groups.
+  # scale_fill_vvn() fills bars with VVN brand colors.
+  #
+  # output$bar_chart <- renderPlot({
+  #   req(nrow(filtered()) > 0)
+  #   filtered() |>
+  #     filter([your_year_col] == max([your_year_col])) |>
+  #     group_by([your_group_col]) |>
+  #     summarise(v = mean([your_value_col], na.rm = TRUE), .groups = "drop") |>
+  #     arrange(v) |>
+  #     mutate([your_group_col] = factor([your_group_col], levels = [your_group_col])) |>
+  #     ggplot(aes(x = v, y = [your_group_col], fill = [your_group_col])) +
+  #     geom_col(width = 0.65, show.legend = FALSE) +
+  #     geom_text(aes(label = round(v, 1)), hjust = -0.2, size = 3.2, color = "#3D3D3D") +
+  #     scale_fill_vvn("main") +
+  #     scale_x_continuous(expand = expansion(mult = c(0, .18))) +
+  #     theme_vvn(grid = "x") +
+  #     labs(
+  #       title    = "[Bar Chart Title]",
+  #       subtitle = paste("Latest year:", max(filtered()$[your_year_col])),
+  #       x        = "[X-axis label]",
+  #       y        = NULL,
+  #       caption  = "Source: [Agency, Dataset, Year]."
+  #     )
+  # }, res = 110)
+
+
+  # ── Chart C: Histogram / distribution ────────────────────────────────────────
+  # Shows the distribution of a variable across all rows in filtered data.
+  # The orange dashed line marks the mean.
+  #
+  # output$hist_chart <- renderPlot({
+  #   req(nrow(filtered()) > 0)
+  #   m <- mean(filtered()$[your_value_col], na.rm = TRUE)
+  #   ggplot(filtered(), aes(x = [your_value_col])) +
+  #     geom_histogram(bins = 20, fill = "#861F41", color = "#FFFFFF", alpha = 0.85) +
+  #     geom_vline(xintercept = m, color = "#E5751F", linewidth = 1.2,
+  #                linetype = "dashed") +
+  #     annotate("text", x = m, y = Inf, vjust = 2, hjust = -0.1, size = 3,
+  #              label = paste0("Mean: ", round(m, 1)), color = "#E5751F") +
+  #     theme_vvn() +
+  #     labs(
+  #       title   = "[Distribution Title]",
+  #       x       = "[Variable label]",
+  #       y       = "Count",
+  #       caption = "Source: [Agency, Dataset, Year]."
+  #     )
+  # }, res = 110)
+
+
+  # ── Chart D: Scatter plot (optional) ─────────────────────────────────────────
+  # Shows the relationship between two continuous variables.
+  # Add color = [your_group_col] to color points by group.
+  #
+  # output$scatter_chart <- renderPlot({
+  #   req(nrow(filtered()) > 0)
+  #   ggplot(filtered(), aes(x = [x_col], y = [y_col], color = [your_group_col])) +
+  #     geom_point(size = 2.5, alpha = 0.75) +
+  #     geom_smooth(method = "lm", se = FALSE, linewidth = 1, linetype = "dashed",
+  #                 color = "#3D3D3D") +
+  #     scale_color_vvn("main") +
+  #     theme_vvn() +
+  #     labs(
+  #       title    = "[Scatter Title]",
+  #       subtitle = "[Describe what the two axes show]",
+  #       x        = "[X-axis label]",
+  #       y        = "[Y-axis label]",
+  #       color    = "[Group label]",
+  #       caption  = "Source: [Agency, Dataset, Year]."
+  #     )
+  # }, res = 110)
+
+
+  # ── Map: Leaflet county choropleth (optional) ─────────────────────────────────
+  # Requires: library(leaflet) and library(sf) uncommented above.
+  # Requires: va_counties loaded in R/data_prep.R.
+  # vvn_map_style() applies the VVN Leaflet theme (maroon_seq palette, tooltip).
+  #
   # output$county_map <- leaflet::renderLeaflet({
   #   leaflet::leaflet(va_counties) |>
   #     vvn_map_style(
   #       data      = va_counties,
-  #       value_col = input$variable_sel,
-  #       title     = switch(input$variable_sel,
-  #         value      = "Index Value",
-  #         employment = "Employment Rate (%)",
-  #         poverty    = "Poverty Rate (%)"
+  #       value_col = "[your_value_column]",   # <-- numeric column to map
+  #       title     = "[Map Legend Title]"     # <-- e.g., "Poverty Rate (%)"
+  #     )
+  # })
+
+
+  # ── DT interactive table — Option A ──────────────────────────────────────────
+  # Good for large datasets. Users can search, sort, and download.
+  # Uncomment DT::dataTableOutput("dt_table") in the UI above.
+  #
+  # output$dt_table <- DT::renderDataTable({
+  #   filtered() |>
+  #     select([col_1], [col_2], [col_3]) |>   # <-- choose columns to display
+  #     arrange(desc([your_year_col])) |>
+  #     DT::datatable(
+  #       rownames   = FALSE,
+  #       class      = "stripe hover compact",
+  #       extensions = "Buttons",
+  #       options    = list(
+  #         pageLength = 15,
+  #         scrollX    = TRUE,
+  #         dom        = "Bfrtip",
+  #         buttons    = c("csv", "excel")    # CSV and Excel download buttons
   #       )
   #     )
   # })
+
+
+  # ── GT styled table — Option B ────────────────────────────────────────────────
+  # Good for small summary tables. vvn_table() applies VVN maroon header style.
+  # Uncomment gt::gt_output("gt_table") in the UI above.
+  #
+  # output$gt_table <- gt::render_gt({
+  #   filtered() |>
+  #     group_by([your_group_col]) |>
+  #     summarise(
+  #       `[Column 1]` = round(mean([col_1], na.rm = TRUE), 1),
+  #       `[Column 2]` = round(mean([col_2], na.rm = TRUE), 1),
+  #       .groups = "drop"
+  #     ) |>
+  #     arrange(desc(`[Column 1]`)) |>
+  #     gt::gt() |>
+  #     vvn_table(
+  #       title       = "[Table Title]",
+  #       source_note = "Source: [Agency, Dataset, Year]. VVN Analysis."
+  #     )
+  # })
+
 }
 
-# ── Launch ────────────────────────────────────────────────────────────────────
+# ── Launch ─────────────────────────────────────────────────────────────────────
 shinyApp(ui, server)
