@@ -40,38 +40,45 @@ create_vvn_story <- function(name,
     fs::dir_delete(proj)
   }
 
-  # Create directory structure
-  for (d in c("data/raw", "data/processed", "figures", "scripts")) {
-    fs::dir_create(fs::path(proj, d))
-  }
+  created_fresh <- FALSE
+  tryCatch({
+    # Create directory structure
+    for (d in c("data/raw", "data/processed", "figures", "scripts")) {
+      fs::dir_create(fs::path(proj, d))
+    }
+    created_fresh <- TRUE
 
-  # Copy bundled templates (root-level files: index.qmd, _quarto.yml, styles.scss)
-  tmpl <- system.file("templates", "story", package = "vvnthemes")
-  if (nzchar(tmpl) && fs::dir_exists(tmpl)) {
-    root_files <- fs::dir_ls(tmpl, type = "file")
-    if (length(root_files)) fs::file_copy(root_files, proj, overwrite = FALSE)
-  } else {
-    .write_story_stubs(proj)
-  }
+    # Copy bundled templates (root-level files: index.qmd, _quarto.yml, styles.scss)
+    tmpl <- system.file("templates", "story", package = "vvnthemes")
+    if (nzchar(tmpl) && fs::dir_exists(tmpl)) {
+      root_files <- fs::dir_ls(tmpl, type = "file")
+      if (length(root_files)) fs::file_copy(root_files, proj, overwrite = TRUE)
+    } else {
+      .write_story_stubs(proj)
+    }
 
-  # Copy analysis.R template into scripts/
-  analysis_tmpl <- system.file("templates", "story", "scripts", "analysis.R",
-                                package = "vvnthemes")
-  if (nzchar(analysis_tmpl) && fs::file_exists(analysis_tmpl)) {
-    fs::file_copy(analysis_tmpl, fs::path(proj, "scripts", "analysis.R"),
-                  overwrite = FALSE)
-  } else {
-    .write_analysis_stub(fs::path(proj, "scripts", "analysis.R"))
-  }
+    # Copy analysis.R template into scripts/
+    analysis_tmpl <- system.file("templates", "story", "scripts", "analysis.R",
+                                  package = "vvnthemes")
+    if (nzchar(analysis_tmpl) && fs::file_exists(analysis_tmpl)) {
+      fs::file_copy(analysis_tmpl, fs::path(proj, "scripts", "analysis.R"),
+                    overwrite = TRUE)
+    } else {
+      .write_analysis_stub(fs::path(proj, "scripts", "analysis.R"))
+    }
 
-  # Inject title & author into index.qmd
-  qmd <- fs::path(proj, "index.qmd")
-  if (fs::file_exists(qmd)) {
-    lines <- readLines(qmd, warn = FALSE)
-    lines <- gsub("VVN_TITLE",  title,  lines, fixed = TRUE)
-    lines <- gsub("VVN_AUTHOR", author, lines, fixed = TRUE)
-    writeLines(lines, qmd)
-  }
+    # Inject title & author into index.qmd
+    qmd <- fs::path(proj, "index.qmd")
+    if (fs::file_exists(qmd)) {
+      lines <- readLines(qmd, warn = FALSE)
+      lines <- gsub("VVN_TITLE",  title,  lines, fixed = TRUE)
+      lines <- gsub("VVN_AUTHOR", author, lines, fixed = TRUE)
+      writeLines(lines, qmd)
+    }
+  }, error = function(e) {
+    if (created_fresh && fs::dir_exists(proj)) fs::dir_delete(proj)
+    cli::cli_abort("Failed to create project: {e$message}", call = NULL)
+  })
 
   # README
   .write_readme(proj, name, title,
