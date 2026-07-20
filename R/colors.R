@@ -1,6 +1,6 @@
 # =============================================================================
 # VVN Colors & Palettes
-# Visualizing Virginia Numbers · Virginia Tech
+# Visualizing Virginia's Numbers · Virginia Tech
 # =============================================================================
 
 # Suppress R CMD check notes for ggplot2 aesthetic variables

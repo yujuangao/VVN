@@ -1,7 +1,7 @@
-#' vvnthemes: Visualizing Virginia Numbers Themes and Templates
+#' vvnthemes: Visualizing Virginia's Numbers Themes and Templates
 #'
 #' @description
-#' `vvnthemes` is the design system for all Visualizing Virginia Numbers (VVN)
+#' `vvnthemes` is the design system for all Visualizing Virginia's Numbers (VVN)
 #' projects at Virginia Tech. It enforces VT brand colors, typography, and
 #' layout rules so every chart, map, table, dashboard, and narrative report
 #' produced by VVN teams is consistent and publication-ready.
@@ -129,7 +129,7 @@
   v <- utils::packageVersion(pkgname)
   packageStartupMessage(
     "\u25a0 vvnthemes ", v,
-    " \u00b7 Visualizing Virginia Numbers \u00b7 Virginia Tech\n",
+    " \u00b7 Visualizing Virginia's Numbers \u00b7 Virginia Tech\n",
     "  Use set_vvn_defaults() to apply VVN brand globally."
   )
 }

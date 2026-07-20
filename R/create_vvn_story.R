@@ -31,7 +31,7 @@
 create_vvn_story <- function(name,
                               path      = ".",
                               title     = name,
-                              author    = "Visualizing Virginia Numbers",
+                              author    = "Visualizing Virginia's Numbers",
                               overwrite = FALSE) {
 
   proj <- fs::path(path, name)
@@ -209,7 +209,7 @@ check_vvn_story <- function(path = ".") {
       "## Conclusion",
       "",
       "---",
-      "*Visualizing Virginia Numbers \u00B7 Virginia Tech*"
+      "*Visualizing Virginia's Numbers \u00B7 Virginia Tech*"
     ),
     fs::path(proj, "index.qmd")
   )

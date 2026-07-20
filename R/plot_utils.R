@@ -17,7 +17,7 @@
 #' library(ggplot2)
 #' ggplot(ggplot2::mpg, aes(displ, hwy)) + geom_point() +
 #'   vvn_title("Engine Size vs Fuel Economy",
-#'              subtitle = "Visualizing Virginia Numbers, 2024")
+#'              subtitle = "Visualizing Virginia's Numbers, 2024")
 vvn_title <- function(title, subtitle = NULL) {
   ggplot2::labs(title = title, subtitle = subtitle)
 }

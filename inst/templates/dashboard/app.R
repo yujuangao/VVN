@@ -1,7 +1,7 @@
 # ==============================================================================
 # VVN Dashboard Template — app.R
 # VVN_TITLE
-# VVN_AUTHOR · Visualizing Virginia Numbers · Virginia Tech
+# VVN_AUTHOR · Visualizing Virginia's Numbers · Virginia Tech
 #
 # WORKFLOW:
 #   Step 1 — Load your data below (Section "Load data")
@@ -53,14 +53,14 @@ ui <- bslib::page_navbar(
   header = tagList(
     tags$head(
       tags$link(rel = "stylesheet", href = "vvn.css"),
-      tags$title("VVN_TITLE · Visualizing Virginia Numbers")
+      tags$title("VVN_TITLE · Visualizing Virginia's Numbers")
     )
   ),
 
   # ── Page footer ──────────────────────────────────────────────────────────────
   footer = tags$footer(
     class = "text-center text-muted small py-2 border-top mt-3",
-    "Visualizing Virginia Numbers · Virginia Tech · ",
+    "Visualizing Virginia's Numbers · Virginia Tech · ",
     tags$a("vvn.vt.edu", href = "https://vvn.vt.edu", target = "_blank")
   ),
 
@@ -205,7 +205,7 @@ ui <- bslib::page_navbar(
 
         # ── Option A: Interactive Leaflet map ─────────────────────────────────
         # Requires: library(leaflet) and library(sf) uncommented above.
-        # Requires: va_counties loaded in R/data_prep.R.
+        # Requires: va_counties loaded via sf::read_sf() in the "Load data" section above.
         # Uncomment leafletOutput() and the matching renderLeaflet() in server.
         #
         # leaflet::leafletOutput("county_map", height = "580px")
@@ -293,7 +293,7 @@ ui <- bslib::page_navbar(
         tags$h4("Contact"),
         tags$p(
           "Built by ",
-          tags$a("Visualizing Virginia Numbers (VVN)",
+          tags$a("Visualizing Virginia's Numbers (VVN)",
                  href = "https://vvn.vt.edu", target = "_blank"),
           " at Virginia Tech. Questions? ",
           tags$a("vvn@vt.edu", href = "mailto:vvn@vt.edu")

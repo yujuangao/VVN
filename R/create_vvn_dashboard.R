@@ -29,7 +29,7 @@
 create_vvn_dashboard <- function(name,
                                   path      = ".",
                                   title     = name,
-                                  author    = "Visualizing Virginia Numbers",
+                                  author    = "Visualizing Virginia's Numbers",
                                   overwrite = FALSE) {
 
   proj <- fs::path(path, name)

@@ -38,7 +38,7 @@ set_vvn_defaults()
 ## VVN_TITLE
 
 ::: {.hero-subtitle}
-Visualizing Virginia Numbers · Virginia Tech · `r format(Sys.Date(), "%Y")`
+Visualizing Virginia's Numbers · Virginia Tech · `r format(Sys.Date(), "%Y")`
 :::
 
 [One sentence describing what this story is about and who it covers.]
@@ -201,5 +201,5 @@ if (file.exists(f)) knitr::include_graphics(f)
 
 ---
 
-*Produced by Visualizing Virginia Numbers · Virginia Tech*
+*Produced by Visualizing Virginia's Numbers · Virginia Tech*
 *Built with [vvnthemes](https://github.com/yujuangao/VVN)*
