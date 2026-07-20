@@ -1,6 +1,7 @@
 # =============================================================================
 # VVN Colors & Palettes
 # Visualizing Virginia's Numbers · Virginia Tech
+# Source: brand.vt.edu/identity/color.html
 # =============================================================================
 
 # Suppress R CMD check notes for ggplot2 aesthetic variables
@@ -9,62 +10,104 @@ utils::globalVariables(c("x", "color", "label_col"))
 # ── Internal color constants (not exported) ───────────────────────────────────
 
 .VVN <- list(
-  # ── Chart / brand colors ──────────────────────────────────────────────────
-  maroon     = "#861F41",
-  maroon_dk  = "#520F25",
-  maroon_lt  = "#F5C8D4",
-  orange     = "#E5751F",   # print/chart orange
-  orange_lt  = "#FDE8D4",
-  navy       = "#1B5299",
-  charcoal   = "#3D3D3D",
+
+  # ── VT Primary Palette (brand.vt.edu) ─────────────────────────────────────
+  # Chicago Maroon  CSS: --vt-maroon        HEX: #861F41
+  # Burnt Orange    CSS: --vt-burntOrange   HEX: #E5751F  (print / chart)
+  # Hokie Stone     CSS: --vt-hokieStone    HEX: #75787B
+  # Yardline White  CSS: --vt-white         HEX: #FFFFFF
+  # Impact Orange   CSS: --vt-impactOrange  HEX: #CA4F00  (digital text / UI)
+  maroon         = "#861F41",
+  maroon_dk      = "#520F25",
+  maroon_lt      = "#F5C8D4",
+  orange         = "#E5751F",   # Burnt Orange — print / chart
+  orange_lt      = "#FDE8D4",
+  hokie_stone    = "#75787B",   # Hokie Stone (CSS: --vt-hokieStone)
+  impact_orange  = "#CA4F00",   # Impact Orange — digital text & UI accent
+  white          = "#FFFFFF",
+
+  # ── VT Secondary Palette (brand.vt.edu) ───────────────────────────────────
+  # CSS variables: --vt-purple, --vt-pink, --vt-yellow, --vt-teal,
+  #                --vt-turquoise, --vt-grey, --vt-smoke, --vt-impactOrange
+  purple     = "#642667",   # Pylon Purple
+  pink       = "#CE0058",   # Boundless Pink
+  yellow     = "#F7EA48",   # Triumphant Yellow
+  teal       = "#508590",   # Sustainable Teal
+  turquoise  = "#2CD5C4",   # Vibrant Turquoise
+  land_grey  = "#D7D2CB",   # Land Grant Grey
+  smoke      = "#E5E1E6",   # Skipper Smoke
+
+  # ── Non-official utility colors (kept for chart/palette use) ──────────────
+  navy       = "#1B5299",   # Not in VT palette; used in diverging scales
+  charcoal   = "#3D3D3D",   # Body text
   gray       = "#AAAAAA",
   light_gray = "#F7F7F7",
   rule       = "#E0E0E0",
-  white      = "#FFFFFF",
 
-  # ── UI / website chrome colors (new design system) ────────────────────────
-  ui_nav_bg    = "#FFFFFF",   # top navigation background
-  ui_page_bg   = "#F3F4F7",   # page background
-  ui_footer    = "#222C3D",   # footer & breadcrumb bar
-  ui_text      = "#1A1A1A",   # main text
-  ui_text_2    = "#3F4650",   # secondary text
-  ui_card_bg   = "#FFFFFF",   # card background
-  ui_card_bdr  = "#D9D9D9",   # card border
-  ui_btn_bdr   = "#D5D5D5",   # button border
-  ui_footer_div= "#8C939C",   # footer divider
-  ui_orange    = "#E87722",   # UI accent orange (Impact Orange — digital)
-  ui_launch    = "#8A2045"    # dark maroon for launch / primary CTA buttons
+  # ── UI / website chrome ───────────────────────────────────────────────────
+  ui_nav_bg    = "#FFFFFF",
+  ui_page_bg   = "#F3F4F7",
+  ui_footer    = "#222C3D",
+  ui_text      = "#1A1A1A",
+  ui_text_2    = "#3F4650",
+  ui_card_bg   = "#FFFFFF",
+  ui_card_bdr  = "#D9D9D9",
+  ui_btn_bdr   = "#D5D5D5",
+  ui_footer_div= "#8C939C",
+  ui_orange    = "#CA4F00",   # Impact Orange (CSS: --vt-impactOrange)
+  ui_launch    = "#8A2045"    # Dark maroon for CTA buttons
 )
 
 # ── Named palette lists ───────────────────────────────────────────────────────
 
 .VVN_PALETTES <- list(
 
-  # ── VT Brand — categorical ────────────────────────────────────────────────
-  # Official Virginia Tech brand colors for data visualizations.
-  # Source: brand.vt.edu
+  # ── VT Primary — categorical ──────────────────────────────────────────────
+  # Six-color palette drawn entirely from official VT brand colors.
+  # Uses primary palette (maroon, burnt orange, hokie stone) +
+  # three secondary colors (purple, teal, land grey) for variety.
+  # Source: brand.vt.edu/identity/color.html
   vt = c(
-    "#861F41",  # VT Maroon
-    "#E87722",  # Impact Orange (digital screen)
-    "#1B5299",  # Navy Blue
-    "#4B6734",  # Forest Green
-    "#75757A",  # Hokie Stone
-    "#CEB893"   # Sand / Wheat
+    "#861F41",  # Chicago Maroon   (primary)
+    "#CA4F00",  # Impact Orange    (primary digital)
+    "#642667",  # Pylon Purple     (secondary)
+    "#508590",  # Sustainable Teal (secondary)
+    "#75787B",  # Hokie Stone      (primary)
+    "#D7D2CB"   # Land Grant Grey  (secondary)
   ),
+
+  # ── VT Secondary — all 8 official secondary colors ────────────────────────
+  # Complete secondary palette from brand.vt.edu.
+  # Use sparingly; for accent and supplemental data series.
+  vt_secondary = c(
+    "#642667",  # Pylon Purple
+    "#CE0058",  # Boundless Pink
+    "#F7EA48",  # Triumphant Yellow
+    "#508590",  # Sustainable Teal
+    "#2CD5C4",  # Vibrant Turquoise
+    "#D7D2CB",  # Land Grant Grey
+    "#E5E1E6",  # Skipper Smoke
+    "#CA4F00"   # Impact Orange
+  ),
+
+  # ── Brand — 3-color primary brand triad ──────────────────────────────────
+  # Chicago Maroon + Burnt Orange (print) + Hokie Stone.
+  # For charts where 3 groups need clear VT identity.
+  brand = c("#861F41", "#E5751F", "#75787B"),
 
   # ── General-purpose categorical ───────────────────────────────────────────
   main = c(
     "#861F41", "#E5751F", "#1B5299", "#2E7D32", "#7B1FA2",
     "#C05878", "#5B9BD5", "#F0964A", "#00838F", "#795548"
   ),
-  brand = c("#861F41", "#E5751F", "#1B5299"),
 
   # ── Sequential ────────────────────────────────────────────────────────────
-  maroon_seq = c("#F5C8D4", "#E09BB0", "#C86880", "#A03558", "#861F41", "#520F25"),
-  orange_seq = c("#FDE8D4", "#FAC89A", "#F0964A", "#E5751F", "#B05010", "#703008"),
-  navy_seq   = c("#D0E0F5", "#A0C0E8", "#6090CC", "#3060AA", "#1B5299", "#0A2A66"),
+  maroon_seq     = c("#F5C8D4", "#E09BB0", "#C86880", "#A03558", "#861F41", "#520F25"),
+  orange_seq     = c("#FDE8D4", "#FAC89A", "#F0964A", "#E5751F", "#B05010", "#703008"),
+  navy_seq       = c("#D0E0F5", "#A0C0E8", "#6090CC", "#3060AA", "#1B5299", "#0A2A66"),
+  hokie_stone_seq = c("#F2F2F2", "#D7D2CB", "#B5B0AB", "#8E8C89", "#75787B", "#4A4D50"),
 
-  # ── Diverging (navy–white–maroon) ─────────────────────────────────────────
+  # ── Diverging (navy–white–maroon, 7 fixed stops) ──────────────────────────
   diverging = c("#1B5299", "#5B9BD5", "#AED0F0", "#F4F4F4",
                 "#F5C8D4", "#C05878", "#861F41"),
 
@@ -83,8 +126,6 @@ utils::globalVariables(c("x", "color", "label_col"))
   # ─────────────────────────────────────────────────────────────────────────
 
   # ── Monet Pond ────────────────────────────────────────────────────────────
-  # Inspired by Monet's Water Lilies series. Cool blues and greens with a
-  # warm cream that evokes impressionistic light on water.
   monet = c(
     "#A8C5D9",  # sky blue
     "#B9CBAE",  # sage green
@@ -94,8 +135,6 @@ utils::globalVariables(c("x", "color", "label_col"))
   ),
 
   # ── Van Gogh Sunflowers ───────────────────────────────────────────────────
-  # Inspired by Van Gogh's Sunflowers. Deep cobalt blue grounds warm yellow
-  # and gold tones, with earthy olive green.
   sunflower = c(
     "#F2C94C",  # sunflower yellow
     "#1E4E8C",  # cobalt blue
@@ -105,19 +144,15 @@ utils::globalVariables(c("x", "color", "label_col"))
   ),
 
   # ── Academic Deep Blue ────────────────────────────────────────────────────
-  # A scholarly navy-to-orange palette. Evokes academic publishing,
-  # journal covers, and institutional graphics.
   academic = c(
     "#0D1B3D",  # deep navy
     "#385C8E",  # slate blue
     "#BFC7D5",  # blue-gray
-    "#E8ECF4",  # pale ice blue (near-white, stays visible on white bg)
-    "#F28E2B"   # warm amber / burnt orange
+    "#E8ECF4",  # pale ice blue
+    "#F28E2B"   # warm amber
   ),
 
   # ── Natural Muted ─────────────────────────────────────────────────────────
-  # Earthy, understated tones — sage, slate, linen — for environmental,
-  # agricultural, or sustainability topics.
   natural = c(
     "#A6B89A",  # sage green
     "#8CA3B7",  # muted slate blue
@@ -125,22 +160,20 @@ utils::globalVariables(c("x", "color", "label_col"))
     "#333333",  # near-black
     "#F7F7F5"   # warm off-white
   )
-
-  # Note: Diverging variants for artistic themes are generated dynamically
-  # in vvn_palette() — use palette = "monet_div", "sunflower_div", etc.
 )
 
 # ── Diverging control points (internal) ──────────────────────────────────────
-# Each entry is a 3-element vector: [pole A, neutral midpoint, pole B].
-# vvn_palette() interpolates these to n colors using colorRampPalette().
+# Each entry: [pole A, neutral midpoint, pole B].
+# vvn_palette() interpolates these to n colors via colorRampPalette().
 
 .VVN_DIV <- list(
 
   # ── VT Brand diverging ────────────────────────────────────────────────────
-  # Classic VT brand diverging: maroon ↔ neutral white ↔ navy
+  # Classic VT diverging: VT Maroon ↔ white ↔ Navy (utility, not official VT)
   vt_div        = c("#861F41", "#F4F4F4", "#1B5299"),
-  # Orange-accented diverging: Impact Orange ↔ cream ↔ VT Maroon
-  vt_orange_div = c("#E87722", "#FDE8D4", "#861F41"),
+  # Impact Orange (digital) ↔ light cream ↔ VT Maroon
+  # Uses official #CA4F00 (--vt-impactOrange) as the warm pole.
+  vt_orange_div = c("#CA4F00", "#FDE8D4", "#861F41"),
 
   # ── Artistic theme diverging ──────────────────────────────────────────────
   monet_div     = c("#A8C5D9", "#F3F1E6", "#7FA7A6"),
@@ -152,13 +185,18 @@ utils::globalVariables(c("x", "color", "label_col"))
 
 # ── Public API ────────────────────────────────────────────────────────────────
 
-#' Return VVN brand colors
+#' Return VVN / VT brand colors
 #'
 #' Retrieve one or more named VVN brand colors as a named character vector.
+#' Colors include all official VT primary and secondary palette entries from
+#' \url{https://brand.vt.edu/identity/color.html}.
 #'
 #' @param ... Color names to retrieve. If none provided, returns all colors.
-#'   Valid names: `"maroon"`, `"orange"`, `"navy"`, `"charcoal"`, `"gray"`,
-#'   `"light_gray"`, `"white"`, `"maroon_dk"`, `"maroon_lt"`, `"orange_lt"`.
+#'   **Primary:** `"maroon"`, `"orange"`, `"hokie_stone"`, `"white"`,
+#'   `"impact_orange"`, `"maroon_dk"`, `"maroon_lt"`, `"orange_lt"`.
+#'   **Secondary:** `"purple"`, `"pink"`, `"yellow"`, `"teal"`,
+#'   `"turquoise"`, `"land_grey"`, `"smoke"`.
+#'   **Utility:** `"navy"`, `"charcoal"`, `"gray"`, `"light_gray"`.
 #'
 #' @return A named character vector of hex color codes.
 #' @export
@@ -166,19 +204,32 @@ utils::globalVariables(c("x", "color", "label_col"))
 #' @examples
 #' vvn_colors()
 #' vvn_colors("maroon")
-#' vvn_colors("maroon", "orange", "navy")
+#' vvn_colors("maroon", "orange", "hokie_stone")
+#' vvn_colors("teal", "purple", "pink")
 vvn_colors <- function(...) {
   all_cols <- c(
-    maroon     = "#861F41",
-    orange     = "#E5751F",
-    navy       = "#1B5299",
-    charcoal   = "#3D3D3D",
-    gray       = "#AAAAAA",
-    light_gray = "#F7F7F7",
-    white      = "#FFFFFF",
-    maroon_dk  = "#520F25",
-    maroon_lt  = "#F5C8D4",
-    orange_lt  = "#FDE8D4"
+    # VT Primary
+    maroon        = "#861F41",
+    orange        = "#E5751F",   # Burnt Orange (print / chart)
+    hokie_stone   = "#75787B",
+    white         = "#FFFFFF",
+    impact_orange = "#CA4F00",   # Impact Orange (digital text / UI)
+    maroon_dk     = "#520F25",
+    maroon_lt     = "#F5C8D4",
+    orange_lt     = "#FDE8D4",
+    # VT Secondary
+    purple        = "#642667",   # Pylon Purple
+    pink          = "#CE0058",   # Boundless Pink
+    yellow        = "#F7EA48",   # Triumphant Yellow
+    teal          = "#508590",   # Sustainable Teal
+    turquoise     = "#2CD5C4",   # Vibrant Turquoise
+    land_grey     = "#D7D2CB",   # Land Grant Grey
+    smoke         = "#E5E1E6",   # Skipper Smoke
+    # Utility (not official VT; retained for chart use)
+    navy          = "#1B5299",
+    charcoal      = "#3D3D3D",
+    gray          = "#AAAAAA",
+    light_gray    = "#F7F7F7"
   )
   req <- c(...)
   if (length(req) == 0L) return(all_cols)
@@ -197,39 +248,35 @@ vvn_colors <- function(...) {
 #' Use `pick` to extract a single color by position.
 #'
 #' @param palette Palette name. One of:
-#'   **VT Brand:**
-#'   - `"vt"` — 6-color VT brand palette (maroon, orange, navy, forest, stone, sand)
-#'   - `"brand"` — 3-color brand (maroon, orange, navy)
+#'   **VT Brand (official):**
+#'   - `"vt"` — 6-color palette using official VT primary + secondary colors
+#'   - `"vt_secondary"` — all 8 VT secondary palette colors
+#'   - `"brand"` — 3-color primary triad (maroon, burnt orange, hokie stone)
 #'   - `"main"` — 10-color general purpose
 #'
-#'   **Sequential:** `"maroon_seq"`, `"orange_seq"`, `"navy_seq"`, `"gray_seq"`
+#'   **Sequential:** `"maroon_seq"`, `"orange_seq"`, `"navy_seq"`,
+#'   `"hokie_stone_seq"`, `"gray_seq"`
 #'
 #'   **Diverging (standard):** `"diverging"` (navy–white–maroon, 7 fixed colors)
 #'
-#'   **Colorblind-safe:** `"accessible"` (Okabe-Ito), `"wcag"` (all ≥ 4.5:1)
+#'   **Colorblind-safe:** `"accessible"` (Okabe-Ito), `"wcag"` (all \eqn{\ge}4.5:1)
 #'
 #'   **VT brand diverging (interpolated to any n):**
-#'   - `"vt_div"` — VT Maroon ↔ white ↔ Navy (classic VT)
-#'   - `"vt_orange_div"` — Impact Orange ↔ cream ↔ VT Maroon
+#'   - `"vt_div"` — VT Maroon \eqn{\leftrightarrow} white \eqn{\leftrightarrow} Navy
+#'   - `"vt_orange_div"` — Impact Orange (#CA4F00) \eqn{\leftrightarrow} cream \eqn{\leftrightarrow} VT Maroon
 #'
 #'   **Artistic themes (categorical):**
-#'   - `"monet"` — Monet Pond: cool blues and sage greens
-#'   - `"sunflower"` — Van Gogh Sunflowers: cobalt + gold
-#'   - `"academic"` — Academic Deep Blue: navy + amber
-#'   - `"natural"` — Natural Muted: sage, slate, linen
+#'   - `"monet"`, `"sunflower"`, `"academic"`, `"natural"`
 #'
-#'   **Artistic themes (diverging — interpolated to any n):**
-#'   - `"monet_div"` — sky blue ↔ cream ↔ deep teal
-#'   - `"sunflower_div"` — cobalt ↔ parchment ↔ sunflower yellow
-#'   - `"academic_div"` — deep navy ↔ blue-gray ↔ amber
-#'   - `"natural_div"` — near-black ↔ off-white ↔ sage green
+#'   **Artistic themes (diverging):**
+#'   - `"monet_div"`, `"sunflower_div"`, `"academic_div"`, `"natural_div"`
 #'
 #' @param n Number of colors to return. `NULL` returns all base colors.
 #'   For diverging palettes (`_div`), defaults to 7.
 #' @param reverse Reverse the palette? Default `FALSE`.
 #' @param alpha Opacity (0–1). Default `1`.
 #' @param pick Integer index to select a single color from the palette.
-#'   E.g. `pick = 2` returns the 2nd color. Overrides `n`.
+#'   Overrides `n`.
 #'
 #' @return A character vector of hex color codes (length 1 when `pick` is set).
 #' @export
@@ -237,12 +284,12 @@ vvn_colors <- function(...) {
 #' @examples
 #' vvn_palette()                          # all "main" colors
 #' vvn_palette("vt")                      # VT brand categorical (6 colors)
-#' vvn_palette("vt_div", n = 9)          # 9-step VT maroon-white-navy diverging
-#' vvn_palette("vt_orange_div", n = 7)   # 7-step VT orange-cream-maroon diverging
+#' vvn_palette("vt_secondary")            # all 8 VT secondary colors
+#' vvn_palette("brand")                   # maroon, burnt orange, hokie stone
+#' vvn_palette("hokie_stone_seq", n = 8)  # 8-step Hokie Stone sequential
+#' vvn_palette("vt_div", n = 9)           # 9-step VT maroon–white–navy diverging
+#' vvn_palette("vt_orange_div", n = 7)    # 7-step impact orange–cream–maroon
 #' vvn_palette("monet")                   # Monet Pond theme
-#' vvn_palette("monet", pick = 3)         # 3rd Monet color (#7FA7A6 teal)
-#' vvn_palette("sunflower_div", n = 9)    # 9-step diverging from sunflower
-#' vvn_palette("brand")                   # maroon, orange, navy
 #' vvn_palette("maroon_seq", n = 9)       # 9-step sequential
 vvn_palette <- function(palette = "main", n = NULL, reverse = FALSE,
                         alpha = 1, pick = NULL) {
@@ -252,15 +299,15 @@ vvn_palette <- function(palette = "main", n = NULL, reverse = FALSE,
   if (!palette %in% all_names) {
     cli::cli_abort(c(
       "Unknown palette {.val {palette}}.",
-      "i" = "VT brand: {.val {c('vt','brand','main')}}",
-      "i" = "Sequential: {.val {c('maroon_seq','orange_seq','navy_seq','gray_seq')}}",
-      "i" = "Diverging: {.val {c('diverging','monet_div','sunflower_div','academic_div','natural_div')}}",
+      "i" = "VT brand: {.val {c('vt','vt_secondary','brand','main')}}",
+      "i" = "Sequential: {.val {c('maroon_seq','orange_seq','navy_seq','hokie_stone_seq','gray_seq')}}",
+      "i" = "Diverging: {.val {c('diverging','vt_div','vt_orange_div','monet_div','sunflower_div','academic_div','natural_div')}}",
       "i" = "Artistic: {.val {c('monet','sunflower','academic','natural')}}",
       "i" = "Accessible: {.val {c('accessible','wcag')}}"
     ))
   }
 
-  # ── Artistic diverging palettes — generate from 3-point control ───────────
+  # ── Diverging palettes — interpolate from 3-point control ─────────────────
   if (palette %in% names(.VVN_DIV)) {
     ctrl  <- .VVN_DIV[[palette]]
     n_out <- if (is.null(n)) 7L else as.integer(n)
@@ -281,9 +328,7 @@ vvn_palette <- function(palette = "main", n = NULL, reverse = FALSE,
     grDevices::colorRampPalette(base)(n_out)
   }
 
-  # ── Single-color pick ─────────────────────────────────────────────────────
   if (!is.null(pick)) return(cols[pick])
-
   if (alpha < 1) cols <- scales::alpha(cols, alpha)
   cols
 }
@@ -304,6 +349,9 @@ vvn_palette <- function(palette = "main", n = NULL, reverse = FALSE,
 #'
 #' @examples
 #' view_vvn_palette()
+#' view_vvn_palette("vt")
+#' view_vvn_palette("vt_secondary")
+#' view_vvn_palette("hokie_stone_seq", n = 8)
 #' view_vvn_palette("monet")
 #' view_vvn_palette("sunflower_div", n = 9)
 #' view_vvn_palette("accessible")
@@ -320,7 +368,6 @@ view_vvn_palette <- function(palette = "main",
     color = cols,
     stringsAsFactors = FALSE
   )
-  # Choose label color (white on dark, dark on light)
   lum <- vapply(cols, function(h) {
     rgb <- grDevices::col2rgb(h) / 255
     rgb <- ifelse(rgb <= .04045, rgb/12.92, ((rgb+.055)/1.055)^2.4)
@@ -340,11 +387,12 @@ view_vvn_palette <- function(palette = "main",
     ggplot2::labs(title = ttl, x = NULL, y = NULL) +
     ggplot2::theme_void(base_size = 11) +
     ggplot2::theme(
-      plot.title     = ggplot2::element_text(colour = .VVN$maroon, face = "bold",
-                                              size = 13, hjust = 0.5, margin = ggplot2::margin(b = 8)),
+      plot.title      = ggplot2::element_text(colour = .VVN$maroon, face = "bold",
+                                               size = 13, hjust = 0.5,
+                                               margin = ggplot2::margin(b = 8)),
       plot.background = ggplot2::element_rect(fill = .VVN$white, colour = NA),
-      axis.text.x    = ggplot2::element_text(colour = .VVN$charcoal, size = 8),
-      plot.margin    = ggplot2::margin(12, 12, 12, 12)
+      axis.text.x     = ggplot2::element_text(colour = .VVN$charcoal, size = 8),
+      plot.margin     = ggplot2::margin(12, 12, 12, 12)
     )
   print(p)
   invisible(p)

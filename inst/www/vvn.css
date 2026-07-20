@@ -4,7 +4,7 @@
    ─────────────────────────────────────────────────────────────────────────────
    Design system colors:
      Nav background  #FFFFFF  ·  Page background  #F3F4F7
-     Footer/breadcrumb #222C3D  ·  Accent orange  #E87722
+     Footer/breadcrumb #222C3D  ·  Impact Orange  #CA4F00
      Main text  #1A1A1A  ·  Secondary text  #3F4650
      Card border  #D9D9D9  ·  Button border  #D5D5D5
      Launch / primary button  #8A2045
@@ -38,7 +38,7 @@
   --ui-card-bdr:     #D9D9D9;   /* card border */
   --ui-btn-bdr:      #D5D5D5;   /* button border */
   --ui-footer-div:   #8C939C;   /* footer divider */
-  --ui-orange:       #E87722;   /* Impact Orange — digital accent */
+  --ui-orange:       #CA4F00;   /* Impact Orange (--vt-impactOrange) — digital accent */
   --ui-launch:       #8A2045;   /* dark maroon — launch / primary CTA */
 
   /* ── Typography & tokens ─────────────────────────────────────────────── */

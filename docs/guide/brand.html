@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b74986034509e3517a4d7a249d10e1f2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-2f7dec4d620d63cbf2dd80bdc157c62f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -203,14 +203,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#brand-colors" id="toc-brand-colors" class="nav-link" data-scroll-target="#brand-colors">Brand Colors</a></li>
   <li><a href="#chart-map-palettes" id="toc-chart-map-palettes" class="nav-link" data-scroll-target="#chart-map-palettes">Chart &amp; Map Palettes</a></li>
-  <li><a href="#brand-3-group-comparisons" id="toc-brand-3-group-comparisons" class="nav-link" data-scroll-target="#brand-3-group-comparisons"><code>brand</code> — 3-Group Comparisons</a></li>
+  <li><a href="#brand-primary-brand-triad" id="toc-brand-primary-brand-triad" class="nav-link" data-scroll-target="#brand-primary-brand-triad"><code>brand</code> — Primary Brand Triad</a></li>
   <li><a href="#main-general-purpose-10-colors" id="toc-main-general-purpose-10-colors" class="nav-link" data-scroll-target="#main-general-purpose-10-colors"><code>main</code> — General Purpose (10 Colors)</a></li>
   <li><a href="#accessible-okabe-ito-colorblind-safe" id="toc-accessible-okabe-ito-colorblind-safe" class="nav-link" data-scroll-target="#accessible-okabe-ito-colorblind-safe"><code>accessible</code> — Okabe-Ito Colorblind-Safe</a></li>
   <li><a href="#wcag-wcag-aa-compliant" id="toc-wcag-wcag-aa-compliant" class="nav-link" data-scroll-target="#wcag-wcag-aa-compliant"><code>wcag</code> — WCAG AA Compliant</a></li>
   </ul></li>
   <li><a href="#vt-theme" id="toc-vt-theme" class="nav-link" data-scroll-target="#vt-theme">VT Theme</a>
   <ul class="collapse">
-  <li><a href="#vt-categorical" id="toc-vt-categorical" class="nav-link" data-scroll-target="#vt-categorical">VT Categorical</a></li>
+  <li><a href="#vt-vt-brand-categorical" id="toc-vt-vt-brand-categorical" class="nav-link" data-scroll-target="#vt-vt-brand-categorical"><code>vt</code> — VT Brand Categorical</a></li>
+  <li><a href="#vt_secondary-all-8-official-secondary-colors" id="toc-vt_secondary-all-8-official-secondary-colors" class="nav-link" data-scroll-target="#vt_secondary-all-8-official-secondary-colors"><code>vt_secondary</code> — All 8 Official Secondary Colors</a></li>
   <li><a href="#vt-sequential" id="toc-vt-sequential" class="nav-link" data-scroll-target="#vt-sequential">VT Sequential</a></li>
   <li><a href="#vt-diverging" id="toc-vt-diverging" class="nav-link" data-scroll-target="#vt-diverging">VT Diverging</a></li>
   </ul></li>
@@ -285,19 +286,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="swatch">
-<div class="swatch-color" style="background:#E87722;">
+<div class="swatch-color" style="background:#CA4F00;">
 
 </div>
 <div class="swatch-info">
-<p><strong>Impact Orange</strong> <em>(digital UI)</em> <code>#E87722</code> Accent — active nav, buttons, digital highlights</p>
+<p><strong>Impact Orange</strong> <em>(digital UI)</em> <code>#CA4F00</code> Active nav underline, buttons, digital highlights</p>
 </div>
 </div>
 <div class="swatch">
-<div class="swatch-color" style="background:#1B5299;">
+<div class="swatch-color" style="background:#75787B;">
 
 </div>
 <div class="swatch-info">
-<p><strong>Navy</strong> <code>#1B5299</code> Tertiary — chart series, links, accent</p>
+<p><strong>Hokie Stone</strong> <code>#75787B</code> Neutral fills, secondary chart series</p>
 </div>
 </div>
 <div class="swatch">
@@ -366,73 +367,85 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td><code>vt</code></td>
 <td>Categorical</td>
 <td>6</td>
-<td>VT brand: maroon, orange, navy, forest, stone, sand</td>
+<td>Official VT colors: maroon, impact orange, purple, teal, hokie stone, land grey</td>
 </tr>
 <tr class="even">
+<td><code>vt_secondary</code></td>
+<td>Categorical</td>
+<td>8</td>
+<td>All 8 official VT secondary colors</td>
+</tr>
+<tr class="odd">
 <td><code>brand</code></td>
 <td>Categorical</td>
 <td>3</td>
-<td>3-group comparisons: maroon, orange, navy</td>
+<td>Primary brand triad: maroon, burnt orange, hokie stone</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>main</code></td>
 <td>Categorical</td>
 <td>10</td>
 <td>General purpose — up to 10 categories</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>accessible</code></td>
 <td>Categorical</td>
 <td>7</td>
 <td>Okabe-Ito colorblind-safe</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>wcag</code></td>
 <td>Categorical</td>
 <td>6</td>
 <td>All ≥ 4.5:1 contrast on white (WCAG AA)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>monet</code></td>
 <td>Artistic</td>
 <td>5</td>
 <td>Monet Pond: blues, sage, cream</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>sunflower</code></td>
 <td>Artistic</td>
 <td>5</td>
 <td>Van Gogh Sunflowers: cobalt + gold</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>academic</code></td>
 <td>Artistic</td>
 <td>5</td>
 <td>Academic Deep Blue: navy + amber</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>natural</code></td>
 <td>Artistic</td>
 <td>5</td>
 <td>Natural Muted: sage, slate, linen</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>maroon_seq</code></td>
 <td>Sequential</td>
 <td>6</td>
 <td>Light pink → VT Maroon</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>orange_seq</code></td>
 <td>Sequential</td>
 <td>6</td>
 <td>Cream → VT Orange</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>navy_seq</code></td>
 <td>Sequential</td>
 <td>6</td>
 <td>Sky blue → Navy</td>
+</tr>
+<tr class="even">
+<td><code>hokie_stone_seq</code></td>
+<td>Sequential</td>
+<td>6</td>
+<td>Light gray → Hokie Stone</td>
 </tr>
 <tr class="odd">
 <td><code>gray_seq</code></td>
@@ -450,7 +463,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td><code>vt_orange_div</code></td>
 <td>Diverging</td>
 <td>any <em>n</em></td>
-<td>Impact Orange ↔︎ cream ↔︎ Maroon</td>
+<td>Impact Orange (#CA4F00) ↔︎ cream ↔︎ Maroon</td>
 </tr>
 <tr class="even">
 <td><code>diverging</code></td>
@@ -505,15 +518,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <hr>
 </section>
-<section id="brand-3-group-comparisons" class="level3">
-<h3 class="anchored" data-anchor-id="brand-3-group-comparisons"><code>brand</code> — 3-Group Comparisons</h3>
+<section id="brand-primary-brand-triad" class="level3">
+<h3 class="anchored" data-anchor-id="brand-primary-brand-triad"><code>brand</code> — Primary Brand Triad</h3>
+<p>Official VT primary colors for print and traditional media.</p>
 <div class="swatch-grid">
 <div class="swatch">
 <div class="swatch-color" style="background:#861F41;">
 
 </div>
 <div class="swatch-info">
-<p><strong>VT Maroon</strong> <code>#861F41</code></p>
+<p><strong>Chicago Maroon</strong> <code>#861F41</code></p>
 </div>
 </div>
 <div class="swatch">
@@ -521,15 +535,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 <div class="swatch-info">
-<p><strong>VT Orange</strong> <code>#E5751F</code></p>
+<p><strong>Burnt Orange</strong> <code>#E5751F</code></p>
 </div>
 </div>
 <div class="swatch">
-<div class="swatch-color" style="background:#1B5299;">
+<div class="swatch-color" style="background:#75787B;">
 
 </div>
 <div class="swatch-info">
-<p><strong>Navy</strong> <code>#1B5299</code></p>
+<p><strong>Hokie Stone</strong> <code>#75787B</code></p>
 </div>
 </div>
 </div>
@@ -758,57 +772,127 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_palette</span>(<span class="st">"vt_div"</span>, <span class="at">n =</span> <span class="dv">11</span>)        <span class="co"># interpolate to any n</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Pick one color by index</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_palette</span>(<span class="st">"vt"</span>, <span class="at">pick =</span> <span class="dv">1</span>)   <span class="co"># #861F41 VT Maroon</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_palette</span>(<span class="st">"vt"</span>, <span class="at">pick =</span> <span class="dv">2</span>)   <span class="co"># #E87722 Impact Orange</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="vt-categorical" class="level3">
-<h3 class="anchored" data-anchor-id="vt-categorical">VT Categorical</h3>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_palette</span>(<span class="st">"vt"</span>, <span class="at">pick =</span> <span class="dv">1</span>)   <span class="co"># #861F41 Chicago Maroon</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_palette</span>(<span class="st">"vt"</span>, <span class="at">pick =</span> <span class="dv">2</span>)   <span class="co"># #CA4F00 Impact Orange</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="vt-vt-brand-categorical" class="level3">
+<h3 class="anchored" data-anchor-id="vt-vt-brand-categorical"><code>vt</code> — VT Brand Categorical</h3>
+<p>Six official VT colors for data visualizations. All drawn from the official VT primary and secondary palettes at <code>brand.vt.edu</code>.</p>
 <div class="swatch-grid">
 <div class="swatch">
 <div class="swatch-color" style="background:#861F41;">
 
 </div>
 <div class="swatch-info">
-<p><strong>VT Maroon</strong> <code>#861F41</code></p>
+<p><strong>Chicago Maroon</strong> <code>#861F41</code> Primary — CSS: <code>--vt-maroon</code></p>
 </div>
 </div>
 <div class="swatch">
-<div class="swatch-color" style="background:#E87722;">
+<div class="swatch-color" style="background:#CA4F00;">
 
 </div>
 <div class="swatch-info">
-<p><strong>Impact Orange</strong> <code>#E87722</code></p>
+<p><strong>Impact Orange</strong> <code>#CA4F00</code> Primary digital — CSS: <code>--vt-impactOrange</code></p>
 </div>
 </div>
 <div class="swatch">
-<div class="swatch-color" style="background:#1B5299;">
+<div class="swatch-color" style="background:#642667;">
 
 </div>
 <div class="swatch-info">
-<p><strong>Navy Blue</strong> <code>#1B5299</code></p>
+<p><strong>Pylon Purple</strong> <code>#642667</code> Secondary — CSS: <code>--vt-purple</code></p>
 </div>
 </div>
 <div class="swatch">
-<div class="swatch-color" style="background:#4B6734;">
+<div class="swatch-color" style="background:#508590;">
 
 </div>
 <div class="swatch-info">
-<p><strong>Forest Green</strong> <code>#4B6734</code></p>
+<p><strong>Sustainable Teal</strong> <code>#508590</code> Secondary — CSS: <code>--vt-teal</code></p>
 </div>
 </div>
 <div class="swatch">
-<div class="swatch-color" style="background:#75757A;">
+<div class="swatch-color" style="background:#75787B;">
 
 </div>
 <div class="swatch-info">
-<p><strong>Hokie Stone</strong> <code>#75757A</code></p>
+<p><strong>Hokie Stone</strong> <code>#75787B</code> Primary — CSS: <code>--vt-hokieStone</code></p>
 </div>
 </div>
 <div class="swatch">
-<div class="swatch-color" style="background:#CEB893;">
+<div class="swatch-color" style="background:#D7D2CB;">
 
 </div>
 <div class="swatch-info">
-<p><strong>Sand / Wheat</strong> <code>#CEB893</code></p>
+<p><strong>Land Grant Grey</strong> <code>#D7D2CB</code> Secondary — CSS: <code>--vt-grey</code></p>
+</div>
+</div>
+</div>
+</section>
+<section id="vt_secondary-all-8-official-secondary-colors" class="level3">
+<h3 class="anchored" data-anchor-id="vt_secondary-all-8-official-secondary-colors"><code>vt_secondary</code> — All 8 Official Secondary Colors</h3>
+<div class="swatch-grid">
+<div class="swatch">
+<div class="swatch-color" style="background:#642667;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Pylon Purple</strong> <code>#642667</code> CSS: <code>--vt-purple</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#CE0058;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Boundless Pink</strong> <code>#CE0058</code> CSS: <code>--vt-pink</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#F7EA48;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Triumphant Yellow</strong> <code>#F7EA48</code> CSS: <code>--vt-yellow</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#508590;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Sustainable Teal</strong> <code>#508590</code> CSS: <code>--vt-teal</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#2CD5C4;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Vibrant Turquoise</strong> <code>#2CD5C4</code> CSS: <code>--vt-turquoise</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#D7D2CB;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Land Grant Grey</strong> <code>#D7D2CB</code> CSS: <code>--vt-grey</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#E5E1E6;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Skipper Smoke</strong> <code>#E5E1E6</code> CSS: <code>--vt-smoke</code></p>
+</div>
+</div>
+<div class="swatch">
+<div class="swatch-color" style="background:#CA4F00;">
+
+</div>
+<div class="swatch-info">
+<p><strong>Impact Orange</strong> <code>#CA4F00</code> CSS: <code>--vt-impactOrange</code></p>
 </div>
 </div>
 </div>
@@ -840,6 +924,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="palette-strip">
+<div class="palette-strip-bar" style="background: linear-gradient(to right, #F2F2F2, #D7D2CB, #B5B0AB, #8E8C89, #75787B, #4A4D50);">
+
+</div>
+<div class="palette-strip-info">
+<p><code>hokie_stone_seq</code> — Light gray → Hokie Stone</p>
+</div>
+</div>
+<div class="palette-strip">
 <div class="palette-strip-bar" style="background: linear-gradient(to right, #F7F7F7, #BBBBBB, #888888, #555555, #222222); border-bottom: 1px solid #D9D9D9;">
 
 </div>
@@ -859,11 +951,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="palette-strip">
-<div class="palette-strip-bar" style="background: linear-gradient(to right, #E87722, #F5C0A0, #FDE8D4, #C86080, #861F41);">
+<div class="palette-strip-bar" style="background: linear-gradient(to right, #CA4F00, #E89070, #FDE8D4, #C86080, #861F41);">
 
 </div>
 <div class="palette-strip-info">
-<p><code>vt_orange_div</code> — Impact Orange ↔︎ cream ↔︎ Maroon</p>
+<p><code>vt_orange_div</code> — Impact Orange (#CA4F00) ↔︎ cream ↔︎ Maroon</p>
 </div>
 </div>
 <div class="palette-strip">
@@ -1220,8 +1312,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td><code>vt</code></td>
-<td><code>#861F41</code> (Maroon), <code>#1B5299</code> (Navy), <code>#4B6734</code> (Forest)</td>
-<td><code>#E87722</code> (Orange), <code>#75757A</code> (Stone), <code>#CEB893</code> (Sand)</td>
+<td><code>#861F41</code> (Maroon), <code>#642667</code> (Purple), <code>#508590</code> (Teal)</td>
+<td><code>#CA4F00</code> (Impact Orange), <code>#75787B</code> (Hokie Stone), <code>#D7D2CB</code> (Land Grey)</td>
 </tr>
 <tr class="even">
 <td><code>main</code></td>
