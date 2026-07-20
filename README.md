@@ -289,9 +289,15 @@ vvn_save(p, "figures/plot", formats = c("png", "pdf", "svg"))
 
 ---
 
-## Contributing
+## Contact & Support
 
-Issues and pull requests welcome at <https://github.com/yujuangao/VVN>.
+| Channel | Link |
+|---------|------|
+| General questions & feedback | [vvn@vt.edu](mailto:vvn@vt.edu) |
+| Bug reports & feature requests | [GitHub Issues](https://github.com/yujuangao/VVN/issues) |
+| Pull requests | [GitHub Repo](https://github.com/yujuangao/VVN) |
+
+Have a question about using a function, found unexpected behavior, or want to suggest a new feature? Open a [GitHub Issue](https://github.com/yujuangao/VVN/issues) or email **vvn@vt.edu** — we read both.
 
 ---
 
