@@ -31,11 +31,22 @@
 #'   annotation-heavy figures.
 #'
 #' @section Color system:
-#' Access and preview VT brand palettes. Palettes: `"main"`, `"brand"`,
-#' `"maroon_seq"`, `"orange_seq"`, `"navy_seq"`, `"diverging"`, `"accessible"`.
+#' Access and preview VT brand and artistic palettes.
+#'
+#' **VT Brand (categorical):** `"vt"`, `"brand"`, `"main"`, `"accessible"`, `"wcag"`
+#'
+#' **Sequential:** `"maroon_seq"`, `"orange_seq"`, `"navy_seq"`, `"gray_seq"`
+#'
+#' **Diverging:** `"diverging"` (navy–white–maroon)
+#'
+#' **Artistic themes (categorical):** `"monet"`, `"sunflower"`, `"academic"`, `"natural"`
+#'
+#' **Artistic themes (diverging):** `"monet_div"`, `"sunflower_div"`,
+#' `"academic_div"`, `"natural_div"` — interpolated to any `n`.
+#'
 #' - [vvn_colors()] — Return hex codes for named VVN brand colors.
-#' - [vvn_palette()] — Build a color vector from a named palette.
-#'   Sequential palettes interpolate to any number of steps.
+#' - [vvn_palette()] — Build a color vector from any palette; use `pick` to
+#'   extract a single color by index.
 #' - [view_vvn_palette()] — Render a swatch strip using [ggplot2::ggplot()].
 #'
 #' @section Scales:

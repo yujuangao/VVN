@@ -1,14 +1,25 @@
 /* =============================================================================
    VVN Theme · Global CSS
    Visualizing Virginia Numbers · Virginia Tech
-   Maroon #861F41  ·  Orange #E5751F  ·  Navy #1B5299
+   ─────────────────────────────────────────────────────────────────────────────
+   Design system colors:
+     Nav background  #FFFFFF  ·  Page background  #F3F4F7
+     Footer/breadcrumb #222C3D  ·  Accent orange  #E87722
+     Main text  #1A1A1A  ·  Secondary text  #3F4650
+     Card border  #D9D9D9  ·  Button border  #D5D5D5
+     Launch / primary button  #8A2045
+   Chart colors:
+     VT Maroon  #861F41  ·  VT Orange  #E5751F  ·  Navy  #1B5299
    ============================================================================= */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
 :root {
+  /* ── Chart / brand colors ─────────────────────────────────────────────── */
   --vvn-maroon:      #861F41;
   --vvn-maroon-dark: #520F25;
   --vvn-maroon-lt:   #F5C8D4;
-  --vvn-orange:      #E5751F;
+  --vvn-orange:      #E5751F;   /* chart / print orange */
   --vvn-orange-lt:   #FDE8D4;
   --vvn-navy:        #1B5299;
   --vvn-charcoal:    #3D3D3D;
@@ -17,54 +28,91 @@
   --vvn-rule:        #E0E0E0;
   --vvn-white:       #FFFFFF;
 
-  --vvn-font:        "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+  /* ── UI / website chrome colors ──────────────────────────────────────── */
+  --ui-nav-bg:       #FFFFFF;   /* top navigation background */
+  --ui-page-bg:      #F3F4F7;   /* page / app background */
+  --ui-footer:       #222C3D;   /* footer & breadcrumb bar */
+  --ui-text:         #1A1A1A;   /* main text */
+  --ui-text-2:       #3F4650;   /* secondary text */
+  --ui-card-bg:      #FFFFFF;
+  --ui-card-bdr:     #D9D9D9;   /* card border */
+  --ui-btn-bdr:      #D5D5D5;   /* button border */
+  --ui-footer-div:   #8C939C;   /* footer divider */
+  --ui-orange:       #E87722;   /* Impact Orange — digital accent */
+  --ui-launch:       #8A2045;   /* dark maroon — launch / primary CTA */
+
+  /* ── Typography & tokens ─────────────────────────────────────────────── */
+  --vvn-font:        "Inter", "Helvetica Neue", Arial, sans-serif;
   --vvn-mono:        "JetBrains Mono", "Fira Code", "Courier New", monospace;
   --vvn-radius:      6px;
-  --vvn-shadow-sm:   0 1px 4px rgba(0,0,0,.08);
-  --vvn-shadow:      0 2px 10px rgba(0,0,0,.10);
-  --vvn-shadow-lg:   0 4px 20px rgba(134,31,65,.15);
+  --vvn-shadow-sm:   0 1px 4px rgba(0,0,0,.07);
+  --vvn-shadow:      0 2px 10px rgba(0,0,0,.09);
+  --vvn-shadow-lg:   0 4px 20px rgba(34,44,61,.15);
   --vvn-transition:  0.16s ease;
 }
 
 /* ── Base ─────────────────────────────────────────────────────────────────── */
-body { font-family: var(--vvn-font); color: var(--vvn-charcoal); }
+body {
+  font-family: var(--vvn-font);
+  font-size: 1rem;      /* 16–18px base */
+  line-height: 1.6;
+  color: var(--ui-text);
+  background-color: var(--ui-page-bg);
+}
+
 h1, h2, h3, h4 { color: var(--vvn-maroon); font-weight: 700; }
 a { color: var(--vvn-maroon); }
-a:hover { color: var(--vvn-orange); }
+a:hover { color: var(--ui-orange); }
 
-/* ── Navbar ───────────────────────────────────────────────────────────────── */
+/* ── Navbar — white background (spec: #FFFFFF) ────────────────────────────── */
 .navbar, .navbar-default,
 .bslib-page-navbar > .navbar {
-  background-color: var(--vvn-maroon) !important;
-  border-bottom: 3px solid var(--vvn-orange) !important;
+  background-color: var(--ui-nav-bg) !important;
+  border-bottom: 1px solid var(--ui-card-bdr) !important;
+  box-shadow: none !important;
 }
+
 .navbar-brand, .navbar .navbar-brand {
-  color: var(--vvn-white) !important;
+  color: var(--ui-text) !important;
+  font-family: var(--vvn-font);
   font-weight: 700;
-  letter-spacing: 0.02em;
+  font-size: 1.5rem;    /* logo: 24-28px, weight 700 */
+  line-height: 1.1;
+  letter-spacing: -0.01em;
 }
+
 .navbar .nav-link {
-  color: rgba(255,255,255,.88) !important;
-  font-size: .92rem;
+  color: var(--ui-text) !important;
+  font-family: var(--vvn-font);
+  font-size: 1.125rem;  /* nav: 18px */
+  font-weight: 600;     /* 500-600 */
+  line-height: 1.4;
 }
-.navbar .nav-link:hover,
-.navbar .nav-link.active { color: var(--vvn-white) !important; }
+
+.navbar .nav-link:hover { color: var(--ui-text) !important; }
+.navbar .nav-link.active {
+  color: var(--ui-text) !important;
+  font-weight: 700;
+  border-bottom: 2px solid var(--ui-orange);
+}
 
 /* ── Cards ────────────────────────────────────────────────────────────────── */
 .card, .bslib-card {
-  border: 1px solid var(--vvn-rule);
+  border: 1px solid var(--ui-card-bdr);
   border-radius: var(--vvn-radius);
+  background: var(--ui-card-bg);
   box-shadow: var(--vvn-shadow-sm);
 }
 
-/* Card header with VVN branding */
+/* Branded card header */
 .vvn-card-header,
 .card-header.vvn-card-header {
   background-color: var(--vvn-maroon) !important;
   color:            var(--vvn-white)  !important;
-  font-weight: 600;
-  font-size:   .92rem;
-  border-bottom: 2px solid var(--vvn-orange);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.2;
+  border-bottom: 2px solid var(--ui-orange);
   border-radius: var(--vvn-radius) var(--vvn-radius) 0 0;
   padding: .6rem 1rem;
 }
@@ -72,15 +120,22 @@ a:hover { color: var(--vvn-orange); }
 /* ── KPI Cards ────────────────────────────────────────────────────────────── */
 .vvn-kpi-card {
   border-top:    4px solid var(--vvn-maroon);
+  border:        1px solid var(--ui-card-bdr);
   border-radius: var(--vvn-radius);
   box-shadow:    var(--vvn-shadow-sm);
   padding:       1rem 1.2rem;
-  background:    var(--vvn-white);
+  background:    var(--ui-card-bg);
   transition:    box-shadow var(--vvn-transition);
 }
 .vvn-kpi-card:hover { box-shadow: var(--vvn-shadow-lg); }
-.vvn-kpi-value  { font-size: 2rem; font-weight: 700; color: var(--vvn-maroon); margin: 0 0 .2rem; }
-.vvn-kpi-label  { font-size: .82rem; color: var(--vvn-charcoal); margin: 0; }
+.vvn-kpi-value  {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--vvn-maroon);
+  margin: 0 0 .2rem;
+  line-height: 1.1;
+}
+.vvn-kpi-label  { font-size: .82rem; color: var(--ui-text-2); margin: 0; line-height: 1.4; }
 .vvn-kpi-trend  { font-size: .8rem; margin: .2rem 0 0; }
 
 /* ── Buttons ──────────────────────────────────────────────────────────────── */
@@ -89,10 +144,12 @@ a:hover { color: var(--vvn-orange); }
   align-items:     center;
   gap:             .4rem;
   padding:         .44rem 1.1rem;
-  font-size:       .88rem;
+  font-family:     var(--vvn-font);
+  font-size:       1.125rem;    /* primary button: 18px */
   font-weight:     600;
+  line-height:     1.2;
   border-radius:   var(--vvn-radius);
-  border:          2px solid transparent;
+  border:          1px solid var(--ui-btn-bdr);
   cursor:          pointer;
   transition:      background var(--vvn-transition),
                    border-color var(--vvn-transition),
@@ -100,36 +157,44 @@ a:hover { color: var(--vvn-orange); }
   text-decoration: none;
 }
 .vvn-btn:focus-visible {
-  outline: 3px solid var(--vvn-orange);
+  outline: 3px solid var(--ui-orange);
   outline-offset: 2px;
 }
 
+/* Launch / primary CTA — dark maroon #8A2045 */
 .vvn-btn-primary {
-  background:   var(--vvn-maroon);
+  background:   var(--ui-launch);
   color:        var(--vvn-white);
-  border-color: var(--vvn-maroon);
+  border-color: var(--ui-launch);
 }
 .vvn-btn-primary:hover {
   background:   var(--vvn-maroon-dark);
   border-color: var(--vvn-maroon-dark);
-  box-shadow:   0 2px 8px rgba(134,31,65,.30);
+  box-shadow:   0 2px 8px rgba(138,32,69,.30);
   color:        var(--vvn-white);
 }
 
+/* Secondary — accent orange */
 .vvn-btn-secondary {
-  background:   var(--vvn-orange);
+  background:   var(--ui-orange);
   color:        var(--vvn-white);
-  border-color: var(--vvn-orange);
+  border-color: var(--ui-orange);
 }
-.vvn-btn-secondary:hover { background: #c05f10; border-color: #c05f10; color: #fff; }
+.vvn-btn-secondary:hover {
+  background: #cc6a1a;
+  border-color: #cc6a1a;
+  color: #fff;
+}
 
+/* Outline */
 .vvn-btn-outline {
   background:   transparent;
   color:        var(--vvn-maroon);
-  border-color: var(--vvn-maroon);
+  border-color: var(--ui-btn-bdr);
 }
 .vvn-btn-outline:hover {
   background: var(--vvn-maroon-lt);
+  border-color: var(--vvn-maroon);
   color: var(--vvn-maroon);
 }
 
@@ -137,13 +202,21 @@ a:hover { color: var(--vvn-orange); }
 .vvn-filter-wrap  { margin-bottom: 1rem; }
 .vvn-slider-wrap  { margin-bottom: 1rem; }
 .vvn-filter-label {
-  font-size:       .8rem;
+  font-family:     var(--vvn-font);
+  font-size:       1rem;     /* label: 18px at 600 weight */
   font-weight:     600;
-  color:           var(--vvn-charcoal);
-  text-transform:  uppercase;
-  letter-spacing:  .04em;
+  color:           var(--ui-text);
+  line-height:     1.4;
   display:         block;
   margin-bottom:   .25rem;
+}
+
+/* Dropdown — 18px, 400 weight */
+.vvn-filter-wrap select,
+.vvn-filter-wrap .selectize-input {
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.4;
 }
 
 /* Shiny selectInput focus ring */
@@ -159,8 +232,42 @@ a:hover { color: var(--vvn-orange); }
 .vvn-slider-wrap .irs--shiny .irs-to,
 .vvn-slider-wrap .irs--shiny .irs-single       { background: var(--vvn-maroon) !important; }
 
+/* ── Footer — dark navy #222C3D ───────────────────────────────────────────── */
+footer, .vvn-footer {
+  background-color: var(--ui-footer) !important;
+  color: rgba(255,255,255,0.75) !important;
+  font-family: var(--vvn-font);
+  font-size: 1rem;       /* footer links: 16px */
+  line-height: 1.6;
+  padding: 1.5rem 2rem;
+  margin-top: 2rem;
+  border-top: none;
+}
+footer a, .vvn-footer a {
+  color: rgba(255,255,255,0.6) !important;
+}
+footer a:hover, .vvn-footer a:hover { color: #FFFFFF !important; }
+
+/* Footer headings: Inter 700, 18-20px */
+footer h4, footer h5, .vvn-footer h4, .vvn-footer h5 {
+  color: #FFFFFF !important;
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+
+/* Footer divider */
+footer hr, .vvn-footer hr { border-color: var(--ui-footer-div) !important; }
+
+/* Copyright */
+footer small, .vvn-footer small {
+  font-size: 0.94rem;
+  color: rgba(255,255,255,0.55) !important;
+  line-height: 1.5;
+}
+
 /* ── Leaflet ──────────────────────────────────────────────────────────────── */
-.leaflet-control { font-family: var(--vvn-font); font-size: .82rem; }
+.leaflet-control { font-family: var(--vvn-font); font-size: .9rem; }
 .leaflet-popup-content-wrapper {
   border-radius: var(--vvn-radius);
   border: 1.5px solid var(--vvn-maroon);
@@ -172,23 +279,27 @@ a:hover { color: var(--vvn-orange); }
 table.dataTable thead th {
   background-color: var(--vvn-maroon) !important;
   color:            var(--vvn-white)  !important;
-  border-bottom:    2px solid var(--vvn-orange) !important;
+  border-bottom:    2px solid var(--ui-orange) !important;
+  font-weight: 700;
 }
 table.dataTable.stripe tbody tr.odd { background-color: var(--vvn-light-gray); }
 .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-  background: var(--vvn-maroon) !important;
-  border-color: var(--vvn-maroon) !important;
+  background:   var(--ui-launch) !important;
+  border-color: var(--ui-launch) !important;
   color: #fff !important;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-  background: var(--vvn-maroon-lt) !important;
+  background:   var(--vvn-maroon-lt) !important;
   border-color: var(--vvn-maroon) !important;
   color: var(--vvn-maroon) !important;
 }
-.dataTables_filter input:focus { border-color: var(--vvn-maroon); box-shadow: 0 0 0 3px rgba(134,31,65,.15); }
+.dataTables_filter input:focus {
+  border-color: var(--vvn-maroon);
+  box-shadow: 0 0 0 3px rgba(134,31,65,.15);
+}
 
 /* ── Accessibility ────────────────────────────────────────────────────────── */
-:focus-visible { outline: 3px solid var(--vvn-orange); outline-offset: 2px; }
+:focus-visible { outline: 3px solid var(--ui-orange); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }

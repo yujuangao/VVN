@@ -13,8 +13,10 @@ scale_colour_vvn_c(palette = "maroon_seq", reverse = FALSE, ...)
 scale_fill_vvn_c(palette = "maroon_seq", reverse = FALSE, ...)
 }
 \arguments{
-\item{palette}{One of \code{"maroon_seq"}, \code{"orange_seq"}, \code{"navy_seq"},
-\code{"diverging"}, \code{"gray_seq"}. Default \code{"maroon_seq"}.}
+\item{palette}{Sequential or diverging palette. Standard: \code{"maroon_seq"},
+\code{"orange_seq"}, \code{"navy_seq"}, \code{"diverging"}, \code{"gray_seq"}. Artistic
+diverging: \code{"monet_div"}, \code{"sunflower_div"}, \code{"academic_div"},
+\code{"natural_div"}. Default \code{"maroon_seq"}.}
 
 \item{reverse}{Reverse palette? Default \code{FALSE}.}
 

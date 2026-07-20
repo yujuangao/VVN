@@ -4,36 +4,70 @@
 \alias{vvn_palette}
 \title{VVN color palette generator}
 \usage{
-vvn_palette(palette = "main", n = NULL, reverse = FALSE, alpha = 1)
+vvn_palette(
+  palette = "main",
+  n = NULL,
+  reverse = FALSE,
+  alpha = 1,
+  pick = NULL
+)
 }
 \arguments{
 \item{palette}{Palette name. One of:
+\strong{VT Brand:}
 \itemize{
-\item Categorical: \code{"main"} (10 colors), \code{"brand"} (3 colors)
-\item Sequential: \code{"maroon_seq"}, \code{"orange_seq"}, \code{"navy_seq"}
-\item Diverging: \code{"diverging"}
-\item Colorblind-safe: \code{"accessible"} (Okabe-Ito — distinguishable, not all WCAG AA)
-\item WCAG AA: \code{"wcag"} (6 colors, all ≥ 4.5:1 on white)
-\item Neutral: \code{"gray_seq"}
+\item \code{"vt"} — 6-color VT brand palette (maroon, orange, navy, forest, stone, sand)
+\item \code{"brand"} — 3-color brand (maroon, orange, navy)
+\item \code{"main"} — 10-color general purpose
+}
+
+\strong{Sequential:} \code{"maroon_seq"}, \code{"orange_seq"}, \code{"navy_seq"}, \code{"gray_seq"}
+
+\strong{Diverging:} \code{"diverging"} (navy–white–maroon)
+
+\strong{Colorblind-safe:} \code{"accessible"} (Okabe-Ito), \code{"wcag"} (all ≥ 4.5:1)
+
+\strong{Artistic themes (categorical):}
+\itemize{
+\item \code{"monet"} — Monet Pond: cool blues and sage greens
+\item \code{"sunflower"} — Van Gogh Sunflowers: cobalt + gold
+\item \code{"academic"} — Academic Deep Blue: navy + amber
+\item \code{"natural"} — Natural Muted: sage, slate, linen
+}
+
+\strong{Artistic themes (diverging — interpolated to any n):}
+\itemize{
+\item \code{"monet_div"} — sky blue ↔ cream ↔ deep teal
+\item \code{"sunflower_div"} — cobalt ↔ parchment ↔ sunflower yellow
+\item \code{"academic_div"} — deep navy ↔ blue-gray ↔ amber
+\item \code{"natural_div"} — near-black ↔ off-white ↔ sage green
 }}
 
-\item{n}{Number of colors. \code{NULL} returns all base colors.}
+\item{n}{Number of colors to return. \code{NULL} returns all base colors.
+For diverging palettes (\verb{_div}), defaults to 7.}
 
 \item{reverse}{Reverse the palette? Default \code{FALSE}.}
 
 \item{alpha}{Opacity (0–1). Default \code{1}.}
+
+\item{pick}{Integer index to select a single color from the palette.
+E.g. \code{pick = 2} returns the 2nd color. Overrides \code{n}.}
 }
 \value{
-A character vector of hex color codes.
+A character vector of hex color codes (length 1 when \code{pick} is set).
 }
 \description{
 Returns a vector of colors from a named VVN palette. Sequential and
 diverging palettes are interpolated when \code{n} exceeds the base palette size.
+Use \code{pick} to extract a single color by position.
 }
 \examples{
 vvn_palette()                          # all "main" colors
+vvn_palette("vt")                      # VT brand categorical
+vvn_palette("monet")                   # Monet Pond theme
+vvn_palette("monet", pick = 3)         # 3rd Monet color (#7FA7A6 teal)
+vvn_palette("sunflower_div", n = 9)    # 9-step diverging from sunflower
+vvn_palette("academic_div", n = 11)    # 11-step diverging
 vvn_palette("brand")                   # maroon, orange, navy
 vvn_palette("maroon_seq", n = 9)       # 9-step sequential
-vvn_palette("diverging", n = 11)
-vvn_palette("accessible")
 }

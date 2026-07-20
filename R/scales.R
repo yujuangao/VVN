@@ -6,7 +6,9 @@
 #'
 #' Drop-in replacement for [ggplot2::scale_color_discrete()].
 #'
-#' @param palette VVN palette name (see [vvn_palette()]). Default `"main"`.
+#' @param palette VVN palette name (see [vvn_palette()]). Categorical palettes:
+#'   `"vt"` (VT brand), `"main"`, `"brand"`, `"accessible"`, `"wcag"`,
+#'   `"monet"`, `"sunflower"`, `"academic"`, `"natural"`. Default `"main"`.
 #' @param reverse Reverse palette order? Default `FALSE`.
 #' @param alpha Opacity (0–1). Default `1`.
 #' @param ... Passed to [ggplot2::discrete_scale()].
@@ -35,8 +37,10 @@ scale_fill_vvn <- function(palette = "main", reverse = FALSE, alpha = 1, ...) {
 
 #' Continuous color scale using VVN sequential / diverging palettes
 #'
-#' @param palette One of `"maroon_seq"`, `"orange_seq"`, `"navy_seq"`,
-#'   `"diverging"`, `"gray_seq"`. Default `"maroon_seq"`.
+#' @param palette Sequential or diverging palette. Standard: `"maroon_seq"`,
+#'   `"orange_seq"`, `"navy_seq"`, `"diverging"`, `"gray_seq"`. Artistic
+#'   diverging: `"monet_div"`, `"sunflower_div"`, `"academic_div"`,
+#'   `"natural_div"`. Default `"maroon_seq"`.
 #' @param reverse Reverse palette? Default `FALSE`.
 #' @param ... Passed to [ggplot2::scale_color_gradientn()].
 #'

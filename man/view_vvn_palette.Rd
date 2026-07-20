@@ -9,7 +9,7 @@ view_vvn_palette(palette = "main", n = NULL, label = TRUE, title = NULL)
 \arguments{
 \item{palette}{Palette name (see \code{\link[=vvn_palette]{vvn_palette()}}).}
 
-\item{n}{Number of colors to show. Default: all base colors.}
+\item{n}{Number of colors to show. Default: all base colors (7 for \verb{_div}).}
 
 \item{label}{Show hex codes on swatches? Default \code{TRUE}.}
 
@@ -24,6 +24,7 @@ ggplot2 so it can be saved with \code{vvn_save()}.
 }
 \examples{
 view_vvn_palette()
-view_vvn_palette("diverging", n = 9)
+view_vvn_palette("monet")
+view_vvn_palette("sunflower_div", n = 9)
 view_vvn_palette("accessible")
 }

@@ -13,7 +13,9 @@ scale_colour_vvn(palette = "main", reverse = FALSE, alpha = 1, ...)
 scale_fill_vvn(palette = "main", reverse = FALSE, alpha = 1, ...)
 }
 \arguments{
-\item{palette}{VVN palette name (see \code{\link[=vvn_palette]{vvn_palette()}}). Default \code{"main"}.}
+\item{palette}{VVN palette name (see \code{\link[=vvn_palette]{vvn_palette()}}). Categorical palettes:
+\code{"vt"} (VT brand), \code{"main"}, \code{"brand"}, \code{"accessible"}, \code{"wcag"},
+\code{"monet"}, \code{"sunflower"}, \code{"academic"}, \code{"natural"}. Default \code{"main"}.}
 
 \item{reverse}{Reverse palette order? Default \code{FALSE}.}
 

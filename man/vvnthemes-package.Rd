@@ -47,12 +47,22 @@ annotation-heavy figures.
 
 \section{Color system}{
 
-Access and preview VT brand palettes. Palettes: \code{"main"}, \code{"brand"},
-\code{"maroon_seq"}, \code{"orange_seq"}, \code{"navy_seq"}, \code{"diverging"}, \code{"accessible"}.
+Access and preview VT brand and artistic palettes.
+
+\strong{VT Brand (categorical):} \code{"vt"}, \code{"brand"}, \code{"main"}, \code{"accessible"}, \code{"wcag"}
+
+\strong{Sequential:} \code{"maroon_seq"}, \code{"orange_seq"}, \code{"navy_seq"}, \code{"gray_seq"}
+
+\strong{Diverging:} \code{"diverging"} (navy–white–maroon)
+
+\strong{Artistic themes (categorical):} \code{"monet"}, \code{"sunflower"}, \code{"academic"}, \code{"natural"}
+
+\strong{Artistic themes (diverging):} \code{"monet_div"}, \code{"sunflower_div"},
+\code{"academic_div"}, \code{"natural_div"} — interpolated to any \code{n}.
 \itemize{
 \item \code{\link[=vvn_colors]{vvn_colors()}} — Return hex codes for named VVN brand colors.
-\item \code{\link[=vvn_palette]{vvn_palette()}} — Build a color vector from a named palette.
-Sequential palettes interpolate to any number of steps.
+\item \code{\link[=vvn_palette]{vvn_palette()}} — Build a color vector from any palette; use \code{pick} to
+extract a single color by index.
 \item \code{\link[=view_vvn_palette]{view_vvn_palette()}} — Render a swatch strip using \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 }
 }

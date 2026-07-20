@@ -1,10 +1,10 @@
 /*-- scss:defaults --*/
 
-// ── VVN Brand Variables ────────────────────────────────────────────────────
+// ── VVN Brand Variables ─────────────────────────────────────────────────────
 $vvn-maroon:       #861F41;
 $vvn-maroon-dark:  #520F25;
 $vvn-maroon-light: #F5C8D4;
-$vvn-orange:       #E5751F;
+$vvn-orange:       #E5751F;   // chart / print orange
 $vvn-orange-light: #FDE8D4;
 $vvn-navy:         #1B5299;
 $vvn-charcoal:     #3D3D3D;
@@ -13,42 +13,94 @@ $vvn-light-gray:   #F7F7F7;
 $vvn-rule:         #E0E0E0;
 $vvn-white:        #FFFFFF;
 
+// ── UI Theme Colors (new design system) ────────────────────────────────────
+$ui-orange:        #E87722;   // Impact Orange — digital accent
+$ui-launch:        #8A2045;   // dark maroon for CTA buttons
+$footer-bg:        #222C3D;   // footer background
+$text-main:        #1A1A1A;   // main text
+$text-secondary:   #3F4650;   // secondary text
+$card-border:      #D9D9D9;
+$btn-border:       #D5D5D5;
+$footer-divider:   #8C939C;
+
 // Quarto theme overrides
 $headings-color:          $vvn-maroon;
 $link-color:              $vvn-maroon;
-$link-hover-color:        $vvn-orange;
-$body-color:              $vvn-charcoal;
-$body-bg:                 $vvn-white;
-$border-color:            $vvn-rule;
+$link-hover-color:        $ui-orange;
+$body-color:              $text-main;
+$body-bg:                 #F3F4F7;
+$border-color:            $card-border;
 $border-radius:           6px;
-$font-family-sans-serif:  "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+$font-family-sans-serif:  "Inter", "Helvetica Neue", Arial, sans-serif;
 
 /*-- scss:rules --*/
 
+// ── Fonts ───────────────────────────────────────────────────────────────────
+// Inter: all body and UI text (Acherus Grotesque substitute)
+// Barlow Condensed Italic: large hero titles (Gineso Condensed Italic substitute)
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Barlow+Condensed:ital,wght@1,300;1,400&family=JetBrains+Mono:wght@400&display=swap');
+
 // ── Base ───────────────────────────────────────────────────────────────────
-body { line-height: 1.65; }
-
-h1, h2, h3, h4 { color: $vvn-maroon; font-weight: 700; }
-
-h2 {
-  border-bottom: 2px solid $vvn-rule;
-  padding-bottom: 0.35em;
-  margin-top: 2rem;
+body {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 18px;      // intro paragraph: 18-20px
+  line-height: 1.6;
+  color: $text-main;
+  background-color: #F3F4F7;
 }
 
-a { color: $vvn-maroon; &:hover { color: $vvn-orange; } }
+// ── Headings ───────────────────────────────────────────────────────────────
+// Story page title: Barlow Condensed Italic (Gineso Condensed Italic substitute)
+h1.title, .quarto-title h1 {
+  font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(2.8rem, 6vw, 4rem);
+  line-height: 1.1;
+  color: $text-main;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
 
-// ── Navbar ─────────────────────────────────────────────────────────────────
+h1, h2, h3, h4 {
+  font-family: 'Inter', sans-serif;
+  color: $vvn-maroon;
+  font-weight: 700;
+}
+
+h2 {
+  border-bottom: 2px solid $card-border;
+  padding-bottom: 0.35em;
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+h3 { font-size: 1.2rem; font-weight: 600; }
+
+a { color: $vvn-maroon; &:hover { color: $ui-orange; } }
+
+// ── Navbar — white background (spec: #FFFFFF) ──────────────────────────────
 .navbar {
-  background-color: $vvn-maroon !important;
-  border-bottom: 3px solid $vvn-orange;
+  background-color: #FFFFFF !important;
+  border-bottom: 1px solid $card-border !important;
 
-  .navbar-brand { color: $vvn-white !important; font-weight: 700; letter-spacing: 0.02em; }
+  .navbar-brand {
+    color: $text-main !important;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;     // logo: 24-28px, weight 700
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
 
   .nav-link {
-    color: rgba(255,255,255,0.88) !important;
-    font-size: 0.92rem;
-    &:hover, &.active { color: $vvn-white !important; }
+    color: $text-main !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.125rem;   // nav: 18px
+    font-weight: 600;      // 500-600
+    line-height: 1.4;
+    &:hover, &.active { color: $text-main !important; }
   }
 }
 
@@ -62,7 +114,6 @@ a { color: $vvn-maroon; &:hover { color: $vvn-orange; } }
   position: relative;
   overflow: hidden;
 
-  // Diagonal texture overlay
   &::before {
     content: "";
     position: absolute;
@@ -75,22 +126,34 @@ a { color: $vvn-maroon; &:hover { color: $vvn-orange; } }
     pointer-events: none;
   }
 
-  h2 { color: $vvn-white !important; border: none; font-size: 2rem; margin-top: 0; }
-  p  { color: rgba(255,255,255,0.88); font-size: 1.08rem; }
+  // Card title style applied to hero heading
+  h2 {
+    color: $vvn-white !important;
+    border: none;
+    font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-top: 0;
+    line-height: 1.1;
+  }
+  p { color: rgba(255,255,255,0.88); font-size: 1.125rem; line-height: 1.6; }
 
   .hero-subtitle {
-    color: $vvn-orange;
+    color: $ui-orange;
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
-    font-size: 0.92rem;
+    font-size: 1rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     margin-bottom: 1rem;
+    line-height: 1.4;
   }
 }
 
 // ── Blockquote (Key Finding) ───────────────────────────────────────────────
 blockquote {
-  border-left: 5px solid $vvn-orange;
+  border-left: 5px solid $ui-orange;
   background: $vvn-orange-light;
   padding: 1rem 1.5rem;
   border-radius: 0 6px 6px 0;
@@ -108,7 +171,7 @@ blockquote {
 
   &.callout-note      { border-left-color: $vvn-navy !important; }
   &.callout-tip       { border-left-color: #2E7D32 !important; }
-  &.callout-warning   { border-left-color: $vvn-orange !important; }
+  &.callout-warning   { border-left-color: $ui-orange !important; }
   &.callout-important { border-left-color: $vvn-maroon !important; }
 
   .callout-title { font-weight: 700; }
@@ -116,12 +179,12 @@ blockquote {
 
 // ── Table of contents ──────────────────────────────────────────────────────
 #TOC {
-  border-left: 3px solid $vvn-rule;
+  border-left: 3px solid $card-border;
   padding-left: 1rem;
 
   a {
-    color: $vvn-charcoal;
-    font-size: 0.87rem;
+    color: $text-secondary;
+    font-size: 0.9rem;
     line-height: 1.6;
     &:hover { color: $vvn-maroon; }
   }
@@ -135,17 +198,16 @@ blockquote {
   }
 }
 
-// ── Data tables ────────────────────────────────────────────────────────────
+// ── Tables ─────────────────────────────────────────────────────────────────
 .gt_table { border-top: 3px solid $vvn-maroon !important; }
 .gt_col_heading {
   background-color: $vvn-maroon !important;
   color: $vvn-white !important;
   font-weight: 700 !important;
 }
-.gt_col_heading:after { border-bottom-color: $vvn-orange !important; }
+.gt_col_heading:after { border-bottom-color: $ui-orange !important; }
 .gt_striped_row { background-color: $vvn-light-gray !important; }
 
-// knitr::kable tables
 table {
   width: 100%;
   border-top: 3px solid $vvn-maroon;
@@ -162,13 +224,13 @@ table {
 
   tbody tr:nth-child(even) { background-color: $vvn-light-gray; }
   tbody tr:hover            { background-color: $vvn-maroon-light; }
-  tbody td { padding: 0.45rem 0.75rem; border-bottom: 1px solid $vvn-rule; }
+  tbody td { padding: 0.45rem 0.75rem; border-bottom: 1px solid $card-border; }
 }
 
 // ── Figure captions ────────────────────────────────────────────────────────
 figcaption, .figure-caption, .quarto-figure-caption {
-  font-size: 0.80rem;
-  color: $vvn-gray;
+  font-size: 0.82rem;
+  color: $text-secondary;
   font-style: italic;
   margin-top: 0.35rem;
 }
@@ -186,13 +248,35 @@ pre {
   overflow-x: auto;
 }
 
-// ── Footer ─────────────────────────────────────────────────────────────────
+// ── Footer — dark navy #222C3D (spec) ─────────────────────────────────────
 footer, .page-footer {
-  border-top: 2px solid $vvn-rule;
-  padding-top: 1rem;
-  color: $vvn-gray;
-  font-size: 0.82rem;
+  background-color: $footer-bg !important;
+  color: rgba(255,255,255,0.75) !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;       // footer links: 16px
+  line-height: 1.6;
+  padding-top: 1.5rem;
   margin-top: 3rem;
+
+  a { color: rgba(255,255,255,0.6) !important; &:hover { color: #FFFFFF !important; } }
+
+  // Footer headings: Inter 700, 18-20px
+  h4, h5, strong {
+    color: #FFFFFF !important;
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
+
+  // Footer divider
+  hr { border-color: $footer-divider !important; }
+
+  // Copyright: 15-16px
+  .copyright, small {
+    font-size: 0.94rem;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.55) !important;
+  }
 }
 
 // ── Print optimizations ────────────────────────────────────────────────────
@@ -205,12 +289,13 @@ footer, .page-footer {
 // ── Responsive ─────────────────────────────────────────────────────────────
 @media (max-width: 768px) {
   .hero { padding: 2rem 1.25rem; }
-  h2 { font-size: 1.4rem; }
+  h2 { font-size: 1.3rem; }
   blockquote { padding: 0.75rem 1rem; }
+  body { font-size: 16px; }
 }
 
 // ── Accessibility ──────────────────────────────────────────────────────────
-:focus-visible { outline: 3px solid $vvn-orange; outline-offset: 2px; }
+:focus-visible { outline: 3px solid $ui-orange; outline-offset: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
