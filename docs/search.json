@@ -130,7 +130,7 @@
     "href": "dashboard.html#required-libraries",
     "title": "Interactive Data Visualizations",
     "section": "Required libraries",
-    "text": "Required libraries\nInstall before running create_vvn_dashboard():\n# app.R — required\ninstall.packages(c(\"shiny\", \"bslib\", \"bsicons\", \"dplyr\", \"readr\"))\n\n# scripts/analysis.R — required\ninstall.packages(c(\"ggplot2\", \"dplyr\", \"tidyr\"))\n\n# Optional — uncomment in app.R or analysis.R when needed\ninstall.packages(c(\"leaflet\", \"sf\", \"DT\", \"gt\", \"mapshot2\"))\nvvnthemes is required in both app.R and scripts/analysis.R and is loaded automatically by the scaffold."
+    "text": "Required libraries\nInstall before running create_vvn_dashboard():\n# app.R — required\ninstall.packages(c(\"shiny\", \"bslib\", \"bsicons\", \"dplyr\", \"readr\", \"scales\"))\n\n# scripts/analysis.R — required\ninstall.packages(c(\"ggplot2\", \"dplyr\", \"tidyr\"))\n\n# Optional — uncomment in app.R or analysis.R when needed\ninstall.packages(c(\"leaflet\", \"sf\", \"DT\", \"gt\", \"mapshot2\"))\nvvnthemes is required in both app.R and scripts/analysis.R and is loaded automatically by the scaffold.\n\n\n\n\n\n\n\n\nLibrary\nUsed in\nWhat it does\n\n\n\n\nshiny\napp.R\nBuilds the interactive web application — reactive UI and server logic\n\n\nbslib\napp.R\nBootstrap 5 layout: page_navbar(), card(), sidebar(), layout_columns()\n\n\nbsicons\napp.R\nBootstrap icon set used in tab labels and button icons\n\n\ndplyr\nboth\nData manipulation: filter(), select(), mutate(), summarise()\n\n\nreadr\napp.R\nFast CSV loading with read_csv()\n\n\nscales\napp.R\nNumber formatting: dollar(), comma(), percent() for KPI labels\n\n\nggplot2\nanalysis.R\nBuild all static charts saved as PNGs to figures/\n\n\ntidyr\nanalysis.R\nReshape data between wide and long formats\n\n\nleaflet\napp.R\nInteractive county choropleth map (optional — Map tab)\n\n\nsf\napp.R\nRead and process spatial data (.geojson, .shp) — required with leaflet\n\n\nDT\napp.R\nSearchable, paginated data table with CSV and Excel download buttons\n\n\ngt\napp.R\nStyled summary tables — pairs with vvn_table() for VT-branded headers\n\n\nmapshot2\nanalysis.R\nSave a Leaflet map as a static PNG in figures/"
   },
   {
     "objectID": "dashboard.html#create-the-project",
@@ -614,6 +614,13 @@
     "title": "VVN Insight",
     "section": "",
     "text": "The create_vvn_story() function scaffolds a complete Quarto narrative report in one command. The analysis and the narrative are kept in separate files so each is easier to work on independently."
+  },
+  {
+    "objectID": "vvn-insight.html#required-libraries",
+    "href": "vvn-insight.html#required-libraries",
+    "title": "VVN Insight",
+    "section": "Required libraries",
+    "text": "Required libraries\nInstall before running create_vvn_story():\n# index.qmd (rendered by Quarto) — required\ninstall.packages(c(\"knitr\", \"dplyr\", \"readr\", \"gt\"))\n\n# scripts/analysis.R — required\ninstall.packages(c(\"ggplot2\", \"dplyr\", \"tidyr\"))\n\n# Optional — uncomment in analysis.R or index.qmd when needed\ninstall.packages(c(\"leaflet\", \"sf\", \"mapshot2\"))\nvvnthemes is required in both files and is loaded automatically by the scaffold.\n\n\n\n\n\n\n\n\nLibrary\nUsed in\nWhat it does\n\n\n\n\nknitr\nindex.qmd\nEmbeds figure PNGs in the narrative using include_graphics() in Quarto chunks\n\n\ndplyr\nboth\nData manipulation: filter(), select(), mutate(), summarise()\n\n\nreadr\nanalysis.R\nFast CSV loading with read_csv()\n\n\ngt\nindex.qmd\nStyled summary tables — pairs with vvn_table() for VT-branded headers\n\n\nggplot2\nanalysis.R\nBuild all static charts saved as PNGs to figures/\n\n\ntidyr\nanalysis.R\nReshape data between wide and long formats\n\n\nleaflet\nanalysis.R\nBuild interactive county choropleth maps (optional)\n\n\nsf\nanalysis.R\nRead and process spatial data (.geojson, .shp) — required with leaflet\n\n\nmapshot2\nanalysis.R\nSave a Leaflet map as a static PNG for embedding in the story"
   },
   {
     "objectID": "vvn-insight.html#create-the-project",
