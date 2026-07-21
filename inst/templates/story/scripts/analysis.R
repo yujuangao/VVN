@@ -1,12 +1,19 @@
-# ── VVN Story Analysis Script ────────────────────────────────────────────────
-# HOW TO USE:
-#   1. Load your data in Section 1.
-#   2. Scroll through the chart gallery below and UNCOMMENT the chart(s) you want.
-#   3. Fill in your data columns and labels inside each block.
-#   4. Run the script — figures are auto-numbered and saved to figures/
-#   5. Open index.qmd, replace text placeholders, and render the website.
+# ── VVN Story Analysis Script ─────────────────────────────────────────────────
+# Project : VVN_TITLE
+# Author  : VVN_AUTHOR
+# Created : VVN_DATE
 #
-# Run from project root:  source("scripts/analysis.R")
+# HOW TO USE:
+#   1. Place your data in data/raw/ or data/processed/.
+#   2. Load it in Section 1 below.
+#   3. Uncomment and fill in the chart block(s) you want from the gallery.
+#   4. Source this script — figures are auto-numbered and saved to figures/.
+#   5. Open index.qmd: replace [placeholders] and update include_graphics()
+#      filenames to match what was saved in figures/.
+#
+# Run from project root:
+#   source("scripts/analysis.R")          # RStudio
+#   Rscript scripts/analysis.R            # terminal
 # ─────────────────────────────────────────────────────────────────────────────
 
 library(vvnthemes)

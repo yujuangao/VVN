@@ -1,16 +1,22 @@
-# ── VVN Dashboard Analysis Script ────────────────────────────────────────────
+# ── VVN Dashboard Analysis Script ─────────────────────────────────────────────
+# Project : VVN_TITLE
+# Author  : VVN_AUTHOR
+# Created : VVN_DATE
+#
 # HOW TO USE:
-#   1. Load your data in Section 1.
-#   2. Scroll through the chart gallery below and UNCOMMENT the chart(s) you want.
-#   3. Fill in your data columns and labels inside each block.
-#   4. Run the script — figures are auto-numbered and saved to figures/
-#   5. Open app.R, replace filename placeholders (e.g., 01_[name].png),
-#      then run shiny::runApp()
+#   1. Place your data in data/raw/ or data/processed/.
+#   2. Load it in Section 1 below.
+#   3. Uncomment and fill in the chart block(s) you want from the gallery.
+#   4. Source this script — figures are auto-numbered and saved to figures/.
+#   5. Open app.R: fill in chart filenames (e.g., 01_[name].png) and
+#      uncomment the renderUI() blocks for each chart, then run shiny::runApp().
 #
 # Charts generated here are displayed as static PNGs in app.R.
-# Interactive components (KPI cards, table, map) are built in app.R.
+# Interactive components (KPI cards, filters, table, map) are built in app.R.
 #
-# Run from project root:  source("scripts/analysis.R")
+# Run from project root:
+#   source("scripts/analysis.R")          # RStudio
+#   Rscript scripts/analysis.R            # terminal
 # ─────────────────────────────────────────────────────────────────────────────
 
 library(vvnthemes)

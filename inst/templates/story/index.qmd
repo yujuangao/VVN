@@ -1,15 +1,18 @@
 ---
+# ── Project info — filled in automatically by create_vvn_story() ─────────────
 title: "VVN_TITLE"
 author: "VVN_AUTHOR"
 date: today
+
+# ── VVN format settings — configured for you, no changes needed ───────────────
 format:
   html:
-    theme: [cosmo, styles.scss]
+    theme: [cosmo, styles.scss]   # VVN brand theme
     toc: true
     toc-depth: 3
     toc-location: right
     toc-title: "Contents"
-    embed-resources: true
+    embed-resources: true          # single self-contained HTML file
     fig-width: 8
     fig-height: 5
     fig-dpi: 150

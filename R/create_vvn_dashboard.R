@@ -2,29 +2,56 @@
 # VVN Project Scaffolding — Shiny Dashboard
 # =============================================================================
 
-#' Create a VVN Shiny dashboard project
+#' Create a new VVN Shiny dashboard project
 #'
-#' Scaffolds a production-ready Shiny dashboard using `bslib` with full VVN
-#' branding: maroon navbar, KPI cards, reactive charts, map, and filter panel.
-#' The generated `app.R` runs immediately on example data.
+#' Sets up a Shiny dashboard with VVN branding. Your title and author are filled
+#' in automatically. Everything else — data, charts, filters, and KPI values —
+#' is left for you to fill in using clearly marked `[placeholders]` and
+#' commented-out code blocks.
 #'
-#' @param name      Project folder name.
-#' @param path      Parent directory. Default: `"."`.
+#' **Filled in automatically from your function call:**
+#' - Title and author in `app.R` and `scripts/analysis.R`
+#' - Creation date in both files
+#'
+#' **Already configured — no changes needed:**
+#' - VVN Bootstrap theme (`vvn_bs_theme()`), maroon navbar, VVN CSS
+#' - Tab structure: Overview / Map / Data / About
+#' - KPI card slots, chart slots, sidebar filter slots (commented out, ready to activate)
+#'
+#' **You fill in:**
+#' - Data files → place in `data/raw/` or `data/processed/`
+#' - Charts → uncomment blocks in `scripts/analysis.R`, then `source()` it
+#' - `app.R` → load data, fill in chart filenames, uncomment KPI/filter/table blocks
+#' - About tab → add your data sources, methods, and contact info
+#'
+#' @param name      Folder name for the project. Use `snake_case`
+#'   (e.g., `"housing_dashboard"`). Created inside `path`.
+#' @param path      Parent directory. Defaults to the current working directory.
 #' @param title     Dashboard title shown in the navbar.
-#' @param author    Author name(s).
-#' @param overwrite If `TRUE`, delete and recreate an existing project folder.
-#'   Default `FALSE` (error if folder exists).
+#'   Filled into `app.R` automatically.
+#' @param author    Author name(s) shown in the file header comment. Defaults to
+#'   `"Visualizing Virginia's Numbers"`.
+#' @param overwrite If `TRUE`, delete an existing folder with the same name and
+#'   recreate it. Default `FALSE` — raises an error if the folder exists.
 #'
-#' @return Invisibly the project path.
+#' @return Invisibly returns the path to the created project folder.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' create_vvn_dashboard("housing_dashboard",
-#'                       title = "Virginia Housing Affordability Dashboard")
+#' # Title and author are filled in automatically:
+#' create_vvn_dashboard(
+#'   "housing_dashboard",
+#'   title  = "Virginia Housing Affordability",
+#'   author = "Jane Smith"
+#' )
+#'
+#' # Build figures, then run:
+#' source("housing_dashboard/scripts/analysis.R")
 #' shiny::runApp("housing_dashboard")
-#' # Re-run without error:
-#' create_vvn_dashboard("housing_dashboard", overwrite = TRUE)
+#'
+#' # Recreate (overwrites existing folder):
+#' create_vvn_dashboard("housing_dashboard", title = "...", overwrite = TRUE)
 #' }
 create_vvn_dashboard <- function(name,
                                   path      = ".",
@@ -60,13 +87,26 @@ create_vvn_dashboard <- function(name,
     fs::file_copy(css_src, fs::path(proj, "www", "vvn.css"), overwrite = TRUE)
   }
 
-  # Patch title in app.R
+  today <- format(Sys.Date(), "%Y-%m-%d")
+
+  # Patch title, author, date in app.R
   app_path <- fs::path(proj, "app.R")
   if (fs::file_exists(app_path)) {
     lines <- readLines(app_path, warn = FALSE)
     lines <- gsub("VVN_TITLE",  title,  lines, fixed = TRUE)
     lines <- gsub("VVN_AUTHOR", author, lines, fixed = TRUE)
+    lines <- gsub("VVN_DATE",   today,  lines, fixed = TRUE)
     writeLines(lines, app_path)
+  }
+
+  # Patch title, author, date in scripts/analysis.R
+  analysis_path <- fs::path(proj, "scripts", "analysis.R")
+  if (fs::file_exists(analysis_path)) {
+    lines <- readLines(analysis_path, warn = FALSE)
+    lines <- gsub("VVN_TITLE",  title,  lines, fixed = TRUE)
+    lines <- gsub("VVN_AUTHOR", author, lines, fixed = TRUE)
+    lines <- gsub("VVN_DATE",   today,  lines, fixed = TRUE)
+    writeLines(lines, analysis_path)
   }
 
   .write_readme(proj, name, title,

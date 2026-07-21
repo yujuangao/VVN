@@ -2,31 +2,53 @@
 # VVN Project Scaffolding - Data Story
 # =============================================================================
 
-#' Create a VVN Insights data story project
+#' Create a new VVN data story project
 #'
-#' Scaffolds a Quarto project with VVN branding that renders to a
-#' self-contained HTML page. Equivalent to creating a new Urban Institute
-#' analysis project.
+#' Sets up a self-contained Quarto project with VVN branding. Your title and
+#' author are filled in automatically. Everything else — charts, narrative, and
+#' data — is left for you to fill in using clearly marked `[placeholders]`.
 #'
-#' @param name      Project folder name (use snake_case, e.g. `"childcare_cost"`).
-#' @param path      Parent directory. Default: current working directory.
-#' @param title     Story title for YAML front matter and README.
-#' @param author    Author name(s).
-#' @param overwrite If `TRUE`, delete and recreate an existing project folder.
-#'   Default `FALSE` (error if folder exists).
+#' **Filled in automatically from your function call:**
+#' - Title and author in `index.qmd`
+#' - Creation date in `index.qmd` and `scripts/analysis.R`
 #'
-#' @return Invisibly the project path (character).
+#' **Already configured — no changes needed:**
+#' - VVN brand theme and colors (`styles.scss`)
+#' - Quarto format settings (TOC, embed-resources, figure size)
+#'
+#' **You fill in:**
+#' - Data files → place in `data/raw/` or `data/processed/`
+#' - Charts → uncomment blocks in `scripts/analysis.R`, then `source()` it
+#' - Narrative → edit `index.qmd`, replace every `[placeholder]` with your text
+#'
+#' @param name      Folder name for the project. Use `snake_case`
+#'   (e.g., `"childcare_cost"`). Created inside `path`.
+#' @param path      Parent directory. Defaults to the current working directory.
+#' @param title     Story title shown in the document header and browser tab.
+#'   Filled into `index.qmd` automatically.
+#' @param author    Author name(s) shown below the title. Defaults to
+#'   `"Visualizing Virginia's Numbers"`.
+#' @param overwrite If `TRUE`, delete an existing folder with the same name and
+#'   recreate it. Default `FALSE` — raises an error if the folder exists.
+#'
+#' @return Invisibly returns the path to the created project folder.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' create_vvn_story("childcare_cost",
-#'                   title  = "Childcare Cost in Rural Virginia",
-#'                   author = "VVN Research Team")
-#' # Re-run without error:
-#' create_vvn_story("childcare_cost", overwrite = TRUE)
-#' # Renders to HTML:
+#' # Title and author are filled in automatically:
+#' create_vvn_story(
+#'   "childcare_cost",
+#'   title  = "Childcare Cost in Rural Virginia",
+#'   author = "Jane Smith"
+#' )
+#'
+#' # Build figures, then render:
+#' source("childcare_cost/scripts/analysis.R")
 #' quarto::quarto_render("childcare_cost/index.qmd")
+#'
+#' # Recreate (overwrites existing folder):
+#' create_vvn_story("childcare_cost", title = "...", overwrite = TRUE)
 #' }
 create_vvn_story <- function(name,
                               path      = ".",
@@ -67,13 +89,26 @@ create_vvn_story <- function(name,
       .write_analysis_stub(fs::path(proj, "scripts", "analysis.R"))
     }
 
-    # Inject title & author into index.qmd
+    today <- format(Sys.Date(), "%Y-%m-%d")
+
+    # Inject title, author, date into index.qmd
     qmd <- fs::path(proj, "index.qmd")
     if (fs::file_exists(qmd)) {
       lines <- readLines(qmd, warn = FALSE)
       lines <- gsub("VVN_TITLE",  title,  lines, fixed = TRUE)
       lines <- gsub("VVN_AUTHOR", author, lines, fixed = TRUE)
+      lines <- gsub("VVN_DATE",   today,  lines, fixed = TRUE)
       writeLines(lines, qmd)
+    }
+
+    # Inject title, author, date into scripts/analysis.R
+    analysis_path <- fs::path(proj, "scripts", "analysis.R")
+    if (fs::file_exists(analysis_path)) {
+      lines <- readLines(analysis_path, warn = FALSE)
+      lines <- gsub("VVN_TITLE",  title,  lines, fixed = TRUE)
+      lines <- gsub("VVN_AUTHOR", author, lines, fixed = TRUE)
+      lines <- gsub("VVN_DATE",   today,  lines, fixed = TRUE)
+      writeLines(lines, analysis_path)
     }
   }, error = function(e) {
     if (created_fresh && fs::dir_exists(proj)) fs::dir_delete(proj)

@@ -1,18 +1,22 @@
 # ==============================================================================
-# VVN Dashboard Template — app.R
-# VVN_TITLE
-# VVN_AUTHOR · Visualizing Virginia's Numbers · Virginia Tech
+# VVN Dashboard — app.R
+# Project : VVN_TITLE
+# Author  : VVN_AUTHOR · Visualizing Virginia's Numbers · Virginia Tech
+# Created : VVN_DATE
 #
-# WORKFLOW:
-#   Step 1 — Load your data below (Section "Load data")
-#   Step 2 — Build charts in scripts/analysis.R, then source it
-#             (figures are auto-numbered and saved to figures/)
-#   Step 3 — Replace every [placeholder] in this file with your content
-#   Step 4 — Run: shiny::runApp()
-#   Step 5 — Deploy: rsconnect::deployApp()
+# WHAT IS CONFIGURED FOR YOU (no changes needed):
+#   - VVN Bootstrap theme (maroon navbar, VT brand colors)
+#   - Page structure: Overview / Map / Data / About tabs
+#   - KPI card slots, chart slots, sidebar filter slots
+#   - vvn.css stylesheet and VVN footer
 #
-# Charts are static PNGs built in scripts/analysis.R and displayed here.
-# Interactive components (KPI cards, table, map) are reactive to filters.
+# WHAT YOU FILL IN:
+#   Step 1 — Place data in data/ and uncomment the read_csv() lines below
+#   Step 2 — Build charts: source("scripts/analysis.R")
+#   Step 3 — Uncomment and fill in filters, KPI cards, chart slots in app.R
+#   Step 4 — Fill in the About tab (data sources, methods, contact)
+#   Step 5 — Run: shiny::runApp()
+#   Step 6 — Deploy: rsconnect::deployApp()
 # ==============================================================================
 
 # ── Libraries ─────────────────────────────────────────────────────────────────
@@ -61,7 +65,9 @@ ui <- bslib::page_navbar(
   footer = tags$footer(
     class = "text-center text-muted small py-2 border-top mt-3",
     "Visualizing Virginia's Numbers · Virginia Tech · ",
-    tags$a("vvn.vt.edu", href = "https://vvn.vt.edu", target = "_blank")
+    tags$a("vvn.vt.edu", href = "https://vvn.vt.edu", target = "_blank"),
+    " · ",
+    format(Sys.Date(), "%B %d, %Y")
   ),
 
   # ============================================================================

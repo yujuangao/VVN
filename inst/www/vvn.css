@@ -60,7 +60,9 @@ body {
   background-color: var(--ui-page-bg);
 }
 
-h1, h2, h3, h4 { color: var(--vvn-maroon); font-weight: 700; }
+h1, h2 { color: var(--vvn-maroon); font-weight: 700; }
+h3 { color: #3D3D3D; font-weight: 700; font-size: 1.1rem; letter-spacing: -0.01em; }
+h4 { color: #3D3D3D; font-weight: 600; font-size: 1rem; }
 a { color: var(--vvn-maroon); }
 a:hover { color: var(--ui-orange); }
 
@@ -73,12 +75,12 @@ a:hover { color: var(--ui-orange); }
 }
 
 .navbar-brand, .navbar .navbar-brand {
-  color: var(--ui-text) !important;
+  color: #3D3D3D !important;          /* charcoal — matches user guide main title */
   font-family: var(--vvn-font);
   font-weight: 700;
-  font-size: 1.5rem;    /* logo: 24-28px, weight 700 */
+  font-size: 1.55rem;   /* matches user guide page title size */
   line-height: 1.1;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 .navbar .nav-link {
@@ -104,17 +106,20 @@ a:hover { color: var(--ui-orange); }
   box-shadow: var(--vvn-shadow-sm);
 }
 
-/* Branded card header */
+/* Branded card header — matches user guide main title style */
 .vvn-card-header,
 .card-header.vvn-card-header {
-  background-color: var(--vvn-maroon) !important;
-  color:            var(--vvn-white)  !important;
-  font-weight: 700;
-  font-size: 1rem;
-  line-height: 1.2;
-  border-bottom: 2px solid var(--ui-orange);
-  border-radius: var(--vvn-radius) var(--vvn-radius) 0 0;
-  padding: .6rem 1rem;
+  background-color: var(--ui-card-bg);            /* white — same as user guide */
+  color:            #3D3D3D;                       /* charcoal — matches user guide page title */
+  font-family:      var(--vvn-font);
+  font-weight:      700;
+  font-size:        1.05rem;
+  line-height:      1.25;
+  letter-spacing:   -0.01em;
+  border-left:      3px solid var(--vvn-maroon);  /* VT Maroon brand accent */
+  border-bottom:    1px solid var(--ui-card-bdr); /* subtle rule, like user guide title block */
+  border-radius:    var(--vvn-radius) var(--vvn-radius) 0 0;
+  padding:          .65rem 1rem .65rem 0.875rem;
 }
 
 /* ── KPI Cards ────────────────────────────────────────────────────────────── */
