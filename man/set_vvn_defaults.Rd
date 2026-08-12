@@ -4,10 +4,12 @@
 \alias{set_vvn_defaults}
 \title{Set VVN as the default ggplot2 theme}
 \usage{
-set_vvn_defaults(style = c("standard", "map"), base_size = 12)
+set_vvn_defaults(style = c("standard", "map", "research"), base_size = 12)
 }
 \arguments{
-\item{style}{\code{"standard"} (default charts) or \code{"map"}.}
+\item{style}{One of \code{"standard"} (default charts), \code{"map"}, or
+\code{"research"} (clean academic / research-hub style — neutral dark titles,
+no axis lines, bottom legend).}
 
 \item{base_size}{Passed to the theme.}
 }
@@ -23,6 +25,8 @@ every subsequent \code{ggplot()} call automatically uses VVN brand colors.
 set_vvn_defaults()
 ggplot2::ggplot(ggplot2::mpg, ggplot2::aes(displ, hwy)) +
   ggplot2::geom_point()   # automatically maroon points, VVN theme
+
+set_vvn_defaults("research")  # research-hub / academic style
 
 undo_vvn_defaults()       # revert when done
 }

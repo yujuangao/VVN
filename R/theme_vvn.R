@@ -110,6 +110,104 @@ theme_vvn_map <- function(base_size = 11, base_family = "sans") {
 }
 
 
+#' VVN Research Hub theme
+#'
+#' A clean, academic publication-quality ggplot2 theme inspired by the design
+#' of research data-blog sites (e.g., the DHS Research Hub at
+#' \url{https://tech.popdata.org/dhs-research-hub/}).
+#'
+#' Key differences from `theme_vvn()`:
+#' \itemize{
+#'   \item Near-black (`#1A1A1A`) titles instead of VT Maroon — neutral /
+#'         publication-ready.
+#'   \item No axis lines or ticks — pure grid-only minimal look.
+#'   \item Legend defaults to **bottom / horizontal** for easier reading.
+#'   \item Left-aligned caption (matching blog conventions).
+#'   \item Neutral gray facet strips (not VT Maroon).
+#'   \item Grid lines are slightly lighter (`#EBEBEB`) for a softer feel.
+#' }
+#'
+#' Pairs naturally with the `"forest"` and `"forest_div"` palettes for
+#' environmental / land-cover research visualizations.
+#'
+#' @inheritParams theme_vvn
+#'
+#' @return A `ggplot2::theme` object.
+#' @export
+#'
+#' @examples
+#' library(ggplot2)
+#' ggplot(ggplot2::mpg, aes(displ, hwy, colour = class)) +
+#'   geom_point() +
+#'   theme_vvn_research()
+#'
+#' # Environmental / deforestation-style map
+#' # ggplot(forest_sf, aes(fill = pct_change)) +
+#' #   geom_sf(colour = NA) +
+#' #   scale_fill_vvn_c("forest_div") +
+#' #   theme_vvn_research(grid = "none")
+theme_vvn_research <- function(base_size = 12, base_family = "sans", grid = "y") {
+  half  <- base_size / 2
+  small <- base_size * 0.75
+
+  grid_line <- ggplot2::element_line(colour = "#EBEBEB", linewidth = 0.4)
+  no_line   <- ggplot2::element_blank()
+
+  ggplot2::theme_minimal(base_size = base_size, base_family = base_family) +
+    ggplot2::theme(
+      # ── Backgrounds ──────────────────────────────────────────────────
+      plot.background  = ggplot2::element_rect(fill = "#FFFFFF", colour = NA),
+      panel.background = ggplot2::element_rect(fill = "#FFFFFF", colour = NA),
+
+      # ── Grid ─────────────────────────────────────────────────────────
+      panel.grid.major.y = if (grid %in% c("y", "both")) grid_line else no_line,
+      panel.grid.major.x = if (grid %in% c("x", "both")) grid_line else no_line,
+      panel.grid.minor   = no_line,
+
+      # ── Axes — no lines/ticks (pure minimal academic style) ───────────
+      axis.line   = no_line,
+      axis.ticks  = no_line,
+      axis.text   = ggplot2::element_text(colour = "#333333", size = small),
+      axis.title  = ggplot2::element_text(colour = "#333333", size = base_size * 0.85,
+                                           margin = ggplot2::margin(4, 4, 4, 4)),
+
+      # ── Titles — near-black for academic / publication neutrality ─────
+      plot.title    = ggplot2::element_text(
+        colour = "#1A1A1A", size = base_size * 1.2, face = "bold",
+        hjust  = 0, margin = ggplot2::margin(b = half)
+      ),
+      plot.subtitle = ggplot2::element_text(
+        colour = "#555555", size = base_size * 0.9, hjust = 0,
+        margin = ggplot2::margin(b = half)
+      ),
+      plot.caption  = ggplot2::element_text(
+        colour = "#888888", size = base_size * 0.7, hjust = 0,
+        margin = ggplot2::margin(t = half)
+      ),
+      plot.title.position   = "plot",
+      plot.caption.position = "plot",
+      plot.margin = ggplot2::margin(half, half, half, half),
+
+      # ── Legend — bottom / horizontal (standard for research figures) ──
+      legend.position   = "bottom",
+      legend.direction  = "horizontal",
+      legend.title      = ggplot2::element_text(colour = "#333333", size = small,
+                                                 face = "bold"),
+      legend.text       = ggplot2::element_text(colour = "#333333", size = small),
+      legend.key        = ggplot2::element_rect(fill = "#FFFFFF", colour = NA),
+      legend.background = ggplot2::element_blank(),
+      legend.margin     = ggplot2::margin(t = 4),
+
+      # ── Facets — neutral gray strips (not VT Maroon) ──────────────────
+      strip.background = ggplot2::element_rect(fill = "#F0F0F0", colour = NA),
+      strip.text       = ggplot2::element_text(
+        colour = "#333333", face = "bold", size = base_size * 0.85,
+        margin = ggplot2::margin(4, 6, 4, 6)
+      )
+    )
+}
+
+
 #' VVN minimal theme (no axes, no grid)
 #'
 #' For infographic-style figures, tables-as-charts, and annotation-heavy plots.
@@ -132,7 +230,9 @@ theme_vvn_minimal <- function(base_size = 12, base_family = "sans") {
 #' active theme and updates default aesthetics for all common geoms so that
 #' every subsequent `ggplot()` call automatically uses VVN brand colors.
 #'
-#' @param style `"standard"` (default charts) or `"map"`.
+#' @param style One of `"standard"` (default charts), `"map"`, or
+#'   `"research"` (clean academic / research-hub style — neutral dark titles,
+#'   no axis lines, bottom legend).
 #' @param base_size Passed to the theme.
 #'
 #' @return Invisibly `NULL`. Called for its side effects.
@@ -143,10 +243,17 @@ theme_vvn_minimal <- function(base_size = 12, base_family = "sans") {
 #' ggplot2::ggplot(ggplot2::mpg, ggplot2::aes(displ, hwy)) +
 #'   ggplot2::geom_point()   # automatically maroon points, VVN theme
 #'
+#' set_vvn_defaults("research")  # research-hub / academic style
+#'
 #' undo_vvn_defaults()       # revert when done
-set_vvn_defaults <- function(style = c("standard", "map"), base_size = 12) {
+set_vvn_defaults <- function(style = c("standard", "map", "research"),
+                              base_size = 12) {
   style <- match.arg(style)
-  thm   <- if (style == "map") theme_vvn_map(base_size) else theme_vvn(base_size)
+  thm <- switch(style,
+    map      = theme_vvn_map(base_size),
+    research = theme_vvn_research(base_size),
+    theme_vvn(base_size)
+  )
   ggplot2::theme_set(thm)
 
   # ── Geom defaults ────────────────────────────────────────────────────────

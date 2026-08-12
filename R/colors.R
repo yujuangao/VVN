@@ -159,6 +159,20 @@ utils::globalVariables(c("x", "color", "label_col"))
     "#DCCDB4",  # warm linen
     "#333333",  # near-black
     "#F7F7F5"   # warm off-white
+  ),
+
+  # ── Forest / Environmental ─────────────────────────────────────────────────
+  # Designed for land-cover and environmental research visualizations.
+  # Matches the green-red scheme used in deforestation / forest-change analysis
+  # (e.g., DHS Research Hub style).  Red = loss, green = gain/cover,
+  # blue = water, amber = disturbance.
+  forest = c(
+    "#1B5E20",  # deep forest green  — forest cover / gain
+    "#4A7C59",  # mid forest green
+    "#B22222",  # firebrick red      — forest loss
+    "#8D6E63",  # soil brown         — degraded / bare land
+    "#1565C0",  # water blue         — rivers / lakes
+    "#F9A825"   # amber              — fire / other disturbance
   )
 )
 
@@ -179,7 +193,13 @@ utils::globalVariables(c("x", "color", "label_col"))
   monet_div     = c("#A8C5D9", "#F3F1E6", "#7FA7A6"),
   sunflower_div = c("#1E4E8C", "#F7F4E7", "#F2C94C"),
   academic_div  = c("#0D1B3D", "#BFC7D5", "#F28E2B"),
-  natural_div   = c("#333333", "#F7F7F5", "#A6B89A")
+  natural_div   = c("#333333", "#F7F7F5", "#A6B89A"),
+
+  # ── Forest diverging (interpolated to any n) ──────────────────────────────
+  # Loss (red) ↔ no-change (light cream/yellow) ↔ gain (deep green).
+  # Mirrors scale_fill_gradient2(low="darkred", mid="lightyellow",
+  # high="darkgreen") as used in deforestation research plots.
+  forest_div    = c("#B22222", "#FFFDE7", "#1B5E20")
 )
 
 
@@ -271,6 +291,10 @@ vvn_colors <- function(...) {
 #'   **Artistic themes (diverging):**
 #'   - `"monet_div"`, `"sunflower_div"`, `"academic_div"`, `"natural_div"`
 #'
+#'   **Forest / Environmental:**
+#'   - `"forest"` — 6-color categorical (deep green, loss red, soil, water, amber)
+#'   - `"forest_div"` — diverging red–cream–green for forest loss / gain maps
+#'
 #' @param n Number of colors to return. `NULL` returns all base colors.
 #'   For diverging palettes (`_div`), defaults to 7.
 #' @param reverse Reverse the palette? Default `FALSE`.
@@ -291,6 +315,8 @@ vvn_colors <- function(...) {
 #' vvn_palette("vt_orange_div", n = 7)    # 7-step impact orange–cream–maroon
 #' vvn_palette("monet")                   # Monet Pond theme
 #' vvn_palette("maroon_seq", n = 9)       # 9-step sequential
+#' vvn_palette("forest")                  # forest / environmental categorical
+#' vvn_palette("forest_div", n = 9)       # 9-step loss–cream–gain diverging
 vvn_palette <- function(palette = "main", n = NULL, reverse = FALSE,
                         alpha = 1, pick = NULL) {
 
@@ -303,7 +329,8 @@ vvn_palette <- function(palette = "main", n = NULL, reverse = FALSE,
       "i" = "Sequential: {.val {c('maroon_seq','orange_seq','navy_seq','hokie_stone_seq','gray_seq')}}",
       "i" = "Diverging: {.val {c('diverging','vt_div','vt_orange_div','monet_div','sunflower_div','academic_div','natural_div')}}",
       "i" = "Artistic: {.val {c('monet','sunflower','academic','natural')}}",
-      "i" = "Accessible: {.val {c('accessible','wcag')}}"
+      "i" = "Accessible: {.val {c('accessible','wcag')}}",
+      "i" = "Forest/Env: {.val {c('forest','forest_div')}}"
     ))
   }
 
