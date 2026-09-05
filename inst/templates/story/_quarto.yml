@@ -25,11 +25,12 @@ format:
   html:
     theme: [cosmo, styles.scss]
     toc: true
-    toc-depth: 3
-    toc-location: right
+    toc-depth: 2
+    toc-location: left
+    number-sections: true
     embed-resources: true
     fig-width: 8
-    fig-height: 5
+    fig-height: 4.5
     fig-dpi: 150
     code-fold: true
     code-tools: true

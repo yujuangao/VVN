@@ -1,302 +1,506 @@
 /*-- scss:defaults --*/
+// ── VVN Insights Theme ──────────────────────────────────────────────────────
+// Pew Research Center–inspired article styling:
+//   Libre Franklin (sans) + Lora (serif)
+//   Gold accent #d7b236 · link blue #346ead · near-black text #2a2a2a
 
-// ── VVN Brand Variables ─────────────────────────────────────────────────────
-$vvn-maroon:       #861F41;
-$vvn-maroon-dark:  #520F25;
-$vvn-maroon-light: #F5C8D4;
-$vvn-orange:       #E5751F;   // chart / print orange
-$vvn-orange-light: #FDE8D4;
-$vvn-navy:         #1B5299;
-$vvn-charcoal:     #3D3D3D;
-$vvn-gray:         #AAAAAA;
-$vvn-light-gray:   #F7F7F7;
-$vvn-rule:         #E0E0E0;
-$vvn-white:        #FFFFFF;
+$vvn-gold:      #d7b236;   // signature gold — big numbers, highlights
+$vvn-pink:      #C2185B;   // pink accent — finding numbers
+$vvn-blue:      #346ead;   // link color
+$vvn-chart-b:   #456A83;   // chart steel blue
+$vvn-chart-r:   #BF3B27;   // chart red-brown
+$vvn-text:      #2a2a2a;   // primary text
+$vvn-mid:       #565656;   // secondary text / captions
+$vvn-border:    #CBCBCB;   // light border
+$vvn-border-dk: #818181;   // darker border
+$vvn-bg:        #ffffff;   // page background
+$vvn-bg-light:  #f7f7f7;   // subtle panel background
 
-// ── UI Theme Colors (new design system) ────────────────────────────────────
-$ui-orange:        #E87722;   // Impact Orange — digital accent
-$ui-launch:        #8A2045;   // dark maroon for CTA buttons
-$footer-bg:        #222C3D;   // footer background
-$text-main:        #1A1A1A;   // main text
-$text-secondary:   #3F4650;   // secondary text
-$card-border:      #D9D9D9;
-$btn-border:       #D5D5D5;
-$footer-divider:   #8C939C;
-
-// Quarto theme overrides
-$headings-color:          $vvn-maroon;
-$link-color:              $vvn-maroon;
-$link-hover-color:        $ui-orange;
-$body-color:              $text-main;
-$body-bg:                 #F3F4F7;
-$border-color:            $card-border;
-$border-radius:           6px;
-$font-family-sans-serif:  "Inter", "Helvetica Neue", Arial, sans-serif;
+// Quarto / Bootstrap overrides
+$headings-color:         $vvn-text;
+$body-color:             $vvn-text;
+$body-bg:                $vvn-bg;
+$link-color:             $vvn-blue;
+$link-hover-color:       darken($vvn-blue, 12%);
+$border-color:           $vvn-border;
+$border-radius:          0px;
+$font-family-sans-serif: "Libre Franklin", "Franklin Gothic URW", Verdana, Geneva, sans-serif;
+$font-family-serif:      "Lora", "Abril Text", Georgia, "Times New Roman", serif;
 
 /*-- scss:rules --*/
 
-// ── Fonts ───────────────────────────────────────────────────────────────────
-// Inter: all body and UI text (Acherus Grotesque substitute)
-// Barlow Condensed Italic: large hero titles (Gineso Condensed Italic substitute)
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Barlow+Condensed:ital,wght@1,300;1,400&family=JetBrains+Mono:wght@400&display=swap');
+// ── Web fonts ─────────────────────────────────────────────────────────────────
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap');
 
-// ── Base ───────────────────────────────────────────────────────────────────
+// ── Base ──────────────────────────────────────────────────────────────────────
 body {
-  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 18px;      // intro paragraph: 18-20px
-  line-height: 1.6;
-  color: $text-main;
-  background-color: #F3F4F7;
+  font-family: 'Libre Franklin', 'Franklin Gothic URW', Verdana, Geneva, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: $vvn-text;
+  background: $vvn-bg;
 }
 
-// ── Headings ───────────────────────────────────────────────────────────────
-// Story page title: Barlow Condensed Italic (Gineso Condensed Italic substitute)
-h1.title, .quarto-title h1 {
-  font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(2.8rem, 6vw, 4rem);
-  line-height: 1.1;
-  color: $text-main;
-  letter-spacing: -0.01em;
-  margin-bottom: 0.5rem;
-}
-
+// ── Headings ─────────────────────────────────────────────────────────────────
 h1, h2, h3, h4 {
-  font-family: 'Inter', sans-serif;
-  color: $vvn-maroon;
-  font-weight: 700;
-}
-
-h2 {
-  border-bottom: 2px solid $card-border;
-  padding-bottom: 0.35em;
-  margin-top: 2rem;
-  font-size: 1.5rem;
+  color: $vvn-text;
   line-height: 1.2;
 }
 
-h3 { font-size: 1.2rem; font-weight: 600; }
-
-a { color: $vvn-maroon; &:hover { color: $ui-orange; } }
-
-// ── Navbar — white background (spec: #FFFFFF) ──────────────────────────────
-.navbar {
-  background-color: #FFFFFF !important;
-  border-bottom: 1px solid $card-border !important;
-
-  .navbar-brand {
-    color: $text-main !important;
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: 1.5rem;     // logo: 24-28px, weight 700
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-  }
-
-  .nav-link {
-    color: $text-main !important;
-    font-family: 'Inter', sans-serif;
-    font-size: 1.125rem;   // nav: 18px
-    font-weight: 600;      // 500-600
-    line-height: 1.4;
-    &:hover, &.active { color: $text-main !important; }
-  }
+h2 {
+  font-family: 'Libre Franklin', Verdana, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  border-bottom: 1px solid #000000;
+  padding-bottom: 0.35em;
+  margin-top: 2.5rem;
+  letter-spacing: -0.01em;
 }
 
-// ── Hero section ───────────────────────────────────────────────────────────
-.hero {
-  background: $vvn-maroon;
-  color: $vvn-white;
-  padding: 3.5rem 2.5rem;
-  margin: 0 0 2.5rem;
-  border-radius: 0 0 8px 8px;
-  position: relative;
-  overflow: hidden;
+h3 {
+  font-family: 'Libre Franklin', Verdana, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 1.6rem;
+  color: $vvn-text;
+}
 
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      -55deg,
-      transparent, transparent 18px,
-      rgba(255,255,255,0.04) 18px, rgba(255,255,255,0.04) 36px
-    );
-    pointer-events: none;
-  }
+h4 {
+  font-family: 'Libre Franklin', Verdana, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: $vvn-mid;
+}
 
-  // Card title style applied to hero heading
+a {
+  color: $vvn-blue;
+  text-decoration: none;
+  &:hover { text-decoration: underline; color: darken($vvn-blue, 12%); }
+}
+
+// ── Hide Quarto auto-title block — .vvn-header is the visual title ──────────
+.quarto-title,
+.quarto-title-block,
+.quarto-title-meta { display: none !important; }
+
+// ── VVN article header ──────────────────────────────────────────────────────
+.vvn-header {
+  border-top: 3px solid #000000;
+  padding: 1.4rem 0 1.75rem;
+  margin-bottom: 2rem;
+
   h2 {
-    color: $vvn-white !important;
+    font-family: 'Lora', 'Abril Text', Georgia, serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.12;
+    color: $vvn-text;
     border: none;
-    font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(2rem, 4vw, 3rem);
-    margin-top: 0;
-    line-height: 1.1;
-  }
-  p { color: rgba(255,255,255,0.88); font-size: 1.125rem; line-height: 1.6; }
-
-  .hero-subtitle {
-    color: $ui-orange;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-    line-height: 1.4;
+    padding-bottom: 0;
+    margin-top: 0.6rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
   }
 }
 
-// ── Blockquote (Key Finding) ───────────────────────────────────────────────
-blockquote {
-  border-left: 5px solid $ui-orange;
-  background: $vvn-orange-light;
-  padding: 1rem 1.5rem;
-  border-radius: 0 6px 6px 0;
-  font-style: normal;
+// Rubric label
+.vvn-rubric {
+  font-family: 'Libre Franklin', Verdana, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $vvn-mid;
+  margin-bottom: 0.6rem;
+  border-bottom: none;
+}
+
+// Topic / category tags
+.vvn-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.vvn-tag {
+  font-family: 'Libre Franklin', Verdana, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: $vvn-blue;
+  border: 1px solid $vvn-border;
+  padding: 0.15rem 0.55rem;
+  border-radius: 0;
+
+  &:hover { background: $vvn-bg-light; text-decoration: none; }
+}
+
+// Subtitle — serif italic
+.vvn-subtitle {
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
   font-size: 1.05rem;
-  color: $vvn-charcoal;
-
-  strong { color: $vvn-maroon; }
+  color: $vvn-mid;
+  line-height: 1.5;
+  margin-top: 0.4rem;
+  margin-bottom: 0.9rem;
 }
 
-// ── Callouts ───────────────────────────────────────────────────────────────
+// Byline — uppercase, compact
+.vvn-byline {
+  font-family: 'Libre Franklin', Verdana, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: $vvn-mid;
+  border-top: 1px solid $vvn-border;
+  padding-top: 0.65rem;
+  margin-top: 0.8rem;
+}
+
+// ── Big-number stats — signature gold callout ────────────────────────────────
+.vvn-stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 1.75rem 0;
+  border-top: 3px solid #000;
+  border-bottom: 1px solid $vvn-border;
+  padding: 1.25rem 0;
+}
+
+.vvn-stat {
+  flex: 1 1 140px;
+  padding: 0 1.25rem 0 0;
+  border-right: 1px solid $vvn-border;
+  &:last-child { border-right: none; }
+
+  .big-number {
+    display: block;
+    font-family: 'Libre Franklin', Verdana, sans-serif;
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: $vvn-gold;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label {
+    font-family: 'Libre Franklin', Verdana, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $vvn-mid;
+    line-height: 1.35;
+  }
+}
+
+// ── Blockquote / key finding ────────────────────────────────────────────────
+blockquote {
+  border-left: 4px solid $vvn-gold;
+  padding: 0.75rem 1.5rem;
+  margin: 1.75rem 0;
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: $vvn-text;
+  background: none;
+
+  strong { font-style: normal; color: $vvn-text; }
+  em     { font-style: normal; }
+}
+
+// ── Callout notes ───────────────────────────────────────────────────────────
 .callout {
-  border-radius: 6px;
-  border-left-width: 5px !important;
-
-  &.callout-note      { border-left-color: $vvn-navy !important; }
-  &.callout-tip       { border-left-color: #2E7D32 !important; }
-  &.callout-warning   { border-left-color: $ui-orange !important; }
-  &.callout-important { border-left-color: $vvn-maroon !important; }
-
-  .callout-title { font-weight: 700; }
+  border-radius: 0 !important;
+  border-left-width: 4px !important;
+  background: $vvn-bg-light !important;
+  &.callout-note      { border-left-color: $vvn-blue !important; }
+  &.callout-tip       { border-left-color: $vvn-gold !important; }
+  &.callout-warning   { border-left-color: $vvn-chart-r !important; }
+  &.callout-important { border-left-color: #000 !important; }
+  .callout-title {
+    font-family: 'Libre Franklin', Verdana, sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
 }
 
-// ── Table of contents ──────────────────────────────────────────────────────
+// ── Table of Contents ───────────────────────────────────────────────────────
 #TOC {
-  border-left: 3px solid $card-border;
+  border-left: 3px solid $vvn-border;
   padding-left: 1rem;
 
+  .toc-title {
+    font-family: 'Libre Franklin', Verdana, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $vvn-mid;
+  }
+
   a {
-    color: $text-secondary;
-    font-size: 0.9rem;
-    line-height: 1.6;
-    &:hover { color: $vvn-maroon; }
+    font-family: 'Libre Franklin', Verdana, sans-serif;
+    color: $vvn-mid;
+    font-size: 0.84rem;
+    line-height: 1.75;
+    &:hover { color: $vvn-blue; text-decoration: none; }
   }
 
   li.active > a {
-    color: $vvn-maroon;
-    font-weight: 600;
-    border-left: 2px solid $vvn-maroon;
+    color: $vvn-blue;
+    font-weight: 700;
+    border-left: 3px solid $vvn-gold;
     margin-left: -1rem;
-    padding-left: calc(1rem - 2px);
+    padding-left: calc(1rem - 3px);
   }
 }
 
-// ── Tables ─────────────────────────────────────────────────────────────────
-.gt_table { border-top: 3px solid $vvn-maroon !important; }
-.gt_col_heading {
-  background-color: $vvn-maroon !important;
-  color: $vvn-white !important;
-  font-weight: 700 !important;
-}
-.gt_col_heading:after { border-bottom-color: $ui-orange !important; }
-.gt_striped_row { background-color: $vvn-light-gray !important; }
+// ── Map / data viz cards ────────────────────────────────────────────────────
+.map-card {
+  margin: 2rem 0;
+  border: 1px solid $vvn-border;
+  overflow: hidden;
 
-table {
-  width: 100%;
-  border-top: 3px solid $vvn-maroon;
-  border-collapse: collapse;
-  font-size: 0.9rem;
-
-  thead th {
-    background-color: $vvn-maroon;
-    color: $vvn-white;
-    font-weight: 700;
-    padding: 0.55rem 0.75rem;
+  iframe {
+    display: block;
+    width: 100%;
     border: none;
   }
-
-  tbody tr:nth-child(even) { background-color: $vvn-light-gray; }
-  tbody tr:hover            { background-color: $vvn-maroon-light; }
-  tbody td { padding: 0.45rem 0.75rem; border-bottom: 1px solid $card-border; }
 }
 
-// ── Figure captions ────────────────────────────────────────────────────────
+.map-caption {
+  background: $vvn-bg-light;
+  border-top: 1px solid $vvn-border;
+  padding: 0.55rem 0.9rem;
+  font-family: 'Libre Franklin', Verdana, sans-serif;
+  font-size: 0.75rem;
+  color: $vvn-mid;
+  font-style: italic;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+// ── Tables ──────────────────────────────────────────────────────────────────
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Libre Franklin', Verdana, sans-serif;
+  font-size: 0.875rem;
+  border-top: 2px solid #000;
+
+  thead th {
+    background: $vvn-bg-light;
+    color: $vvn-text;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid $vvn-border-dk;
+    text-align: left;
+  }
+
+  tbody tr:nth-child(even) { background: $vvn-bg-light; }
+  tbody td {
+    padding: 0.45rem 0.75rem;
+    border-bottom: 1px solid $vvn-border;
+    vertical-align: top;
+  }
+}
+
+// ── Code ────────────────────────────────────────────────────────────────────
+pre, code {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.83em;
+  background: $vvn-bg-light;
+  border-radius: 0;
+}
+pre {
+  padding: 0.9rem 1.2rem;
+  border-left: 3px solid $vvn-gold;
+  overflow-x: auto;
+}
+
+// ── Figure captions ─────────────────────────────────────────────────────────
 figcaption, .figure-caption, .quarto-figure-caption {
-  font-size: 0.82rem;
-  color: $text-secondary;
+  font-family: 'Libre Franklin', Verdana, sans-serif;
+  font-size: 0.77rem;
+  color: $vvn-mid;
   font-style: italic;
   margin-top: 0.35rem;
 }
 
-// ── Code ───────────────────────────────────────────────────────────────────
-pre, code {
-  font-family: "JetBrains Mono", "Fira Code", "Courier New", monospace;
-  font-size: 0.86em;
-  background: $vvn-light-gray;
-  border-radius: 4px;
-}
-pre {
-  padding: 1rem 1.25rem;
-  border-left: 3px solid $vvn-maroon;
-  overflow-x: auto;
+// ── Source lines ────────────────────────────────────────────────────────────
+.vvn-source {
+  font-family: 'Libre Franklin', Verdana, sans-serif;
+  font-size: 0.74rem;
+  color: $vvn-mid;
+  font-style: normal;
+  &::before {
+    content: "SOURCE: ";
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: $vvn-text;
+  }
 }
 
-// ── Footer — dark navy #222C3D (spec) ─────────────────────────────────────
+// ── Horizontal rule ─────────────────────────────────────────────────────────
+hr { border: none; border-top: 1px solid $vvn-border; margin: 2rem 0; }
+
+// ── Footer ──────────────────────────────────────────────────────────────────
 footer, .page-footer {
-  background-color: $footer-bg !important;
-  color: rgba(255,255,255,0.75) !important;
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;       // footer links: 16px
-  line-height: 1.6;
+  background-color: #1a1a1a !important;
+  color: rgba(255,255,255,0.65) !important;
+  font-family: 'Libre Franklin', Verdana, sans-serif;
+  font-size: 0.83rem;
+  line-height: 1.65;
   padding-top: 1.5rem;
   margin-top: 3rem;
+  border-top: 3px solid $vvn-gold;
 
-  a { color: rgba(255,255,255,0.6) !important; &:hover { color: #FFFFFF !important; } }
+  a { color: rgba(255,255,255,0.55) !important; &:hover { color: #FFF !important; } }
+  hr { border-color: #444 !important; }
+}
 
-  // Footer headings: Inter 700, 18-20px
-  h4, h5, strong {
-    color: #FFFFFF !important;
-    font-weight: 700;
-    font-size: 1.1rem;
-    line-height: 1.3;
+// ── "About This Research" collapsible ───────────────────────────────────────
+details.about-research {
+  border: 1px solid $vvn-border;
+  border-left: 3px solid $vvn-gold;
+  margin: 1.75rem 0 2rem;
+  background: $vvn-bg;
+
+  summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1.1rem;
+    font-family: 'Libre Franklin', Verdana, sans-serif;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $vvn-text;
+    background: $vvn-bg-light;
+    user-select: none;
+
+    &::-webkit-details-marker { display: none; }
+
+    &::after {
+      content: "\25BC";
+      font-size: 0.6rem;
+      color: $vvn-gold;
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+      margin-left: 0.75rem;
+    }
+
+    &:hover { background: darken($vvn-bg-light, 3%); }
+    &:focus-visible { outline: 2px solid $vvn-gold; outline-offset: -2px; }
   }
 
-  // Footer divider
-  hr { border-color: $footer-divider !important; }
+  &[open] summary::after {
+    content: "\25B2";
+  }
 
-  // Copyright: 15-16px
-  .copyright, small {
-    font-size: 0.94rem;
-    line-height: 1.5;
-    color: rgba(255,255,255,0.55) !important;
+  .about-content {
+    padding: 1.25rem 1.5rem 0.75rem;
+    border-top: 1px solid $vvn-border;
+    font-size: 0.96rem;
+    line-height: 1.7;
+
+    h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 1.25rem;
+      &:first-child { margin-top: 0; }
+    }
+
+    .vvn-stats-row {
+      margin: 1rem 0;
+      padding: 0.75rem 0;
+      border-top: 2px solid #000;
+      .big-number { font-size: 2rem; }
+    }
   }
 }
 
-// ── Print optimizations ────────────────────────────────────────────────────
-@media print {
-  .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  blockquote { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .navbar { display: none; }
+// ── Section numbers — CSS counter on .finding sections ──────────────────────
+main { counter-reset: finding; }
+
+section.level2.finding {
+  counter-increment: finding;
+
+  &::before {
+    content: counter(finding);
+    display: block;
+    font-family: 'Libre Franklin', Verdana, sans-serif;
+    font-size: 6rem;
+    font-weight: 800;
+    color: $vvn-pink;
+    opacity: 0.18;
+    line-height: 1;
+    margin-top: 3rem;
+    margin-bottom: -1.4rem;
+    user-select: none;
+    letter-spacing: -0.03em;
+    pointer-events: none;
+  }
 }
 
-// ── Responsive ─────────────────────────────────────────────────────────────
+h2.finding {
+  height: 0;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  font-size: 0;
+  line-height: 0;
+  border: 0;
+}
+
+#toc-title { display: none; }
+
+.finding-statement {
+  font-family: 'Libre Franklin', Verdana, sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: $vvn-text;
+  border-bottom: 2px solid #861F41;
+  padding-bottom: 0.4em;
+  margin-top: 0;
+  margin-bottom: 1.1rem;
+}
+
+// ── Responsive ──────────────────────────────────────────────────────────────
 @media (max-width: 768px) {
-  .hero { padding: 2rem 1.25rem; }
-  h2 { font-size: 1.3rem; }
-  blockquote { padding: 0.75rem 1rem; }
-  body { font-size: 16px; }
+  body { font-size: 15px; }
+  h2   { font-size: 1.2rem; }
+  .vvn-header h2 { font-size: 1.65rem; }
+  .vvn-stats-row { flex-direction: column; gap: 1rem; }
+  .vvn-stat { border-right: none; border-bottom: 1px solid $vvn-border; padding-bottom: 0.75rem; }
 }
 
-// ── Accessibility ──────────────────────────────────────────────────────────
-:focus-visible { outline: 3px solid $ui-orange; outline-offset: 2px; }
+// ── Print ───────────────────────────────────────────────────────────────────
+@media print {
+  .navbar { display: none; }
+  .vvn-header { border-top: 2px solid #000; }
+}
 
+// ── Accessibility ───────────────────────────────────────────────────────────
+:focus-visible { outline: 3px solid $vvn-gold; outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }

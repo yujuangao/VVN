@@ -70,6 +70,11 @@ create_vvn_story <- function(name,
     }
     created_fresh <- TRUE
 
+    # Write .gitkeep files in empty directories
+    for (d in c("data/raw", "data/processed", "figures")) {
+      file.create(fs::path(proj, d, ".gitkeep"))
+    }
+
     # Copy bundled templates (root-level files: index.qmd, _quarto.yml, styles.scss)
     tmpl <- system.file("templates", "story", package = "vvnthemes")
     if (nzchar(tmpl) && fs::dir_exists(tmpl)) {
@@ -99,6 +104,14 @@ create_vvn_story <- function(name,
       lines <- gsub("VVN_AUTHOR", author, lines, fixed = TRUE)
       lines <- gsub("VVN_DATE",   today,  lines, fixed = TRUE)
       writeLines(lines, qmd)
+    }
+
+    # Inject title into _quarto.yml
+    yml <- fs::path(proj, "_quarto.yml")
+    if (fs::file_exists(yml)) {
+      lines <- readLines(yml, warn = FALSE)
+      lines <- gsub("VVN_TITLE", title, lines, fixed = TRUE)
+      writeLines(lines, yml)
     }
 
     # Inject title, author, date into scripts/analysis.R
@@ -162,6 +175,7 @@ create_vvn_story <- function(name,
 #' Check a VVN Insights story for required sections
 #'
 #' Validates `index.qmd` for key structural sections and VVN function usage.
+#' Searches both `index.qmd` and `scripts/analysis.R` for `vvn_source`.
 #'
 #' @param path Path to the story folder. Default: `"."`.
 #' @return Invisibly `TRUE` if all checks pass, `FALSE` otherwise.
@@ -177,30 +191,46 @@ check_vvn_story <- function(path = ".") {
 
   if (!fs::file_exists(qmd)) cli::cli_abort("No {.path index.qmd} in {.path {path}}.")
 
-  # Check analysis script exists and figures have been generated
-  if (!fs::file_exists(script)) {
-    cli::cli_alert_warning("Missing {.path scripts/analysis.R} — create and source it to generate figures.")
-  } else {
-    n_figs <- length(fs::dir_ls(fs::path(path, "figures"), glob = "*.png",
-                                 fail = FALSE))
+  # Check for figures (independent of script existence)
+  fig_dir <- fs::path(path, "figures")
+  if (fs::dir_exists(fig_dir)) {
+    n_figs <- length(fs::dir_ls(fig_dir, glob = "*.png", fail = FALSE))
     if (n_figs == 0) {
       cli::cli_alert_warning("No PNG files in {.path figures/} — source {.path scripts/analysis.R} first.")
     } else {
       cli::cli_alert_success("{n_figs} figure(s) found in {.path figures/}.")
     }
+  } else {
+    cli::cli_alert_warning("No {.path figures/} directory found.")
+  }
+
+  # Check analysis script exists
+  if (!fs::file_exists(script)) {
+    cli::cli_alert_warning("Missing {.path scripts/analysis.R} — create and source it to generate figures.")
   }
 
   # Check index.qmd sections
-  txt      <- paste(readLines(qmd, warn = FALSE), collapse = "\n")
-  required <- c("Overview", "Background", "Findings", "Conclusion",
-                 "include_graphics", "vvn_source")
-  missing  <- required[!vapply(required, grepl, logical(1), x = txt, fixed = TRUE)]
+  txt_qmd <- paste(readLines(qmd, warn = FALSE), collapse = "\n")
+
+  # Search both files for vvn_source
+  has_vvn_source <- grepl("vvn_source", txt_qmd, fixed = TRUE)
+  if (!has_vvn_source && fs::file_exists(script)) {
+    txt_script <- paste(readLines(script, warn = FALSE), collapse = "\n")
+    has_vvn_source <- grepl("vvn_source", txt_script, fixed = TRUE)
+  }
+
+  # Check required sections in index.qmd (vvn_source checked separately)
+  required_sections <- c("finding-statement", "include_graphics")
+  missing <- required_sections[!vapply(required_sections, grepl, logical(1),
+                                        x = txt_qmd, fixed = TRUE)]
+
+  if (!has_vvn_source) missing <- c(missing, "vvn_source")
 
   if (length(missing) == 0) {
-    cli::cli_alert_success("All required VVN sections present in {.path index.qmd}.")
+    cli::cli_alert_success("All required VVN sections present.")
     return(invisible(TRUE))
   }
-  cli::cli_alert_warning("Missing in {.path index.qmd}:")
+  cli::cli_alert_warning("Missing:")
   cli::cli_bullets(stats::setNames(paste("Missing:", missing), rep("x", length(missing))))
   invisible(FALSE)
 }
@@ -219,8 +249,9 @@ check_vvn_story <- function(path = ".") {
       "  html:",
       "    theme: [cosmo, styles.scss]",
       "    toc: true",
-      "    toc-depth: 3",
-      "    toc-location: right",
+      "    toc-depth: 2",
+      "    toc-location: left",
+      "    number-sections: true",
       "    embed-resources: true",
       "execute:",
       "  echo: false",
@@ -231,17 +262,20 @@ check_vvn_story <- function(path = ".") {
       "#| include: false",
       "library(vvnthemes)",
       "library(ggplot2)",
+      "set_vvn_defaults()",
       '```',
       "",
-      "## Overview {.hero}",
+      "::: {.vvn-header}",
+      "## VVN_TITLE {.unnumbered .unlisted}",
+      ":::",
       "",
-      "> **Key Finding:** Write your key finding here.",
+      "## Finding 1 {.finding}",
       "",
-      "## Background",
+      '::: {.finding-statement}',
+      "[Write your key finding here.]",
+      ":::",
       "",
-      "## Findings",
-      "",
-      "## Conclusion",
+      "## Conclusion {.unnumbered}",
       "",
       "---",
       "*Visualizing Virginia's Numbers \u00B7 Virginia Tech*"
@@ -255,6 +289,10 @@ check_vvn_story <- function(path = ".") {
       "format:",
       "  html:",
       "    theme: [cosmo, styles.scss]",
+      "    toc: true",
+      "    toc-depth: 2",
+      "    toc-location: left",
+      "    number-sections: true",
       "    embed-resources: true"
     ),
     fs::path(proj, "_quarto.yml")
@@ -324,48 +362,6 @@ check_vvn_story <- function(path = ".") {
     "#   labs(title = \"[Chart title]\", x = NULL, y = \"[Metric]\", color = \"[Legend]\") +",
     "#   vvn_source(\"[Dataset]\") + scatter_grid()",
     "# save_fig(p1, \"trend_grouped\")",
-    "",
-    "# ── HORIZONTAL BAR CHART: ranking or comparison ─────────────────────────────",
-    "# p2 <- df |>",
-    "#   mutate(name = reorder(name, value), hi = name == \"[highlight]\") |>",
-    "#   ggplot(aes(x = value, y = name, fill = hi)) +",
-    "#   geom_col(width = 0.65) +",
-    "#   geom_text(aes(label = round(value, 1)), hjust = -0.2, size = 3.4) +",
-    "#   scale_fill_manual(values = c(`TRUE` = \"#E5751F\", `FALSE` = \"#861F41\"),",
-    "#                     guide = \"none\") +",
-    "#   scale_x_continuous(expand = expansion(mult = c(0, .15))) +",
-    "#   labs(title = \"[Chart title]\", x = \"[Metric]\", y = NULL) +",
-    "#   vvn_source(\"[Dataset]\") + remove_ticks()",
-    "# save_fig(p2, \"bar_horizontal\")",
-    "",
-    "# ── SCATTER / BUBBLE CHART ──────────────────────────────────────────────────",
-    "# p3 <- ggplot(df, aes(x = x_var, y = y_var, color = group, size = size_var)) +",
-    "#   geom_point(alpha = 0.75) +",
-    "#   scale_color_vvn(\"main\") +",
-    "#   scale_size_continuous(range = c(2, 10), labels = scales::comma) +",
-    "#   labs(title = \"[Chart title]\", x = \"[X]\", y = \"[Y]\", color = \"[Legend]\") +",
-    "#   vvn_source(\"[Dataset]\") + scatter_grid()",
-    "# save_fig(p3, \"scatter\")",
-    "",
-    "# ── LOLLIPOP CHART: ranking ─────────────────────────────────────────────────",
-    "# p4 <- df |>",
-    "#   mutate(name = reorder(name, value),",
-    "#          grp  = if_else(value >= median(value), \"Above\", \"Below\")) |>",
-    "#   ggplot(aes(x = value, y = name, color = grp)) +",
-    "#   geom_segment(aes(x = 0, xend = value, yend = name),",
-    "#                linewidth = 0.7, alpha = 0.5) +",
-    "#   geom_point(size = 3.5) +",
-    "#   scale_color_manual(values = c(Above = \"#861F41\", Below = \"#E5751F\")) +",
-    "#   labs(title = \"[Chart title]\", x = \"[Metric]\", y = NULL, color = NULL) +",
-    "#   vvn_source(\"[Dataset]\") + remove_ticks()",
-    "# save_fig(p4, \"lollipop\", height = 7)",
-    "",
-    "# ── COUNTY MAP (leaflet + static PNG) ───────────────────────────────────────",
-    "# library(leaflet); library(mapshot2)",
-    "# m <- leaflet(va_counties) |>",
-    "#   vvn_map_style(data = va_counties, value_col = \"[var]\", title = \"[title]\")",
-    "# mapshot2(m, file = sprintf(\"figures/%02d_map.png\", .n + 1L))",
-    "# .n <<- .n + 1L",
     "",
     "message(sprintf(\"Done — %d figure(s) saved to figures/\", .n))"
   ), path)

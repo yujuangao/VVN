@@ -1,22 +1,23 @@
 ---
-# ── Project info — filled in automatically by create_vvn_story() ─────────────
 title: "VVN_TITLE"
+subtitle: "VVN_SUBTITLE"
 author: "VVN_AUTHOR"
 date: today
-
-# ── VVN format settings — configured for you, no changes needed ───────────────
 format:
   html:
-    theme: [cosmo, styles.scss]   # VVN brand theme
+    theme: [cosmo, styles.scss]
     toc: true
-    toc-depth: 3
-    toc-location: right
-    toc-title: "Contents"
-    embed-resources: true          # single self-contained HTML file
-    fig-width: 8
-    fig-height: 5
-    fig-dpi: 150
+    toc-depth: 2
+    toc-location: left
+    number-sections: true
     smooth-scroll: true
+    code-fold: true
+    code-tools: true
+    fig-width: 8
+    fig-height: 4.5
+    fig-dpi: 150
+    embed-resources: true
+    link-external-icon: true
 execute:
   echo: false
   warning: false
@@ -26,181 +27,143 @@ execute:
 ```{r setup}
 #| include: false
 library(vvnthemes)
+library(ggplot2)
 library(knitr)
-library(gt)
 library(dplyr)
-library(readr)
 
 set_vvn_defaults()
-
-# Load your processed data (needed for the summary table)
-# df <- read_csv("data/processed/my_data.csv", show_col_types = FALSE)
 ```
 
-::: {.hero}
-## VVN_TITLE
-
-::: {.hero-subtitle}
-Visualizing Virginia's Numbers · Virginia Tech · `r format(Sys.Date(), "%Y")`
+::: {.vvn-header}
+::: {.vvn-rubric}
+Insights · Visualizing Virginia's Numbers · Virginia Tech
 :::
 
-[One sentence describing what this story is about and who it covers.]
+::: {.vvn-topics}
+[Topic 1]{.vvn-tag}
+[Topic 2]{.vvn-tag}
+[Topic 3]{.vvn-tag}
 :::
 
----
+## VVN_TITLE {.unnumbered .unlisted}
 
-## Overview
+::: {.vvn-subtitle}
+[One sentence describing the scope and angle of this analysis.]
+:::
 
-> **Key Finding:** [State your single most important result here. **Bold the key number.** Keep it to 1–2 sentences.]
+::: {.vvn-byline}
+By **VVN_AUTHOR** · Visualizing Virginia's Numbers (VVN) · Virginia Tech · VVN_DATE
+:::
+:::
 
-[2–3 sentences summarizing what you found and why it matters. Mention which figures support the finding and cite the data source.]
+[2–3 sentences introducing the story: what question it answers, which data it uses, and why it matters for Virginia communities.]
 
----
+::: {.vvn-stats-row}
+::: {.vvn-stat}
+[##]{.big-number}
+[Stat 1 label]{.stat-label}
+:::
 
-## Background
+::: {.vvn-stat}
+[##]{.big-number}
+[Stat 2 label]{.stat-label}
+:::
 
-**Why this matters.** [Describe the policy or research context:]
+::: {.vvn-stat}
+[##]{.big-number}
+[Stat 3 label]{.stat-label}
+:::
+:::
 
-- [What problem or question does this story address?]
-- [Who is affected, and how?]
-- [What data gap or opportunity does this analysis address?]
+<details class="about-research">
+<summary>About This Research</summary>
+<div class="about-content">
 
-**Audience.** [Name the intended readers — e.g., policymakers, advocates, community organizations — and the issue area.]
+### Background
 
----
+[Describe the policy or research context — what problem this analysis addresses, who is affected, and why it matters.]
 
-## Data & Methods
+### Data & Methods
 
 | Item | Details |
 |------|---------|
 | **Source** | [Dataset name, organization, year] |
 | **Geography** | [e.g., Virginia counties / independent cities] |
 | **Period** | [e.g., 2018–2023] |
-| **Variable** | [Description of the key variable(s) you are measuring] |
+| **Variable** | [Key variable(s) being measured] |
 
-::: {.callout-note}
-**Data note:** [Note any caveats — missing data, model-based estimates, comparability issues across years, or pandemic-related disruptions.]
-:::
+### Limitations
+
+- [Data availability or lag]
+- [Geographic resolution caveats]
+- [Causal claims — note that the analysis is descriptive unless stated otherwise]
+
+</div>
+</details>
 
 ---
 
-## Findings
+## Finding 1 Title {.finding}
 
-### [Section title — e.g., Statewide Trend]
+::: {.finding-statement}
+[Write the main finding as a bold headline statement — one sentence summarizing what the data shows.]
+:::
 
-[1–2 sentences introducing Figure 1. Point out what the reader should notice and reference a specific number from the chart.]
+[1–2 paragraphs explaining this finding. Reference the figure below and highlight the key number or pattern the reader should notice.]
 
 ```{r fig-01}
 #| fig-cap: "[Caption: what the figure shows and the data source.]"
-#| fig-alt: "[Alt text: chart type, key pattern, range of values — for screen readers.]"
-# Replace 01_[name].png with your actual filename (e.g. 01_trend_statewide.png)
+#| fig-alt: "[Alt text: chart type, key pattern, range of values.]"
+# Replace 01_[name].png with your actual filename
 f <- "figures/01_[name].png"
 if (file.exists(f)) knitr::include_graphics(f)
 ```
 
-### [Section title — e.g., Trends by Group]
+<!-- vvn_source("[Dataset name]") -->
 
-[1–2 sentences introducing Figure 2. Highlight the most important comparison or pattern.]
+---
+
+## Finding 2 Title {.finding}
+
+::: {.finding-statement}
+[Second major finding as a headline statement.]
+:::
+
+[1–2 paragraphs explaining this finding.]
 
 ```{r fig-02}
 #| fig-cap: "[Caption for Figure 2.]"
 #| fig-alt: "[Alt text for Figure 2.]"
-# Replace 02_[name].png with your actual filename
 f <- "figures/02_[name].png"
 if (file.exists(f)) knitr::include_graphics(f)
 ```
 
-::: {.callout-important}
-**Key observation:** [One sentence stating the most striking finding from Figure 2 — a gap, a reversal, an outlier.]
+<!-- vvn_source("[Dataset name]") -->
+
+---
+
+## Finding 3 Title {.finding}
+
+::: {.finding-statement}
+[Third major finding as a headline statement.]
 :::
 
-### [Section title — e.g., Latest-Year Comparison]
-
-[1–2 sentences introducing Figure 3 and pointing out the key comparison.]
+[1–2 paragraphs explaining this finding.]
 
 ```{r fig-03}
 #| fig-cap: "[Caption for Figure 3.]"
 #| fig-alt: "[Alt text for Figure 3.]"
-# Replace 03_[name].png with your actual filename
 f <- "figures/03_[name].png"
 if (file.exists(f)) knitr::include_graphics(f)
 ```
 
-### [Section title — e.g., Relationship Between Two Variables]
-
-[1–2 sentences introducing Figure 4. Explain what the two axes represent and what the pattern means.]
-
-```{r fig-04}
-#| fig-cap: "[Caption for Figure 4.]"
-#| fig-alt: "[Alt text for Figure 4.]"
-# Replace 04_[name].png with your actual filename
-f <- "figures/04_[name].png"
-if (file.exists(f)) knitr::include_graphics(f)
-```
-
-### [Section title — e.g., County or Group Rankings]
-
-[1–2 sentences introducing Figure 5. Note the range from lowest to highest and any notable entries.]
-
-```{r fig-05}
-#| fig-cap: "[Caption for Figure 5.]"
-#| fig-alt: "[Alt text for Figure 5.]"
-# Replace 05_[name].png with your actual filename
-f <- "figures/05_[name].png"
-if (file.exists(f)) knitr::include_graphics(f)
-```
+<!-- vvn_source("[Dataset name]") -->
 
 ---
 
-## Summary Table
-
-```{r tbl-summary}
-#| tbl-cap: "[Caption for the summary table.]"
-
-# Replace with your own summary. Example:
-#
-# df |>
-#   filter(year == max(year)) |>
-#   group_by(`[Group]` = group_col) |>
-#   summarise(
-#     `[Column 1]` = round(mean(value_1), 1),
-#     `[Column 2]` = round(mean(value_2), 1),
-#     .groups = "drop"
-#   ) |>
-#   arrange(desc(`[Column 1]`)) |>
-#   gt() |>
-#   vvn_table(
-#     title       = "[Table title]",
-#     source_note = "Source: [Dataset] · VVN Analysis"
-#   )
-```
-
----
-
-## Discussion
-
-**Interpretation of findings:**
-
-1. **[Finding 1 title].** [Describe and interpret the first major result — what does the pattern mean, not just what it shows?]
-2. **[Finding 2 title].** [Connect the pattern to known context, prior research, or policy history.]
-3. **Equity implications.** [Who benefits from current trends? Who is left behind, and why does that matter?]
-
-**Limitations:**
-
-- [Data availability or lag]
-- [Geographic resolution — e.g., county-level data may mask sub-county variation]
-- [Causal claims — note that the analysis is descriptive unless stated otherwise]
-
----
-
-## Conclusion
+## Conclusion {.unnumbered}
 
 [2–3 sentences summarizing the main takeaway.] These findings suggest that [policy implication]. Future work should examine [next research question].
-
-::: {.callout-tip}
-**For more:** Contact VVN at [vvn@vt.edu](mailto:vvn@vt.edu) or visit
-[vvn.vt.edu](https://vvn.vt.edu).
-:::
 
 ---
 

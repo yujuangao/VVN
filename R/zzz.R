@@ -11,7 +11,7 @@
 #' @section Quick start:
 #' ```r
 #' library(vvnthemes)
-#' set_vvn_defaults()        # apply VT Maroon theme + geom colors globally
+#' set_vvn_defaults()        # apply VVN theme + geom colors globally
 #' view_vvn_palette("main")  # preview the brand palette
 #' ```
 #'
@@ -23,12 +23,12 @@
 #'
 #' @section Themes:
 #' ggplot2 themes built on [ggplot2::theme_minimal()].
-#' - [theme_vvn()] — Standard VVN chart theme: white background, maroon titles,
-#'   light gray horizontal gridlines. Use for bar charts, line charts, histograms.
+#' - [theme_vvn()] — Standard VVN chart theme: white background, near-black
+#'   titles, no axis lines, light gray gridlines, bottom legend. Use for all
+#'   chart types.
 #' - [theme_vvn_map()] — Map variant: removes axes, muted background, legend at
 #'   bottom. Use with [ggplot2::geom_sf()] for static choropleth maps.
-#' - [theme_vvn_minimal()] — No gridlines, no axes. For small multiples and
-#'   annotation-heavy figures.
+#' - [theme_vvn_research()] — **Deprecated** alias for `theme_vvn()`.
 #'
 #' @section Color system:
 #' Access and preview VT brand and artistic palettes.
@@ -127,9 +127,12 @@
 
 .onAttach <- function(libname, pkgname) {
   v <- utils::packageVersion(pkgname)
+  is_utf8 <- isTRUE(l10n_info()[["UTF-8"]])
+  bullet <- if (is_utf8) "\u25a0" else "*"
+  dot    <- if (is_utf8) "\u00b7" else "-"
   packageStartupMessage(
-    "\u25a0 vvnthemes ", v,
-    " \u00b7 Visualizing Virginia's Numbers \u00b7 Virginia Tech\n",
+    bullet, " vvnthemes ", v,
+    " ", dot, " Visualizing Virginia's Numbers ", dot, " Virginia Tech\n",
     "  Use set_vvn_defaults() to apply VVN brand globally."
   )
 }

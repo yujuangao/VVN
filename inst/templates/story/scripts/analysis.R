@@ -119,45 +119,6 @@ save_fig <- function(plot, name, width = 8, height = 5) {
 # save_fig(p, "bar_horizontal")
 
 
-# ── VERTICAL BAR CHART ────────────────────────────────────────────────────────
-# Good for: comparing a small number of categories (≤ 8).
-#
-# p <- df |>
-#   mutate(name = reorder(name, -value)) |>
-#   ggplot(aes(x = name, y = value, fill = name)) +
-#   geom_col(width = 0.65, show.legend = FALSE) +
-#   geom_text(aes(label = round(value, 1)), vjust = -0.4, size = 3.4,
-#             color = "#3D3D3D") +
-#   scale_fill_vvn("main") +
-#   scale_y_continuous(expand = expansion(mult = c(0, .12))) +
-#   labs(
-#     title    = "[Chart title]",
-#     x = NULL, y = "[Y-axis label]"
-#   ) +
-#   vvn_source("[Dataset name]") +
-#   remove_ticks()
-#
-# save_fig(p, "bar_vertical")
-
-
-# ── STACKED BAR CHART ────────────────────────────────────────────────────────
-# Good for: showing part-to-whole relationships across groups.
-#
-# p <- df |>
-#   ggplot(aes(x = group, y = value, fill = category)) +
-#   geom_col(width = 0.65, position = "stack") +
-#   scale_fill_vvn("main") +
-#   scale_y_continuous(expand = expansion(mult = c(0, .08))) +
-#   labs(
-#     title    = "[Chart title]",
-#     x = NULL, y = "[Y-axis label]", fill = "[Legend title]"
-#   ) +
-#   vvn_source("[Dataset name]") +
-#   remove_ticks()
-#
-# save_fig(p, "bar_stacked")
-
-
 # ── SCATTER PLOT ──────────────────────────────────────────────────────────────
 # Good for: showing the relationship between two continuous variables.
 #
@@ -173,87 +134,6 @@ save_fig <- function(plot, name, width = 8, height = 5) {
 #   scatter_grid()
 #
 # save_fig(p, "scatter")
-
-
-# ── BUBBLE CHART: scatter with size ──────────────────────────────────────────
-# Good for: adding a third dimension (e.g., population size) to a scatter.
-#
-# p <- ggplot(df, aes(x = x_var, y = y_var, color = group, size = size_var)) +
-#   geom_point(alpha = 0.75) +
-#   scale_color_vvn("main") +
-#   scale_size_continuous(range = c(2, 10), labels = scales::comma,
-#                         name = "[Size legend title]") +
-#   labs(
-#     title    = "[Chart title]",
-#     subtitle = "Size = [size variable]",
-#     x = "[X-axis label]", y = "[Y-axis label]", color = "[Legend title]"
-#   ) +
-#   vvn_source("[Dataset name]") +
-#   scatter_grid()
-#
-# save_fig(p, "bubble")
-
-
-# ── LOLLIPOP CHART: ranking ───────────────────────────────────────────────────
-# Good for: ranking counties or groups with a score; highlight top vs. bottom.
-#
-# p <- df |>
-#   mutate(name  = reorder(name, value),
-#          group = if_else(value >= median(value), "Above median", "Below median")) |>
-#   ggplot(aes(x = value, y = name, color = group)) +
-#   geom_segment(aes(x = 0, xend = value, yend = name),
-#                linewidth = 0.7, alpha = 0.5) +
-#   geom_point(size = 3.5) +
-#   geom_text(aes(label = round(value, 1)), hjust = -0.4, size = 3.2) +
-#   scale_color_manual(values = c(`Above median` = "#861F41",
-#                                 `Below median` = "#E5751F")) +
-#   scale_x_continuous(limits = c(0, NA), expand = expansion(mult = c(0, .15))) +
-#   labs(
-#     title    = "[Chart title]",
-#     x = "[X-axis label]", y = NULL, color = NULL
-#   ) +
-#   vvn_source("[Dataset name]") +
-#   remove_ticks()
-#
-# save_fig(p, "lollipop", height = 7)
-
-
-# ── HISTOGRAM / DISTRIBUTION ──────────────────────────────────────────────────
-# Good for: showing the spread or skew of a variable across observations.
-#
-# p <- ggplot(df, aes(x = value)) +
-#   geom_histogram(bins = 20, fill = "#861F41", color = "#FFFFFF", alpha = 0.9) +
-#   geom_vline(xintercept = mean(df$value, na.rm = TRUE),
-#              color = "#E5751F", linewidth = 1.2, linetype = "dashed") +
-#   annotate("text",
-#            x = mean(df$value, na.rm = TRUE), y = Inf,
-#            label = paste0("Mean: ", round(mean(df$value, na.rm = TRUE), 1)),
-#            color = "#E5751F", hjust = -0.1, vjust = 1.5, size = 3.5) +
-#   labs(
-#     title = "[Chart title]",
-#     x = "[X-axis label]", y = "Count"
-#   ) +
-#   vvn_source("[Dataset name]")
-#
-# save_fig(p, "histogram", width = 6, height = 3.5)
-
-
-# ── FACETED CHART: small multiples ───────────────────────────────────────────
-# Good for: showing the same metric across multiple subgroups simultaneously.
-#
-# p <- ggplot(df, aes(x = year, y = value, color = subgroup, group = subgroup)) +
-#   geom_line(linewidth = 1.1) +
-#   geom_point(size = 2) +
-#   facet_wrap(~ facet_var, ncol = 3) +
-#   scale_color_vvn("main") +
-#   labs(
-#     title    = "[Chart title]",
-#     x = NULL, y = "[Y-axis label]", color = "[Legend title]"
-#   ) +
-#   vvn_source("[Dataset name]") +
-#   scatter_grid()
-#
-# save_fig(p, "faceted", height = 6)
 
 
 # ── COUNTY MAP (leaflet + static PNG) ────────────────────────────────────────

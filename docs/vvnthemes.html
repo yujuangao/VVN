@@ -311,7 +311,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Set <code>theme_vvn()</code> as the global ggplot2 theme and update default geom aesthetics for the session. Call once at the top of every script.</p>
 <section id="usage" class="level4">
 <h4 class="anchored" data-anchor-id="usage">Usage</h4>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set_vvn_defaults</span>(<span class="at">style =</span> <span class="fu">c</span>(<span class="st">"standard"</span>, <span class="st">"map"</span>), <span class="at">base_size =</span> <span class="dv">12</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set_vvn_defaults</span>(<span class="at">base_size =</span> <span class="dv">12</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="arguments" class="level4">
 <h4 class="anchored" data-anchor-id="arguments">Arguments</h4>
@@ -330,11 +330,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>style</code></td>
-<td><code>"standard"</code></td>
-<td><code>"standard"</code> applies <code>theme_vvn()</code>; <code>"map"</code> applies <code>theme_vvn_map()</code>.</td>
-</tr>
-<tr class="even">
 <td><code>base_size</code></td>
 <td><code>12</code></td>
 <td>Base font size passed to the theme.</td>
@@ -488,8 +483,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 <section id="theme_vvn_minimal" class="level3">
-<h3 class="anchored" data-anchor-id="theme_vvn_minimal"><code>theme_vvn_minimal()</code></h3>
-<p>Minimal VVN variant: no grid lines, no axes. Use for small multiples, annotation-heavy figures, and inset charts.</p>
+<h3 class="anchored" data-anchor-id="theme_vvn_minimal"><code>theme_vvn_minimal()</code> <span style="color: #E87722; font-size: 0.8em; font-weight: normal;">(deprecated)</span></h3>
+<p><strong>Deprecated.</strong> Use <code>theme_vvn(grid = "none")</code> instead. This function is retained as a wrapper for backward compatibility.</p>
 <section id="usage-4" class="level4">
 <h4 class="anchored" data-anchor-id="usage-4">Usage</h4>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_vvn_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>, <span class="at">base_family =</span> <span class="st">"sans"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1976,7 +1971,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Compute WCAG 2.1 contrast ratios for a set of hex colors against a background and report pass/fail status.</p>
 <section id="usage-26" class="level4">
 <h4 class="anchored" data-anchor-id="usage-26">Usage</h4>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_accessibility_check</span>(colors, <span class="at">background =</span> <span class="st">"#FFFFFF"</span>, <span class="at">level =</span> <span class="fu">c</span>(<span class="st">"AA"</span>, <span class="st">"AAA"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_accessibility_check</span>(colors, <span class="at">background =</span> <span class="st">"#FFFFFF"</span>, <span class="at">level =</span> <span class="fu">c</span>(<span class="st">"AA"</span>, <span class="st">"AAA"</span>), <span class="at">use =</span> <span class="fu">c</span>(<span class="st">"graphic"</span>, <span class="st">"text"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="arguments-22" class="level4">
 <h4 class="anchored" data-anchor-id="arguments-22">Arguments</h4>
@@ -2008,6 +2003,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td><code>level</code></td>
 <td><code>"AA"</code></td>
 <td>WCAG standard: <code>"AA"</code> (≥ 4.5:1 contrast ratio) or <code>"AAA"</code> (≥ 7.0:1).</td>
+</tr>
+<tr class="even">
+<td><code>use</code></td>
+<td><code>"graphic"</code></td>
+<td><code>"graphic"</code> applies the 3:1 minimum ratio for non-text elements (WCAG 1.4.11); <code>"text"</code> applies the 4.5:1 minimum for normal text (WCAG 1.4.3).</td>
 </tr>
 </tbody>
 </table>
@@ -2766,15 +2766,14 @@ document.addEventListener('DOMContentLoaded', function () {
 <span id="cb63-29"><a href="#cb63-29" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Usage</span></span>
 <span id="cb63-30"><a href="#cb63-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-31"><a href="#cb63-31" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb63-32"><a href="#cb63-32" aria-hidden="true" tabindex="-1"></a><span class="fu">set_vvn_defaults</span>(<span class="at">style =</span> <span class="fu">c</span>(<span class="st">"standard"</span>, <span class="st">"map"</span>), <span class="at">base_size =</span> <span class="dv">12</span>)</span>
+<span id="cb63-32"><a href="#cb63-32" aria-hidden="true" tabindex="-1"></a><span class="fu">set_vvn_defaults</span>(<span class="at">base_size =</span> <span class="dv">12</span>)</span>
 <span id="cb63-33"><a href="#cb63-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb63-34"><a href="#cb63-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-35"><a href="#cb63-35" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Arguments</span></span>
 <span id="cb63-36"><a href="#cb63-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-37"><a href="#cb63-37" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Argument <span class="pp">|</span> Default <span class="pp">|</span> Description <span class="pp">|</span></span>
 <span id="cb63-38"><a href="#cb63-38" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|---------|-------------|</span></span>
-<span id="cb63-39"><a href="#cb63-39" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`style`</span> <span class="pp">|</span> <span class="in">`"standard"`</span> <span class="pp">|</span> <span class="in">`"standard"`</span> applies <span class="in">`theme_vvn()`</span>; <span class="in">`"map"`</span> applies <span class="in">`theme_vvn_map()`</span>. <span class="pp">|</span></span>
-<span id="cb63-40"><a href="#cb63-40" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`base_size`</span> <span class="pp">|</span> <span class="in">`12`</span> <span class="pp">|</span> Base font size passed to the theme. <span class="pp">|</span></span>
+<span id="cb63-39"><a href="#cb63-39" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`base_size`</span> <span class="pp">|</span> <span class="in">`12`</span> <span class="pp">|</span> Base font size passed to the theme. <span class="pp">|</span></span>
 <span id="cb63-41"><a href="#cb63-41" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-42"><a href="#cb63-42" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Value</span></span>
 <span id="cb63-43"><a href="#cb63-43" aria-hidden="true" tabindex="-1"></a></span>
@@ -2894,9 +2893,9 @@ document.addEventListener('DOMContentLoaded', function () {
 <span id="cb63-157"><a href="#cb63-157" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-158"><a href="#cb63-158" aria-hidden="true" tabindex="-1"></a>---</span>
 <span id="cb63-159"><a href="#cb63-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-160"><a href="#cb63-160" aria-hidden="true" tabindex="-1"></a><span class="fu">### `theme_vvn_minimal()` {#theme_vvn_minimal}</span></span>
+<span id="cb63-160"><a href="#cb63-160" aria-hidden="true" tabindex="-1"></a><span class="fu">### `theme_vvn_minimal()` *(deprecated)* {#theme_vvn_minimal}</span></span>
 <span id="cb63-161"><a href="#cb63-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-162"><a href="#cb63-162" aria-hidden="true" tabindex="-1"></a>Minimal VVN variant: no grid lines, no axes. Use for small multiples, annotation-heavy figures, and inset charts.</span>
+<span id="cb63-162"><a href="#cb63-162" aria-hidden="true" tabindex="-1"></a>**Deprecated.** Use <span class="in">`theme_vvn(grid = "none")`</span> instead. Retained as a wrapper for backward compatibility.</span>
 <span id="cb63-163"><a href="#cb63-163" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-164"><a href="#cb63-164" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Usage</span></span>
 <span id="cb63-165"><a href="#cb63-165" aria-hidden="true" tabindex="-1"></a></span>
@@ -3759,7 +3758,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span id="cb63-1022"><a href="#cb63-1022" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Usage</span></span>
 <span id="cb63-1023"><a href="#cb63-1023" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-1024"><a href="#cb63-1024" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb63-1025"><a href="#cb63-1025" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_accessibility_check</span>(colors, <span class="at">background =</span> <span class="st">"#FFFFFF"</span>, <span class="at">level =</span> <span class="fu">c</span>(<span class="st">"AA"</span>, <span class="st">"AAA"</span>))</span>
+<span id="cb63-1025"><a href="#cb63-1025" aria-hidden="true" tabindex="-1"></a><span class="fu">vvn_accessibility_check</span>(colors, <span class="at">background =</span> <span class="st">"#FFFFFF"</span>, <span class="at">level =</span> <span class="fu">c</span>(<span class="st">"AA"</span>, <span class="st">"AAA"</span>), <span class="at">use =</span> <span class="fu">c</span>(<span class="st">"graphic"</span>, <span class="st">"text"</span>))</span>
 <span id="cb63-1026"><a href="#cb63-1026" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb63-1027"><a href="#cb63-1027" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-1028"><a href="#cb63-1028" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Arguments</span></span>
@@ -3769,6 +3768,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span id="cb63-1032"><a href="#cb63-1032" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`colors`</span> <span class="pp">|</span> <span class="pp">|</span> Character vector of hex codes to test. <span class="pp">|</span></span>
 <span id="cb63-1033"><a href="#cb63-1033" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`background`</span> <span class="pp">|</span> <span class="in">`"#FFFFFF"`</span> <span class="pp">|</span> Background hex code to test against. <span class="pp">|</span></span>
 <span id="cb63-1034"><a href="#cb63-1034" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`level`</span> <span class="pp">|</span> <span class="in">`"AA"`</span> <span class="pp">|</span> WCAG standard: <span class="in">`"AA"`</span> (≥ 4.5:1 contrast ratio) or <span class="in">`"AAA"`</span> (≥ 7.0:1). <span class="pp">|</span></span>
+<span id="cb63-1034b"><a href="#cb63-1034b" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`use`</span> <span class="pp">|</span> <span class="in">`"graphic"`</span> <span class="pp">|</span> <span class="in">`"graphic"`</span> applies the 3:1 minimum ratio for non-text elements (WCAG 1.4.11); <span class="in">`"text"`</span> applies the 4.5:1 minimum for normal text (WCAG 1.4.3). <span class="pp">|</span></span>
 <span id="cb63-1035"><a href="#cb63-1035" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-1036"><a href="#cb63-1036" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Value</span></span>
 <span id="cb63-1037"><a href="#cb63-1037" aria-hidden="true" tabindex="-1"></a></span>

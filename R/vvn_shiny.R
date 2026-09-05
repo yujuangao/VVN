@@ -137,6 +137,9 @@ vvn_kpi_card <- function(value, label, trend = NULL, trend_text = NULL,
 #' @param colors     Character vector of hex codes.
 #' @param background Background hex code. Default `"#FFFFFF"`.
 #' @param level      `"AA"` (>= 4.5:1, default) or `"AAA"` (>= 7.0:1).
+#' @param use        `"graphic"` (default) applies the 3:1 threshold for
+#'   non-text UI components and graphics (WCAG 1.4.11). `"text"` applies
+#'   the 4.5:1 (AA) or 7:1 (AAA) threshold for normal text (WCAG 1.4.3).
 #'
 #' @return A data frame with columns `color`, `contrast_ratio`, `pass`.
 #'   Printed via `cli` with pass/fail badges.
@@ -144,10 +147,20 @@ vvn_kpi_card <- function(value, label, trend = NULL, trend_text = NULL,
 #'
 #' @examples
 #' vvn_accessibility_check(vvn_palette("brand"))
+#' vvn_accessibility_check(vvn_palette("brand"), use = "text")
 vvn_accessibility_check <- function(colors, background = "#FFFFFF",
-                                     level = c("AA", "AAA")) {
-  level     <- match.arg(level)
-  threshold <- if (level == "AA") 4.5 else 7.0
+                                     level = c("AA", "AAA"),
+                                     use = c("graphic", "text")) {
+  level <- match.arg(level)
+  use   <- match.arg(use)
+
+  if (use == "graphic") {
+    threshold <- 3.0
+    wcag_ref  <- "WCAG 1.4.11 (Non-text Contrast)"
+  } else {
+    threshold <- if (level == "AA") 4.5 else 7.0
+    wcag_ref  <- paste0("WCAG 1.4.3 (Text Contrast, ", level, ")")
+  }
 
   lum <- function(hex) {
     r <- grDevices::col2rgb(hex) / 255
@@ -164,7 +177,7 @@ vvn_accessibility_check <- function(colors, background = "#FFFFFF",
   result <- data.frame(color = colors, contrast_ratio = round(ratios, 2), pass = pass,
                         stringsAsFactors = FALSE)
 
-  cli::cli_h1("VVN Accessibility \u00B7 WCAG {level} (threshold: {threshold}:1)")
+  cli::cli_h1("VVN Accessibility \u00B7 {wcag_ref} (threshold: {threshold}:1)")
   for (i in seq_len(nrow(result))) {
     r <- result[i, ]
     if (r$pass) cli::cli_alert_success("{r$color}  {r$contrast_ratio}:1  PASS")
