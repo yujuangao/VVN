@@ -260,7 +260,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="required-elements" class="level2">
 <h2 class="anchored" data-anchor-id="required-elements">Required elements</h2>
-<p>Every VVN Insight must include all seven elements. Use the vvnthemes library functions to build each one.</p>
+<p>Every VVN Insight must include these elements. Use the vvnthemes library functions to build each one.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 7%">
@@ -279,45 +279,45 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td><strong>Hero banner</strong></td>
-<td>Full-width VT Maroon <code>#861F41</code>. “VVN INSIGHTS” label in small caps; title in white bold, headline case; one-sentence description below.</td>
+<td><strong>Article header</strong></td>
+<td><code>.vvn-header</code> with <code>.vvn-rubric</code> label, <code>.vvn-tag</code> topics, serif title, <code>.vvn-subtitle</code>, and <code>.vvn-byline</code> with date.</td>
 <td><code>create_vvn_story()</code></td>
 </tr>
 <tr class="even">
 <td>2</td>
-<td><strong>Headline</strong></td>
-<td>White, headline case, bold. States topic and geographic scope in one line.</td>
-<td><code>create_vvn_story()</code></td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td><strong>Date &amp; source tag</strong></td>
-<td>Publication date + primary data source below the headline. Include dataset name and vintage year.</td>
-<td><code>create_vvn_story()</code></td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td><strong>Choropleth map</strong></td>
-<td>County-level interactive Leaflet map. <code>maroon_seq</code> palette. Tooltip: county name + value. Referenced in text before it appears.</td>
-<td><code>vvn_map_style()</code></td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td><strong>KPI callouts</strong></td>
-<td>Key statistics highlighted in callout boxes. Use sparingly — only the most important 2–3 numbers.</td>
-<td><code>vvn_kpi_card()</code></td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td><strong>Narrative sections</strong></td>
-<td>Short paragraphs (3–4 sentences). Section headings in sentence case. Sections: Overview, Background, Data &amp; Methods, Findings, Discussion, Conclusion.</td>
+<td><strong>Key statistics</strong></td>
+<td><code>.vvn-stats-row</code> with 3–4 gold big-number callouts (<code>.vvn-stat</code>). Use sparingly — only the most important numbers.</td>
 <td>Quarto markdown</td>
 </tr>
 <tr class="odd">
-<td>7</td>
+<td>3</td>
+<td><strong>About This Research</strong></td>
+<td>Collapsible <code>&lt;details class="about-research"&gt;</code> with Background, Data &amp; Methods table, and Limitations.</td>
+<td>Quarto HTML</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><strong>Finding sections</strong></td>
+<td><code>## Title {.finding}</code> with <code>.finding-statement</code> headline (bold, maroon border). Each finding includes a visual (chart or map) and 1–2 paragraphs.</td>
+<td>Quarto markdown</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><strong>Visuals</strong></td>
+<td>Two options per finding: static PNG via <code>knitr::include_graphics()</code> <strong>or</strong> interactive HTML via <code>.map-card</code> iframe from <code>assets/</code>.</td>
+<td><code>vvn_save()</code> or <code>htmlwidgets::saveWidget()</code></td>
+</tr>
+<tr class="even">
+<td>6</td>
 <td><strong>Source lines</strong></td>
-<td>Required on every figure. Format: “Source: [Agency, Dataset, Year].”</td>
+<td>Required on every figure. Static: <code>vvn_source()</code>. Interactive: <code>[Source: ...]{.vvn-source}</code> in <code>.map-caption</code>.</td>
 <td><code>vvn_source()</code></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td><strong>Conclusion</strong></td>
+<td><code>## Conclusion {.unnumbered}</code> — 2–3 sentences with policy implication and next steps.</td>
+<td>Quarto markdown</td>
 </tr>
 </tbody>
 </table>
@@ -325,28 +325,37 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="design-standards" class="level2">
 <h2 class="anchored" data-anchor-id="design-standards">Design standards</h2>
-<p><strong>Hero banner</strong></p>
+<p><strong>Article header</strong> (<code>.vvn-header</code>)</p>
 <ul>
-<li>Background: VT Maroon <code>#861F41</code></li>
-<li>“VVN INSIGHTS” label: small caps, 0.75 rem, <code>rgba(255,255,255,0.75)</code></li>
-<li>Title: white, bold, headline case, max 2 lines</li>
-<li>Description: white, sentence case, 1 rem</li>
+<li>Top border: 3px solid black</li>
+<li><code>.vvn-rubric</code>: uppercase, 0.68rem, 800 weight, letter-spacing 0.12em</li>
+<li>Tags (<code>.vvn-tag</code>): uppercase, bordered pills, blue text</li>
+<li>Title: Lora serif, clamp(1.8rem, 4vw, 2.6rem), bold</li>
+<li><code>.vvn-subtitle</code>: Lora italic, 1.05rem, mid-gray</li>
+<li><code>.vvn-byline</code>: uppercase, 0.72rem, 600 weight, border-top separator</li>
 </ul>
-<p><strong>Narrative</strong></p>
+<p><strong>Key statistics</strong> (<code>.vvn-stats-row</code>)</p>
 <ul>
-<li>Lead with the key finding — state the main result in the first paragraph</li>
-<li>Every figure must be referenced in the text before it appears: “Figure 1 shows that …”</li>
-<li>Paragraphs: 3–4 sentences maximum</li>
-<li>Section headings: sentence case (<code>##</code> level)</li>
-<li>Include sections for: Overview · Background · Data &amp; Methods · Findings · Discussion · Conclusion</li>
+<li>Gold (#d7b236) big numbers, 2.8rem, 800 weight</li>
+<li>Uppercase stat labels, 0.72rem</li>
+<li>Use only for the 3–4 most important statistics</li>
 </ul>
-<p><strong>Figures</strong></p>
+<p><strong>Findings</strong> (<code>## Title {.finding}</code>)</p>
+<ul>
+<li><code>.finding-statement</code>: 2rem bold headline with maroon (#861F41) bottom border</li>
+<li>CSS counter auto-numbers findings (large pink ghost numbers)</li>
+<li>Lead with the key finding — state the main result before the visual</li>
+</ul>
+<p><strong>Visuals — two options</strong></p>
+<ol type="1">
+<li><strong>Static PNG:</strong> <code>knitr::include_graphics("figures/01_name.png")</code> from <code>scripts/analysis.R</code></li>
+<li><strong>Interactive HTML:</strong> <code>.map-card</code> iframe from <code>assets/</code> with <code>.map-caption</code> and <code>[Source]{.vvn-source}</code></li>
+</ol>
 <p>Follow all <a href="./charts.html">Chart Standards</a> and <a href="./maps.html">Map Standards</a>. Source lines are required on every figure without exception.</p>
-<p><strong>KPI callouts</strong></p>
+<p><strong>About This Research</strong> (<code>&lt;details class="about-research"&gt;</code>)</p>
 <ul>
-<li>Use only for the 2–3 most important statistics</li>
-<li>Orange accent (<code>#E5751F</code>) for emphasis</li>
-<li>Never use KPI callouts in place of a proper explanation in the narrative</li>
+<li>Gold left border, collapsible with arrow indicator</li>
+<li>Contains: Background, Data &amp; Methods table, Limitations</li>
 </ul>
 <hr>
 <blockquote class="blockquote">

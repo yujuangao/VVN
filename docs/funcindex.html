@@ -289,12 +289,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>Map variant for ggplot2 + sf static choropleth maps. Removes axes, adds muted panel background, moves legend to bottom.</td>
 </tr>
 <tr class="odd">
-<td><code>theme_vvn_minimal()</code> <em>(deprecated)</em></td>
-<td>Deprecated wrapper for <code>theme_vvn(grid = "none")</code>. Retained for backward compatibility.</td>
-</tr>
-<tr class="even">
-<td><code>theme_vvn_research()</code> <em>(deprecated)</em></td>
-<td>Deprecated alias for <code>theme_vvn()</code>. The standard <code>theme_vvn()</code> now uses the research style (near-black titles, no axis lines, bottom legend). Retained for backward compatibility.</td>
+<td><code>theme_vvn_minimal()</code></td>
+<td>Stripped-down variant — no gridlines, no axes. For small multiples, annotation-heavy figures, or inset charts.</td>
 </tr>
 </tbody>
 </table>
@@ -319,7 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td><code>vvn_palette()</code></td>
-<td>Returns a vector of hex codes from a named palette (<code>"vt"</code>, <code>"vt_secondary"</code>, <code>"maroon_seq"</code>, <code>"diverging"</code>, <code>"forest"</code>, <code>"forest_div"</code>, etc.). Sequential and diverging palettes interpolate to any number of steps.</td>
+<td>Returns a vector of hex codes from a named palette (<code>"vt"</code>, <code>"vt_secondary"</code>, <code>"maroon_seq"</code>, <code>"diverging"</code>, etc.). Sequential palettes interpolate to any number of steps.</td>
 </tr>
 <tr class="odd">
 <td><code>view_vvn_palette()</code></td>
@@ -413,7 +409,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td><code>vvn_accessibility_check()</code></td>
-<td>Computes WCAG 2.1 contrast ratios and reports pass/fail for AA or AAA standards. The <code>use</code> parameter selects the threshold: <code>"graphic"</code> (3:1, WCAG 1.4.11) or <code>"text"</code> (4.5:1, WCAG 1.4.3).</td>
+<td>Computes WCAG 2.1 contrast ratios and reports pass/fail for AA (&gt;= 4.5:1) or AAA (&gt;= 7.0:1) standards.</td>
 </tr>
 </tbody>
 </table>
@@ -1069,15 +1065,14 @@ document.addEventListener('DOMContentLoaded', function () {
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`theme_vvn()`</span> <span class="pp">|</span> Standard VVN ggplot2 theme — white background, maroon titles, light gray horizontal gridlines. Use for bar charts, line charts, and histograms. <span class="pp">|</span></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`theme_vvn_map()`</span> <span class="pp">|</span> Map variant for ggplot2 + sf static choropleth maps. Removes axes, adds muted panel background, moves legend to bottom. <span class="pp">|</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`theme_vvn_minimal()`</span> *(deprecated)* <span class="pp">|</span> Deprecated wrapper for <span class="in">`theme_vvn(grid = "none")`</span>. Retained for backward compatibility. <span class="pp">|</span></span>
-<span id="cb1-29b"><a href="#cb1-29b" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`theme_vvn_research()`</span> *(deprecated)* <span class="pp">|</span> Deprecated alias for <span class="in">`theme_vvn()`</span>. The standard <span class="in">`theme_vvn()`</span> now uses the research style (near-black titles, no axis lines, bottom legend). Retained for backward compatibility. <span class="pp">|</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`theme_vvn_minimal()`</span> <span class="pp">|</span> Stripped-down variant — no gridlines, no axes. For small multiples, annotation-heavy figures, or inset charts. <span class="pp">|</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## Color System</span></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Function <span class="pp">|</span> Purpose <span class="pp">|</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`vvn_colors()`</span> <span class="pp">|</span> Returns hex codes for named VT brand colors — primary (maroon, orange, hokie_stone, impact_orange), secondary (purple, teal, turquoise, etc.), and utility colors. <span class="pp">|</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`vvn_palette()`</span> <span class="pp">|</span> Returns a vector of hex codes from a named palette (<span class="in">`"vt"`</span>, <span class="in">`"vt_secondary"`</span>, <span class="in">`"maroon_seq"`</span>, <span class="in">`"diverging"`</span>, <span class="in">`"forest"`</span>, <span class="in">`"forest_div"`</span>, etc.). Sequential and diverging palettes interpolate to any number of steps. <span class="pp">|</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`vvn_palette()`</span> <span class="pp">|</span> Returns a vector of hex codes from a named palette (<span class="in">`"vt"`</span>, <span class="in">`"vt_secondary"`</span>, <span class="in">`"maroon_seq"`</span>, <span class="in">`"diverging"`</span>, etc.). Sequential palettes interpolate to any number of steps. <span class="pp">|</span></span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`view_vvn_palette()`</span> <span class="pp">|</span> Renders a horizontal color swatch strip for any palette — use to preview available colors before building a chart. <span class="pp">|</span></span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## Scales</span></span>
@@ -1102,7 +1097,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`legend_bottom()`</span> <span class="pp">|</span> Moves the legend to the bottom of the chart in horizontal orientation. <span class="pp">|</span></span>
 <span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`remove_legend()`</span> <span class="pp">|</span> Removes the legend entirely. Use when colors are labeled directly on the chart. <span class="pp">|</span></span>
 <span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`vvn_save()`</span> <span class="pp">|</span> Exports a ggplot at 300 dpi, 8 × 5 in, white background. Supports multi-format export in one call (e.g. <span class="in">`c("png","pdf","svg")`</span>). <span class="pp">|</span></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`vvn_accessibility_check()`</span> <span class="pp">|</span> Computes WCAG 2.1 contrast ratios and reports pass/fail for AA or AAA standards. The <span class="in">`use`</span> parameter selects the threshold: <span class="in">`"graphic"`</span> (3:1, WCAG 1.4.11) or <span class="in">`"text"`</span> (4.5:1, WCAG 1.4.3). <span class="pp">|</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`vvn_accessibility_check()`</span> <span class="pp">|</span> Computes WCAG 2.1 contrast ratios and reports pass/fail for AA (&gt;= 4.5:1) or AAA (&gt;= 7.0:1) standards. <span class="pp">|</span></span>
 <span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tables</span></span>
 <span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
