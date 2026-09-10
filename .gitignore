@@ -22,6 +22,7 @@ _site/
 _freeze/
 *.html
 !inst/**/*.html
+!docs/**/*.html
 
 # Test outputs (regenerated on each run)
 tests/testthat/outputs/
