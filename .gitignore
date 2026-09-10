@@ -16,3 +16,14 @@ NAMESPACE.bak
 # Temporary files
 *.swp
 *~
+
+# Quarto build artifacts
+_site/
+_freeze/
+*.html
+!inst/**/*.html
+
+# Test outputs (regenerated on each run)
+tests/testthat/outputs/
+tests/testthat/hurricane_helene_test/assets/*.html
+tests/testthat/hurricane_helene_test/figures/*.png

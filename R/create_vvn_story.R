@@ -26,6 +26,7 @@
 #' @param path      Parent directory. Defaults to the current working directory.
 #' @param title     Story title shown in the document header and browser tab.
 #'   Filled into `index.qmd` automatically.
+#' @param subtitle  Subtitle shown below the title. Default `""` (empty).
 #' @param author    Author name(s) shown below the title. Defaults to
 #'   `"Visualizing Virginia's Numbers"`.
 #' @param overwrite If `TRUE`, delete an existing folder with the same name and
@@ -36,11 +37,12 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Title and author are filled in automatically:
+#' # Title, subtitle, and author are filled in automatically:
 #' create_vvn_story(
 #'   "childcare_cost",
-#'   title  = "Childcare Cost in Rural Virginia",
-#'   author = "Jane Smith"
+#'   title    = "Childcare Cost in Rural Virginia",
+#'   subtitle = "County-Level Trends from the ACS",
+#'   author   = "Jane Smith"
 #' )
 #'
 #' # Build figures, then render:
@@ -53,6 +55,7 @@
 create_vvn_story <- function(name,
                               path      = ".",
                               title     = name,
+                              subtitle  = "",
                               author    = "Visualizing Virginia's Numbers",
                               overwrite = FALSE) {
 
@@ -65,13 +68,13 @@ create_vvn_story <- function(name,
   created_fresh <- FALSE
   tryCatch({
     # Create directory structure
-    for (d in c("data/raw", "data/processed", "figures", "scripts")) {
+    for (d in c("data/raw", "data/processed", "figures", "assets", "scripts")) {
       fs::dir_create(fs::path(proj, d))
     }
     created_fresh <- TRUE
 
     # Write .gitkeep files in empty directories
-    for (d in c("data/raw", "data/processed", "figures")) {
+    for (d in c("data/raw", "data/processed", "figures", "assets")) {
       file.create(fs::path(proj, d, ".gitkeep"))
     }
 
@@ -100,9 +103,10 @@ create_vvn_story <- function(name,
     qmd <- fs::path(proj, "index.qmd")
     if (fs::file_exists(qmd)) {
       lines <- readLines(qmd, warn = FALSE)
-      lines <- gsub("VVN_TITLE",  title,  lines, fixed = TRUE)
-      lines <- gsub("VVN_AUTHOR", author, lines, fixed = TRUE)
-      lines <- gsub("VVN_DATE",   today,  lines, fixed = TRUE)
+      lines <- gsub("VVN_TITLE",    title,    lines, fixed = TRUE)
+      lines <- gsub("VVN_SUBTITLE", subtitle, lines, fixed = TRUE)
+      lines <- gsub("VVN_AUTHOR",   author,   lines, fixed = TRUE)
+      lines <- gsub("VVN_DATE",     today,    lines, fixed = TRUE)
       writeLines(lines, qmd)
     }
 
@@ -136,11 +140,13 @@ create_vvn_story <- function(name,
       "Open `scripts/analysis.R`, fill in your chart code, then source it:\n\n",
       "```r\n",
       "source(\"scripts/analysis.R\")\n",
-      "# figures saved to figures/01_name.png, 02_name.png, ...\n",
+      "# Static figures saved to figures/01_name.png, 02_name.png, ...\n",
+      "# Interactive HTML maps saved to assets/name.html\n",
       "```\n\n",
       "**Step 2 — Write the narrative**\n\n",
-      "Open `index.qmd`. Replace every `[placeholder]` with your content and\n",
-      "update the filenames in `knitr::include_graphics()` to match `figures/`.\n\n",
+      "Open `index.qmd`. Replace every `[placeholder]` with your content.\n",
+      "- **Static figures:** update `knitr::include_graphics()` filenames\n",
+      "- **Interactive maps:** uncomment the `.map-card` iframe block and set the `src` path\n\n",
       "**Step 3 — Render**\n\n",
       "```r\n",
       "quarto::quarto_render(\"index.qmd\")\n",
@@ -152,11 +158,12 @@ create_vvn_story <- function(name,
       "\u251c\u2500\u2500 index.qmd            \u2190 Narrative — fill in text, insert figure names\n",
       "\u251c\u2500\u2500 _quarto.yml\n",
       "\u251c\u2500\u2500 styles.scss          \u2190 VVN brand SCSS (do not edit)\n",
+      "\u251c\u2500\u2500 assets/              \u2190 Interactive HTML maps/widgets (iframe in index.qmd)\n",
       "\u251c\u2500\u2500 data/raw/\n",
       "\u251c\u2500\u2500 data/processed/\n",
       "\u251c\u2500\u2500 scripts/\n",
-      "\u2502   \u2514\u2500\u2500 analysis.R       \u2190 Build all figures here, then source\n",
-      "\u2514\u2500\u2500 figures/             \u2190 Auto-created when analysis.R runs\n",
+      "\u2502   \u2514\u2500\u2500 analysis.R       \u2190 Build figures + maps here, then source\n",
+      "\u2514\u2500\u2500 figures/             \u2190 Static PNG charts\n",
       "```\n"
     )
   )
@@ -220,9 +227,12 @@ check_vvn_story <- function(path = ".") {
   }
 
   # Check required sections in index.qmd (vvn_source checked separately)
-  required_sections <- c("finding-statement", "include_graphics")
+  has_figures <- grepl("include_graphics", txt_qmd, fixed = TRUE) ||
+                 grepl("map-card", txt_qmd, fixed = TRUE)
+  required_sections <- c("finding-statement")
   missing <- required_sections[!vapply(required_sections, grepl, logical(1),
                                         x = txt_qmd, fixed = TRUE)]
+  if (!has_figures) missing <- c(missing, "include_graphics or map-card")
 
   if (!has_vvn_source) missing <- c(missing, "vvn_source")
 

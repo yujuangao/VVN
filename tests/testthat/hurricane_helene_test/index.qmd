@@ -1,0 +1,172 @@
+---
+title: "Hurricane Helene Impact on Virginia Vegetation"
+subtitle: "Storm Damage, Satellite Coverage, and Treatment-Counterfactual Analysis"
+author: "Yujuan Gao"
+date: today
+format:
+  html:
+    theme: [cosmo, styles.scss]
+    toc: true
+    toc-depth: 2
+    toc-location: left
+    number-sections: true
+    smooth-scroll: true
+    code-fold: true
+    code-tools: true
+    fig-width: 8
+    fig-height: 4.5
+    fig-dpi: 150
+    embed-resources: true
+    link-external-icon: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r setup}
+#| include: false
+library(vvnthemes)
+library(ggplot2)
+library(knitr)
+library(dplyr)
+
+set_vvn_defaults()
+```
+
+::: {.vvn-header}
+::: {.vvn-rubric}
+Insights · Visualizing Virginia's Numbers · Virginia Tech
+:::
+
+::: {.vvn-topics}
+[Remote Sensing]{.vvn-tag}
+[Forest Disturbance]{.vvn-tag}
+[Natural Disasters]{.vvn-tag}
+[Satellite Data]{.vvn-tag}
+:::
+
+## Hurricane Helene Impact on Virginia Vegetation {.unnumbered .unlisted}
+
+::: {.vvn-subtitle}
+Storm Damage, Satellite Coverage, and Treatment-Counterfactual Analysis
+:::
+
+::: {.vvn-byline}
+By **Yujuan Gao** · Visualizing Virginia's Numbers (VVN) · Virginia Tech · September 10, 2026
+:::
+:::
+
+On September 26–27, 2024, Hurricane Helene made landfall and swept through western Virginia, delivering historic rainfall and catastrophic winds to Appalachian communities. This analysis uses Sentinel-1 SAR and Sentinel-2 optical imagery from Google Earth Engine to quantify vegetation damage across 10 counties using a matched treatment–counterfactual design.
+
+::: {.vvn-stats-row}
+::: {.vvn-stat}
+[Sep 27]{.big-number}
+[Helene landfall in Virginia (2024)]{.stat-label}
+:::
+
+::: {.vvn-stat}
+[2]{.big-number}
+[Satellite sensors deployed]{.stat-label}
+:::
+
+::: {.vvn-stat}
+[10×]{.big-number}
+[Counterfactual sites per treatment]{.stat-label}
+:::
+
+::: {.vvn-stat}
+[~40]{.big-number}
+[Days of satellite monitoring]{.stat-label}
+:::
+:::
+
+<details class="about-research">
+<summary>About This Research</summary>
+<div class="about-content">
+
+### Background
+
+Hurricane Helene made landfall in Florida on September 26, 2024, and tracked through the Appalachian region, bringing extreme rainfall and flooding to southwest Virginia. Satellite monitoring enables rapid, county-level damage assessment without ground surveys.
+
+### Data & Methods
+
+| Item | Details |
+|------|---------|
+| **Source** | Sentinel-2 SR Harmonized, Sentinel-1 GRD (ESA/Copernicus) |
+| **Geography** | 10 counties in southwest Virginia |
+| **Period** | June 2024 – March 2025 |
+| **Processing** | Google Earth Engine |
+| **Index** | NDVI (Normalized Difference Vegetation Index) |
+
+### Limitations
+
+- Simulated data used for demonstration
+- County-level aggregation may mask sub-county variation
+- NDVI measures greenness, not structural damage
+
+</div>
+</details>
+
+---
+
+## Storm Track Through Virginia {.finding}
+
+::: {.finding-statement}
+Hurricane Helene crossed Virginia as a Category 1 storm on September 27, delivering 10–20 inches of rain to mountain communities.
+:::
+
+The interactive map below shows the NOAA-tracked storm path with wind speed markers at each advisory position. The storm weakened as it moved inland but maintained tropical-storm-force winds through the study region.
+
+::: {.map-card}
+<iframe src="assets/03_helene_track.html" height="580" style="width:100%;border:none;" title="Hurricane Helene Track Through Virginia"></iframe>
+::: {.map-caption}
+**Figure 1.** Hurricane Helene storm track through Virginia with Saffir-Simpson category markers at each NOAA advisory position.
+[Source: NOAA National Hurricane Center]{.vvn-source}
+:::
+:::
+
+---
+
+## Treatment and Counterfactual Sites {.finding}
+
+::: {.finding-statement}
+Ten treatment sites in the storm path were matched to counterfactual sites based on elevation, slope, and land cover.
+:::
+
+Each treatment site (orange) is linked to 10 counterfactual matches (blue) that share similar terrain but were outside the storm's direct path. Click any marker to see site details.
+
+::: {.map-card}
+<iframe src="assets/01_treatment_counterfactual_map.html" height="580" style="width:100%;border:none;" title="Treatment and Counterfactual Sites"></iframe>
+::: {.map-caption}
+**Figure 2.** Treatment sites (orange) and matched counterfactual sites (blue) in southwest Virginia. Click markers for details.
+[Source: Google Earth Engine · VVN Analysis]{.vvn-source}
+:::
+:::
+
+---
+
+## Vegetation Greenness Dropped After the Storm {.finding}
+
+::: {.finding-statement}
+All 10 counties showed NDVI declines of 0.19–0.28 between August and October 2024.
+:::
+
+NDVI values dropped from a pre-storm range of 0.67–0.75 down to 0.39–0.55 after the hurricane. Patrick County experienced the largest absolute drop, while Craig County showed the smallest.
+
+```{r fig-03}
+#| fig-cap: "NDVI comparison across 10 southwest Virginia counties before and after Hurricane Helene. Source: Sentinel-2 SR Harmonized, Google Earth Engine."
+#| fig-alt: "Grouped bar chart showing NDVI values for 10 Virginia counties. Pre-storm values range from 0.67 to 0.75; post-storm values range from 0.39 to 0.55."
+knitr::include_graphics("figures/01_ndvi_comparison.png")
+```
+
+---
+
+## Conclusion {.unnumbered}
+
+Hurricane Helene caused significant, measurable vegetation loss across southwest Virginia. Satellite monitoring — particularly SAR for cloud-free coverage — enabled rapid county-level damage assessment. The treatment–counterfactual design confirms that the storm, not seasonal change, was the primary driver. Future work should examine recovery trajectories over 6–12 months.
+
+---
+
+*Produced by Yujuan Gao · Visualizing Virginia's Numbers · Virginia Tech*
+*Built with [vvnthemes](https://github.com/yujuangao/VVN) · theme_vvn() · vvn_palette()*

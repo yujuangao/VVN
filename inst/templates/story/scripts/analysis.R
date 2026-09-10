@@ -8,8 +8,10 @@
 #   2. Load it in Section 1 below.
 #   3. Uncomment and fill in the chart block(s) you want from the gallery.
 #   4. Source this script — figures are auto-numbered and saved to figures/.
+#      Interactive HTML maps/widgets are saved to assets/.
 #   5. Open index.qmd: replace [placeholders] and update include_graphics()
-#      filenames to match what was saved in figures/.
+#      filenames to match figures/, or uncomment .map-card iframe blocks
+#      for interactive HTML files in assets/.
 #
 # Run from project root:
 #   source("scripts/analysis.R")          # RStudio
@@ -35,8 +37,10 @@ set_vvn_defaults()
 )
 setwd(normalizePath(file.path(.script_dir, "..")))
 dir.create("figures", showWarnings = FALSE)
+dir.create("assets", showWarnings = FALSE)
 message("Project root      : ", getwd())
 message("Figures saved to  : ", normalizePath("figures"))
+message("Assets saved to   : ", normalizePath("assets"))
 
 # ── Auto-numbering helper ─────────────────────────────────────────────────────
 # Figures are numbered in the order you run them — no manual renaming needed.
@@ -152,6 +156,38 @@ save_fig <- function(plot, name, width = 8, height = 5) {
 # mapshot2(m, file = sprintf("figures/%02d_map.png", .n + 1L))
 # .n <<- .n + 1L   # advance counter manually for the map
 # message(sprintf("Saved figures/%02d_map.png", .n))
+
+
+# ── INTERACTIVE HTML MAP (saved to assets/ for iframe inclusion) ──────────────
+# Good for: interactive Leaflet/Folium/Plotly maps embedded via iframe in
+#   index.qmd. Use the .map-card pattern in index.qmd to display these.
+#
+# Option 1: Leaflet (R)
+# library(leaflet)
+# library(htmlwidgets)
+# m <- leaflet(va_counties) |>
+#   vvn_map_style(va_counties, "[your_variable]", title = "[Legend title]")
+# htmlwidgets::saveWidget(m, "assets/01_map.html", selfcontained = TRUE)
+# message("Saved assets/01_map.html")
+#
+# Option 2: Plotly (R)
+# library(plotly)
+# library(htmlwidgets)
+# fig <- plot_ly(df, x = ~x, y = ~y, type = "scatter", mode = "markers")
+# htmlwidgets::saveWidget(fig, "assets/02_chart.html", selfcontained = TRUE)
+#
+# Option 3: Place pre-built HTML files directly in assets/
+# (e.g., from Python Folium/geemap scripts)
+#
+# Then in index.qmd, uncomment the .map-card iframe block:
+#   ::: {.map-card}
+#   <iframe src="assets/01_map.html" height="580"
+#     style="width:100%;border:none;" title="[Map title]"></iframe>
+#   ::: {.map-caption}
+#   **Figure N.** [Caption]
+#   [Source: [Dataset]]{.vvn-source}
+#   :::
+#   :::
 
 
 # =============================================================================

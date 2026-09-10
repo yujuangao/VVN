@@ -48,7 +48,7 @@ Insights · Visualizing Virginia's Numbers · Virginia Tech
 ## VVN_TITLE {.unnumbered .unlisted}
 
 ::: {.vvn-subtitle}
-[One sentence describing the scope and angle of this analysis.]
+VVN_SUBTITLE
 :::
 
 ::: {.vvn-byline}
@@ -111,15 +111,26 @@ By **VVN_AUTHOR** · Visualizing Virginia's Numbers (VVN) · Virginia Tech · VV
 
 [1–2 paragraphs explaining this finding. Reference the figure below and highlight the key number or pattern the reader should notice.]
 
+<!-- OPTION A: Static figure (from scripts/analysis.R → figures/) -->
 ```{r fig-01}
 #| fig-cap: "[Caption: what the figure shows and the data source.]"
 #| fig-alt: "[Alt text: chart type, key pattern, range of values.]"
-# Replace 01_[name].png with your actual filename
 f <- "figures/01_[name].png"
 if (file.exists(f)) knitr::include_graphics(f)
 ```
 
-<!-- vvn_source("[Dataset name]") -->
+<!-- OPTION B: Interactive HTML map/widget (from assets/) -->
+<!-- Uncomment the block below and remove the R chunk above if using an interactive HTML file. -->
+<!-- Place your .html file in assets/ and update the src path and title. -->
+<!--
+::: {.map-card}
+<iframe src="assets/[map_name].html" height="580" style="width:100%;border:none;" title="[Map title]"></iframe>
+::: {.map-caption}
+**Figure 1.** [Caption describing the interactive map.]
+[Source: [Dataset name]]{.vvn-source}
+:::
+:::
+-->
 
 ---
 
@@ -138,8 +149,6 @@ f <- "figures/02_[name].png"
 if (file.exists(f)) knitr::include_graphics(f)
 ```
 
-<!-- vvn_source("[Dataset name]") -->
-
 ---
 
 ## Finding 3 Title {.finding}
@@ -156,8 +165,6 @@ if (file.exists(f)) knitr::include_graphics(f)
 f <- "figures/03_[name].png"
 if (file.exists(f)) knitr::include_graphics(f)
 ```
-
-<!-- vvn_source("[Dataset name]") -->
 
 ---
 
